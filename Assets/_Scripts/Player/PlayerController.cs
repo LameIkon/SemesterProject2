@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] float _moveSpeed = 5f;
     [SerializeField, Tooltip("Remember to drag the child collider MovePoint of the player into this field")] Transform _movePoint;
-    [SerializeField, Tooltip("Select what layers should block movement")] List<LayerMask> _whatStopsMovement = new List<LayerMask>();
+    [SerializeField, Tooltip("Select what layers should block movement")] List<LayerMask> _whatStopsMovementList = new List<LayerMask>();
 
 
 
@@ -48,7 +48,7 @@ public class PlayerController : MonoBehaviour
     private void Move(Vector3 direction)
     {
         Vector3 newPosition = _movePoint.position + direction; //direction here is either the local variables in FixedUpate (horizontal or vertical)
-        bool cantMove0 = Physics2D.OverlapCircle(newPosition, 0.2f, _whatStopsMovement[0]); //bool to determine if we overlap with layer in index 0 of our list.
+        bool cantMove0 = Physics2D.OverlapCircle(newPosition, 0.2f, _whatStopsMovementList[0]); //bool to determine if we overlap with layer in index 0 of our list.
 
 
         if (!cantMove0) // if we DON't overlap with any colliders with that layer we CAN move.
