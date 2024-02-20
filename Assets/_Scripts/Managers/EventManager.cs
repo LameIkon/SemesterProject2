@@ -7,7 +7,7 @@ public class EventManager : MonoBehaviour
 {
     public static EventManager Instance;
 
-    public static event Action ExampleEvent;
+    public event Action ExampleEvent;
 
 
     private void Awake()
