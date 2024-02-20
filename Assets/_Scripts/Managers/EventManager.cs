@@ -5,8 +5,24 @@ using System;
 
 public class EventManager : MonoBehaviour
 {
+    public static EventManager Instance;
 
     public static event Action ExampleEvent;
+
+
+    private void Awake()
+    {
+        if(Instance == null) 
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+
+        DontDestroyOnLoad(gameObject);
+    }
 
     // Start is called before the first frame update
     void Start()
