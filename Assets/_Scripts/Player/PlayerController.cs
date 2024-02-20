@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour
 
         if (Vector3.Distance(transform.position, _movePoint.position) <= .05f) //makes sure you can't move if u have not reached ur new position yet.
         {
-            if (Mathf.Abs(Input.GetAxisRaw("Horizontal")) == 1f) //if the X-axes is 1 or -1 we move horizontal. Mathf.abs tracks if its 1 regardsless of negative or positive 1.
+            if (Mathf.Abs(Input.GetAxisRaw("Horizontal")) == 1f) //if the X-axes is 1 or -1 we move horizontal. Mathf.abs tracks if its negative or positive 1.
             {
                 Move(horizontal);
             }
