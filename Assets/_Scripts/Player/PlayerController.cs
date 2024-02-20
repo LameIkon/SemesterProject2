@@ -10,8 +10,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField, Tooltip("Select what layers should block movement")] List<LayerMask> _whatStopsMovementList = new List<LayerMask>();
 
 
-
-    // Start is called before the first frame update
     void Start()
     {
         _movePoint.parent = null; //detachs the MovePoint as a child of player. Not acutally needed. 
@@ -38,11 +36,6 @@ public class PlayerController : MonoBehaviour
                 Move(vertical);
             }
         }
-    }
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
     private void Move(Vector3 direction)
