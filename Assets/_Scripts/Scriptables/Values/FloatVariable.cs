@@ -4,25 +4,40 @@ using UnityEngine;
 public class FloatVariable : VariableBase
 {
 
-    public float Value;
+    [SerializeField] private float _value;
+
+    [SerializeField] private GameEvent _onValueChanged;
 
     public void SetValue(float value)
     {
-        Value = value;
+        _value = value;
     }
 
     public void SetValue(FloatVariable value)
     {
-        Value = value.Value;
+        _value = value._value;
     }
 
     public void ApplyChange(float amount)
     {
-        Value += amount;
+        _value += amount;
     }
 
     public void ApplyChange(FloatVariable amount)
     {
-        Value += amount.Value;
+        _value += amount._value;
+    }
+
+    public float GetValue() 
+    {  
+        return _value; 
+    }
+
+    private void OnValueChanged() 
+    {
+        if (_onValueChanged != null)
+        {
+            _onValueChanged.Raise();
+        }
     }
 }
