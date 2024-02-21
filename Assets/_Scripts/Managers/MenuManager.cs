@@ -9,7 +9,7 @@ public class MenuManager : MonoBehaviour
     // current gameobject as active
     private GameObject activePage;
 
-    private float transitionTime = 0;
+    private float transitionTime = 0; // change this depending if you want a transition
 
     //gameobjects to transition between
     public GameObject MainMenu;
@@ -78,9 +78,10 @@ public class MenuManager : MonoBehaviour
         }     
     }
 
+    // change page 
     public void TransitiontoPage(GameObject newPage)
     {
-        if (newPage != activePage)
+        if (newPage != activePage) // this might be reduntant: It checks if the page you want to go to is not the same page 
         {
             StartCoroutine(Transition(newPage));
         }

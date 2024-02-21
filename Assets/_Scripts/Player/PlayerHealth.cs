@@ -6,8 +6,8 @@ using UnityEngine.UI;
 public class PlayerHealth : MonoBehaviour
 {
     private Slider healthbar;
-    [SerializeField] private int maxHealth = 100;
-    [SerializeField] private int currentHealth;
+    [SerializeField] private int maxHealth = 100; // decides the max health a player can get
+    [SerializeField] private int currentHealth; // the current amount the player have at the given moment
 
     private void Awake()
     {
@@ -26,12 +26,12 @@ public class PlayerHealth : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Space)) 
         {
-            TakeDamage(2);
+            TakeDamage(2); // testing if the player loses 2 hp
         }
 
         if (Input.GetKeyDown(KeyCode.M))
         {
-            GainHealth(2);
+            GainHealth(2); // testing if the player gains 2 hp
         }
 
         if (!gameIsOver)
@@ -62,20 +62,21 @@ public class PlayerHealth : MonoBehaviour
         
     }
 
-    // this method is to be called to update UI
+    // this method is to be called to update health bar UI
     void UpdateHealthBar()
     {
         healthbar.value = currentHealth;
     }
 
     // this should maybe be in its own script
+    // the method checks if the player has 0 or less health 
     private bool gameIsOver;
     void GameOver()
     {        
         if (currentHealth <= 0)
         {
-            Debug.Log("you have less than 0 health thus you die!");
-            gameIsOver = true;
+            Debug.Log("you have reached 0 health thus you die!");
+            gameIsOver = true; 
         }
     }
 }
