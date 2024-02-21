@@ -8,8 +8,11 @@ public class FloatReference
     [SerializeField] private float _constantValue;
     [SerializeField] private FloatVariable _variable;
 
-    public FloatReference()
-    { }
+    public FloatReference(FloatVariable variable)
+    {
+        _useConstant = false; 
+        _variable = variable;
+    }
 
     public FloatReference(float value)
     {
