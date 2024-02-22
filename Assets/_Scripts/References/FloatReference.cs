@@ -4,25 +4,25 @@ using UnityEngine;
 [Serializable]
 public class FloatReference
 {
-    [SerializeField] private bool _useConstant = true;
-    [SerializeField] private float _constantValue;
-    [SerializeField] private FloatVariable _variable;
+     public bool UseConstant = true;
+     public float ConstantValue;
+     public FloatVariable Variable;
 
     public FloatReference(FloatVariable variable)
     {
-        _useConstant = false; 
-        _variable = variable;
+        UseConstant = false; 
+        Variable = variable;
     }
 
     public FloatReference(float value)
     {
-        _useConstant = true;
-        _constantValue = value;
+        UseConstant = true;
+        ConstantValue = value;
     }
 
     public float Value 
     {
-        get { return _useConstant ? _constantValue : _variable.GetValue(); }
+        get { return UseConstant ? ConstantValue : Variable.GetValue(); }
     }
 
     public static implicit operator float(FloatReference reference)

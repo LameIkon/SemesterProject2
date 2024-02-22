@@ -9,16 +9,17 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private int maxHealth = 100; // decides the max health a player can get
     [SerializeField] private int currentHealth; // the current amount the player have at the given moment
 
-    private void Awake()
-    {
-        healthbar = GameObject.Find("Health bar").GetComponent<Slider>();
-    }
-
     private void Start()
     {
+        healthbar = GameObject.Find("Health bar").GetComponent<Slider>();
         currentHealth = maxHealth; // set players health to max
         healthbar.maxValue = maxHealth; // ensure Slider hold 100 as max value 
         healthbar.value = maxHealth; // set health bar UI to max
+    }
+
+    private void Awake()
+    {
+        
     }
 
     // just to show that the player can take and gain health
