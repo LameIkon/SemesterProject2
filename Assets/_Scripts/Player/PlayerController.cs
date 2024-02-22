@@ -6,8 +6,12 @@ public class PlayerController : MonoBehaviour
 {
 
     [SerializeField] float _moveSpeed = 5f;
-    [SerializeField, Tooltip("Remember to drag the child collider MovePoint of the player into this field")] Transform _movePoint;
-    [SerializeField, Tooltip("Select what layers should block movement")] List<LayerMask> _whatStopsMovementList = new List<LayerMask>();
+    [SerializeField, Tooltip("Remember to drag the child collider MovePoint of the player into this field")] 
+    Transform _movePoint;
+
+    [SerializeField, Tooltip("Select what layers should block movement")] 
+    List<LayerMask> _whatStopsMovementList = new List<LayerMask>();
+
 
 
     void Start()
@@ -31,7 +35,7 @@ public class PlayerController : MonoBehaviour
                 Move(horizontal);
             }
 
-            else if (Mathf.Abs(Input.GetAxisRaw("Vertical")) == 1f) //if the Y-axes is 1 or -1 we move vertical. REMOVE "ELSE" to move diagonal
+            if (Mathf.Abs(Input.GetAxisRaw("Vertical")) == 1f) //if the Y-axes is 1 or -1 we move vertical. REMOVE "ELSE" to move diagonal
             {
                 Move(vertical);
             }
