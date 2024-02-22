@@ -12,6 +12,6 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: ed664a99639841645ad53bd805b05881
   - enabled: 1
-    path: Assets/Scenes/TemplateScene.unity
+    path: Assets/Scenes/Healthbar.unity
     guid: 4fa2099bd9252fa45a2804fb9f5306ee
   m_configObjects: {}
