@@ -4709,9 +4709,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _moveSpeed: 5
   _movePoint: {fileID: 1261757178}
-  _whatStopsMovementList:
-  - serializedVersion: 2
-    m_Bits: 64
+  _whatStopsMovement: []
+  _input: {fileID: 0}
 --- !u!4 &2049083461
 Transform:
   m_ObjectHideFlags: 0
