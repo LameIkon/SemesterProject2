@@ -27,12 +27,18 @@ public class PlayerController : MonoBehaviour
 
     private void OnEnable()
     {
-        _input.OnMoveEvent += HandleMove; // Here we subscribe to the OnMoveEvent from the InputReader
+        if (_input != null)
+        {
+            _input.OnMoveEvent += HandleMove; // Here we subscribe to the OnMoveEvent from the InputReader
+        }
     }
 
     private void OnDisable()
     {
-        _input.OnMoveEvent -= HandleMove; // Here we unsubscribe from the OnMoveEvent from the InputReader, it is just good coding pratice to unsub from events when you do not follow them anymore
+        if (_input != null)
+        {
+            _input.OnMoveEvent -= HandleMove; // Here we unsubscribe from the OnMoveEvent from the InputReader, it is just good coding pratice to unsub from events when you do not follow them anymore
+        }
     }
 
     void FixedUpdate()
