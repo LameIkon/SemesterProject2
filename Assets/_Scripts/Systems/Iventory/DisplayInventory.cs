@@ -44,7 +44,7 @@ public class DisplayInventory : MonoBehaviour
                 Debug.Log("Creates object");
                 var obj = Instantiate(Inventory.Container[i].Item.ItemPrefab, Vector3.zero, Quaternion.identity, transform);
                 obj.GetComponent<RectTransform>().localPosition = GetPosition(i);
-                obj.GetComponentInChildren<TextMeshPro>().text = Inventory.Container[i].Amount.ToString();
+                obj.GetComponentInChildren<TextMeshProUGUI>().text = Inventory.Container[i].Amount.ToString();
 
                 itemsDisplayed.Add(Inventory.Container[i], obj);
             }
@@ -57,7 +57,7 @@ public class DisplayInventory : MonoBehaviour
         {
             var obj = Instantiate(Inventory.Container[i].Item.ItemPrefab,Vector3.zero, Quaternion.identity, transform);
             obj.GetComponent<RectTransform>().localPosition = GetPosition(i);
-            obj.GetComponentInChildren<TextMeshPro>().text = Inventory.Container[i].Amount.ToString();
+            obj.GetComponentInChildren<TextMeshProUGUI>().text = Inventory.Container[i].Amount.ToString();
 
             itemsDisplayed.Add(Inventory.Container[i], obj);
         }
