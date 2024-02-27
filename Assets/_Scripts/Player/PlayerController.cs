@@ -13,7 +13,8 @@ public class PlayerController : MonoBehaviour
     LayerMask[] _whatStopsMovement; // This is made into an array as the layers that stop Movement should not change during runtime, therefore it is redundat to make it a List
 
 
-    [SerializeField] private InputReader _input; // The InputReaders script 
+    [SerializeField, Tooltip("Drag the InputReader on to here to move with it")] 
+    private InputReader _input; // The InputReaders script 
     private Vector2 _moveVector; // This vector is set in the HandleMove
 
 
@@ -51,14 +52,14 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    private void Move(Vector3 direction)
+    public void Move(Vector3 direction)
     {
 
        // Vector3 newPosition = _movePoint.position + direction; //direction here is either the local variables in FixedUpate (horizontal or vertical)
        // bool cantMove0 = Physics2D.OverlapCircle(newPosition, 0.2f, _whatStopsMovementList[0]); //bool to determine if we overlap with layer in index 0 of our list.
 
 
-        if (CanMove(direction)) // if we DON't overlap with any colliders with that layer we CAN move.
+        if (CanMove(direction)) // if we DON't overlap with any colliders on nonwalkable layers, we CAN move.
         {
             _movePoint.position = MovePosition(direction); //basicly we dont actually move the "player" we move the invisible movePoint, and the player constantly "MoveTowards" that point in FixedUpdate.
         }
