@@ -4,9 +4,9 @@ using UnityEngine;
 
 public abstract class BrainAI : ScriptableObject
 {
-    public virtual void Initialize(AIThinker ai) { }
+    public virtual void Initialize(AIThinker brain) { }
 
-    public abstract void Think(AIThinker ai);
+    public abstract void Think(AIThinker brain);
 
 }
 

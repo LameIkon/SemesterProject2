@@ -17,101 +17,102 @@ public class RandomWalkAI : BrainAI
 
 
 
-    public override void Initialize(AIThinker ai)
+    public override void Initialize(AIThinker brain)
     {
-        ai.Remember(_walkState, Directions.W);
-        ai.Remember(_stateTimeout, Random.Range(_waitBetweenWalk.MinValue, _waitBetweenWalk.MaxValue));
+        brain.Remember(_walkState, Directions.W);
+        brain.Remember(_stateTimeout, Random.Range(_waitBetweenWalk.MinValue, _waitBetweenWalk.MaxValue));
     }
 
 
-    public override void Think(AIThinker ai)
+    public override void Think(AIThinker brain)
     {
-        float stateTimeout = ai.Remember<float>(_stateTimeout);
+        float stateTimeout = brain.Remember<float>(_stateTimeout);
         stateTimeout -= Time.deltaTime;
-        ai.Remember(_stateTimeout, stateTimeout);
+        brain.Remember(_stateTimeout, stateTimeout);
 
 
-        var state = ai.Remember<Directions>(_walkState);
+        var state = brain.Remember<Directions>(_walkState);
 
-        var move = ai.GetComponent<PlayerController>();
+        var move = brain.GetComponent<MovementController>();
 
-        if (stateTimeout < 0) 
+        if (stateTimeout < 0)
         {
-            SetTimeout(ai);
+            SetTimeout(brain);
 
             Debug.Log("Default");
             move.Move(new Vector3(Random.Range(-1, 2), Random.Range(-1, 2), 0));
-        }
 
+        }
 
     }
 
-    private void SetTimeout(AIThinker ai) 
+    private void SetTimeout(AIThinker brain) 
     {
-        ai.Remember(_stateTimeout, Random.Range(_waitBetweenWalk.MinValue, _waitBetweenWalk.MaxValue));
+        brain.Remember(_stateTimeout, Random.Range(_waitBetweenWalk.MinValue, _waitBetweenWalk.MaxValue));
     }
 
 
     /*
-     switch ((Directions)Random.Range(0,10)) 
+        switch ((Directions)Random.Range(0, 10))
             {
                 case Directions.N:
 
-                    SetTimeout(ai);
+                    SetTimeout(brain);
 
                     move.Move(Vector3.up);
                     break;
 
                 case Directions.S:
 
-                    SetTimeout(ai);
+                    SetTimeout(brain);
 
                     move.Move(Vector3.down);
                     break;
 
                 case Directions.E:
-                    SetTimeout(ai);
+                    SetTimeout(brain);
 
                     move.Move(Vector3.right);
                     break;
 
                 case Directions.W:
-                    SetTimeout(ai);
+                    SetTimeout(brain);
 
                     move.Move(Vector3.left);
                     break;
 
                 case Directions.NE:
-                    SetTimeout(ai);
+                    SetTimeout(brain);
 
                     move.Move(Vector3.up + Vector3.right);
                     break;
 
                 case Directions.NW:
-                    SetTimeout(ai);
+                    SetTimeout(brain);
 
                     move.Move(Vector3.up + Vector3.left);
                     break;
 
                 case Directions.SE:
-                    SetTimeout(ai);
+                    SetTimeout(brain);
 
                     move.Move(Vector3.down + Vector3.right);
                     break;
 
                 case Directions.SW:
-                    SetTimeout(ai);
+                    SetTimeout(brain);
 
                     move.Move(Vector3.down + Vector3.left);
                     break;
 
 
                 default:
-                    SetTimeout(ai);
+                    SetTimeout(brain);
 
                     Debug.Log("Default");
                     move.Move(new Vector3(Random.Range(-1, 2), Random.Range(-1, 2), 0));
                     break;
+            }
      */
 
 

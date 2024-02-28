@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class MovementController : MonoBehaviour
 {
 
     [SerializeField] float _moveSpeed = 5f;
@@ -16,7 +16,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField, Tooltip("Drag the InputReader on to here to move with it")] 
     private InputReader _input; // The InputReaders script 
     private Vector2 _moveVector; // This vector is set in the HandleMove
-
 
 
     void Start()
