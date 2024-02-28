@@ -65,7 +65,7 @@ public class InventoryObject : ScriptableObject, ISerializationCallbackReceiver
 
     public void OnAfterDeserialize()
     {
-        for (int i = 0; i < Container.Count;i++)
+        for (int i = 0; i < Container.Count; i++)
         {
             Container[i].Item = _dataBase.GetItem[Container[i].ID];
         }

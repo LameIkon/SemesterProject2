@@ -41,12 +41,7 @@ public class DisplayInventory : MonoBehaviour
 
             else 
             {
-                Debug.Log("Creates object");
-                var obj = Instantiate(Inventory.Container[i].Item.ItemPrefab, Vector3.zero, Quaternion.identity, transform);
-                obj.GetComponent<RectTransform>().localPosition = GetPosition(i);
-                obj.GetComponentInChildren<TextMeshProUGUI>().text = Inventory.Container[i].Amount.ToString();
-
-                itemsDisplayed.Add(Inventory.Container[i], obj);
+               CreateObject(i);
             }
         }
     }
@@ -55,11 +50,7 @@ public class DisplayInventory : MonoBehaviour
     {
         for (int i = 0; i < Inventory.Container.Count; i++)
         {
-            var obj = Instantiate(Inventory.Container[i].Item.ItemPrefab,Vector3.zero, Quaternion.identity, transform);
-            obj.GetComponent<RectTransform>().localPosition = GetPosition(i);
-            obj.GetComponentInChildren<TextMeshProUGUI>().text = Inventory.Container[i].Amount.ToString();
-
-            itemsDisplayed.Add(Inventory.Container[i], obj);
+            CreateObject(i);
         }
     }
 
@@ -68,5 +59,17 @@ public class DisplayInventory : MonoBehaviour
         
         return new Vector3(X_START + (X_SPACE_BETWEEN_ITEM *(i % NUMBER_OF_COLUMN)), Y_START + (-Y_SPACE_BETWEEN_ITEM * (i/NUMBER_OF_COLUMN)), 0f);
         
+    }
+
+
+    public void CreateObject (int i)
+    {
+
+        var obj = Instantiate(Inventory.Container[i].Item.ItemPrefab, Vector3.zero, Quaternion.identity, transform);
+        obj.GetComponent<RectTransform>().localPosition = GetPosition(i);
+        obj.GetComponentInChildren<TextMeshProUGUI>().text = Inventory.Container[i].Amount.ToString();
+
+        itemsDisplayed.Add(Inventory.Container[i], obj);
+
     }
 }
