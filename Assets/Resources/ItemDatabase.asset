@@ -9,10 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af7c9deb151351c438ff03ae8c069140, type: 3}
-  m_Name: New Clothing Object
+  m_Script: {fileID: 11500000, guid: 1050e85b9ec21d046bd11ea2c0e6ac90, type: 3}
+  m_Name: ItemDatabase
   m_EditorClassIdentifier: 
-  ItemPrefab: {fileID: 5991359903223009951, guid: ceffef7be7ddd62409b2a0f0ae016ecc, type: 3}
-  ItemType: 1
-  ItemDescription: 
-  ColdResistance: 0
+  ItemsArray:
+  - {fileID: 11400000, guid: b8f614f650b6f7940a5a637ff39486ee, type: 2}
+  - {fileID: 11400000, guid: 969425667d9b5d644b60b50f3709ad88, type: 2}
