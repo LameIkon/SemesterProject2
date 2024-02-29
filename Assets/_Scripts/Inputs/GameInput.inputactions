@@ -31,6 +31,42 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "InventoryOpen",
+                    "type": "Button",
+                    "id": "a34b2013-9cbc-4109-8504-5434b432079b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "LeftClick",
+                    "type": "Button",
+                    "id": "7a38232a-20e2-421d-ad7c-2998848e9dbf",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "RightClick",
+                    "type": "Button",
+                    "id": "24199067-289d-44fc-9b4c-a31d3a0c579c",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Postion",
+                    "type": "Value",
+                    "id": "a4323534-9253-43ef-93ec-d51793b88d33",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -187,6 +223,61 @@
                     "action": "Pause",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fb2639f1-637d-429c-9899-9bba6718309d",
+                    "path": "<Keyboard>/i",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "InventoryOpen",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4d8b5413-afea-444c-8c2d-b40b1e5e1492",
+                    "path": "<Keyboard>/tab",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "InventoryOpen",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "85589f10-59e9-4517-976f-004009433b9a",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LeftClick",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b2ed5818-c13c-4d36-a5da-071cea4482f2",
+                    "path": "<Mouse>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Postion",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "bf697f8c-f4de-40c0-9905-72c70fccac9f",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RightClick",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
@@ -216,6 +307,15 @@
                     "name": "Resume",
                     "type": "Button",
                     "id": "861fc571-d7b6-4e32-b85b-35f38a477f30",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "InventoryClose",
+                    "type": "Button",
+                    "id": "c7d06703-8c22-4021-a6fa-1b984e9c48a7",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -374,6 +474,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "Resume",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "679166b1-e070-43df-9c6c-779da91b354c",
+                    "path": "<Keyboard>/tab",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "InventoryClose",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ea08f7d5-8584-4f1f-bc7c-aa622e7d6641",
+                    "path": "<Keyboard>/i",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "InventoryClose",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

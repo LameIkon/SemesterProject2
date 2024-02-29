@@ -8,6 +8,19 @@ public class InputReader : ScriptableObject, GameInput.IGameplayActions, GameInp
 
     private GameInput _gameInput;
 
+    private bool _isUI = false;
+
+    void Awake() 
+    {
+       // _mainCamera = Camera.main;
+    
+    }
+
+    void Start() 
+    {
+        _isUI = false;
+    }
+
     private void OnEnable() 
     {
         // This instanciates the GameInput script if there is non
@@ -15,7 +28,7 @@ public class InputReader : ScriptableObject, GameInput.IGameplayActions, GameInp
         {
             _gameInput = new GameInput();
 
-            _gameInput.Gameplay.SetCallbacks(this);
+            _gameInput.Gameplay.SetCallbacks(this); 
             _gameInput.UI.SetCallbacks(this);
 
             SetGameplay(); // This is what picks what keys are chosen when the game loads
@@ -44,22 +57,21 @@ public class InputReader : ScriptableObject, GameInput.IGameplayActions, GameInp
     #region Ingame Controls
 
     // The events that other scripts can subscribe to, for information.
-    public event Action<Vector2> OnMoveEvent;
-    public event Action OnInteractEvent;
+    public event Action<Vector2> OnMoveEvent; // This sends a Vector2 along with the event
+    public event Action OnInteractEvent; 
     public event Action OnPauseEvent;
+    public event Action OnInventoryOpenEvent;
 
     
+    // This method listens to the move inputs that are connected in the Input System
     public void OnMove(InputAction.CallbackContext context)
     {
-        //Debug.Log(context.ReadValue<Vector2>());
-        OnMoveEvent?.Invoke(context.ReadValue<Vector2>());
+        OnMoveEvent?.Invoke(context.ReadValue<Vector2>()); // The context.ReadValue is used because the input is set to Value in the Input System, the OnMoveEvent will then invoke the Event with the Vector2
     }
 
     public void OnInteract(InputAction.CallbackContext context)
     {
-        //Debug.Log(context.phase);
-
-        if (context.phase == InputActionPhase.Performed) 
+        if (context.phase == InputActionPhase.Performed)  // This is only true on the Performed stage when the button is pressed, there is also the .Canceled and .Started
         {
             OnInteractEvent?.Invoke();
         }
@@ -70,10 +82,19 @@ public class InputReader : ScriptableObject, GameInput.IGameplayActions, GameInp
     {
         if (context.phase == InputActionPhase.Performed)
         {
+            _isUI = true; // This is so the inventory event does not interfere with the Pause button.
             OnPauseEvent?.Invoke();
             SetUI(); // Important, here we switch to the UI control scheme
         }
         
+    }
+    public void OnInventoryOpen(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed && !_isUI) 
+        {
+            OnInventoryOpenEvent?.Invoke();
+            SetUI();
+        }
     }
 
     #endregion
@@ -84,6 +105,7 @@ public class InputReader : ScriptableObject, GameInput.IGameplayActions, GameInp
     public event Action<Vector2> OnNavigateEvent;
     public event Action OnPickEvent; 
     public event Action OnResumeEvent;
+    public event Action OnInventoryCloseEvent;
 
     public void OnNavigate(InputAction.CallbackContext context)
     {
@@ -103,11 +125,48 @@ public class InputReader : ScriptableObject, GameInput.IGameplayActions, GameInp
     {
         if (context.phase == InputActionPhase.Performed)
         {
+            _isUI = false;
             OnResumeEvent?.Invoke();
             SetGameplay(); // Important, here we switch to the Gameplay control scheme
         }
 
     }
 
-    #endregion 
+    public void OnInventoryClose(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed && !_isUI) 
+        {
+            OnInventoryCloseEvent?.Invoke();
+            SetGameplay();
+        }
+    }
+
+    #endregion
+
+    public event Action OnLeftClickEvent;
+    public event Action OnRightClickEvent;
+    public event Action<Vector2> OnMousePositionEvent;
+
+    public void OnLeftClick(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed) 
+        {
+            OnLeftClickEvent?.Invoke();
+        }
+    }
+
+    public void OnRightClick(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+        {
+            OnRightClickEvent?.Invoke();
+        }
+    }
+
+    public void OnPostion(InputAction.CallbackContext context)
+    {
+        //Debug.Log(context.ReadValue<Vector2>());
+        OnMousePositionEvent?.Invoke(context.ReadValue<Vector2>());
+    }
+
 }
