@@ -4975,10 +4975,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _moveSpeed: 5
   _movePoint: {fileID: 1261757178}
-  _whatStopsMovementList:
+  _whatStopsMovement:
   - serializedVersion: 2
     m_Bits: 64
-  Inventory: {fileID: 11400000, guid: 301e59d3e6f1c0742b945ac3d60d05ab, type: 2}
+  _input: {fileID: 11400000, guid: c4df98e5f5651f84cb8d4682d3d0370b, type: 2}
 --- !u!4 &2049083461
 Transform:
   m_ObjectHideFlags: 0
