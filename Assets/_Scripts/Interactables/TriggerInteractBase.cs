@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-[RequireComponent(typeof(CircleCollider2D))]
+[RequireComponent(typeof(BoxCollider2D))]
 public class TriggerInteractBase : MonoBehaviour, IInteractable
 {
 
@@ -21,12 +21,12 @@ public class TriggerInteractBase : MonoBehaviour, IInteractable
 
     private void OnEnable() 
     {
-        _inputs.OnInteractEvent += HandleInteract;
+        _inputs.OnLeftClickEvent += HandleInteract;
     }
 
     private void OnDisable()
     { 
-        _inputs.OnInteractEvent -= HandleInteract;
+        _inputs.OnLeftClickEvent -= HandleInteract;
     }
 
 
@@ -60,17 +60,12 @@ public class TriggerInteractBase : MonoBehaviour, IInteractable
 
 
 
-    private void OnMouseDown() 
-    {
-        Interact();
-    }
-
 
     private void Reset() 
     {
-        CircleCollider2D circle = GetComponent<CircleCollider2D>();
-        circle.isTrigger = true;
-        circle.radius = 5f;
+        BoxCollider2D trigger = GetComponent<BoxCollider2D>();
+        trigger.isTrigger = true;
+        trigger.size = new Vector2(3,3);
     }
 
 }

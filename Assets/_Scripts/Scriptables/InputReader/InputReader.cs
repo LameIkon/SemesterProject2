@@ -10,6 +10,12 @@ public class InputReader : ScriptableObject, GameInput.IGameplayActions, GameInp
 
     private bool _isUI = false;
 
+    void Awake() 
+    {
+       // _mainCamera = Camera.main;
+    
+    }
+
     void Start() 
     {
         _isUI = false;
@@ -135,9 +141,32 @@ public class InputReader : ScriptableObject, GameInput.IGameplayActions, GameInp
         }
     }
 
-
-    
-
     #endregion
+
+    public event Action OnLeftClickEvent;
+    public event Action OnRightClickEvent;
+    public event Action<Vector2> OnMousePositionEvent;
+
+    public void OnLeftClick(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed) 
+        {
+            OnLeftClickEvent?.Invoke();
+        }
+    }
+
+    public void OnRightClick(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+        {
+            OnRightClickEvent?.Invoke();
+        }
+    }
+
+    public void OnPostion(InputAction.CallbackContext context)
+    {
+        //Debug.Log(context.ReadValue<Vector2>());
+        OnMousePositionEvent?.Invoke(context.ReadValue<Vector2>());
+    }
 
 }
