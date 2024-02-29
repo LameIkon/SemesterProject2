@@ -452,21 +452,21 @@ MonoBehaviour:
     ConstantValue: 0.1
     Variable: {fileID: 0}
   _maxHealth:
-    UseConstant: 1
+    UseConstant: 0
     ConstantValue: 100
-    Variable: {fileID: 0}
+    Variable: {fileID: 11400000, guid: 86a0bb363a0bb4a4bb2686902045b0fb, type: 2}
   _maxFreeze:
     UseConstant: 0
     ConstantValue: 0
-    Variable: {fileID: 0}
+    Variable: {fileID: 11400000, guid: 373d26a8e454b6642a9be50ed6467ee6, type: 2}
   _maxHunger:
     UseConstant: 0
     ConstantValue: 0
-    Variable: {fileID: 0}
+    Variable: {fileID: 11400000, guid: 209b5461b8679d74988b06b3888df1db, type: 2}
   _maxStamina:
     UseConstant: 0
     ConstantValue: 0
-    Variable: {fileID: 0}
+    Variable: {fileID: 11400000, guid: 80e4c72db125bab448d3ce635c113a3d, type: 2}
 --- !u!224 &849984043 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1911556709544219686, guid: 92e0b79a80166834d927441d416116e6, type: 3}
