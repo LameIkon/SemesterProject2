@@ -36,23 +36,25 @@ public class InkTestingScript : MonoBehaviour
     {
         eraseUI();
 
+        //creating the dialogue
         TextMeshProUGUI storyText = Instantiate(TextPrefab); //takes a textfile prefab with predefined settings
         storyText.text = loadStoryChunk();
-        storyText.transform.SetParent(this.transform, false);
+        storyText.transform.SetParent(this.transform, false); //set dialogue to the parent but keep its own transform
 
 
-        GameObject buttonsContainer = new GameObject("ButtonsContainer");
-        buttonsContainer.transform.SetParent(this.transform, false);
-        VerticalLayoutGroup layoutSettings = buttonsContainer.AddComponent<VerticalLayoutGroup>();
-        layoutSettings.childControlHeight = false;
+        //creating the answers (buttons)
+        GameObject buttonsContainer = new GameObject("ButtonsContainer"); //create an empty gameobject to store buttons as children
+        buttonsContainer.transform.SetParent(this.transform, false); //set gameobject to the parent but keep its own transform
+        VerticalLayoutGroup layoutSettings = buttonsContainer.AddComponent<VerticalLayoutGroup>(); // add vertical layout group componennt to buttonContainer
+        layoutSettings.childControlHeight = false; // disable control child height, meaning height is constant now
 
-        foreach (Choice choice in _story.currentChoices)
+        foreach (Choice choice in _story.currentChoices) //currentChoices are a list used for ink for the choices you get
         {
-            Button choiceButton = Instantiate(ButtonPrefab);
-            choiceButton.transform.SetParent(buttonsContainer.transform, false);
+            Button choiceButton = Instantiate(ButtonPrefab); // create button
+            choiceButton.transform.SetParent(buttonsContainer.transform, false); //set buttons to the parent but keep its own transform
 
-            TextMeshProUGUI choiceText = choiceButton.GetComponentInChildren<TextMeshProUGUI>();
-            choiceText.text = choice.text;
+            TextMeshProUGUI choiceText = choiceButton.GetComponentInChildren<TextMeshProUGUI>(); // create a new attribute choiceText as TextMeshProGUI
+            choiceText.text = choice.text; //the button text is set to the current choice in the list
 
             choiceButton.onClick.AddListener(delegate
             {
