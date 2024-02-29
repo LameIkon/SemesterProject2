@@ -30,7 +30,7 @@ public class InventoryObject : ScriptableObject
                 return;
             }
         }        
-            Container.Items.Add(new InventorySlot(item.ID, item, amount));
+            Container.Items.Add(new InventorySlot(item, amount));
         
     }
 
@@ -97,12 +97,12 @@ public class InventorySlot
     public Item Item;
     public int Amount;
 
-    public int ID;
+    
 
 
-    public InventorySlot(int id, Item item, int amount)
+    public InventorySlot(Item item, int amount)
     {
-        ID = id;
+       
         Item = item;
         Amount = amount;
       

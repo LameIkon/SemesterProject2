@@ -17,17 +17,14 @@ MonoBehaviour:
   Container:
     Items:
     - Item:
-        ItemName: Bread
+        ItemName: 
         ID: 0
       Amount: 15
-      ID: 0
     - Item:
-        ItemName: Lumber
+        ItemName: 
         ID: 2
       Amount: 5
-      ID: 2
     - Item:
-        ItemName: Shoes
+        ItemName: 
         ID: 1
       Amount: 5
-      ID: 1
