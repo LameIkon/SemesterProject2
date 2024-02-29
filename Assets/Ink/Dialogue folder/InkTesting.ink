@@ -26,6 +26,6 @@ Sir, it has become too cold for us to continue without setting our <color=red>li
 
 ===continue===
 *[let's stop now]
-    test
+    We have walked for a while now, I think we should rest now before it becomes too dangerous
     ->main
        
