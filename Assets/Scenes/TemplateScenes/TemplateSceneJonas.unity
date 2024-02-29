@@ -322,10 +322,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -485,8 +485,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 259.4397, y: 107.521515}
-  m_SizeDelta: {x: -534.571, y: -237.2502}
+  m_AnchoredPosition: {x: 124.81543, y: 40.403442}
+  m_SizeDelta: {x: -265.3223, y: -103.0139}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &662538429
 MonoBehaviour:
@@ -540,9 +540,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InventoryPrefab: {fileID: 4038510048974629389, guid: f7e58fdc455397748817f9ff95f2e526, type: 3}
   Inventory: {fileID: 11400000, guid: 301e59d3e6f1c0742b945ac3d60d05ab, type: 2}
-  X_START: -170
-  Y_START: 120
-  X_SPACE_BETWEEN_ITEM: 50
+  X_START: -750
+  Y_START: 420
+  X_SPACE_BETWEEN_ITEM: 120
   NUMBER_OF_COLUMN: 6
   Y_SPACE_BETWEEN_ITEM: 35
 --- !u!1 &905083314
