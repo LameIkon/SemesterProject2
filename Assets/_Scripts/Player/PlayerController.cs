@@ -13,6 +13,9 @@ public class PlayerController : MonoBehaviour
     List<LayerMask> _whatStopsMovementList = new List<LayerMask>();
 
 
+    public InventoryObject Inventory;
+
+
 
     void Start()
     {

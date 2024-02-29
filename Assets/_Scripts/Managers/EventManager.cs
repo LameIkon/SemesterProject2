@@ -5,9 +5,10 @@ using System;
 
 public class EventManager : MonoBehaviour
 {
+    /*
     public static EventManager Instance;
 
-    public event Action ExampleEvent;
+    //public event Action ExampleEvent;
 
 
     private void Awake()
@@ -35,4 +36,5 @@ public class EventManager : MonoBehaviour
     {
         
     }
+    */
 }
