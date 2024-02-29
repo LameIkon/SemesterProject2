@@ -21,7 +21,7 @@ Sir, it has become too cold for us to continue without setting our <color=red>li
 * [take a bite]
     You take a huge bite
     <i>"The captain has gone crazy, SHOOT HIM!"
-    You die from gunshot
+    <color=red> die from gunshot</color>
     ->END
 
 ===continue===
