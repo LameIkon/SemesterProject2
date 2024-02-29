@@ -11,6 +11,10 @@ public class InkTestingScript : MonoBehaviour
     /// <summary>
     /// Nuværende udfordringer er at få forskellige inkJSON filer herind uden at skabe dublicationer. Dette laves sikkert om til en singleton, hvor vi så skal give 
     /// information udefra. Derudover skal vi også gemme de svarmuligheder man tager.
+    /// 
+    /// Ligenu har vi en primitiv måde at huske svar, men hvis vi vil være mere præcise i hvilke svar vi skal gemme kunne vi måske gøre brug af tags
+    /// til de få specialle dialogues der kan bestemme spillets retning. fx. kan vi have uniq tags, som så de bliver taget vil give 
+    /// nye bestemte dialogues.
     /// </summary>
 
 
@@ -119,6 +123,9 @@ public class InkTestingScript : MonoBehaviour
     {
         _story.ChooseChoiceIndex(choice.index);
         refreshUI();
+
+        //can be used to remember choices
+        Debug.Log("The answer you took is index: "+choice.index + " Which can be be used to remeber the choices you made");
     }
 
     //takes the ink file to read 
