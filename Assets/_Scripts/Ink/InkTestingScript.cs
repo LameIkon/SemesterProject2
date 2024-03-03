@@ -17,10 +17,9 @@ public class InkTestingScript : MonoBehaviour
     /// nye bestemte dialogues.
     /// </summary>
 
-
-    [SerializeField] private TextAsset _inkJSON;
     private Story _story;
-
+    
+    [SerializeField] private TextAsset _inkJSON;
     [SerializeField] private TextMeshProUGUI _textPrefab;
     [SerializeField] private Button _buttonPrefab;
     [SerializeField] private Image _dialogueImagePrefab;
@@ -71,7 +70,9 @@ public class InkTestingScript : MonoBehaviour
 
         storyText.text = loadStoryChunk();
 
-       
+        GetTag();
+
+        
 
             //creating the answers (buttons)
             GameObject buttonsContainer = new GameObject("ButtonsContainer"); //create an empty gameobject to store buttons as children
@@ -119,13 +120,22 @@ public class InkTestingScript : MonoBehaviour
         }
     }
 
+    void GetTag()
+    {
+        //Testing if i can get the tags
+        List<string> tags = _story.currentTags; //store the tag of the text that correlate to the button
+        if (tags.Count > 0)
+        {
+            Debug.Log(tags[0]); //there will always be 1 tag at most since currentTags only checks on the text at which the button correlate to
+        }
+    }
     void chooseStoryChoice(Choice choice)
     {
         _story.ChooseChoiceIndex(choice.index);
         refreshUI();
 
         //can be used to remember choices
-        Debug.Log("The answer you took is index: "+choice.index + " Which can be be used to remeber the choices you made");
+        //Debug.Log("The answer you took is index: "+choice.index + " Which can be be used to remeber the choices you made");
     }
 
     //takes the ink file to read 
@@ -134,7 +144,7 @@ public class InkTestingScript : MonoBehaviour
         string text = "";
         if (_story.canContinue)
         {
-            text = _story.ContinueMaximally();
+            text = _story.ContinueMaximally(); //print all lines of rows to text
         }
         return text;
     }
