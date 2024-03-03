@@ -18,9 +18,15 @@ public abstract class ItemObject : ScriptableObject
 
 public enum ItemType
 {
-    Food,
-    Clothing,
-    Fuel
+    Default,
+    Food,    
+    Fuel,
+    Head,
+    Body,
+    Legs,
+    Shoes,
+    MainHand,
+    OffHand
 }
 
 [System.Serializable]
@@ -29,6 +35,11 @@ public class Item
     public string ItemName;
     public int ID;
     
+    public Item()
+    {
+        ID = -1;
+        ItemName = "";
+    }
 
     public Item (ItemObject item)
     {

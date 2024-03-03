@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class CursorManager : MonoBehaviour
 {
+    public MouseItem MouseItem = new MouseItem();
     [SerializeField] private InputReader _inputs;
     private Vector2 _mousePosition;
-
     private Camera _mainCamera;
 
 

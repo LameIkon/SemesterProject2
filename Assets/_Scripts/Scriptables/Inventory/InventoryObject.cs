@@ -20,20 +20,54 @@ public class InventoryObject : ScriptableObject
     public void AddItem (Item item, int amount)
     {
        
-
-        for (int i = 0; i < Container.Items.Count; i++)
+        
+        for (int i = 0; i < Container.Items.Length; i++)
         {
-            if (Container.Items[i].Item.ID == item.ID)
+            if (Container.Items[i].ID == item.ID)
             {
                 Container.Items[i].AddAmount(amount);
                
                 return;
             }
-        }        
-            Container.Items.Add(new InventorySlot(item.ID, item, amount));
+        }
+        
+        SetEmptySlot(item, amount);
+           
         
     }
 
+    public InventorySlot SetEmptySlot(Item item, int amount)
+    {
+        for(int i = 0; i < Container.Items.Length; i++)
+        {
+            if (Container.Items[i].ID <= -1)
+            {
+                Container.Items[i].UpdateSlot(item.ID, item, amount);
+                return Container.Items[i];
+            }
+        }
+
+        //SETUP FOR WHEN INVENTORY IS FULL
+        return null;
+    }
+
+    public void MoveItem(InventorySlot item1, InventorySlot item2)
+    {
+        InventorySlot temp = new InventorySlot(item2.ID, item2.Item, item2.Amount);
+        item2.UpdateSlot(item1.ID, item1.Item, item1.Amount);
+        item1.UpdateSlot(temp.ID, temp.Item, temp.Amount);
+    }
+
+    public void RemoveItem(Item item)
+    {
+        for (int i = 0; i < Container.Items.Length;i++)
+        {
+            if (Container.Items[i].Item == item)
+            {
+                Container.Items[i].UpdateSlot(-1, null, 0);
+            }
+        }
+    }
 
     [ContextMenu("Save")]
     public void Save()
@@ -67,9 +101,14 @@ public class InventoryObject : ScriptableObject
             */
             IFormatter formatter = new BinaryFormatter();
             Stream stream = new FileStream(string.Concat(Application.persistentDataPath, SavePath), FileMode.Open, FileAccess.Read);
-            Container = (Inventory)formatter.Deserialize(stream);
-            stream.Close();
+            Inventory newContainer = (Inventory)formatter.Deserialize(stream);
 
+            for (int i = 0; i < Container.Items.Length;i++)
+            {
+                Container.Items[i].UpdateSlot(newContainer.Items[i].Item.ID, newContainer.Items[i].Item, newContainer.Items[i].Amount);
+            }
+
+            stream.Close();
         }
         
     }
@@ -78,39 +117,76 @@ public class InventoryObject : ScriptableObject
     [ContextMenu("Clear")]
     public void Clear()
     {
-        Container = new Inventory();
-    }
-
-    
+        Container.Clear();
+    }    
 }
 
 [System.Serializable]
 public class Inventory
 {
-    public List<InventorySlot> Items = new List<InventorySlot>();
-}
+    public InventorySlot[] Items = new InventorySlot[24];
 
+    public void Clear()
+    {
+        for (int i = 0; i < Items.Length; i++)
+        {
+            Items[i].UpdateSlot(-1, new Item(), 0);
+        }
+
+    }
+}
 
 [System.Serializable]
 public class InventorySlot
 {
+    [System.NonSerialized]
+    public UserInterface parent;
+    public ItemType[] AllowedItems = new ItemType[0];    
     public Item Item;
     public int Amount;
+    public int ID = -1;
 
-    public int ID;
 
+    public InventorySlot()
+    {
+        ID = -1;
+        Item = null;
+        Amount = 0;
+      
+    }
 
     public InventorySlot(int id, Item item, int amount)
     {
         ID = id;
         Item = item;
         Amount = amount;
-      
     }
+
+    public void UpdateSlot (int id, Item item, int amount)
+    {  ID = id; 
+       Item = item;
+       Amount = amount; 
+    }
+
 
 
     public void AddAmount(int value)
     {
         Amount += value;
+    }
+
+    public bool CanPlaceInSlot(ItemObject item)
+    {
+        if (AllowedItems.Length <= 0) 
+        {
+            return true;
+        }
+
+        for (int i = 0; i < AllowedItems.Length; i++)
+        {
+            if (item.ItemType == AllowedItems[i])
+                return true;
+        }
+        return false;
     }
 }

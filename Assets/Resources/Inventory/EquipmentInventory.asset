@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6dbd26130aaeeb469d02b103ecbc445, type: 3}
+  m_Name: EquipmentInventory
+  m_EditorClassIdentifier: 
+  _dataBase: {fileID: 11400000, guid: 6aab6e98529b36a40aa4942653918f7e, type: 2}
+  SavePath: 
+  Container:
+    Items:
+    - AllowedItems: 02000000
+      parent: {fileID: 0}
+      Item:
+        ItemName: 
+        ID: 0
+      Amount: 0
+      ID: -1
+    - AllowedItems: 03000000
+      parent: {fileID: 0}
+      Item:
+        ItemName: 
+        ID: 0
+      Amount: 0
+      ID: -1
+    - AllowedItems: 04000000
+      parent: {fileID: 0}
+      Item:
+        ItemName: 
+        ID: 0
+      Amount: 0
+      ID: -1
+    - AllowedItems: 05000000
+      parent: {fileID: 0}
+      Item:
+        ItemName: 
+        ID: 0
+      Amount: 0
+      ID: -1
+    - AllowedItems: 06000000
+      parent: {fileID: 0}
+      Item:
+        ItemName: 
+        ID: 0
+      Amount: 0
+      ID: -1
+    - AllowedItems: 07000000
+      parent: {fileID: 0}
+      Item:
+        ItemName: 
+        ID: 0
+      Amount: 0
+      ID: -1
