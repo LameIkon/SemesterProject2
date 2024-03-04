@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(MovementController))]
 public class AIThinker : MonoBehaviour
 {
     [SerializeField] private BrainAI _brain;

@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class CursorManager : MonoBehaviour
 {
-    [SerializeField] private InputReader _inputs;
     private Vector2 _mousePosition;
 
     private Camera _mainCamera;
@@ -17,14 +16,14 @@ public class CursorManager : MonoBehaviour
 
     void OnEnable() 
     {
-        _inputs.OnMousePositionEvent += HandleMousePosition;
-        _inputs.OnLeftClickEvent += HandleLeftMouseClick;
+        InputReader.OnMousePositionEvent += HandleMousePosition;
+        InputReader.OnLeftClickEvent += HandleLeftMouseClick;
     }
 
     void OnDisable()
     {
-        _inputs.OnMousePositionEvent -= HandleMousePosition;
-        _inputs.OnLeftClickEvent -= HandleLeftMouseClick;
+        InputReader.OnMousePositionEvent -= HandleMousePosition;
+        InputReader.OnLeftClickEvent -= HandleLeftMouseClick;
     }
 
     void DetectObject() 

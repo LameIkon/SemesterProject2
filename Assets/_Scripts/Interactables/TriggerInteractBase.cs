@@ -11,23 +11,11 @@ public class TriggerInteractBase : MonoBehaviour, IInteractable
 
     public bool _canInteract;
 
-    [SerializeField] private InputReader _inputs;
-
     public virtual void Interact()
     {
         Debug.Log("Interacted");
     }
 
-
-    private void OnEnable() 
-    {
-        _inputs.OnLeftClickEvent += HandleInteract;
-    }
-
-    private void OnDisable()
-    { 
-        _inputs.OnLeftClickEvent -= HandleInteract;
-    }
 
 
     private void HandleInteract() 

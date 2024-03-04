@@ -36,6 +36,23 @@ public class InputReader : ScriptableObject, GameInput.IGameplayActions, GameInp
         }
     }
 
+
+    // The events that other scripts can subscribe to, for information for gameplay.
+    public static event Action<Vector2> OnMoveEvent; // This sends a Vector2 along with the event
+    public static event Action OnInteractEvent; 
+    public static event Action OnPauseEvent;
+    public static event Action OnInventoryOpenEvent;
+
+    // The events that other scripts can subscribe to, for information about UI.
+    public static event Action<Vector2> OnNavigateEvent;
+    public static event Action OnPickEvent; 
+    public static event Action OnResumeEvent;
+    public static event Action OnInventoryCloseEvent;
+
+    public static event Action OnLeftClickEvent;
+    public static event Action OnRightClickEvent;
+    public static event Action<Vector2> OnMousePositionEvent;
+
     #region Change between Layouts
 
     // These two methods switch the the layouts that are used
@@ -56,11 +73,6 @@ public class InputReader : ScriptableObject, GameInput.IGameplayActions, GameInp
 
     #region Ingame Controls
 
-    // The events that other scripts can subscribe to, for information.
-    public event Action<Vector2> OnMoveEvent; // This sends a Vector2 along with the event
-    public event Action OnInteractEvent; 
-    public event Action OnPauseEvent;
-    public event Action OnInventoryOpenEvent;
 
     
     // This method listens to the move inputs that are connected in the Input System
@@ -101,11 +113,6 @@ public class InputReader : ScriptableObject, GameInput.IGameplayActions, GameInp
 
     #region UI Controls
 
-    // The events that other scripts can subscribe to, for information.
-    public event Action<Vector2> OnNavigateEvent;
-    public event Action OnPickEvent; 
-    public event Action OnResumeEvent;
-    public event Action OnInventoryCloseEvent;
 
     public void OnNavigate(InputAction.CallbackContext context)
     {
@@ -143,9 +150,6 @@ public class InputReader : ScriptableObject, GameInput.IGameplayActions, GameInp
 
     #endregion
 
-    public event Action OnLeftClickEvent;
-    public event Action OnRightClickEvent;
-    public event Action<Vector2> OnMousePositionEvent;
 
     public void OnLeftClick(InputAction.CallbackContext context)
     {

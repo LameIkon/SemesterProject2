@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-
-    [SerializeField, Tooltip("Drag in the InputReader")] private InputReader _input;
     [SerializeField] private GameObject _pauseMenu;
     [SerializeField] private GameObject _inventoryMenu;
 
@@ -16,10 +14,18 @@ public class GameManager : MonoBehaviour
         _inventoryMenu.SetActive(false);
 
         // Here we subscribe the events to the handlers
-        _input.OnPauseEvent += HandlePause;
-        _input.OnResumeEvent += HandleResume;
-        _input.OnInventoryOpenEvent += HandleInventoryOpen;
-        _input.OnInventoryCloseEvent += HandleInvertoryClose;
+        InputReader.OnPauseEvent += HandlePause;
+        InputReader.OnResumeEvent += HandleResume;
+        InputReader.OnInventoryOpenEvent += HandleInventoryOpen;
+        InputReader.OnInventoryCloseEvent += HandleInvertoryClose;
+    }
+
+    private void OnDisable() 
+    {
+        InputReader.OnPauseEvent -= HandlePause;
+        InputReader.OnResumeEvent -= HandleResume;
+        InputReader.OnInventoryOpenEvent -= HandleInventoryOpen;
+        InputReader.OnInventoryCloseEvent -= HandleInvertoryClose;
     }
 
 
