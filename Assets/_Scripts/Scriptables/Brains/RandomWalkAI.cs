@@ -38,8 +38,6 @@ public class RandomWalkAI : BrainAI
         if (stateTimeout < 0)
         {
             SetTimeout(brain);
-
-            Debug.Log("Default");
             move.Move(new Vector3(Random.Range(-1, 2), Random.Range(-1, 2), 0));
 
         }

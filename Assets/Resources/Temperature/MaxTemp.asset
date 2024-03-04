@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: MaxTemp
   m_EditorClassIdentifier: 
   DevDescription: 
-  _value: 200
+  _value: 100
   _onValueChanged: {fileID: 0}

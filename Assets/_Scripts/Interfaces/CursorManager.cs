@@ -17,14 +17,14 @@ public class CursorManager : MonoBehaviour
 
     void OnEnable() 
     {
-        _inputs.OnMousePositionEvent += HandleMousePosition;
-        _inputs.OnLeftClickEvent += HandleLeftMouseClick;
+        InputReader.OnMousePositionEvent += HandleMousePosition;
+        InputReader.OnLeftClickEvent += HandleLeftMouseClick;
     }
 
     void OnDisable()
     {
-        _inputs.OnMousePositionEvent -= HandleMousePosition;
-        _inputs.OnLeftClickEvent -= HandleLeftMouseClick;
+        InputReader.OnMousePositionEvent -= HandleMousePosition;
+        InputReader.OnLeftClickEvent -= HandleLeftMouseClick;
     }
 
     void DetectObject() 
