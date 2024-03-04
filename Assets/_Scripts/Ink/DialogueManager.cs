@@ -1,3 +1,4 @@
+using Ink.Parsed;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -19,7 +20,8 @@ public class DialogueManager : MonoBehaviour
     }
 
 
-    private void OnCollisionEnter2D(Collision2D other)
+
+    private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.name == "Player")
         {
@@ -31,12 +33,16 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-    private void OnCollisionExit2D(Collision2D other)
+    private void OnTriggerExit2D(Collider2D other)
     {
         if (other.gameObject.name == "Player")
         {
             Debug.Log("exited collsion area");
-        }  
+        }
+        else
+        {
+            Debug.Log("something entered collsion area 1");
+        }
     }
 
     void IfDialogue()
