@@ -1,4 +1,4 @@
-Sir, it has become too cold for us to continue without setting our <color=red>lives at risk</color>. Perhaps we should settle down for the night and then continue tomorrow?
+This is test 1
 ->main
 
 ===main===
