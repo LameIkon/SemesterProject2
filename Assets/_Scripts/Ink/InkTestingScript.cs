@@ -6,48 +6,63 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+
 public class InkTestingScript : MonoBehaviour
 {
     /// <summary>
-    /// Nuværende udfordringer er at få forskellige inkJSON filer herind uden at skabe dublicationer. Dette laves sikkert om til en singleton, hvor vi så skal give 
-    /// information udefra. Derudover skal vi også gemme de svarmuligheder man tager.
-    /// 
-    /// Ligenu har vi en primitiv måde at huske svar, men hvis vi vil være mere præcise i hvilke svar vi skal gemme kunne vi måske gøre brug af tags
-    /// til de få specialle dialogues der kan bestemme spillets retning. fx. kan vi have uniq tags, som så de bliver taget vil give 
-    /// nye bestemte dialogues.
+    /// indtil videre ser jeg ingen grund til at have et scriptable object af _dialogueData da det er præcis det samme jeg gør. Måske hvis jeg havde mere kode.
+    /// Som det er sat op nu, vil den ændre data hver gang attribute bliver ændret. udfordringen jeg står i lige nu er hvordan jeg skal kommunikere at 
+    /// jeg har brug for ny dialogue. 
     /// </summary>
-
     private Story _story;
-    
-    [SerializeField] private TextAsset _inkJSON;
+
+    [SerializeField] private TextAsset _emptyTemplate;
+    //[SerializeField] private DialogueData _dialogueData;
+    [SerializeField] private TextAsset _dialogueData;
     [SerializeField] private TextMeshProUGUI _textPrefab;
     [SerializeField] private Button _buttonPrefab;
     [SerializeField] private Image _dialogueImagePrefab;
 
     private bool _oneclick; // for testing purpose only. only activate once
+    private bool _newFile;
 
     // Start is called before the first frame update
-    void Awake()
-    {
-        //store the ink story in a textfile
-        _story = new Story(_inkJSON.text);
-    }
+    /*  void Awake()
+      {
+          //store the ink story in a textfile
+          _story = new Story(_dialogueData.InkJSON.text);
+      }
+    */
 
+    void OnValidate()
+    {
+        if (_dialogueData !=null /*&& _dialogueData.InkJSON != null*/)
+        {
+            Debug.Log("InkJSON file inserted");
+            _newFile = true; // new file means you can open up dialogue
+            _story = new Story(_dialogueData/*.InkJSON.*/.text);
+        }
+        
+    }
 
     // Update is called once per frame
     void Update()
     {
-        //just to test
-        if (Input.GetKeyDown(KeyCode.Space) && !_oneclick)
+        if (_dialogueData != null /*&& _dialogueData.InkJSON != null*/)
         {
-            _oneclick = true;
-            refreshUI();
+            //just to test
+            if (Input.GetKeyDown(KeyCode.Space) && !_oneclick && _newFile)
+            {
+                _oneclick = true;
+                refreshUI();
+            }
         }
+
     }
 
     void refreshUI()
     {
-        eraseUI();
+        eraseUI(); // delete gameobjects if there is any
 
         
 
@@ -152,7 +167,9 @@ public class InkTestingScript : MonoBehaviour
     void exitDialogue()
     {
         Debug.Log("you exited dialogue");
-        _oneclick = false; // open up dialogue again
+        _story = new Story(_emptyTemplate.text); // change file to empty data
+        _oneclick = false; // ensures 1 instance
+        _newFile = false; // cannot open up dialogue if data hasnt been changed out. validate
     }
 
 }
