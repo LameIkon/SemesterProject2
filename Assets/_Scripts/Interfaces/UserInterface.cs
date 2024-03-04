@@ -148,11 +148,7 @@ public abstract class UserInterface: MonoBehaviour
         {
             Cursor.MouseItem.Obj.GetComponent<RectTransform>().position = Input.mousePosition;
         }
-    }
-
-
-
-   
+    }   
 }
 
 
