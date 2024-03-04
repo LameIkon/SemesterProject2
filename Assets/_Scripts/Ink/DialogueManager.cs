@@ -16,13 +16,13 @@ public class DialogueManager : MonoBehaviour
     /// </summary>
     /// 
 
-    public static DialogueManager Instance { get; private set; }
+    public static DialogueManager instance { get; private set; }
 
     private Story _story;
 
     [SerializeField] private TextAsset _emptyTemplate;
     //[SerializeField] private DialogueData _dialogueData;
-    public TextAsset DialogueData;
+    public TextAsset DialogueData; // used in other scripts to change the data
     [SerializeField] private TextMeshProUGUI _textPrefab;
     [SerializeField] private Button _buttonPrefab;
     [SerializeField] private Image _dialogueImagePrefab;

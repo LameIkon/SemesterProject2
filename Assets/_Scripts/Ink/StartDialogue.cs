@@ -10,7 +10,7 @@ public class StartDialogue : MonoBehaviour
     // Start is called before the first frame update
 
     private bool _startDialogue;
-    public TextAsset Dialogue;
+    [SerializeField] private TextAsset Dialogue;
 
     // Update is called once per frame
     void Update()
@@ -22,13 +22,12 @@ public class StartDialogue : MonoBehaviour
     }
 
 
-
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.name == "Player")
         {
             Debug.Log("Enter");
-            Dia.instance.DialogueData = Dialogue;
+            DialogueManager.instance.DialogueData = Dialogue;
             DialogueManager.instance.InsertDialogue();
             _startDialogue = true;
         }
