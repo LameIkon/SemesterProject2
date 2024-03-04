@@ -1129,10 +1129,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _emptyTemplate: {fileID: 4900000, guid: 9f852e0d7ea910643bd87d549a1731db, type: 3}
-  _dialogueData: {fileID: 0}
+  _dialogueData: {fileID: 4900000, guid: cb1a95a74e3661a4fbc440bd8b5bbbac, type: 3}
   _textPrefab: {fileID: 1684017184061222413, guid: c56f959e2f166af44a59c118bac8cd31, type: 3}
   _buttonPrefab: {fileID: 2331016107263520480, guid: 694fdd59c01478b4d9eda0fbf6a0fb20, type: 3}
   _dialogueImagePrefab: {fileID: 5260247860963206343, guid: 213f253fe4772e54bb40243fe59586ab, type: 3}
+  _newFile: 1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
