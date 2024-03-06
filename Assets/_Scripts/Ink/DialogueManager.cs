@@ -3,38 +3,35 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Xml.Serialization;
 using TMPro;
+using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.UI;
 
 
 public class DialogueManager : MonoBehaviour
 {
-    /// <summary>
-    /// indtil videre ser jeg ingen grund til at have et scriptable object af _dialogueData da det er præcis det samme jeg gør. Måske hvis jeg havde mere kode.
-    /// Som det er sat op nu, vil den ændre data hver gang attribute bliver ændret. udfordringen jeg står i lige nu er hvordan jeg skal kommunikere at 
-    /// jeg har brug for ny dialogue. 
-    /// </summary>
-    /// 
-
     public static DialogueManager instance { get; private set; }
 
-    private Story _story;
+    private Story _story; // Dialogue will be stored in this value
 
-    [SerializeField] private TextAsset _emptyTemplate;
-    //[SerializeField] private DialogueData _dialogueData;
-    public TextAsset DialogueData; // used in other scripts to change the data
+    [Header("UI Elements")]
+    [SerializeField] private TextAsset _emptyTemplate; // Changes to empty template allowing Ink to update Dialogue   
     [SerializeField] private TextMeshProUGUI _textPrefab;
     [SerializeField] private Button _buttonPrefab;
     [SerializeField] private Image _dialogueImagePrefab;
 
-    public bool _oneclick; // for testing purpose only. only activate once
-    public bool _newFile;
+    [Header("Stored data")]
+    public bool _oneclick;
+    public bool _dialogueExited = false;
+    public List<string> savedTags = new List<string>(); //save all tags and store them for other scripts to use
 
-    // Start is called before the first frame update
+    [Header("Selected Dialogue")]
+    public TextAsset DialogueData; // used in other scripts to change the data. Other scripts will store their choosen dialogue data here
+
+
     void Awake()
     {
-          //store the ink story in a textfile
-          //_story = new Story(_dialogueData.InkJSON.text);
+        // Ensure only 1 singleton of this script
         if (instance != null && instance != this)
         {
             Destroy(this);
@@ -43,37 +40,28 @@ public class DialogueManager : MonoBehaviour
         {
             instance = this;
         }
-
-        _story = new Story(_emptyTemplate.text); // change file to empty data
+        _story = new Story(_emptyTemplate.text); // change file to empty data. IF this shows up then there have happened an error
     }
-    
+
 
     public void InsertDialogue()
     {
-        if (DialogueData !=null /*&& _dialogueData.InkJSON != null*/)
+        if (DialogueData != null) // Only if there is data are you allowed to start a dialogue
         {
-            Debug.Log("InkJSON file inserted");
-            _newFile = true; // new file means you can open up dialogue
-            _story = new Story(DialogueData/*.InkJSON.*/.text);
+            //Debug.Log("InkJSON file inserted");
+            _story = new Story(DialogueData.text); // Insert dialogue Data into the story data.
         }
-        
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-
-    }
 
     public void OpenUI()
     {
-        if (DialogueData != null /*&& _dialogueData.InkJSON != null*/)
+        if (DialogueData != null) // Only if there is data are you allowed to start a dialogue
         {
             //just to test
-            if (Input.GetKeyDown(KeyCode.E))
+            if (Input.GetKeyDown(KeyCode.E)) // Press E to open dialogue UI
             {
-                _oneclick = true;
+                _oneclick = true; // Ensure only 1 instance. Used in other scripts
                 refreshUI();
             }
         }
@@ -81,69 +69,69 @@ public class DialogueManager : MonoBehaviour
 
     public void refreshUI()
     {
-        eraseUI(); // delete gameobjects if there is any
+        eraseUI(); // Delete gameobjects if there is any
 
-        //creating the dialogue Gameobject container
-        GameObject dialogueContainer = new GameObject("DialogueContainer");
-        dialogueContainer.transform.SetParent(transform, false);
+        // Creating the dialogue Gameobject container
+        GameObject dialogueContainer = new GameObject("DialogueContainer"); // Create an Empty GameObject to store the dialogue as children
+        dialogueContainer.transform.SetParent(transform, false); // Set GameObject to the parent but keep its own transform
 
-        //creating background image for dialogue
-        Image dialogueBackground = Instantiate(_dialogueImagePrefab);
-        dialogueBackground.transform.SetParent(dialogueContainer.transform, false);
+        // Creating background image for dialogue
+        Image dialogueBackground = Instantiate(_dialogueImagePrefab); // Takes a image prefab
+        dialogueBackground.transform.SetParent(dialogueContainer.transform, false); // Set Image to the parent but keep its own transform
 
-        //creating the dialogue
-        TextMeshProUGUI storyText = Instantiate(_textPrefab); //takes a textfile prefab with predefined settings
-        storyText.transform.SetParent(dialogueContainer.transform, false); //set dialogue to the parent but keep its own transform
-       
-        //implement vertical layout group for the container with settings
-        VerticalLayoutGroup dialogueLayoutSettings = dialogueContainer.AddComponent<VerticalLayoutGroup>();
-        dialogueLayoutSettings.spacing = -300;
-        dialogueLayoutSettings.childControlHeight = false;
+        // Creating the dialogue
+        TextMeshProUGUI storyText = Instantiate(_textPrefab); // Takes a textfile prefab with predefined settings
+        storyText.transform.SetParent(dialogueContainer.transform, false); // Set dialogue to the parent but keep its own transform
+
+        // Implement vertical layout group for the container with settings
+        VerticalLayoutGroup dialogueLayoutSettings = dialogueContainer.AddComponent<VerticalLayoutGroup>(); // Add vertical layout group componennt to buttonContainer
+        dialogueLayoutSettings.spacing = -300; // Change spacing to match the dialogue box and text to be inside each other 
+        dialogueLayoutSettings.childControlHeight = false; // Disable control child height, meaning height is constant now, no matter the parents height size
 
         storyText.text = loadStoryChunk();
 
         GetTag();
 
-        
 
-            //creating the answers (buttons)
-            GameObject buttonsContainer = new GameObject("ButtonsContainer"); //create an empty gameobject to store buttons as children
-            buttonsContainer.transform.SetParent(transform, false); //set gameobject to the parent but keep its own transform
-            VerticalLayoutGroup buttonLayoutSettings = buttonsContainer.AddComponent<VerticalLayoutGroup>(); // add vertical layout group componennt to buttonContainer
-            buttonLayoutSettings.childControlHeight = false; // disable control child height, meaning height is constant now
-        
-        if (_story.currentChoices.Count > 0)
+
+        // Creating the answers (buttons)
+        GameObject buttonsContainer = new GameObject("ButtonsContainer"); // Create an empty gameobject to store buttons as children
+        buttonsContainer.transform.SetParent(transform, false); // Set gameobject to the parent but keep its own transform
+        VerticalLayoutGroup buttonLayoutSettings = buttonsContainer.AddComponent<VerticalLayoutGroup>(); // Add vertical layout group componennt to buttonContainer
+        buttonLayoutSettings.childControlHeight = false; // Disable control child height, meaning height is constant now, no matter the parents height size
+
+        if (_story.currentChoices.Count > 0) // If there is at least 1 choice button
         {
-            foreach (Choice choice in _story.currentChoices) //currentChoices are a list used for ink for the choices you get
+            foreach (Choice choice in _story.currentChoices) // CurrentChoices are a list used for ink for the choices you get
             {
-                Button choiceButton = Instantiate(_buttonPrefab); // create button
-                choiceButton.transform.SetParent(buttonsContainer.transform, false); //set buttons to the parent but keep its own transform
+                Button choiceButton = Instantiate(_buttonPrefab); // Create button with prefab
+                choiceButton.transform.SetParent(buttonsContainer.transform, false); // Set buttons to the parent but keep its own transform
 
-                TextMeshProUGUI choiceText = choiceButton.GetComponentInChildren<TextMeshProUGUI>(); // create a new attribute choiceText as TextMeshProGUI
-                choiceText.text = choice.text; //the button text is set to the current choice in the list
+                TextMeshProUGUI choiceText = choiceButton.GetComponentInChildren<TextMeshProUGUI>(); // Create a new attribute choiceText as TextMeshProGUI
+                choiceText.text = choice.text; // The button text is set to the current choice in the list
 
                 choiceButton.onClick.AddListener(delegate
                 {
                     chooseStoryChoice(choice);
-                });
+                }); // Clicking button will go down that path
             }
         }
-        else
+        else // If there is no choices to choose 
         {
-            Button endDialogueButton = Instantiate(_buttonPrefab);
-            endDialogueButton.transform.SetParent(buttonsContainer.transform, false);
-            TextMeshProUGUI endDialogueText = endDialogueButton.GetComponentInChildren<TextMeshProUGUI>();
-            endDialogueText.text = "End Dialogue";
+            Button endDialogueButton = Instantiate(_buttonPrefab); // Create button with prefab
+            endDialogueButton.transform.SetParent(buttonsContainer.transform, false); // Set buttons to the parent but keep its own transform
+            TextMeshProUGUI endDialogueText = endDialogueButton.GetComponentInChildren<TextMeshProUGUI>(); // Create a new attribute choiceText as TextMeshProGUI
+            endDialogueText.text = "End Dialogue"; // The button text is set to End Dialogue 
 
             endDialogueButton.onClick.AddListener(delegate
             {
                 exitDialogue();
                 eraseUI();
-            });
+            }); // Clicking button will call the methods 
         }
     }
 
-    //destroy all child objects on the parent object which this script is on
+    // Destroy all child objects on the parent object which this script is on
     void eraseUI()
     {
         for (int i = 0; i < transform.childCount; i++)
@@ -152,41 +140,48 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
+    // Get the tag from the dialogue and store it
     void GetTag()
     {
-        //Testing if i can get the tags
-        List<string> tags = _story.currentTags; //store the tag of the text that correlate to the button
-        if (tags.Count > 0)
+        List<string> tags = _story.currentTags; // Store the tag of the text that correlate to the button
+        if (tags.Count > 0) // If there is more than 0 tags it will search
         {
-            Debug.Log(tags[0]); //there will always be 1 tag at most since currentTags only checks on the text at which the button correlate to
+            //Debug.Log(tags[0]);
+            savedTags.Add(tags[0]); // Store the tag in a list to be used for alternative texts
         }
     }
-    void chooseStoryChoice(Choice choice)
+    void chooseStoryChoice(Choice choice) // When button clicked 
     {
-        _story.ChooseChoiceIndex(choice.index);
+        _story.ChooseChoiceIndex(choice.index); // Show new dialogue from the choosen button path
         refreshUI();
-
-        //can be used to remember choices
-        //Debug.Log("The answer you took is index: "+choice.index + " Which can be be used to remeber the choices you made");
     }
 
-    //takes the ink file to read 
+    // Takes the ink file to read 
     string loadStoryChunk()
     {
         string text = "";
         if (_story.canContinue)
         {
-            text = _story.ContinueMaximally(); //print all lines of rows to text
+            text = _story.ContinueMaximally(); // Print all lines of rows to text
         }
         return text;
     }
 
-    void exitDialogue()
+    // Exit Dialouge
+    private void exitDialogue()
     {
-        Debug.Log("you exited dialogue");
-        _story = new Story(DialogueData.text); // change file to empty data
-        _oneclick = false; // ensures 1 instance
-        _newFile = false; // cannot open up dialogue if data hasnt been changed out. validate
+        _story = new Story(DialogueData.text); // Change file to the same dialogueData. Must be done otherwise you cant repeat the same dialouge
+        _oneclick = false; // Ensures 1 instance
+        _dialogueExited = true; // Announces that the exitDialogue was called (used to check if player exited dialogue)
+        Invoke("SetDialogueExitFalse", 0f); // Used to give a small frame for the text to change to the alternative text
     }
+
+    // Invoked almost next frame to make boolean false
+    void SetDialogueExitFalse()
+    {
+        _dialogueExited = false;
+    }
+
+    
 
 }

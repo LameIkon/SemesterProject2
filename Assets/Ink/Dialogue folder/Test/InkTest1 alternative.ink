@@ -1,4 +1,4 @@
-Sir, it has become too cold for us to continue without setting our <color=red>lives at risk</color>. Perhaps we should settle down for the night and then continue tomorrow?
+this is test 1 alternative 1
 ->main
 
 ===main===
@@ -14,14 +14,15 @@ Sir, it has become too cold for us to continue without setting our <color=red>li
    
 ===next===
 * [turn around and start to eat your crewmate]
-    <i>"Oh, you finally noticed i was talking to you... why are you ominously moving towards me?" #testTag1
+    <i>"Oh, you finally noticed i was talking to you... why are you ominously moving towards me?"
     ->third
 
 =third
 * [take a bite]
     You take a huge bite 
     <i>"The captain has gone crazy, SHOOT HIM!"
-    <color=red> die from gunshot</color> #testTag2
+    <color=red> die from gunshot</color> 
+    #testTag1
     ->END
 
 ===continue===

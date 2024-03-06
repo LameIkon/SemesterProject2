@@ -1,4 +1,4 @@
-This is test 1
+This is test 2
 ->main
 
 ===main===
@@ -14,14 +14,15 @@ This is test 1
    
 ===next===
 * [turn around and start to eat your crewmate]
-    <i>"Oh, you finally noticed i was talking to you... why are you ominously moving towards me?" #testTag1
+    <i>"Oh, you finally noticed i was talking to you... why are you ominously moving towards me?"
     ->third
 
 =third
 * [take a bite]
     You take a huge bite 
     <i>"The captain has gone crazy, SHOOT HIM!"
-    <color=red> die from gunshot</color> #testTag2
+    <color=red> die from gunshot</color> 
+    #testTag1
     ->END
 
 ===continue===
