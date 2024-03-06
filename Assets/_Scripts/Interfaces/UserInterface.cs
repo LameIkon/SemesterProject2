@@ -98,9 +98,9 @@ public abstract class UserInterface: MonoBehaviour
 
     public void OnDragEnd(GameObject obj)
     {
-    
+
         Destroy(MouseData.tempItemBeingDragged);
-        if(MouseData.interfaceMouseIsOver == null)
+        if (MouseData.interfaceMouseIsOver == null)
         {
             slotsOnInterface[obj].RemoveItem();
             return;
@@ -109,7 +109,9 @@ public abstract class UserInterface: MonoBehaviour
         {
             InventorySlot mouseHoverSlotData = MouseData.interfaceMouseIsOver.slotsOnInterface[MouseData.slotHoveredOver];
             Inventory.SwapItems(slotsOnInterface[obj], mouseHoverSlotData);
-        } 
+        }
+
+       
     }
 
     public void OnDrag(GameObject obj)

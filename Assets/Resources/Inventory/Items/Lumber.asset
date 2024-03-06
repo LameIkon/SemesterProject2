@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6b2165c46dabda439bd648c255df982, type: 3}
   m_Name: Lumber
   m_EditorClassIdentifier: 
-  ItemDisplayed: {fileID: 0}
+  ItemDisplayed: {fileID: 21300000, guid: a027205e17e2a784b93f1bbd4281e392, type: 3}
   Stackable: 1
   ItemType: 2
   data:
