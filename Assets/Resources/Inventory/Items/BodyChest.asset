@@ -12,8 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af7c9deb151351c438ff03ae8c069140, type: 3}
   m_Name: BodyChest
   m_EditorClassIdentifier: 
-  ItemDisplay: {fileID: 0}
-  ItemType: 3
-  ID: 2
+  ItemDisplayed: {fileID: 0}
+  Stackable: 0
+  ItemType: 4
+  data:
+    ItemName: 
+    ID: 2
   ItemDescription: 
   ColdResistance: 0

@@ -16,45 +16,33 @@ MonoBehaviour:
   SavePath: 
   Container:
     Items:
-    - AllowedItems: 02000000
-      parent: {fileID: 0}
-      Item:
-        ItemName: 
-        ID: 0
-      Amount: 0
-      ID: -1
     - AllowedItems: 03000000
-      parent: {fileID: 0}
       Item:
         ItemName: 
         ID: 0
       Amount: 0
-      ID: -1
     - AllowedItems: 04000000
-      parent: {fileID: 0}
       Item:
         ItemName: 
         ID: 0
       Amount: 0
-      ID: -1
     - AllowedItems: 05000000
-      parent: {fileID: 0}
       Item:
         ItemName: 
         ID: 0
       Amount: 0
-      ID: -1
     - AllowedItems: 06000000
-      parent: {fileID: 0}
       Item:
         ItemName: 
         ID: 0
       Amount: 0
-      ID: -1
     - AllowedItems: 07000000
-      parent: {fileID: 0}
       Item:
         ItemName: 
         ID: 0
       Amount: 0
-      ID: -1
+    - AllowedItems: 08000000
+      Item:
+        ItemName: 
+        ID: 0
+      Amount: 0

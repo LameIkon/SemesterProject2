@@ -9,7 +9,7 @@ public class ItemDatabaseObject : ScriptableObject, ISerializationCallbackReceiv
 {
     public ItemObject[] ItemsArray;
 
-    public Dictionary<int, ItemObject> GetItem = new Dictionary<int, ItemObject>();
+   // public Dictionary<int, ItemObject> GetItem = new Dictionary<int, ItemObject>();
 
 
     public void OnAfterDeserialize()
@@ -17,13 +17,13 @@ public class ItemDatabaseObject : ScriptableObject, ISerializationCallbackReceiv
        
         for (int i = 0; i < ItemsArray.Length; i++)
         {
-            ItemsArray[i].ID = i;
-            GetItem.Add(i, ItemsArray[i]);
+            ItemsArray[i].data.ID = i;
+            //GetItem.Add(i, ItemsArray[i]);
         }
     }
 
     public void OnBeforeSerialize()
     {
-        GetItem = new Dictionary<int, ItemObject>();
+       // GetItem = new Dictionary<int, ItemObject>();
     }
 }

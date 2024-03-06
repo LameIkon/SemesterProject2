@@ -6,9 +6,11 @@ using UnityEngine.AI;
 public abstract class ItemObject : ScriptableObject
 {
 
-     public Sprite ItemDisplay;
+     public Sprite ItemDisplayed;
+     public bool Stackable;
      public ItemType ItemType;
-     public int ID;
+     public Item data = new Item();
+    
 
     [TextArea(10, 15)]
     public string ItemDescription;
@@ -33,7 +35,7 @@ public enum ItemType
 public class Item
 {
     public string ItemName;
-    public int ID;
+    public int ID = -1;
     
     public Item()
     {
@@ -44,7 +46,7 @@ public class Item
     public Item (ItemObject item)
     {
         ItemName = item.name;
-        ID = item.ID;
+        
         
     }
 }

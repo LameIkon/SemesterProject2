@@ -770,9 +770,9 @@ MonoBehaviour:
   InventoryPrefab: {fileID: 4038510048974629389, guid: f7e58fdc455397748817f9ff95f2e526, type: 3}
   X_START: -360
   Y_START: 300
-  X_SPACE_BETWEEN_ITEM: 50
+  X_SPACE_BETWEEN_ITEM: 110
   NUMBER_OF_COLUMN: 4
-  Y_SPACE_BETWEEN_ITEM: 50
+  Y_SPACE_BETWEEN_ITEM: 110
 --- !u!114 &662538432
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5794,7 +5794,6 @@ MonoBehaviour:
   _whatStopsMovement:
   - serializedVersion: 2
     m_Bits: 64
-  _input: {fileID: 11400000, guid: c4df98e5f5651f84cb8d4682d3d0370b, type: 2}
 --- !u!4 &2049083461
 Transform:
   m_ObjectHideFlags: 0
