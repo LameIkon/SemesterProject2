@@ -5,9 +5,20 @@ using UnityEngine.Tilemaps;
 
 public class GameManager : MonoBehaviour
 {
+    private InputReader _inputs; 
+
     [SerializeField] private GameObject _pauseMenu;
     [SerializeField] private GameObject _inventoryMenu;
-    
+
+
+    private void Awake()
+    {
+        if (_inputs == null) 
+        {
+            _inputs = new InputReader(); 
+        }
+    }
+
     private void Start() 
     {
         // We set the Pause and Inventory Menus to false when we start

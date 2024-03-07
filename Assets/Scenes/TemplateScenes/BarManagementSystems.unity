@@ -407,10 +407,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68a7f641147ac28418daf1014061caeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _healthPoints: {fileID: 11400000, guid: 86a0bb363a0bb4a4bb2686902045b0fb, type: 2}
-  _hungerPoints: {fileID: 11400000, guid: b1920d0977b0f8543902afaa1aea131b, type: 2}
-  _freezePoints: {fileID: 11400000, guid: dece9671aacff9f49a48fa2442bc41eb, type: 2}
-  _staminaPoints: {fileID: 11400000, guid: c3d7f87802b2aa447a728af33e442d66, type: 2}
+  _tikBetweenMax: 60
+  _tikBetweenMin: 45
+  _healthPoint: {fileID: 11400000, guid: 7a688a1e550fb0847961cf213108f4a7, type: 2}
+  _hungerPoint: {fileID: 11400000, guid: ad66e61c2e788044e9f4ab71c4fda638, type: 2}
+  _freezePoint: {fileID: 11400000, guid: 999fa60fdc21b7c40ad833ad7a86116a, type: 2}
+  _staminaPoint: {fileID: 11400000, guid: f2a1028da41a5d04fbebeb90d7b43e9e, type: 2}
   _hungerMinThreshold:
     UseConstant: 1
     ConstantValue: 50
@@ -429,7 +431,7 @@ MonoBehaviour:
     Variable: {fileID: 0}
   _starveDamage:
     UseConstant: 1
-    ConstantValue: 0.2
+    ConstantValue: 0.3
     Variable: {fileID: 0}
   _freezeDamage:
     UseConstant: 1
