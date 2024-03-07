@@ -16,7 +16,7 @@ MonoBehaviour:
   Stackable: 1
   ItemType: 1
   data:
-    ItemName: 
+    ItemName: Bread
     ID: 0
   ItemDescription: 
   RestoreHungerValue: 10

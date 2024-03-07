@@ -22,35 +22,19 @@ public class InventoryObject : ScriptableObject
     {
         InventorySlot slot = FindItemOnInventory(item);
 
-        if(slot != null && _dataBase.ItemsArray[item.ID].Stackable)
+        if (EmptySlotCount <= 0)
         {
-            slot.AddAmount(amount);
-            return true;
+            return false;
         }
 
-        if(EmptySlotCount > 0)
+
+        if (!_dataBase.ItemsArray[item.ID].Stackable || slot == null)
         {
             SetEmptySlot(item, amount);
             return true;
         }
-        else
-        {
-            return false;   
-        }
-
-        //if (EmptySlotCount <= 0)
-        //{
-        //    return false;
-        //}
-
-        
-        //if (!_dataBase.GetItem[item.ID].Stackable || slot == null)
-        //{
-        //    SetEmptySlot(item, amount);
-        //    return true;
-        //}
-        //slot.AddAmount(amount);
-        //return true;
+        slot.AddAmount(amount);
+        return true;
     }
 
     public int EmptySlotCount

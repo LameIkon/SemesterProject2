@@ -8,16 +8,6 @@ public class StaticInterface : UserInterface
 
     public GameObject[] Slots;
 
-    void Start()
-    {
-        
-    }
-
-    
-    void Update()
-    {
-        
-    }
 
     public override void CreateSlots()
     {
