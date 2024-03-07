@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class CursorManager : MonoBehaviour
 {
   
-    private Vector2 _mousePosition;
+    public static Vector2 _mousePosition;
     private Camera _mainCamera;
 
 
@@ -37,7 +38,6 @@ public class CursorManager : MonoBehaviour
             Debug.Log("Name Of Object: " + hit.collider.name);
         }
 
-
     }
 
 
@@ -45,6 +45,7 @@ public class CursorManager : MonoBehaviour
     {
         _mousePosition = pos; 
     }
+
 
     private void HandleLeftMouseClick() 
     {

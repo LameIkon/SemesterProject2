@@ -7,11 +7,19 @@ using UnityEngine;
 public class FoodObject : ItemObject
 {
 
+    [SerializeField] private FloatVariable _hungerPoints;
+
     public int RestoreHungerValue;
 
     public void Awake()
     {
          ItemType = ItemType.Food;
+    }
+
+
+    public void Eat() 
+    {
+        _hungerPoints.ApplyChange(RestoreHungerValue);
     }
 
 }
