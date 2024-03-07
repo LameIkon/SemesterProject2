@@ -11,34 +11,19 @@ public class SurvivalManager : MonoBehaviour, IDamageable, IFreezeable, IStarvea
 
     public void TakeDamage(float damageAmount)
     {
-        _healthPoints.ApplyChange(-damageAmount);
+        _healthPoint.ApplyChange(-damageAmount);
 
-        if (_healthPoints.GetValue() >= _maxHealth)
+        if (_healthPoint.GetValue() < 0)
         {
-            _healthPoints.SetValue(_maxHealth);
-        }
-        else if (_healthPoints.GetValue() <= 0f)
-        {
-            _healthPoints.SetValue(0f);
-        }
-
-        if (_healthPoints.GetValue() < 0) 
-        {
-            Die();    
+            Die();
         }
     }
 
     public void Freeze(float amount)
     {
-        _freezePoints.ApplyChange(-amount);
+        _freezePoint.ApplyChange(-amount);
 
-        if (_freezePoints.GetValue() <= 0f)
-        {
-            _freezePoints.SetValue(0f);
-        }
-
-
-        if (_freezePoints.GetValue() > _freezeMaxThreshold)
+        if (_freezePoint.GetValue() > _freezeMaxThreshold)
         {
             _isWarm = true;
             if (_isFull)
@@ -46,13 +31,13 @@ public class SurvivalManager : MonoBehaviour, IDamageable, IFreezeable, IStarvea
                 TakeDamage(-_healthGainOnFreeze);
             }
         }
-        else if (_freezePoints.GetValue() < _freezeMinThreshold)
+        else if (_freezePoint.GetValue() < _freezeMinThreshold)
         {
             _isFreezing = true;
             TakeDamage(_healthLossOnFreeze);
         }
         else
-        { 
+        {
             _isWarm = false;
             _isFreezing = false;
         }
@@ -60,25 +45,19 @@ public class SurvivalManager : MonoBehaviour, IDamageable, IFreezeable, IStarvea
     }
     public void Starve(float amount)
     {
-        _hungerPoints.ApplyChange(-amount);
-        
-        if (_hungerPoints.GetValue() <= 0f) 
-        {
-            _hungerPoints.SetValue(0f);
-        }
+        _hungerPoint.ApplyChange(-amount);
 
-
-        if (_hungerPoints.GetValue() > _hungerMaxThreshold)
+        if (_hungerPoint.GetValue() > _hungerMaxThreshold)
         {
             _isFull = true;
             _isStarving = false;
             if (_isWarm)
             {
                 TakeDamage(-_healthGainOnHunger);
-                
+
             }
         }
-        else if (_hungerPoints.GetValue() < _hungerMinThreshold)
+        else if (_hungerPoint.GetValue() < _hungerMinThreshold)
         {
             _isStarving = true;
             _isFull = false;
@@ -98,11 +77,11 @@ public class SurvivalManager : MonoBehaviour, IDamageable, IFreezeable, IStarvea
     }
 
 
-    void Start() 
+    void Start()
     {
-        _healthPoints.SetValue(70);
-        _hungerPoints.SetValue(100);
-        _freezePoints.SetValue(100);
+        _healthPoint.SetValue(70);
+        _hungerPoint.SetValue(100);
+        _freezePoint.SetValue(100);
     }
 
     void Update()
@@ -125,13 +104,37 @@ public class SurvivalManager : MonoBehaviour, IDamageable, IFreezeable, IStarvea
         }
         if (Input.GetKey(KeyCode.Q))
         {
-            _hungerPoints.ApplyChange(_healthGainOnHunger);
+            _hungerPoint.ApplyChange(_healthGainOnHunger);
         }
         if (Input.GetKey(KeyCode.W))
         {
-            _freezePoints.ApplyChange(_healthGainOnFreeze);
+            _freezePoint.ApplyChange(_healthGainOnFreeze);
         }
     }
+
+    void FixedUpdate()
+    {
+
+        Tiker();
+
+    }
+
+    private void Tiker()
+    {
+        counter--;
+
+        if (counter <= 0)
+        {
+            Freeze(_freezeDamage);
+            Starve(_starveDamage);
+            counter = Random.Range(_tikBetweenMin, _tikBetweenMax);
+        }
+
+    }
+
+    [SerializeField] private int _tikBetweenMax = 10;
+    [SerializeField] private int _tikBetweenMin = 0;
+    private int counter = 0;
 
 
     private bool _isFull;
@@ -139,10 +142,15 @@ public class SurvivalManager : MonoBehaviour, IDamageable, IFreezeable, IStarvea
     private bool _isStarving;
     private bool _isFreezing;
 
-    [SerializeField] private FloatVariable _healthPoints;
-    [SerializeField] private FloatVariable _hungerPoints;
-    [SerializeField] private FloatVariable _freezePoints;
-    [SerializeField] private FloatVariable _staminaPoints;
+    // [SerializeField] private FloatVariable _healthPoints;
+    // [SerializeField] private FloatVariable _hungerPoints;
+    // [SerializeField] private FloatVariable _freezePoints;
+    // [SerializeField] private FloatVariable _staminaPoints;
+
+    [SerializeField] private FloatReferencer _healthPoint;
+    [SerializeField] private FloatReferencer _hungerPoint;
+    [SerializeField] private FloatReferencer _freezePoint;
+    [SerializeField] private FloatReferencer _staminaPoint;
 
     [SerializeField] private FloatReference _hungerMinThreshold;
     [SerializeField] private FloatReference _hungerMaxThreshold;
