@@ -89,6 +89,15 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Run"",
+                    ""type"": ""Button"",
+                    ""id"": ""404af2ad-f310-4581-a4d3-057b5d3cb852"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -298,6 +307,17 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""RightClick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""be7dd4e5-6f4a-4b22-ad10-0203bb65c3f8"",
+                    ""path"": ""<Keyboard>/leftShift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Run"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -541,6 +561,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         m_Gameplay_LeftClick = m_Gameplay.FindAction("LeftClick", throwIfNotFound: true);
         m_Gameplay_RightClick = m_Gameplay.FindAction("RightClick", throwIfNotFound: true);
         m_Gameplay_Postion = m_Gameplay.FindAction("Postion", throwIfNotFound: true);
+        m_Gameplay_Run = m_Gameplay.FindAction("Run", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -615,6 +636,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_Gameplay_LeftClick;
     private readonly InputAction m_Gameplay_RightClick;
     private readonly InputAction m_Gameplay_Postion;
+    private readonly InputAction m_Gameplay_Run;
     public struct GameplayActions
     {
         private @GameInput m_Wrapper;
@@ -626,6 +648,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         public InputAction @LeftClick => m_Wrapper.m_Gameplay_LeftClick;
         public InputAction @RightClick => m_Wrapper.m_Gameplay_RightClick;
         public InputAction @Postion => m_Wrapper.m_Gameplay_Postion;
+        public InputAction @Run => m_Wrapper.m_Gameplay_Run;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -656,6 +679,9 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @Postion.started += instance.OnPostion;
             @Postion.performed += instance.OnPostion;
             @Postion.canceled += instance.OnPostion;
+            @Run.started += instance.OnRun;
+            @Run.performed += instance.OnRun;
+            @Run.canceled += instance.OnRun;
         }
 
         private void UnregisterCallbacks(IGameplayActions instance)
@@ -681,6 +707,9 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @Postion.started -= instance.OnPostion;
             @Postion.performed -= instance.OnPostion;
             @Postion.canceled -= instance.OnPostion;
+            @Run.started -= instance.OnRun;
+            @Run.performed -= instance.OnRun;
+            @Run.canceled -= instance.OnRun;
         }
 
         public void RemoveCallbacks(IGameplayActions instance)
@@ -786,6 +815,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         void OnLeftClick(InputAction.CallbackContext context);
         void OnRightClick(InputAction.CallbackContext context);
         void OnPostion(InputAction.CallbackContext context);
+        void OnRun(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

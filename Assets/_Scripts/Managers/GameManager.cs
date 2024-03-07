@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -51,12 +52,14 @@ public class GameManager : MonoBehaviour
     private void HandlePause() 
     {
         _pauseMenu.SetActive(true);
+        Time.timeScale = 0f;
     }
 
     private void HandleResume() 
     {
         _pauseMenu.SetActive(false);
         _inventoryMenu.SetActive(false); // Important we close both the inventory and the pause menus here. This will mean if you have the inventory open and the OnResumeEvent fires it will close the inventory 
+        Time.timeScale = 1.0f;
     }
 
     private void HandleInventoryOpen() 
@@ -68,4 +71,5 @@ public class GameManager : MonoBehaviour
     {
         _inventoryMenu.SetActive(false);
     }
+
 }

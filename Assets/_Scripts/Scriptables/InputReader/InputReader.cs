@@ -42,16 +42,17 @@ public class InputReader : ScriptableObject, GameInput.IGameplayActions, GameInp
     public static event Action OnInteractEvent; 
     public static event Action OnPauseEvent;
     public static event Action OnInventoryOpenEvent;
+    public static event Action OnRunEvent;
+
+    public static event Action OnLeftClickEvent;
+    public static event Action OnRightClickEvent;
+    public static event Action<Vector2> OnMousePositionEvent;
 
     // The events that other scripts can subscribe to, for information about UI.
     public static event Action<Vector2> OnNavigateEvent;
     public static event Action OnPickEvent; 
     public static event Action OnResumeEvent;
     public static event Action OnInventoryCloseEvent;
-
-    public static event Action OnLeftClickEvent;
-    public static event Action OnRightClickEvent;
-    public static event Action<Vector2> OnMousePositionEvent;
 
     #region Change between Layouts
 
@@ -173,4 +174,10 @@ public class InputReader : ScriptableObject, GameInput.IGameplayActions, GameInp
         OnMousePositionEvent?.Invoke(context.ReadValue<Vector2>());
     }
 
+
+
+    public void OnRun(InputAction.CallbackContext context)
+    {
+        OnRunEvent?.Invoke();
+    }
 }
