@@ -127,9 +127,7 @@ public abstract class UserInterface: MonoBehaviour
         {
             InventorySlot mouseHoverSlotData = MouseData._InterfaceMouseIsOver._SlotsOnInterface[MouseData._SlotHoveredOver];
             _Inventory.SwapItems(_SlotsOnInterface[obj], mouseHoverSlotData);
-        }
-
-       
+        }       
     }
 
     public void OnDrag(GameObject obj)

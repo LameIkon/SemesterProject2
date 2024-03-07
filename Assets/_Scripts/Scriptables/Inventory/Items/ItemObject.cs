@@ -14,6 +14,8 @@ public abstract class ItemObject : ScriptableObject
 
     [TextArea(10, 15)]
     public string ItemDescription;
+
+    public abstract void Action ();
 }
 
 public enum ItemType
