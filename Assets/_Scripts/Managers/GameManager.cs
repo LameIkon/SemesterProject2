@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
     {
         if (_inputs == null) 
         {
-            _inputs = new InputReader();
+            _inputs = new InputReader(); 
         }
     }
 
