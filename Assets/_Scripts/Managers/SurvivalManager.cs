@@ -110,6 +110,7 @@ public class SurvivalManager : MonoBehaviour, IDamageable, IFreezeable, IStarvea
         {
             _freezePoint.ApplyChange(_healthGainOnFreeze);
         }
+
     }
 
     void FixedUpdate()
