@@ -16,123 +16,123 @@ MonoBehaviour:
   SavePath: /_dataBase.save
   Container:
     Items:
-    - Item:
+    - AllowedItems: 
+      Item:
         ItemName: 
-        ID: 0
+        ID: -1
       Amount: 0
-      ID: -1
-    - Item:
+    - AllowedItems: 
+      Item:
         ItemName: 
-        ID: 0
+        ID: -1
       Amount: 0
-      ID: -1
-    - Item:
+    - AllowedItems: 
+      Item:
         ItemName: 
-        ID: 0
+        ID: -1
       Amount: 0
-      ID: -1
-    - Item:
+    - AllowedItems: 
+      Item:
         ItemName: 
-        ID: 0
+        ID: -1
       Amount: 0
-      ID: -1
-    - Item:
+    - AllowedItems: 
+      Item:
         ItemName: 
-        ID: 0
+        ID: -1
       Amount: 0
-      ID: -1
-    - Item:
+    - AllowedItems: 
+      Item:
         ItemName: 
-        ID: 0
+        ID: -1
       Amount: 0
-      ID: -1
-    - Item:
+    - AllowedItems: 
+      Item:
         ItemName: 
-        ID: 0
+        ID: -1
       Amount: 0
-      ID: -1
-    - Item:
+    - AllowedItems: 
+      Item:
         ItemName: 
-        ID: 0
+        ID: -1
       Amount: 0
-      ID: -1
-    - Item:
+    - AllowedItems: 
+      Item:
         ItemName: 
-        ID: 0
+        ID: -1
       Amount: 0
-      ID: -1
-    - Item:
+    - AllowedItems: 
+      Item:
         ItemName: 
-        ID: 0
+        ID: -1
       Amount: 0
-      ID: -1
-    - Item:
+    - AllowedItems: 
+      Item:
         ItemName: 
-        ID: 0
+        ID: -1
       Amount: 0
-      ID: -1
-    - Item:
+    - AllowedItems: 
+      Item:
         ItemName: 
-        ID: 0
+        ID: -1
       Amount: 0
-      ID: -1
-    - Item:
+    - AllowedItems: 
+      Item:
         ItemName: 
-        ID: 0
+        ID: -1
       Amount: 0
-      ID: -1
-    - Item:
+    - AllowedItems: 
+      Item:
         ItemName: 
-        ID: 0
+        ID: -1
       Amount: 0
-      ID: -1
-    - Item:
+    - AllowedItems: 
+      Item:
         ItemName: 
-        ID: 0
+        ID: -1
       Amount: 0
-      ID: -1
-    - Item:
+    - AllowedItems: 
+      Item:
         ItemName: 
-        ID: 0
+        ID: -1
       Amount: 0
-      ID: -1
-    - Item:
+    - AllowedItems: 
+      Item:
         ItemName: 
-        ID: 0
+        ID: -1
       Amount: 0
-      ID: -1
-    - Item:
+    - AllowedItems: 
+      Item:
         ItemName: 
-        ID: 0
+        ID: -1
       Amount: 0
-      ID: -1
-    - Item:
+    - AllowedItems: 
+      Item:
         ItemName: 
-        ID: 0
+        ID: -1
       Amount: 0
-      ID: -1
-    - Item:
+    - AllowedItems: 
+      Item:
         ItemName: 
-        ID: 0
+        ID: -1
       Amount: 0
-      ID: -1
-    - Item:
+    - AllowedItems: 
+      Item:
         ItemName: 
-        ID: 0
+        ID: -1
       Amount: 0
-      ID: -1
-    - Item:
+    - AllowedItems: 
+      Item:
         ItemName: 
-        ID: 0
+        ID: -1
       Amount: 0
-      ID: -1
-    - Item:
+    - AllowedItems: 
+      Item:
         ItemName: 
-        ID: 0
+        ID: -1
       Amount: 0
-      ID: -1
-    - Item:
+    - AllowedItems: 
+      Item:
         ItemName: 
-        ID: 0
+        ID: -1
       Amount: 0
-      ID: -1

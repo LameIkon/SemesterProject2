@@ -12,8 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dd22a908349aa54585f02423d89f703, type: 3}
   m_Name: Bread
   m_EditorClassIdentifier: 
-  ItemDisplay: {fileID: 418527945090173305, guid: 99862da1eb0cf41428c19e9ce2269db9, type: 3}
-  ItemType: 0
-  ID: 0
+  ItemDisplayed: {fileID: -4361240297170827903, guid: 99862da1eb0cf41428c19e9ce2269db9, type: 3}
+  Stackable: 1
+  ItemType: 1
+  data:
+    ItemName: 
+    ID: 0
   ItemDescription: 
   RestoreHungerValue: 10
