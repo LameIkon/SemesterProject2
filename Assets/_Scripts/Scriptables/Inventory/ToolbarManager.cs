@@ -20,14 +20,14 @@ public class ToolbarManager : MonoBehaviour
     {      
         if (Input.GetKeyUp(KeyCode.Alpha1))
         {
-            var item = _toolbarInventory.GetSlots[0];
-            if (item.ItemObject != null) 
+            var item = _toolbarInventory.GetSlots[0]; //creates a var that holds the ItemObject at that index slot
+            if (item.ItemObject != null) //checks that there is an item object in the slot
             {
-                item.ItemObject.Action();
-                item.AddAmount(-1);
-                if (item._Amount <= 0)
+                item.ItemObject.Action(); //calls the action function on that object
+                item.AddAmount(-1); //substract 1 from the amount
+                if (item._Amount <= 0) //Checks if the amount of the item is 0
                 {
-                    item.RemoveItem();
+                    item.RemoveItem(); //removes item, so that we can use it infinitely
                 }
             }         
         }              
