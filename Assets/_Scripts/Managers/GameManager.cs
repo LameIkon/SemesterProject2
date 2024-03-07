@@ -21,9 +21,17 @@ public class GameManager : MonoBehaviour
 
     private void Start() 
     {
-        // We set the Pause and Inventory Menus to false when we start
-        _pauseMenu.SetActive(false);
-        _inventoryMenu.SetActive(false);
+
+        if (_pauseMenu != null)
+        {
+            // We set the Pause and Inventory Menus to false when we start
+            _pauseMenu.SetActive(false);
+        }
+        if (_inventoryMenu != null)
+        {
+            _inventoryMenu.SetActive(false);
+        }
+
 
         // Here we subscribe the events to the handlers
         InputReader.OnPauseEvent += HandlePause;

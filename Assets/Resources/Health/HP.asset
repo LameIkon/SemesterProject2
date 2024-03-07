@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: HP
   m_EditorClassIdentifier: 
   DevDescription: 100
-  _value: 67.2005
+  _value: 100
   _onValueChanged: {fileID: 11400000, guid: 5e7fd95e3f623d6478fd6e5d3c51697b, type: 2}

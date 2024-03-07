@@ -1,0 +1,108 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8747442776207616643
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7501362769553029342}
+  - component: {fileID: 4251317389186133514}
+  m_Layer: 0
+  m_Name: SurvivalManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7501362769553029342
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8747442776207616643}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4251317389186133514
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8747442776207616643}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68a7f641147ac28418daf1014061caeb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _tikBetweenMax: 60
+  _tikBetweenMin: 45
+  _healthPoint: {fileID: 11400000, guid: 7a688a1e550fb0847961cf213108f4a7, type: 2}
+  _hungerPoint: {fileID: 11400000, guid: ad66e61c2e788044e9f4ab71c4fda638, type: 2}
+  _freezePoint: {fileID: 11400000, guid: 999fa60fdc21b7c40ad833ad7a86116a, type: 2}
+  _staminaPoint: {fileID: 11400000, guid: f2a1028da41a5d04fbebeb90d7b43e9e, type: 2}
+  _hungerMinThreshold:
+    UseConstant: 1
+    ConstantValue: 50
+    Variable: {fileID: 0}
+  _hungerMaxThreshold:
+    UseConstant: 1
+    ConstantValue: 70
+    Variable: {fileID: 0}
+  _freezeMinThreshold:
+    UseConstant: 1
+    ConstantValue: 20
+    Variable: {fileID: 0}
+  _freezeMaxThreshold:
+    UseConstant: 1
+    ConstantValue: 70
+    Variable: {fileID: 0}
+  _starveDamage:
+    UseConstant: 1
+    ConstantValue: 0.3
+    Variable: {fileID: 0}
+  _freezeDamage:
+    UseConstant: 1
+    ConstantValue: 0.2
+    Variable: {fileID: 0}
+  _healthGainOnHunger:
+    UseConstant: 1
+    ConstantValue: 0.2
+    Variable: {fileID: 0}
+  _healthGainOnFreeze:
+    UseConstant: 1
+    ConstantValue: 0.2
+    Variable: {fileID: 0}
+  _healthLossOnHunger:
+    UseConstant: 1
+    ConstantValue: 0.1
+    Variable: {fileID: 0}
+  _healthLossOnFreeze:
+    UseConstant: 1
+    ConstantValue: 0.1
+    Variable: {fileID: 0}
+  _maxHealth:
+    UseConstant: 0
+    ConstantValue: 100
+    Variable: {fileID: 11400000, guid: 86a0bb363a0bb4a4bb2686902045b0fb, type: 2}
+  _maxFreeze:
+    UseConstant: 0
+    ConstantValue: 0
+    Variable: {fileID: 11400000, guid: 373d26a8e454b6642a9be50ed6467ee6, type: 2}
+  _maxHunger:
+    UseConstant: 0
+    ConstantValue: 0
+    Variable: {fileID: 11400000, guid: 209b5461b8679d74988b06b3888df1db, type: 2}
+  _maxStamina:
+    UseConstant: 0
+    ConstantValue: 0
+    Variable: {fileID: 11400000, guid: 80e4c72db125bab448d3ce635c113a3d, type: 2}

@@ -13,7 +13,7 @@ public class SurvivalManager : MonoBehaviour, IDamageable, IFreezeable, IStarvea
     {
         _healthPoint.ApplyChange(-damageAmount);
 
-        if (_healthPoint.GetValue() < 0)
+        if (_healthPoint.GetValue() <= 0)
         {
             Die();
         }
@@ -84,34 +84,6 @@ public class SurvivalManager : MonoBehaviour, IDamageable, IFreezeable, IStarvea
         _freezePoint.SetValue(100);
     }
 
-    void Update()
-    {
-        if (Input.GetKey(KeyCode.A))
-        {
-            Starve(_starveDamage);
-        }
-        if (Input.GetKey(KeyCode.S))
-        {
-            Freeze(_freezeDamage);
-        }
-        if (Input.GetKey(KeyCode.Z))
-        {
-            Starve(-_starveDamage);
-        }
-        if (Input.GetKey(KeyCode.X))
-        {
-            Freeze(-_freezeDamage);
-        }
-        if (Input.GetKey(KeyCode.Q))
-        {
-            _hungerPoint.ApplyChange(_healthGainOnHunger);
-        }
-        if (Input.GetKey(KeyCode.W))
-        {
-            _freezePoint.ApplyChange(_healthGainOnFreeze);
-        }
-
-    }
 
     void FixedUpdate()
     {

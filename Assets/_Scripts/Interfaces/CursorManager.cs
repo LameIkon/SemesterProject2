@@ -5,7 +5,6 @@ using UnityEngine;
 public class CursorManager : MonoBehaviour
 {
   
-    [SerializeField] private InputReader _inputs;
     private Vector2 _mousePosition;
     private Camera _mainCamera;
 
