@@ -13,7 +13,7 @@ public class FoodObject : ItemObject
 
     public void Awake()
     {
-         ItemType = ItemType.Food;
+         _ItemType = ItemType.Food;
     }
 
 
@@ -21,6 +21,5 @@ public class FoodObject : ItemObject
     {
         _hungerPoints.ApplyChange(RestoreHungerValue);
     }
-
 }
  

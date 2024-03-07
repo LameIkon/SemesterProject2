@@ -13,6 +13,6 @@ public class FuelObject : ItemObject
 
     public void Awake()
     {
-       ItemType = ItemType.Fuel;
+       _ItemType = ItemType.Fuel;
     }
 }

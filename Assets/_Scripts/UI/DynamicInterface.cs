@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 public class DynamicInterface : UserInterface
 {
 
-    public GameObject InventoryPrefab;
+    public GameObject _InventoryPrefab;
 
     public int X_START;
     public int Y_START;
@@ -16,11 +16,11 @@ public class DynamicInterface : UserInterface
 
     public override void CreateSlots()
     {
-        slotsOnInterface = new Dictionary<GameObject, InventorySlot>();
+        _SlotsOnInterface = new Dictionary<GameObject, InventorySlot>();
 
-        for (int i = 0; i < Inventory.Container.Items.Length; i++)
+        for (int i = 0; i < _Inventory.GetSlots.Length; i++)
         {
-            var obj = Instantiate(InventoryPrefab, Vector3.zero, Quaternion.identity, transform);
+            var obj = Instantiate(_InventoryPrefab, Vector3.zero, Quaternion.identity, transform);
             obj.GetComponent<RectTransform>().localPosition = GetPosition(i);
 
             AddEvent(obj, EventTriggerType.PointerEnter, delegate { OnEnter(obj); });
@@ -28,8 +28,8 @@ public class DynamicInterface : UserInterface
             AddEvent(obj, EventTriggerType.BeginDrag, delegate { OnDragStart(obj); });
             AddEvent(obj, EventTriggerType.EndDrag, delegate { OnDragEnd(obj); });
             AddEvent(obj, EventTriggerType.Drag, delegate { OnDrag(obj); });
-
-            slotsOnInterface.Add(obj, Inventory.Container.Items[i]);
+            _Inventory.GetSlots[i]._SlotDisplay = obj;
+            _SlotsOnInterface.Add(obj, _Inventory.GetSlots[i]);
         }
     }
 
@@ -38,5 +38,14 @@ public class DynamicInterface : UserInterface
 
         return new Vector3(X_START + (X_SPACE_BETWEEN_ITEM * (i % NUMBER_OF_COLUMN)), Y_START + (-Y_SPACE_BETWEEN_ITEM * (i / NUMBER_OF_COLUMN)), 0f);
 
+    }
+
+    public void OnApplicationQuit()
+    {
+
+        for (int i = 0; i < _Inventory.GetSlots.Length; i++)
+        {
+            _Inventory.GetSlots[i].RemoveItem();
+        }
     }
 }

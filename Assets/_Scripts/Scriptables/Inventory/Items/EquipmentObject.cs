@@ -11,6 +11,6 @@ public class EquipmentObject : ItemObject
 
     public void Awake()
     {
-        ItemType = ItemType.Body;
+        _ItemType = ItemType.Body;
     }
 }
