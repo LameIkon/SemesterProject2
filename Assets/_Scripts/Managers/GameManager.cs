@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class GameManager : MonoBehaviour
 {
@@ -8,7 +9,7 @@ public class GameManager : MonoBehaviour
     [SerializeField, Tooltip("Drag in the InputReader")] private InputReader _input;
     [SerializeField] private GameObject _pauseMenu;
     [SerializeField] private GameObject _inventoryMenu;
-
+    
     private void Start() 
     {
         // We set the Pause and Inventory Menus to false when we start
@@ -21,7 +22,6 @@ public class GameManager : MonoBehaviour
         _input.OnInventoryOpenEvent += HandleInventoryOpen;
         _input.OnInventoryCloseEvent += HandleInvertoryClose;
     }
-
 
     private void HandlePause() 
     {
