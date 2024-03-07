@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
     {
         if (_inputs == null) 
         {
-            _inputs = new InputReader(); 
+            _inputs = ScriptableObject.CreateInstance<InputReader>();
         }
     }
 
