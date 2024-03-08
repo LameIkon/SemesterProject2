@@ -12,37 +12,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6dbd26130aaeeb469d02b103ecbc445, type: 3}
   m_Name: ToolBar
   m_EditorClassIdentifier: 
-  _ItemsDataBase: {fileID: 11400000, guid: 6aab6e98529b36a40aa4942653918f7e, type: 2}
-  _SavePath: 
-  _Container:
-    _Slots:
-    - _AllowedItems: 
-      _Item:
-        _ItemName: 
-        _ID: -1
-      _Amount: 0
-    - _AllowedItems: 
-      _Item:
-        _ItemName: 
-        _ID: -1
-      _Amount: 0
-    - _AllowedItems: 
-      _Item:
-        _ItemName: 
-        _ID: -1
-      _Amount: 0
-    - _AllowedItems: 
-      _Item:
-        _ItemName: 
-        _ID: -1
-      _Amount: 0
-    - _AllowedItems: 
-      _Item:
-        _ItemName: 
-        _ID: -1
-      _Amount: 0
-    - _AllowedItems: 
-      _Item:
-        _ItemName: 
-        _ID: -1
-      _Amount: 0
+  _dataBase: {fileID: 11400000, guid: 6aab6e98529b36a40aa4942653918f7e, type: 2}
+  SavePath: 
+  Container:
+    Items:
+    - AllowedItems: 01000000020000000700000008000000
+      Item:
+        ItemName: 
+        ID: 0
+      Amount: 2
+    - AllowedItems: 01000000020000000700000008000000
+      Item:
+        ItemName: 
+        ID: -1
+      Amount: 0
+    - AllowedItems: 01000000020000000700000008000000
+      Item:
+        ItemName: 
+        ID: -1
+      Amount: 0
+    - AllowedItems: 01000000020000000700000008000000
+      Item:
+        ItemName: 
+        ID: -1
+      Amount: 0
+    - AllowedItems: 01000000020000000700000008000000
+      Item:
+        ItemName: 
+        ID: -1
+      Amount: 0
+    - AllowedItems: 01000000020000000700000008000000
+      Item:
+        ItemName: 
+        ID: -1
+      Amount: 0

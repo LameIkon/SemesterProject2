@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using System;
 
-[CreateAssetMenu(fileName = "New Input Reader", menuName = "Reader/Input"), HelpURL("https://www.youtube.com/watch?v=ZHOWqF-b51k")]
+//[CreateAssetMenu(fileName = "New Input Reader", menuName = "Reader/Input"), HelpURL("https://www.youtube.com/watch?v=ZHOWqF-b51k")]
 public class InputReader : ScriptableObject, GameInput.IGameplayActions, GameInput.IUIActions
 {
 
@@ -10,25 +10,15 @@ public class InputReader : ScriptableObject, GameInput.IGameplayActions, GameInp
 
     private bool _isUI = false;
 
-    void Awake()
-    {
-        // _mainCamera = Camera.main;
 
-    }
-
-    void Start()
-    {
-        _isUI = false;
-    }
-
-    private void OnEnable()
+    private void OnEnable() 
     {
         // This instanciates the GameInput script if there is non
-        if (_gameInput == null)
+        if (_gameInput == null) 
         {
             _gameInput = new GameInput();
 
-            _gameInput.Gameplay.SetCallbacks(this);
+            _gameInput.Gameplay.SetCallbacks(this); 
             _gameInput.UI.SetCallbacks(this);
 
             SetGameplay(); // This is what picks what keys are chosen when the game loads
@@ -39,10 +29,9 @@ public class InputReader : ScriptableObject, GameInput.IGameplayActions, GameInp
 
     // The events that other scripts can subscribe to, for information for gameplay.
     public static event Action<Vector2> OnMoveEvent; // This sends a Vector2 along with the event
-    public static event Action OnInteractEvent;
+    public static event Action OnInteractEvent; 
     public static event Action OnPauseEvent;
     public static event Action OnInventoryOpenEvent;
-    public static event Action OnRunEvent;
 
     public static event Action OnLeftClickEvent;
     public static event Action OnRightClickEvent;
@@ -50,21 +39,21 @@ public class InputReader : ScriptableObject, GameInput.IGameplayActions, GameInp
 
     // The events that other scripts can subscribe to, for information about UI.
     public static event Action<Vector2> OnNavigateEvent;
-    public static event Action OnPickEvent;
+    public static event Action OnPickEvent; 
     public static event Action OnResumeEvent;
     public static event Action OnInventoryCloseEvent;
 
     #region Change between Layouts
 
     // These two methods switch the the layouts that are used
-
-    private void SetGameplay()
+    
+    private void SetGameplay() 
     {
         _gameInput.UI.Disable();
         _gameInput.Gameplay.Enable();
     }
 
-    private void SetUI()
+    private void SetUI() 
     {
         _gameInput.Gameplay.Disable();
         _gameInput.UI.Enable();
@@ -75,7 +64,7 @@ public class InputReader : ScriptableObject, GameInput.IGameplayActions, GameInp
     #region Ingame Controls
 
 
-
+    
     // This method listens to the move inputs that are connected in the Input System
     public void OnMove(InputAction.CallbackContext context)
     {
@@ -99,11 +88,11 @@ public class InputReader : ScriptableObject, GameInput.IGameplayActions, GameInp
             OnPauseEvent?.Invoke();
             SetUI(); // Important, here we switch to the UI control scheme
         }
-
+        
     }
     public void OnInventoryOpen(InputAction.CallbackContext context)
     {
-        if (context.phase == InputActionPhase.Performed && !_isUI)
+        if (context.phase == InputActionPhase.Performed && !_isUI) 
         {
             OnInventoryOpenEvent?.Invoke();
             SetUI();
@@ -122,7 +111,7 @@ public class InputReader : ScriptableObject, GameInput.IGameplayActions, GameInp
 
     public void OnPick(InputAction.CallbackContext context)
     {
-        if (context.phase == InputActionPhase.Performed)
+        if (context.phase == InputActionPhase.Performed) 
         {
             OnPickEvent?.Invoke();
         }
@@ -142,7 +131,7 @@ public class InputReader : ScriptableObject, GameInput.IGameplayActions, GameInp
 
     public void OnInventoryClose(InputAction.CallbackContext context)
     {
-        if (context.phase == InputActionPhase.Performed && !_isUI)
+        if (context.phase == InputActionPhase.Performed && !_isUI) 
         {
             OnInventoryCloseEvent?.Invoke();
             SetGameplay();
@@ -154,7 +143,7 @@ public class InputReader : ScriptableObject, GameInput.IGameplayActions, GameInp
 
     public void OnLeftClick(InputAction.CallbackContext context)
     {
-        if (context.phase == InputActionPhase.Performed)
+        if (context.phase == InputActionPhase.Performed) 
         {
             OnLeftClickEvent?.Invoke();
         }
@@ -175,10 +164,72 @@ public class InputReader : ScriptableObject, GameInput.IGameplayActions, GameInp
     }
 
 
+    public static event Action OnRunStartEvent;
+    public static event Action OnRunCancelEvent;
 
     public void OnRun(InputAction.CallbackContext context)
     {
-        OnRunEvent?.Invoke();
+
+        if (context.phase == InputActionPhase.Performed) 
+        {
+            OnRunStartEvent?.Invoke();
+        }
+
+        if (context.phase == InputActionPhase.Canceled) 
+        {
+            OnRunCancelEvent?.Invoke();
+        }
+
+    }
+
+
+    public static event Action<int> OnButtonPressEvent;
+
+    public void OnButton1(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed) 
+        {
+            OnButtonPressEvent?.Invoke(0);
+        }
+    }
+
+    public void OnButton2(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+        {
+            OnButtonPressEvent?.Invoke(1);
+        }
+    }
+
+    public void OnButton3(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+        {
+            OnButtonPressEvent?.Invoke(2);
+        }
+    }
+
+    public void OnButton4(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+        {
+            OnButtonPressEvent?.Invoke(3);
+        }
+    }
+
+    public void OnButton5(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+        {
+            OnButtonPressEvent?.Invoke(4);
+        }
+    }
+
+    public void OnButton6(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+        {
+            OnButtonPressEvent?.Invoke(5);
+        }
     }
 }
-
