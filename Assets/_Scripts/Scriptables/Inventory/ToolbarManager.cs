@@ -12,7 +12,9 @@ public class ToolbarManager : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {      
+    {
+        SelectSlot();
+        
 
 
         //if (Input.GetKeyUp(KeyCode.Alpha1))
@@ -35,35 +37,38 @@ public class ToolbarManager : MonoBehaviour
         if (Input.inputString != null)
         {
             bool isNumber = int.TryParse(Input.inputString, out int pressedNumber);
-            if (isNumber && pressedNumber >= 1 && pressedNumber <= 6)
+            if (isNumber && pressedNumber > 0 && pressedNumber < 7)
             {
-                ChangeSelectedSlot(pressedNumber - 1);
-                
+                //ChangeSelectedSlot(pressedNumber - 1);
+                _selectedSlot = (pressedNumber -1);
+                TriggerSlot(_selectedSlot);                
             }
         }      
     }
 
     public void TriggerSlot (int slot)
     {
-        var itemInSlot = _toolbarInventory.GetSlots[slot];
-        slot = _selectedSlot;
-        if (itemInSlot.ItemObject != null) //checks that there is an item object in the slot
+        
+        //var itemInSlot = _toolbarInventory.GetSlots[slot];
+        
+        if (_toolbarInventory.GetSlots[slot].ItemObject != null) //checks that there is an item object in the slot
         {
-            itemInSlot.ItemObject.Action(); //calls the action function on that object
-            itemInSlot.AddAmount(-1); //substract 1 from the amount
-            if (itemInSlot._Amount <= 0) //Checks if the amount of the item is 0
+            _toolbarInventory.GetSlots[slot].ItemObject.Action(); //calls the action function on that object
+            _toolbarInventory.GetSlots[slot].AddAmount(-1); //substract 1 from the amount
+            if (_toolbarInventory.GetSlots[slot]._Amount <= 0) //Checks if the amount of the item is 0
             {
-                itemInSlot.RemoveItem(); //removes item, so that we can't use it infinitely
+                _toolbarInventory.GetSlots[slot].RemoveItem(); //removes item, so that we can't use it infinitely
             }
         }
     }
 
-    public void ChangeSelectedSlot(int slot)
-    {
-       if (_selectedSlot >= 0)
-        {
-            _selectedSlot = slot;
-        }
-    }
+    //public void ChangeSelectedSlot(int slot)
+    //{
+    //   if (_selectedSlot > -1)
+    //    {
+    //        _selectedSlot = slot;
+    //        Debug.Log("SelectedSlot value changed to " + _selectedSlot);
+    //    }
+    //}
 
 }
