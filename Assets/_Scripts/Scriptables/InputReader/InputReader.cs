@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using System;
 
-[CreateAssetMenu(fileName = "New Input Reader", menuName = "Reader/Input"), HelpURL("https://www.youtube.com/watch?v=ZHOWqF-b51k")]
+//[CreateAssetMenu(fileName = "New Input Reader", menuName = "Reader/Input"), HelpURL("https://www.youtube.com/watch?v=ZHOWqF-b51k")]
 public class InputReader : ScriptableObject, GameInput.IGameplayActions, GameInput.IUIActions
 {
 
@@ -10,16 +10,6 @@ public class InputReader : ScriptableObject, GameInput.IGameplayActions, GameInp
 
     private bool _isUI = false;
 
-    void Awake() 
-    {
-       // _mainCamera = Camera.main;
-    
-    }
-
-    void Start() 
-    {
-        _isUI = false;
-    }
 
     private void OnEnable() 
     {
@@ -42,7 +32,6 @@ public class InputReader : ScriptableObject, GameInput.IGameplayActions, GameInp
     public static event Action OnInteractEvent; 
     public static event Action OnPauseEvent;
     public static event Action OnInventoryOpenEvent;
-    public static event Action OnRunEvent;
 
     public static event Action OnLeftClickEvent;
     public static event Action OnRightClickEvent;
@@ -175,9 +164,72 @@ public class InputReader : ScriptableObject, GameInput.IGameplayActions, GameInp
     }
 
 
+    public static event Action OnRunStartEvent;
+    public static event Action OnRunCancelEvent;
 
     public void OnRun(InputAction.CallbackContext context)
     {
-        OnRunEvent?.Invoke();
+
+        if (context.phase == InputActionPhase.Performed) 
+        {
+            OnRunStartEvent?.Invoke();
+        }
+
+        if (context.phase == InputActionPhase.Canceled) 
+        {
+            OnRunCancelEvent?.Invoke();
+        }
+
+    }
+
+
+    public static event Action<int> OnButtonPressEvent;
+
+    public void OnButton1(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed) 
+        {
+            OnButtonPressEvent?.Invoke(0);
+        }
+    }
+
+    public void OnButton2(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+        {
+            OnButtonPressEvent?.Invoke(1);
+        }
+    }
+
+    public void OnButton3(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+        {
+            OnButtonPressEvent?.Invoke(2);
+        }
+    }
+
+    public void OnButton4(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+        {
+            OnButtonPressEvent?.Invoke(3);
+        }
+    }
+
+    public void OnButton5(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+        {
+            OnButtonPressEvent?.Invoke(4);
+        }
+    }
+
+    public void OnButton6(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+        {
+            OnButtonPressEvent?.Invoke(5);
+        }
     }
 }

@@ -19,8 +19,8 @@ MonoBehaviour:
     - AllowedItems: 01000000020000000700000008000000
       Item:
         ItemName: 
-        ID: -1
-      Amount: 0
+        ID: 0
+      Amount: 2
     - AllowedItems: 01000000020000000700000008000000
       Item:
         ItemName: 
