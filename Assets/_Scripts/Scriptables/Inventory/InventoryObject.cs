@@ -7,6 +7,8 @@ using UnityEditor;
 using JetBrains.Annotations;
 using System.Runtime.Serialization;
 using UnityEngine.UIElements;
+using UnityEngine.UI;
+using Image = UnityEngine.UI.Image;
 
 [CreateAssetMenu(fileName = "New Inventory", menuName = "Iventory System/Inventory")]
 public class InventoryObject : ScriptableObject
@@ -180,7 +182,7 @@ public class InventorySlot
     public ItemType[] _AllowedItems = new ItemType[0];    
     public Item _Item = new Item ();
     public int _Amount;
-
+   
     public ItemObject ItemObject
     {
         get
