@@ -21,12 +21,9 @@ public abstract class ItemObject : ScriptableObject
 public enum ItemType
 {
     Default,
+    Light,
     Food,    
     Fuel,
-    Head,
-    Body,
-    Legs,
-    Shoes,
     MainHand,
     OffHand
 }
