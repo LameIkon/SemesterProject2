@@ -14,11 +14,11 @@ public class InputReader : ScriptableObject, GameInput.IGameplayActions, GameInp
     private void OnEnable() 
     {
         // This instanciates the GameInput script if there is non
-        if (_gameInput == null) 
+        if (_gameInput == null)
         {
             _gameInput = new GameInput();
 
-            _gameInput.Gameplay.SetCallbacks(this); 
+            _gameInput.Gameplay.SetCallbacks(this);
             _gameInput.UI.SetCallbacks(this);
 
             SetGameplay(); // This is what picks what keys are chosen when the game loads
@@ -29,7 +29,7 @@ public class InputReader : ScriptableObject, GameInput.IGameplayActions, GameInp
 
     // The events that other scripts can subscribe to, for information for gameplay.
     public static event Action<Vector2> OnMoveEvent; // This sends a Vector2 along with the event
-    public static event Action OnInteractEvent; 
+    public static event Action OnInteractEvent;
     public static event Action OnPauseEvent;
     public static event Action OnInventoryOpenEvent;
 
@@ -39,21 +39,21 @@ public class InputReader : ScriptableObject, GameInput.IGameplayActions, GameInp
 
     // The events that other scripts can subscribe to, for information about UI.
     public static event Action<Vector2> OnNavigateEvent;
-    public static event Action OnPickEvent; 
+    public static event Action OnPickEvent;
     public static event Action OnResumeEvent;
     public static event Action OnInventoryCloseEvent;
 
     #region Change between Layouts
 
     // These two methods switch the the layouts that are used
-    
-    private void SetGameplay() 
+
+    private void SetGameplay()
     {
         _gameInput.UI.Disable();
         _gameInput.Gameplay.Enable();
     }
 
-    private void SetUI() 
+    private void SetUI()
     {
         _gameInput.Gameplay.Disable();
         _gameInput.UI.Enable();
@@ -64,7 +64,7 @@ public class InputReader : ScriptableObject, GameInput.IGameplayActions, GameInp
     #region Ingame Controls
 
 
-    
+
     // This method listens to the move inputs that are connected in the Input System
     public void OnMove(InputAction.CallbackContext context)
     {
@@ -88,11 +88,11 @@ public class InputReader : ScriptableObject, GameInput.IGameplayActions, GameInp
             OnPauseEvent?.Invoke();
             SetUI(); // Important, here we switch to the UI control scheme
         }
-        
+
     }
     public void OnInventoryOpen(InputAction.CallbackContext context)
     {
-        if (context.phase == InputActionPhase.Performed && !_isUI) 
+        if (context.phase == InputActionPhase.Performed && !_isUI)
         {
             OnInventoryOpenEvent?.Invoke();
             SetUI();
@@ -111,7 +111,7 @@ public class InputReader : ScriptableObject, GameInput.IGameplayActions, GameInp
 
     public void OnPick(InputAction.CallbackContext context)
     {
-        if (context.phase == InputActionPhase.Performed) 
+        if (context.phase == InputActionPhase.Performed)
         {
             OnPickEvent?.Invoke();
         }
@@ -131,7 +131,7 @@ public class InputReader : ScriptableObject, GameInput.IGameplayActions, GameInp
 
     public void OnInventoryClose(InputAction.CallbackContext context)
     {
-        if (context.phase == InputActionPhase.Performed && !_isUI) 
+        if (context.phase == InputActionPhase.Performed && !_isUI)
         {
             OnInventoryCloseEvent?.Invoke();
             SetGameplay();
@@ -143,7 +143,7 @@ public class InputReader : ScriptableObject, GameInput.IGameplayActions, GameInp
 
     public void OnLeftClick(InputAction.CallbackContext context)
     {
-        if (context.phase == InputActionPhase.Performed) 
+        if (context.phase == InputActionPhase.Performed)
         {
             OnLeftClickEvent?.Invoke();
         }
@@ -233,3 +233,4 @@ public class InputReader : ScriptableObject, GameInput.IGameplayActions, GameInp
         }
     }
 }
+

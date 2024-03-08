@@ -6,16 +6,16 @@ using UnityEngine.AI;
 public abstract class ItemObject : ScriptableObject
 {
 
-     public Sprite ItemDisplayed;
-     public bool Stackable;
-     public ItemType ItemType;
-     public Item data = new Item();
+     public Sprite _ItemDisplayed;
+     public bool _Stackable;
+     public ItemType _ItemType;
+     public Item _Data = new Item();
     
 
     [TextArea(10, 15)]
     public string ItemDescription;
 
-
+    public abstract void Action ();
 }
 
 public enum ItemType
@@ -34,19 +34,18 @@ public enum ItemType
 [System.Serializable]
 public class Item
 {
-    public string ItemName;
-    public int ID = -1;
+    public string _ItemName;
+    public int _ID = -1;
     
     public Item()
     {
-        ID = -1;
-        ItemName = "";
+        _ID = -1;
+        _ItemName = "";
     }
 
     public Item (ItemObject item)
     {
-        ItemName = item.name;
-        
-        
+        _ItemName = item.name;
+        _ID = item._Data._ID;      
     }
 }

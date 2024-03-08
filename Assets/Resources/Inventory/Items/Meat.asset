@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7dd22a908349aa54585f02423d89f703, type: 3}
-  m_Name: Bread
+  m_Name: Meat
   m_EditorClassIdentifier: 
-  _ItemDisplayed: {fileID: -4361240297170827903, guid: 99862da1eb0cf41428c19e9ce2269db9, type: 3}
+  _ItemDisplayed: {fileID: 21300000, guid: a027205e17e2a784b93f1bbd4281e392, type: 3}
   _Stackable: 1
   _ItemType: 1
   _Data:
     _ItemName: 
-    _ID: 0
+    _ID: 1
   ItemDescription: 
   _SystemFloat: {fileID: 11400000, guid: b1920d0977b0f8543902afaa1aea131b, type: 2}
-  RestoreValue: 10
+  RestoreValue: 20
