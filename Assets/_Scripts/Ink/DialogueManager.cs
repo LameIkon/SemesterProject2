@@ -15,10 +15,13 @@ public class DialogueManager : MonoBehaviour
     private Story _story; // Dialogue will be stored in this value
 
     [Header("UI Elements")]
-    [SerializeField] private TextAsset _emptyTemplate; // Changes to empty template allowing Ink to update Dialogue   
-    [SerializeField] private TextMeshProUGUI _textPrefab;
+    //[SerializeField] private TextMeshProUGUI _textPrefab;
     [SerializeField] private Button _buttonPrefab;
-    [SerializeField] private Image _dialogueImagePrefab;
+    //[SerializeField] private Image _dialogueImagePrefab;
+
+    [SerializeField] private GameObject _dialogueLayoutPrefab;
+    [SerializeField] private GameObject _nameHolderPrefab;
+    [SerializeField] private GameObject _DialogueAnswerPrefab;
 
     [Header("Stored data")]
     public bool _oneclick;
@@ -40,7 +43,6 @@ public class DialogueManager : MonoBehaviour
         {
             instance = this;
         }
-        _story = new Story(_emptyTemplate.text); // change file to empty data. IF this shows up then there have happened an error
     }
 
 
@@ -71,41 +73,41 @@ public class DialogueManager : MonoBehaviour
     {
         eraseUI(); // Delete gameobjects if there is any
 
-        // Creating the dialogue Gameobject container
-        GameObject dialogueContainer = new GameObject("DialogueContainer"); // Create an Empty GameObject to store the dialogue as children
-        dialogueContainer.transform.SetParent(transform, false); // Set GameObject to the parent but keep its own transform
+        // Creating the dialogue layout
+        GameObject dialogueLayout = Instantiate(_dialogueLayoutPrefab); // Create an Empty GameObject to store the dialogue as children
+        dialogueLayout.transform.SetParent(transform, false); // Set GameObject to the parent but keep its own transform
 
-        // Creating background image for dialogue
-        Image dialogueBackground = Instantiate(_dialogueImagePrefab); // Takes a image prefab
-        dialogueBackground.transform.SetParent(dialogueContainer.transform, false); // Set Image to the parent but keep its own transform
+        // Creating Nameholder for dialoguebox
+        GameObject nameholder = Instantiate(_nameHolderPrefab); // Takes a image prefab
+        nameholder.transform.SetParent(dialogueLayout.transform, false); // Set Image to the parent but keep its own transform
 
-        // Creating the dialogue
-        TextMeshProUGUI storyText = Instantiate(_textPrefab); // Takes a textfile prefab with predefined settings
-        storyText.transform.SetParent(dialogueContainer.transform, false); // Set dialogue to the parent but keep its own transform
-
+        // Creating the dialogue and answer box
+        GameObject dialogueAnswerPrefab = Instantiate(_DialogueAnswerPrefab); // Takes a textfile prefab with predefined settings
+        dialogueAnswerPrefab.transform.SetParent(dialogueLayout.transform, false); // Set dialogue to the parent but keep its own transform
+        /*
         // Implement vertical layout group for the container with settings
-        VerticalLayoutGroup dialogueLayoutSettings = dialogueContainer.AddComponent<VerticalLayoutGroup>(); // Add vertical layout group componennt to buttonContainer
+        VerticalLayoutGroup dialogueLayoutSettings = dialogueLayout.AddComponent<VerticalLayoutGroup>(); // Add vertical layout group componennt to buttonContainer
         dialogueLayoutSettings.spacing = -300; // Change spacing to match the dialogue box and text to be inside each other 
         dialogueLayoutSettings.childControlHeight = false; // Disable control child height, meaning height is constant now, no matter the parents height size
+        */
+        //dialogueAnswerPrefab.text = loadStoryChunk();
 
-        storyText.text = loadStoryChunk();
 
-        GetTag();
 
 
 
         // Creating the answers (buttons)
-        GameObject buttonsContainer = new GameObject("ButtonsContainer"); // Create an empty gameobject to store buttons as children
-        buttonsContainer.transform.SetParent(transform, false); // Set gameobject to the parent but keep its own transform
-        VerticalLayoutGroup buttonLayoutSettings = buttonsContainer.AddComponent<VerticalLayoutGroup>(); // Add vertical layout group componennt to buttonContainer
-        buttonLayoutSettings.childControlHeight = false; // Disable control child height, meaning height is constant now, no matter the parents height size
+        //GameObject buttonsContainer = new GameObject("ButtonsContainer"); // Create an empty gameobject to store buttons as children
+        //buttonsContainer.transform.SetParent(transform, false); // Set gameobject to the parent but keep its own transform
+        //VerticalLayoutGroup buttonLayoutSettings = buttonsContainer.AddComponent<VerticalLayoutGroup>(); // Add vertical layout group componennt to buttonContainer
+        //buttonLayoutSettings.childControlHeight = false; // Disable control child height, meaning height is constant now, no matter the parents height size
 
         if (_story.currentChoices.Count > 0) // If there is at least 1 choice button
         {
             foreach (Choice choice in _story.currentChoices) // CurrentChoices are a list used for ink for the choices you get
             {
                 Button choiceButton = Instantiate(_buttonPrefab); // Create button with prefab
-                choiceButton.transform.SetParent(buttonsContainer.transform, false); // Set buttons to the parent but keep its own transform
+                choiceButton.transform.SetParent(_DialogueAnswerPrefab.transform, false); // Set buttons to the parent but keep its own transform
 
                 TextMeshProUGUI choiceText = choiceButton.GetComponentInChildren<TextMeshProUGUI>(); // Create a new attribute choiceText as TextMeshProGUI
                 choiceText.text = choice.text; // The button text is set to the current choice in the list
@@ -119,7 +121,7 @@ public class DialogueManager : MonoBehaviour
         else // If there is no choices to choose 
         {
             Button endDialogueButton = Instantiate(_buttonPrefab); // Create button with prefab
-            endDialogueButton.transform.SetParent(buttonsContainer.transform, false); // Set buttons to the parent but keep its own transform
+            endDialogueButton.transform.SetParent(_DialogueAnswerPrefab.transform, false); // Set buttons to the parent but keep its own transform
             TextMeshProUGUI endDialogueText = endDialogueButton.GetComponentInChildren<TextMeshProUGUI>(); // Create a new attribute choiceText as TextMeshProGUI
             endDialogueText.text = "End Dialogue"; // The button text is set to End Dialogue 
 
@@ -129,6 +131,8 @@ public class DialogueManager : MonoBehaviour
                 eraseUI();
             }); // Clicking button will call the methods 
         }
+
+        GetTag();
     }
 
     // Destroy all child objects on the parent object which this script is on

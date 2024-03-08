@@ -37,7 +37,7 @@ public class StartDialogue : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.name == "Player") // Detect if the collision is the gameobject called Player
+        if (other.gameObject.name == "Player" && !DialogueManager.instance._oneclick) // Detect if the collision is the gameobject called Player
         {
             //Debug.Log("Enter");
             UpdateDialogue();
@@ -56,7 +56,7 @@ public class StartDialogue : MonoBehaviour
 
     void IfDialogue()
     {
-        if (DialogueManager.instance._oneclick == false) // Ensures only 1 UI can be open at a time
+        if (!DialogueManager.instance._oneclick) // Ensures only 1 UI can be open at a time
         {
             DialogueManager.instance.OpenUI(); // Open UI
         }       
