@@ -39,8 +39,7 @@ public class ToolbarManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       // SelectSlot();
-        
+       // SelectSlot();       
 
 
         //if (Input.GetKeyUp(KeyCode.Alpha1))
@@ -60,17 +59,18 @@ public class ToolbarManager : MonoBehaviour
 
     public void SelectSlot()
     {
+        var itemInSlot = _toolbarInventory.GetSlots[_selectedSlot];
         if (_selectedSlot < 0)
         {
             return; 
         }
-        if (_toolbarInventory.GetSlots[_selectedSlot].ItemObject != null) //checks that there is an item object in the slot
+        if (itemInSlot.ItemObject != null) //checks that there is an item object in the slot
         {
-            _toolbarInventory.GetSlots[_selectedSlot].ItemObject.Action(); //calls the action function on that object
-            _toolbarInventory.GetSlots[_selectedSlot].AddAmount(-1); //substract 1 from the amount
-            if (_toolbarInventory.GetSlots[_selectedSlot]._Amount <= 0) //Checks if the amount of the item is 0
+            itemInSlot.ItemObject.Action(); //calls the action function on that object
+            itemInSlot.AddAmount(-1); //substract 1 from the amount
+            if (itemInSlot._Amount <= 0) //Checks if the amount of the item is 0
             {
-                _toolbarInventory.GetSlots[_selectedSlot].RemoveItem(); //removes item, so that we can't use it infinitely
+                itemInSlot.RemoveItem(); //removes item, so that we can't use it infinitely
             }
         }
     }

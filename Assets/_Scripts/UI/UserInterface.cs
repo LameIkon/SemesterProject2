@@ -19,20 +19,20 @@ public abstract class UserInterface: MonoBehaviour
     public Dictionary<GameObject, InventorySlot> _SlotsOnInterface = new Dictionary<GameObject, InventorySlot>();
 
 
-    void OnEnable() 
-    {
-        InputReader.OnInventoryOpenEvent += HandleInventoryOpen;
-    }
+    //void OnEnable() 
+    //{
+    //    InputReader.OnInventoryOpenEvent += HandleInventoryOpen;
+    //}
 
-    void OnDisable() 
-    {
-        InputReader.OnInventoryOpenEvent -= HandleInventoryOpen;
-    }
+    //void OnDisable() 
+    //{
+    //    InputReader.OnInventoryOpenEvent -= HandleInventoryOpen;
+    //}
 
-    void HandleInventoryOpen() 
-    {
+    //void HandleInventoryOpen() 
+    //{
 
-    }
+    //}
 
     void Start()
     {
