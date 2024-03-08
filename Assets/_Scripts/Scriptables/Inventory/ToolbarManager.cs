@@ -8,12 +8,38 @@ public class ToolbarManager : MonoBehaviour
 {
     [SerializeField] InventoryObject _toolbarInventory;
     private int _selectedSlot = -1;
-    
+
+
+
+    void OnEnable() 
+    {
+        InputReader.OnButtonPressEvent += HandleButtonPress;
+        InputReader.OnInteractEvent += HandleInteract;
+        InputReader.OnPickEvent += HandleInteract;
+    }
+
+    private void OnDisable()
+    {
+        InputReader.OnButtonPressEvent -= HandleButtonPress;
+        InputReader.OnInteractEvent -= HandleInteract;
+        InputReader.OnPickEvent -= HandleInteract;
+    }
+
+
+    void HandleInteract() 
+    {
+        SelectSlot();
+    }
+
+    void HandleButtonPress(int i) 
+    {
+        _selectedSlot = i;
+    }
 
     // Update is called once per frame
     void Update()
     {
-        SelectSlot();
+       // SelectSlot();
         
 
 
@@ -33,18 +59,23 @@ public class ToolbarManager : MonoBehaviour
     }
 
     public void SelectSlot()
-    {      
-        if (Input.inputString != null)
+    {
+        if (_selectedSlot < 0)
         {
-            bool isNumber = int.TryParse(Input.inputString, out int pressedNumber);
-            if (isNumber && pressedNumber > 0 && pressedNumber < 7)
+            return; 
+        }
+        if (_toolbarInventory.GetSlots[_selectedSlot].ItemObject != null) //checks that there is an item object in the slot
+        {
+            _toolbarInventory.GetSlots[_selectedSlot].ItemObject.Action(); //calls the action function on that object
+            _toolbarInventory.GetSlots[_selectedSlot].AddAmount(-1); //substract 1 from the amount
+            if (_toolbarInventory.GetSlots[_selectedSlot]._Amount <= 0) //Checks if the amount of the item is 0
             {
-                //ChangeSelectedSlot(pressedNumber - 1);
-                _selectedSlot = (pressedNumber -1);
-                TriggerSlot(_selectedSlot);                
+                _toolbarInventory.GetSlots[_selectedSlot].RemoveItem(); //removes item, so that we can't use it infinitely
             }
-        }      
+        }
     }
+
+   
 
     public void TriggerSlot (int slot)
     {
