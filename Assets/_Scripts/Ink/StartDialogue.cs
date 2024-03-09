@@ -8,6 +8,9 @@ public class StartDialogue : MonoBehaviour
 {
     private bool _startDialogue;
 
+    [Header("NPC Name")]
+    public string _NPCname; // Insert the name of the NPC in the inspector
+
     [Header("Default Dialogue")]
     [SerializeField] private TextAsset _defaultDialogue;
 
@@ -28,7 +31,7 @@ public class StartDialogue : MonoBehaviour
        if (_startDialogue) // Only run this if you are inside the area collider
        {
            IfDialogue();
-           if (DialogueManager.instance._dialogueExited) // Only run this when _dialogueExited bool from the singleton is true. used to check when you exit the dialogue
+           if (DialogueManager.instance._DialogueExited) // Only run this when _dialogueExited bool from the singleton is true. used to check when you exit the dialogue
            {
                 UpdateDialogue();
            }
@@ -37,9 +40,10 @@ public class StartDialogue : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.name == "Player" && !DialogueManager.instance._oneclick) // Detect if the collision is the gameobject called Player
+        if (other.gameObject.name == "Player" && !DialogueManager.instance._Oneclick) // Detect if the collision is the gameobject called Player
         {
             //Debug.Log("Enter");
+            DialogueManager.instance._NPCName = _NPCname;
             UpdateDialogue();
             _startDialogue = true; // Set to true allowing start dialogue (Warning be sure there arent overlapping triggers, might cause problems)
         }
@@ -56,7 +60,7 @@ public class StartDialogue : MonoBehaviour
 
     void IfDialogue()
     {
-        if (!DialogueManager.instance._oneclick) // Ensures only 1 UI can be open at a time
+        if (!DialogueManager.instance._Oneclick) // Ensures only 1 UI can be open at a time
         {
             DialogueManager.instance.OpenUI(); // Open UI
         }       
@@ -81,7 +85,7 @@ public class StartDialogue : MonoBehaviour
             {"testTag4", _alt4Dialogue  != null ? _alt4Dialogue : _chosenDialogue}
         };
 
-        foreach (var tag in DialogueManager.instance.savedTags) // Search singleton list for tags
+        foreach (var tag in DialogueManager.instance._SavedTags) // Search singleton list for tags
         {
             if(tagToDialogueMap.TryGetValue(tag, out TextAsset dialogue)) // If tag matches the tags in dictionary 
             {

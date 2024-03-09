@@ -14,22 +14,31 @@ public class DialogueManager : MonoBehaviour
 
     private Story _story; // Dialogue will be stored in this value
 
-    [Header("UI Elements")]
+    [Header("UI Elements")] // each prefab has components that determinds the layout of the dialogue
     //[SerializeField] private TextMeshProUGUI _textPrefab;
-    [SerializeField] private Button _buttonPrefab;
+    
     //[SerializeField] private Image _dialogueImagePrefab;
 
-    [SerializeField] private GameObject _dialogueLayoutPrefab;
-    [SerializeField] private GameObject _nameHolderPrefab;
-    [SerializeField] private GameObject _DialogueAnswerPrefab;
+    [SerializeField] private GameObject _dialogueLayoutPrefab; // Parent GameObject
+
+    [SerializeField] private GameObject _nameHolderPrefab; // Child GameObject of _dialogueLayoutPrefab
+    //[SerializeField] private TextMeshProUGUI _nameHolderTextPrefab; // Text on _nameHolderPrefab
+
+    [SerializeField] private GameObject _dialogueAnswerHolderPrefab;  // Child GameObject of _dialogueLayoutPrefab
+    //[SerializeField] private TextMeshProUGUI _dialoguePrefab; // Text on _dialogueAnswerPrefab
+    [SerializeField] private GameObject _buttonHolderPrefab; // Child GameObject of _dialogueAnswerPrefab
+    [SerializeField] private Button _buttonPrefab; // Buttons on _buttonHolderPrefab
+
+
 
     [Header("Stored data")]
-    public bool _oneclick;
-    public bool _dialogueExited = false;
-    public List<string> savedTags = new List<string>(); //save all tags and store them for other scripts to use
+    public bool _Oneclick; // Used to ensure that only 1 dialogue can happen at a time
+    public bool _DialogueExited = false; // Used to check if an dialogue is ongoing. Same as _oneclick but just made easier to understand the use of the bool
+    public List<string> _SavedTags = new List<string>(); // Save all tags and store them for other scripts to use. 
+    public string _NPCName; // Use the name of the current person you talk with
 
     [Header("Selected Dialogue")]
-    public TextAsset DialogueData; // used in other scripts to change the data. Other scripts will store their choosen dialogue data here
+    public TextAsset DialogueData; // Used in other scripts to change the data. Other scripts will store their choosen dialogue data here
 
 
     void Awake()
@@ -63,7 +72,7 @@ public class DialogueManager : MonoBehaviour
             //just to test
             if (Input.GetKeyDown(KeyCode.E)) // Press E to open dialogue UI
             {
-                _oneclick = true; // Ensure only 1 instance. Used in other scripts
+                _Oneclick = true; // Ensure only 1 instance. Used in other scripts
                 refreshUI();
             }
         }
@@ -82,32 +91,30 @@ public class DialogueManager : MonoBehaviour
         nameholder.transform.SetParent(dialogueLayout.transform, false); // Set Image to the parent but keep its own transform
 
         // Creating the dialogue and answer box
-        GameObject dialogueAnswerPrefab = Instantiate(_DialogueAnswerPrefab); // Takes a textfile prefab with predefined settings
+        GameObject dialogueAnswerPrefab = Instantiate(_dialogueAnswerHolderPrefab); // Takes a textfile prefab with predefined settings
         dialogueAnswerPrefab.transform.SetParent(dialogueLayout.transform, false); // Set dialogue to the parent but keep its own transform
-        /*
-        // Implement vertical layout group for the container with settings
-        VerticalLayoutGroup dialogueLayoutSettings = dialogueLayout.AddComponent<VerticalLayoutGroup>(); // Add vertical layout group componennt to buttonContainer
-        dialogueLayoutSettings.spacing = -300; // Change spacing to match the dialogue box and text to be inside each other 
-        dialogueLayoutSettings.childControlHeight = false; // Disable control child height, meaning height is constant now, no matter the parents height size
-        */
-        //dialogueAnswerPrefab.text = loadStoryChunk();
+
+        // Creating the Answer/button holder
+        GameObject buttonHolder = Instantiate(_buttonHolderPrefab); // Create an GameObject to hold the buttons
+        buttonHolder.transform.SetParent(dialogueAnswerPrefab.transform, false); // Set GameObject to dialogueAnswerPrefab as parent
 
 
+        // Insert Data
 
+        // Insert data into nameholder
+        TextMeshProUGUI nameHolderText = nameholder.GetComponentInChildren<TextMeshProUGUI>();
+        nameHolderText.text = LoadNameOFNPC();
 
-
-        // Creating the answers (buttons)
-        //GameObject buttonsContainer = new GameObject("ButtonsContainer"); // Create an empty gameobject to store buttons as children
-        //buttonsContainer.transform.SetParent(transform, false); // Set gameobject to the parent but keep its own transform
-        //VerticalLayoutGroup buttonLayoutSettings = buttonsContainer.AddComponent<VerticalLayoutGroup>(); // Add vertical layout group componennt to buttonContainer
-        //buttonLayoutSettings.childControlHeight = false; // Disable control child height, meaning height is constant now, no matter the parents height size
+        // Insert dialogue data into dialogue and answer box
+        TextMeshProUGUI dialogueText = dialogueAnswerPrefab.GetComponentInChildren<TextMeshProUGUI>();
+        dialogueText.text = loadStoryChunk();
 
         if (_story.currentChoices.Count > 0) // If there is at least 1 choice button
         {
             foreach (Choice choice in _story.currentChoices) // CurrentChoices are a list used for ink for the choices you get
             {
                 Button choiceButton = Instantiate(_buttonPrefab); // Create button with prefab
-                choiceButton.transform.SetParent(_DialogueAnswerPrefab.transform, false); // Set buttons to the parent but keep its own transform
+                choiceButton.transform.SetParent(buttonHolder.transform, false); // Set buttons to the parent but keep its own transform
 
                 TextMeshProUGUI choiceText = choiceButton.GetComponentInChildren<TextMeshProUGUI>(); // Create a new attribute choiceText as TextMeshProGUI
                 choiceText.text = choice.text; // The button text is set to the current choice in the list
@@ -121,7 +128,7 @@ public class DialogueManager : MonoBehaviour
         else // If there is no choices to choose 
         {
             Button endDialogueButton = Instantiate(_buttonPrefab); // Create button with prefab
-            endDialogueButton.transform.SetParent(_DialogueAnswerPrefab.transform, false); // Set buttons to the parent but keep its own transform
+            endDialogueButton.transform.SetParent(buttonHolder.transform, false); // Set buttons to the parent but keep its own transform
             TextMeshProUGUI endDialogueText = endDialogueButton.GetComponentInChildren<TextMeshProUGUI>(); // Create a new attribute choiceText as TextMeshProGUI
             endDialogueText.text = "End Dialogue"; // The button text is set to End Dialogue 
 
@@ -150,8 +157,17 @@ public class DialogueManager : MonoBehaviour
         List<string> tags = _story.currentTags; // Store the tag of the text that correlate to the button
         if (tags.Count > 0) // If there is more than 0 tags it will search
         {
-            //Debug.Log(tags[0]);
-            savedTags.Add(tags[0]); // Store the tag in a list to be used for alternative texts
+            string tagToAdd = tags[0]; // Store the tag temporarily here
+            {
+                if (!_SavedTags.Contains(tagToAdd)) // Checks if there is a tag already with that name. If its isnt, it gets stored
+                {
+                    _SavedTags.Add(tagToAdd); // Store the tag in a list to be used for alternative texts
+                }
+                else
+                {
+                    Debug.Log("Already stored that tag");
+                }
+            }
         }
     }
     void chooseStoryChoice(Choice choice) // When button clicked 
@@ -175,17 +191,27 @@ public class DialogueManager : MonoBehaviour
     private void exitDialogue()
     {
         _story = new Story(DialogueData.text); // Change file to the same dialogueData. Must be done otherwise you cant repeat the same dialouge
-        _oneclick = false; // Ensures 1 instance
-        _dialogueExited = true; // Announces that the exitDialogue was called (used to check if player exited dialogue)
+        _Oneclick = false; // Ensures 1 instance
+        _DialogueExited = true; // Announces that the exitDialogue was called (used to check if player exited dialogue)
         Invoke("SetDialogueExitFalse", 0f); // Used to give a small frame for the text to change to the alternative text
     }
 
     // Invoked almost next frame to make boolean false
     void SetDialogueExitFalse()
     {
-        _dialogueExited = false;
+        _DialogueExited = false;
     }
 
-    
+    string LoadNameOFNPC()
+    {
+        if (_NPCName == null)
+        {
+            _NPCName = "";
+        }
+        return _NPCName;
+    }
+
+
+
 
 }
