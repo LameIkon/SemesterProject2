@@ -5,16 +5,17 @@ using UnityEngine;
 
 public class CursorManager : MonoBehaviour
 {
-  
-    public static Vector2 _mousePosition;
-    private Camera _mainCamera;
 
+    private static Vector2 _mousePosition;           // Til at "detecte" objekter
+    private static Vector2 _mousePositionRotation;   // Til at rotere objekter
+    private static Quaternion _rotation;             // Bruges i forlængelse af _mousePositionRotation
+    private Camera _mainCamera;
 
     void Start() 
     {
         _mainCamera = Camera.main;
     }
-
+    
     void OnEnable() 
     {
         InputReader.OnMousePositionEvent += HandleMousePosition;
@@ -37,13 +38,11 @@ public class CursorManager : MonoBehaviour
         {
             Debug.Log("Name Of Object: " + hit.collider.name);
         }
-
     }
-
-
+    
     private void HandleMousePosition(Vector2 pos) 
     {
-        _mousePosition = pos; 
+        _mousePosition = pos;
     }
 
 
@@ -51,6 +50,13 @@ public class CursorManager : MonoBehaviour
     {
         DetectObject();
     }
-
+    
+    public static void MouseRotation(Transform transform)   // Metoden sørger for at koordinatsystemet (som sporer muspositionen) forbliver i midten af skæremen og ikke i nederste venstre hjørne
+    {
+        _mousePositionRotation = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;  // Her centraliserer vi muspositionen i midten af skærmen
+        float angle = Mathf.Atan2(_mousePositionRotation.y, _mousePositionRotation.x) * Mathf.Rad2Deg; 
+        _rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
+        transform.rotation = _rotation;
+    }
 }
 
