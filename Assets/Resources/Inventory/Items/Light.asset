@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f145e8804fe780a42922397cdc993d77, type: 3}
   m_Name: Light
   m_EditorClassIdentifier: 
-  _ItemDisplayed: {fileID: 21300000, guid: 4aaa96e3f8083e44198de9dddbe23b92, type: 3}
+  _ItemDisplayed: {fileID: 21300000, guid: 45b67f0cb1d9f694594f0cc8b21b046d, type: 3}
   _Stackable: 0
   _ItemType: 1
   _Data:
     _ItemName: 
     _ID: 2
   ItemDescription: 
+  _lanternPrefab: {fileID: 1590315480542359093, guid: cd7dfcc1d52457a40bbee757da76f392, type: 3}

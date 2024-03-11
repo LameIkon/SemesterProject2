@@ -21,5 +21,10 @@ public class RestoreItem : ItemObject
         _SystemFloat.ApplyChange(RestoreValue);
         Debug.Log(_SystemFloat + " Value restored: " + RestoreValue);
     }
+
+    public override void DisableAction()
+    {
+       
+    }
 }
  

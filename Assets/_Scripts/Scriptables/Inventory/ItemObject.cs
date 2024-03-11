@@ -10,13 +10,19 @@ public abstract class ItemObject : ScriptableObject
      public bool _Stackable;
      public ItemType _ItemType;
      public Item _Data = new Item();
+
+    
     
 
     [TextArea(10, 15)]
     public string ItemDescription;
 
     public abstract void Action ();
+    public abstract void DisableAction();
+  
 }
+
+
 
 public enum ItemType
 {

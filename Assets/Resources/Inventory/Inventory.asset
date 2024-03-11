@@ -19,13 +19,13 @@ MonoBehaviour:
     - _AllowedItems: 
       _Item:
         _ItemName: 
-        _ID: 1
-      _Amount: 10
+        _ID: -1
+      _Amount: 0
     - _AllowedItems: 
       _Item:
         _ItemName: 
-        _ID: 0
-      _Amount: 10
+        _ID: -1
+      _Amount: 0
     - _AllowedItems: 
       _Item:
         _ItemName: 

@@ -12,6 +12,8 @@ public class ToolbarManager : MonoBehaviour
     private int _selectedSlot = -1;
     [SerializeField] private Color _selectedColor, _notSelectedColor;
 
+    public int saveLightItemIndex;
+
     void OnEnable() 
     {
         InputReader.OnButtonPressEvent += HandleButtonPress;
@@ -26,16 +28,22 @@ public class ToolbarManager : MonoBehaviour
         InputReader.OnPickEvent -= HandleInteract;
     }
 
+    //private void Update()
+    //{
+    //    FindLightObject();
+    //}
 
     void HandleInteract() 
     {
-        SelectSlot();
+        UseFoodInSlot();
+        UseLightInSlot();
     }
 
     void HandleButtonPress(int i) 
     {
         _selectedSlot = i;
         OnSelectSlot(i);
+        DisableLight(i);
     }
 
     public void OnSelectSlot(int i)
@@ -48,11 +56,28 @@ public class ToolbarManager : MonoBehaviour
             {
                 _inventorySlotPrefabs[j].GetComponent<Image>().color = _selectedColor;
             }
+
+            //if(j != i)
+            //{
+            //    Debug.Log("Light should disable");
+            //     _toolbarInventory.GetSlots[saveLightItemIndex].ItemObject.DisableAction();
+            //}
         }
     }
 
+    //public void FindLightObject()
+    //{
+    //    for (int j = 0; j < _toolbarInventory.GetSlots.Length; j++)
+    //    {
+    //        if (_toolbarInventory.GetSlots[j].ItemObject._ItemType == ItemType.Light)
+    //        {
+    //            saveLightItemIndex = j;
+    //        }
+    //    }
+    //}
 
-    public void SelectSlot()
+
+    public void UseFoodInSlot()
     {
         var itemInSlot = _toolbarInventory.GetSlots[_selectedSlot];
         if (_selectedSlot < 0)
@@ -60,9 +85,10 @@ public class ToolbarManager : MonoBehaviour
             return; 
         }
       
-        if (itemInSlot.ItemObject != null) //checks that there is an item object in the slot
+        if (itemInSlot.ItemObject != null && itemInSlot.ItemObject._ItemType == ItemType.Food) //checks that there is an item object in the slot
         {
             itemInSlot.ItemObject.Action(); //calls the action function on that object
+       
             if(itemInSlot.ItemObject._Stackable) //checks if the item is stackable, otherwise no need to change the amount
             {
                 itemInSlot.AddAmount(-1); //substract 1 from the amount
@@ -73,5 +99,49 @@ public class ToolbarManager : MonoBehaviour
             }           
         }
     }
+
+    public void UseLightInSlot()
+    {
+        var itemInSlot = _toolbarInventory.GetSlots[_selectedSlot];
+       
+
+        if (_selectedSlot < 0)
+        {
+            return;
+        }
+
+
+        if (itemInSlot.ItemObject != null && itemInSlot.ItemObject._ItemType == ItemType.Light)
+        {
+            itemInSlot.ItemObject.Action();
+            saveLightItemIndex = _selectedSlot;
+        }
+
+    }
+
+    public void DisableLight(int i)
+    {
+        if (i != saveLightItemIndex)
+        {
+            Debug.Log("Light should disable");
+            _toolbarInventory.GetSlots[saveLightItemIndex].ItemObject.DisableAction();
+        }
+    }
+
+    //public void DisableLightInSlot()
+    //{
+    //    var itemInSlot = _toolbarInventory.GetSlots[_selectedSlot];
+    //    if (_selectedSlot < 0)
+    //    {
+    //        return;
+    //    }
+
+    //    if (itemInSlot.ItemObject != null && itemInSlot.ItemObject._ItemType == ItemType.Light && _lightActivated == true)
+    //    {
+    //        itemInSlot.ItemObject.DisableAction();
+    //        _lightActivated = false;
+
+    //    }
+    //}
 
 }
