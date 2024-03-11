@@ -6,21 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 0
-    path: Assets/Scenes/SampleScene.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
-  - enabled: 0
     path: Assets/Scenes/MainMenu.unity
     guid: ed664a99639841645ad53bd805b05881
-  - enabled: 0
-    path: Assets/Scenes/TemplateScenes/TemplateSceneAdam.unity
-    guid: 4fa2099bd9252fa45a2804fb9f5306ee
   - enabled: 1
-    path: Assets/Scenes/TemplateScenes/TroelsTemplate.unity
-    guid: 9166fe496f4f2484582d5d5428f7900f
+    path: Assets/Scenes/TemplateScenes/AdamScenes/MainHub.unity
+    guid: 3c5051dc1b4f98c42bba7523e3067672
   - enabled: 1
-    path: Assets/UI.unity
-    guid: 282c2716efd0bd64f88a1b705503c291
-  - enabled: 1
-    path: Assets/Setups.unity
-    guid: 9860c7ef50587534e833456a8df83769
+    path: Assets/Scenes/TemplateScenes/AdamScenes/Scene_1.unity
+    guid: b34b7dda95eb9ea4ebb68be12d359996
   m_configObjects: {}
