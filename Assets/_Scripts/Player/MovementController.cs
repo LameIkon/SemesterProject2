@@ -1,11 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MovementController : MonoBehaviour
 {
 
-    [SerializeField] protected float _moveSpeed = 5f;
+    protected float _moveSpeed;
+    [SerializeField] protected FloatReferencer _speedReference;
     [SerializeField, Tooltip("Remember to drag the child collider MovePoint of the player into this field")]
     protected Transform _movePoint;
 
@@ -13,10 +12,13 @@ public class MovementController : MonoBehaviour
     LayerMask[] _whatStopsMovement; // This is made into an array as the layers that stop Movement should not change during runtime, therefore it is redundat to make it a List
 
 
-    void Start()
+    void Awake()
     {
         _movePoint.parent = null; //detachs the MovePoint as a child of player. Not acutally needed. 
+        _moveSpeed = _speedReference.GetMinValue(); // Sets the walking speed 
     }
+
+
 
     protected virtual void FixedUpdate() 
     {

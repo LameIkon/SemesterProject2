@@ -2,20 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
-[CreateAssetMenu(menuName = "Brain/Random")]
-public class RandomWalkAI : BrainAI
+[CreateAssetMenu(menuName = "Brain/Square Walk")]
+public class SquareWalkingAI : BrainAI
 {
     // [SerializeField] private RangedFloat _idleTime;
     // [SerializeField] private RangedFloat _moveTime;  
     // [SerializeField] private RangedFloat _fireTime;
     [SerializeField] private RangedFloat _waitBetweenWalk;
+    [SerializeField] private int _squareSize;
+    private int counter;
 
     private const string _stateTimeout = "stateTimeout";
     private const string _walkState = "walkState";
     // private const string _state = "state";
 
-
+    void OnEnable() 
+    {
+        counter = 0;
+    }
 
     public override void Initialize(AIThinker brain)
     {
@@ -38,13 +42,71 @@ public class RandomWalkAI : BrainAI
         if (stateTimeout < 0)
         {
             SetTimeout(brain);
-            move.Move(new Vector3(Random.Range(-1, 2), Random.Range(-1, 2), 0));
+            Debug.Log(counter);
+
+            switch (GiveDirection())
+            {
+                case Directions.N:
+
+                    SetTimeout(brain);
+
+                    move.Move(Vector3.up);
+                    break;
+
+                case Directions.S:
+
+                    SetTimeout(brain);
+
+                    move.Move(Vector3.down);
+                    break;
+
+                case Directions.E:
+                    SetTimeout(brain);
+
+                    move.Move(Vector3.right);
+                    break;
+
+                case Directions.W:
+                    SetTimeout(brain);
+
+                    move.Move(Vector3.left);
+                    break;
+
+            }
 
         }
 
     }
 
-    private void SetTimeout(AIThinker brain) 
+
+    private Directions GiveDirection() 
+    {
+
+        counter++;
+
+        if (counter <= 1 * _squareSize)
+        {
+            return Directions.N;
+        }
+        else if (counter <= 2 * _squareSize)
+        {
+            return Directions.E;
+        }
+        else if (counter <= 3 * _squareSize)
+        {
+            return Directions.S;
+        }
+        else
+        {
+            if (counter >= 4 * _squareSize) 
+            {
+                counter = 0;
+            }
+            return Directions.W;
+        }
+    }
+
+    private void SetTimeout(AIThinker brain)
     {
         brain.Remember(_stateTimeout, Random.Range(_waitBetweenWalk.MinValue, _waitBetweenWalk.MaxValue));
     }

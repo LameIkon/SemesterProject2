@@ -83,7 +83,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""Postion"",
-                    ""type"": ""Value"",
+                    ""type"": ""PassThrough"",
                     ""id"": ""a4323534-9253-43ef-93ec-d51793b88d33"",
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",

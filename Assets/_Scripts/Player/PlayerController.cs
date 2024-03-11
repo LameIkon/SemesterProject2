@@ -7,14 +7,19 @@ public class PlayerController : MovementController
 
     private Vector2 _moveVector;
 
+
     private void OnEnable()
     {
         InputReader.OnMoveEvent += HandleMove;
+        InputReader.OnRunStartEvent += HandleRunStart;
+        InputReader.OnRunCancelEvent += HandleRunCancled;
     }
 
     private void OnDisable()
     {
         InputReader.OnMoveEvent -= HandleMove;
+        InputReader.OnRunStartEvent -= HandleRunStart;
+        InputReader.OnRunCancelEvent -= HandleRunCancled;
     }
 
     protected override void FixedUpdate()
@@ -55,6 +60,19 @@ public class PlayerController : MovementController
         }
 
         _moveVector = dir; // Here the direction vector is set to the _moveVector
+    }
+
+
+    // This handler grabs the run key and sets the appropiate speed
+
+    void HandleRunStart() 
+    {
+        _moveSpeed = _speedReference.GetMaxValue();
+    }
+
+    void HandleRunCancled() 
+    {
+        _moveSpeed = _speedReference.GetMinValue();
     }
 
 

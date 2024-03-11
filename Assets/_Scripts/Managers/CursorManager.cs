@@ -37,7 +37,6 @@ public class CursorManager : MonoBehaviour
         {
             Debug.Log("Name Of Object: " + hit.collider.name);
         }
-
     }
 
 

@@ -41,4 +41,9 @@ public class AIThinker : MonoBehaviour
         _brain.Think(this);
     }
 
+    public void SetBrain(BrainAI brain) 
+    {
+        _brain = brain; 
+    }
+
 }

@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
     private void Start() 
     {
 
+
         if (_pauseMenu != null)
         {
             // We set the Pause and Inventory Menus to false when we start
