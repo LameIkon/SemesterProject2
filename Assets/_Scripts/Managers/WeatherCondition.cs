@@ -23,7 +23,10 @@ public class WeatherCondition : MonoBehaviour
     [SerializeField] private VisualEffect _fogEffect;
 
     [Header("Data")]
-    [SerializeField] private int _counter = 0;
+    //[SerializeField] private int _counter = 0;
+    [SerializeField] private FloatReference _outSideTemp;
+    [SerializeField] private FloatReferencer _freezePoint;
+    private float count = 50;
     private int _timeBetweenMin = 100;
     private int _timeBetweenMax = 200;
     private bool _isChoosingWeather;
@@ -86,31 +89,31 @@ public class WeatherCondition : MonoBehaviour
     {
         //_counter--;
 
-        if (_counter <= 0)
-        {
-            //Invoke("Blizzard", _counter);
-            //_counter = Random.Range(_tikBetweenMin, _tikBetweenMax);
-        }
+        //if (_counter <= 0)
+        //{
+        //    //Invoke("Blizzard", _counter);
+        //    //_counter = Random.Range(_tikBetweenMin, _tikBetweenMax);
+        //}
         //Timer();
     }
 
-    void Timer()
-    {
-        if (!_isChoosingWeather)
-        {
-            _isChoosingWeather = true;
-            _counter = Random.Range(_timeBetweenMin, _timeBetweenMax);
-            StartCoroutine(ChangeWeather());
-        }
-    }
+    //void Timer()
+    //{
+    //    if (!_isChoosingWeather)
+    //    {
+    //        _isChoosingWeather = true;
+    //        //_counter = Random.Range(_timeBetweenMin, _timeBetweenMax);
+    //        StartCoroutine(ChangeWeather());
+    //    }
+    //}
 
-    IEnumerator ChangeWeather()
-    {
-        Blizzard();
-        yield return new WaitForSeconds(_counter); // Amount of time for the ongoing weather
-        ResetWeather(); // Reset
-        _isChoosingWeather = false;
-    }
+    //IEnumerator ChangeWeather()
+    //{
+    //    Blizzard();
+    //    yield return new WaitForSeconds(_counter); // Amount of time for the ongoing weather
+    //    ResetWeather(); // Reset
+    //    _isChoosingWeather = false;
+    //}
 
     void Blizzard()
     {
@@ -121,6 +124,8 @@ public class WeatherCondition : MonoBehaviour
 
         _blizzardEffect.Play(); // Start Blizzard effect
         _blizzardFogEffect.Play(); // Start Fog effect
+
+        //_outSideTemp.Value = 0;
 
         //Invoke("ResetWeather", 20f);
     }
