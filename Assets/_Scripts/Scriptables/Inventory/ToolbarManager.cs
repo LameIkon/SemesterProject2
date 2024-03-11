@@ -48,7 +48,7 @@ public class ToolbarManager : MonoBehaviour
             {
                 _inventorySlotPrefabs[j].GetComponent<Image>().color = _selectedColor;
             }
-        }      
+        }
     }
 
 
