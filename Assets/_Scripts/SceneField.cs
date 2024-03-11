@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Object = UnityEngine.Object;
 
 #if UNITY_EDITOR
@@ -9,19 +10,15 @@ using UnityEditor;
 [System.Serializable]
 public class SceneField
 {
-    [SerializeField] private Object m_SceneAsset;
+    [SerializeField] private Object _sceneAsset;
 
-    [SerializeField] private string m_SceneName = "";
+    [SerializeField] private string _sceneName = "";
 
-    public string SceneName
+    public string _SceneName { get { return _sceneName; } }
+    
+    public static implicit operator string(SceneField sceneField)   // Makes it work with the existing Unity methods (LoadLevel/LoadScene)
     {
-        get { return m_SceneName; }
-    }
-
-    // Makes it work with the existing Unity methods (LoadLevel/LoadScene)
-    public static implicit operator string(SceneField sceneField)
-    {
-        return sceneField.SceneName;
+        return sceneField._SceneName;
     }
 }
 
@@ -33,8 +30,8 @@ public class SceneFieldPropertyDrawer : PropertyDrawer
     public override void OnGUI(Rect _position, SerializedProperty _property, GUIContent _label)
     {
         EditorGUI.BeginProperty(_position, GUIContent.none, _property);
-        SerializedProperty sceneAsset = _property.FindPropertyRelative("m_SceneAsset");
-        SerializedProperty sceneName = _property.FindPropertyRelative("m_SceneName");
+        SerializedProperty sceneAsset = _property.FindPropertyRelative("_sceneAsset");
+        SerializedProperty sceneName = _property.FindPropertyRelative("_sceneName");
         _position = EditorGUI.PrefixLabel(_position, GUIUtility.GetControlID(FocusType.Passive), _label);
         if (sceneAsset != null)
         {

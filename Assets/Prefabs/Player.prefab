@@ -133,7 +133,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9b4209348165a440ac02dd9439773af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moveSpeed: 8
+  _moveSpeed: 5
   _movePoint: {fileID: 5481377247523286882}
   _whatStopsMovement:
   - serializedVersion: 2
@@ -292,6 +292,18 @@ PrefabInstance:
     - target: {fileID: 3413279494487294245, guid: cd7dfcc1d52457a40bbee757da76f392, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5424926233369021202, guid: cd7dfcc1d52457a40bbee757da76f392, type: 3}
+      propertyPath: m_LightOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5424926233369021202, guid: cd7dfcc1d52457a40bbee757da76f392, type: 3}
+      propertyPath: m_NormalMapQuality
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5424926233369021202, guid: cd7dfcc1d52457a40bbee757da76f392, type: 3}
+      propertyPath: m_NormalMapDistance
+      value: 35
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -44,8 +44,7 @@ public class CursorManager : MonoBehaviour
     {
         _mousePosition = pos;
     }
-
-
+    
     private void HandleLeftMouseClick() 
     {
         DetectObject();
