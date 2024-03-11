@@ -18,31 +18,43 @@ public class SurvivalManager : MonoBehaviour, IDamageable, IFreezeable, IStarvea
     // [SerializeField] private FloatVariable _hungerPoints;
     // [SerializeField] private FloatVariable _freezePoints;
     // [SerializeField] private FloatVariable _staminaPoints;
+    [Header("Health")]
+    [SerializeField] private FloatReferencer _healthPoint;
+    [SerializeField] private FloatReference _maxHealth;
 
+    [Space(4f)]
+
+
+    [Header("Temperature")]
+    [SerializeField] private FloatReferencer _freezePoint;
+    [SerializeField] private FloatReference _maxFreeze;
+    [SerializeField] private FloatReference _freezeDamage;
+    [SerializeField] private FloatReference _freezeMinThreshold;
+    [SerializeField] private FloatReference _freezeMaxThreshold;
+    [SerializeField] private FloatReference _healthGainOnFreeze;
+    [SerializeField] private FloatReference _healthLossOnFreeze;
+    [Space(2f)]
     [SerializeField] private FloatReference _outSideTemp;
     [SerializeField] private FloatReference _heatSource;
     [SerializeField] private FloatReference _coldResist;
+    [Space(4f)]
 
-    [SerializeField] private FloatReferencer _healthPoint;
+    [Header("Hunger")]
     [SerializeField] private FloatReferencer _hungerPoint;
-    [SerializeField] private FloatReferencer _freezePoint;
-    [SerializeField] private FloatReferencer _staminaPoint;
-
-
-    [SerializeField] private FloatReference _hungerMinThreshold;
-    [SerializeField] private FloatReference _hungerMaxThreshold;
-    [SerializeField] private FloatReference _freezeMinThreshold;
-    [SerializeField] private FloatReference _freezeMaxThreshold;
-    [SerializeField] private FloatReference _starveDamage;
-    [SerializeField] private FloatReference _freezeDamage;
-    [SerializeField] private FloatReference _healthGainOnHunger;
-    [SerializeField] private FloatReference _healthGainOnFreeze;
-    [SerializeField] private FloatReference _healthLossOnHunger;
-    [SerializeField] private FloatReference _healthLossOnFreeze;
-    [SerializeField] private FloatReference _maxHealth;
-    [SerializeField] private FloatReference _maxFreeze;
     [SerializeField] private FloatReference _maxHunger;
+    [SerializeField] private FloatReference _starveDamage;
+    [SerializeField] private FloatReference _hungerMaxThreshold;
+    [SerializeField] private FloatReference _hungerMinThreshold;
+    [SerializeField] private FloatReference _healthGainOnHunger;
+    [SerializeField] private FloatReference _healthLossOnHunger;
+
+    [Space(4f)]
+
+    [Header("Stamina")]
+    [SerializeField] private FloatReferencer _staminaPoint;
     [SerializeField] private FloatReference _maxStamina;
+
+
 
     public void Die()
     {
