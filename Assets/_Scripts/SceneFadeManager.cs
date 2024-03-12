@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,13 +12,10 @@ public class SceneFadeManager : MonoBehaviour
     
     public bool _IsFadingOut { get; private set; }
     public bool _IsFadingIn { get; private set; }
+    
     private void Awake()
     {
-        if (_Instance == null)
-        {
-            _Instance = this;
-        }
-
+        if (_Instance == null) { _Instance = this; } 
         _fadeOutStartColor.a = 0f;
     }
 
@@ -33,7 +27,7 @@ public class SceneFadeManager : MonoBehaviour
             {
                 _fadeOutStartColor.a += Time.deltaTime * _fadeOutSpeed;
                 _fadeOutImage.color = _fadeOutStartColor;
-            }
+            } 
             else
             {
                 _IsFadingOut = false;

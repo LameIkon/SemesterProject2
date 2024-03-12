@@ -1,21 +1,15 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class SceneSwapManager : MonoBehaviour
 {
     public static SceneSwapManager _Instance;
-
     private DoorTriggerInteraction.DoorToSpawnAt _doorToSpawnTo;
 
     private void Awake()
     {
-        if (_Instance == null)
-        {
-            _Instance = this;
-        }
+        if (_Instance == null) { _Instance = this; }
     }
 
     public static void SwapSceneFromDoorUse(SceneField myScene, DoorTriggerInteraction.DoorToSpawnAt doorToSpawnAt)
@@ -28,11 +22,8 @@ public class SceneSwapManager : MonoBehaviour
     {
         SceneFadeManager._Instance.StartFadeOut();
 
-        while (SceneFadeManager._Instance._IsFadingOut)
-        {
-            yield return null;
-        }
-        
+        while (SceneFadeManager._Instance._IsFadingOut) yield return null;
+
         _doorToSpawnTo = doorToSpawnAt;
         SceneManager.LoadScene(myScene);
     }
