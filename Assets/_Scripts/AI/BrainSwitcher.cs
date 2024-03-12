@@ -39,7 +39,7 @@ public class BrainSwitcher : MonoBehaviour
         if (other.GetComponent<IDamageable>() != null) 
         {
             Debug.Log("Brain Switch");
-            _range.radius = _aggroRange;
+            SetRadius(_aggroRange);
             _thinker.SetBrain(_aggroBrain);
 
         }
@@ -49,10 +49,30 @@ public class BrainSwitcher : MonoBehaviour
     {
         if (other.GetComponent<IDamageable>() != null)
         {
-            _range.radius = _idleRange;
+            SetRadius(_idleRange);
             _thinker.SetBrain(_idleBrain);
 
         }
+    }
+
+
+    private void FixedUpdate()
+    {
+        Debug.Log(_range.radius);
+
+        Collider2D[] enemys = Physics2D.OverlapCircleAll(transform.position, _range.radius);
+
+        foreach (var enemy in enemys)
+        {
+            if (enemy.GetComponent<IDamageable>() != null)
+            {
+                SetRadius(_aggroRange);
+            }
+            else
+                SetRadius(_idleRange);
+        }
+
+
     }
 
     private void OnDrawGizmosSelected()
@@ -62,4 +82,9 @@ public class BrainSwitcher : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, _aggroRange);
     }
 
+
+    private void SetRadius(float radius) 
+    {
+        _range.radius = radius;
+    }
 }

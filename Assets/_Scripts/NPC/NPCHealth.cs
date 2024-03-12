@@ -9,7 +9,7 @@ public class NPCHealth : MonoBehaviour, IDamageable
 
     void Awake() 
     {
-        _health = new FloatVariable();
+        _health = ScriptableObject.CreateInstance<FloatVariable>();
         _health.SetValue(_maxHealth);
     }
 

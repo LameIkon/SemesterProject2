@@ -1,26 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Linq;
 
+[CreateAssetMenu(menuName = "Brain/PolarBear")]
 public class PolarBearAI : BrainAI
 {
     // [SerializeField] private RangedFloat _idleTime;
     // [SerializeField] private RangedFloat _moveTime;  
     // [SerializeField] private RangedFloat _fireTime;
     [SerializeField] private RangedFloat _waitBetweenWalk;
-    [SerializeField] private int _squareSize;
-    private int counter;
+    [SerializeField] private int _aggroRange;
+    
+
+
+    private const string _playerTag = "Player";
 
     private const string _stateTimeout = "stateTimeout";
     private const string _walkState = "walkState";
     private const string _target = "target";
     // private const string _state = "state";
-
-    void OnEnable()
-    {
-        counter = 0;
-    }
 
     public override void Initialize(AIThinker brain)
     {
@@ -28,6 +26,7 @@ public class PolarBearAI : BrainAI
         brain.Remember(_stateTimeout, Random.Range(_waitBetweenWalk.MinValue, _waitBetweenWalk.MaxValue));
     }
 
+    private MovementController _move; 
 
     public override void Think(AIThinker brain)
     {
@@ -36,87 +35,192 @@ public class PolarBearAI : BrainAI
         stateTimeout -= Time.deltaTime;
         brain.Remember(_stateTimeout, stateTimeout);
 
-        
 
         var state = brain.Remember<Directions>(_walkState);
 
-        var move = brain.GetComponent<MovementController>();
+        if (_move == null)
+        {
+            _move = brain.GetComponent<MovementController>();
+        }
 
         if (!target) 
         {
-            target = GameObject
-                        .FindGameObjectsWithTag("Player")
-                        .OrderBy(go => Vector3.Distance(go.transform.position, brain.transform.position))
-                        .FirstOrDefault(go => go != brain.gameObject);
+            //target = GameObject
+            //            .FindGameObjectsWithTag("Player")
+            //            .OrderBy(go => Vector3.Distance(go.transform.position, brain.transform.position))
+            //            .FirstOrDefault(go => go != brain.gameObject);
 
-            brain.Remember<GameObject>(_target);
+            target = GameObject.FindGameObjectWithTag(_playerTag);
+
+            brain.Remember(_target, target);
         }
+
+        Vector3 _aggroVector = new Vector3(_aggroRange, _aggroRange, 0);
 
         if (stateTimeout < 0)
         {
             SetTimeout(brain);
-            Debug.Log(counter);
 
-            switch (GiveDirection())
+            Vector3 targetPosition = target.transform.position;
+            Vector3 ownPosition = brain.transform.position;
+            Vector3 vectorBetween = targetPosition - ownPosition;
+            Vector3 unitVectorBetween = (vectorBetween).normalized;
+
+
+            if (vectorBetween.x > _aggroVector.x || vectorBetween.x < -_aggroVector.x && vectorBetween.y > _aggroVector.y || vectorBetween.y < -_aggroVector.y)
             {
-                case Directions.N:
-
-                    SetTimeout(brain);
-
-                    move.Move(Vector3.up);
-                    break;
-
-                case Directions.S:
-
-                    SetTimeout(brain);
-
-                    move.Move(Vector3.down);
-                    break;
-
-                case Directions.E:
-                    SetTimeout(brain);
-
-                    move.Move(Vector3.right);
-                    break;
-
-                case Directions.W:
-                    SetTimeout(brain);
-
-                    move.Move(Vector3.left);
-                    break;
-
+                WalkRandom();
             }
-
+            else
+            {
+                Walk(GiveDirectionTowardsPlayer(unitVectorBetween), brain);
+            }
         }
 
     }
 
+    private void WalkRandom() 
+    {
+            _move.Move(new Vector3(Random.Range(-1, 2), Random.Range(-1, 2), 0));
+    }
 
-    private Directions GiveDirection()
+    private void Walk(Directions direction, AIThinker brain) 
+    {
+        switch (direction)
+        {
+            case Directions.N:
+
+                SetTimeout(brain);
+
+                _move.Move(Vector3.up);
+                break;
+
+            case Directions.S:
+
+                SetTimeout(brain);
+
+                _move.Move(Vector3.down);
+                break;
+
+            case Directions.E:
+                SetTimeout(brain);
+
+                _move.Move(Vector3.right);
+                break;
+
+            case Directions.W:
+                SetTimeout(brain);
+
+                _move.Move(Vector3.left);
+                break;
+
+            case Directions.NE:
+                SetTimeout(brain);
+
+                _move.Move(Vector3.up + Vector3.right);
+                break;
+
+            case Directions.NW:
+                SetTimeout(brain);
+
+                _move.Move(Vector3.up + Vector3.left);
+                break;
+
+            case Directions.SE:
+                SetTimeout(brain);
+
+                _move.Move(Vector3.down + Vector3.right);
+                break;
+
+            case Directions.SW:
+                SetTimeout(brain);
+
+                _move.Move(Vector3.down + Vector3.left);
+                break;
+
+            default:
+
+                break;
+
+        }
+    }
+
+
+    private Directions GiveDirectionTowardsPlayer(Vector3 dir)
     {
 
-        counter++;
+        int i = Random.Range(0, 2);
 
-        if (counter <= 1 * _squareSize)
+        if (dir == Vector3.up)
         {
             return Directions.N;
         }
-        else if (counter <= 2 * _squareSize)
+        else if (dir == Vector3.right)
         {
             return Directions.E;
         }
-        else if (counter <= 3 * _squareSize)
+        else if (dir == Vector3.down)
         {
             return Directions.S;
         }
-        else
+        else if (dir == Vector3.left)
         {
-            if (counter >= 4 * _squareSize)
-            {
-                counter = 0;
-            }
             return Directions.W;
         }
+        else if (dir == new Vector3())
+        {
+            return Directions.NW;
+        }
+        else if (dir.y > 0 && dir.x > 0)
+        {
+            if (i == 0)
+            {
+                return Directions.N;
+            }
+            else
+            {
+                return Directions.NE;
+            }
+        }
+        else if (dir.y > 0 && dir.x < 0)
+        {
+            if (i == 0)
+            {
+                return Directions.N;
+            }
+            else
+            {
+                return Directions.NW;
+            }
+        }
+        else if (dir.y < 0 && dir.x > 0)
+        {
+            if (i == 0)
+            {
+                return Directions.S;
+            }
+            else
+            {
+                return Directions.SE;
+            }
+        }
+        else if (dir.y < 0 && dir.x < 0)
+        {
+            if (i == 0)
+            {
+                return Directions.S;
+            }
+            else
+            {
+                return Directions.SW;
+            }
+        }
+        else
+        {
+            return Directions.None;
+        }
+
+
     }
 
     private void SetTimeout(AIThinker brain)
@@ -126,66 +230,63 @@ public class PolarBearAI : BrainAI
 
 
     /*
-        switch ((Directions)Random.Range(0, 10))
-            {
-                case Directions.N:
+                switch (GiveDirection(dir))
+        {
+            case Directions.N:
 
-                    SetTimeout(brain);
+                SetTimeout(brain);
 
-                    move.Move(Vector3.up);
-                    break;
+                _move.Move(Vector3.up);
+                break;
 
-                case Directions.S:
+            case Directions.S:
 
-                    SetTimeout(brain);
+                SetTimeout(brain);
 
-                    move.Move(Vector3.down);
-                    break;
+                _move.Move(Vector3.down);
+                break;
 
-                case Directions.E:
-                    SetTimeout(brain);
+            case Directions.E:
+                SetTimeout(brain);
 
-                    move.Move(Vector3.right);
-                    break;
+                _move.Move(Vector3.right);
+                break;
 
-                case Directions.W:
-                    SetTimeout(brain);
+            case Directions.W:
+                SetTimeout(brain);
 
-                    move.Move(Vector3.left);
-                    break;
+                _move.Move(Vector3.left);
+                break;
 
-                case Directions.NE:
-                    SetTimeout(brain);
+            case Directions.NE:
+                SetTimeout(brain);
 
-                    move.Move(Vector3.up + Vector3.right);
-                    break;
+                _move.Move(Vector3.up + Vector3.right);
+                break;
 
-                case Directions.NW:
-                    SetTimeout(brain);
+            case Directions.NW:
+                SetTimeout(brain);
 
-                    move.Move(Vector3.up + Vector3.left);
-                    break;
+                _move.Move(Vector3.up + Vector3.left);
+                break;
 
-                case Directions.SE:
-                    SetTimeout(brain);
+            case Directions.SE:
+                SetTimeout(brain);
 
-                    move.Move(Vector3.down + Vector3.right);
-                    break;
+                _move.Move(Vector3.down + Vector3.right);
+                break;
 
-                case Directions.SW:
-                    SetTimeout(brain);
+            case Directions.SW:
+                SetTimeout(brain);
 
-                    move.Move(Vector3.down + Vector3.left);
-                    break;
+                _move.Move(Vector3.down + Vector3.left);
+                break;
 
+            default:
 
-                default:
-                    SetTimeout(brain);
+                break;
 
-                    Debug.Log("Default");
-                    move.Move(new Vector3(Random.Range(-1, 2), Random.Range(-1, 2), 0));
-                    break;
-            }
+        }
      */
 
 
