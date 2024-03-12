@@ -20,3 +20,4 @@ MonoBehaviour:
     _ID: 2
   ItemDescription: 
   _lanternPrefab: {fileID: 1590315480542359093, guid: cd7dfcc1d52457a40bbee757da76f392, type: 3}
+  _lightPosition: {x: 0.4, y: 0, z: 0}

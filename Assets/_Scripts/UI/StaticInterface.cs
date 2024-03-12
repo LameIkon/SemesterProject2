@@ -32,24 +32,6 @@ public class StaticInterface : UserInterface
         }
     }
 
-    //public void InteractWithItem()
-    //{
-    //    for (int i = 0; i < _Inventory.GetSlots.Length; i++)
-    //    {
-    //        int idSlot = _Inventory.GetSlots[i]._Item._ID;
-
-    //        for (int j = 0; j < _Inventory._ItemsDataBase._ItemObjects.Length; j++)
-    //        {
-    //            int idHotbar = _Inventory._ItemsDataBase._ItemObjects[i]._Data._ID;
-
-    //            if(idSlot == idHotbar)
-    //            {
-    //                _Inventory._ItemsDataBase._ItemObjects[j].Action();
-    //                break;
-    //            }
-    //        }          
-    //    }
-    //}
 
 
     public void OnApplicationQuit()

@@ -13,7 +13,8 @@ public class LightItem : ItemObject
     private GameObject _Player;
     [SerializeField] GameObject _lanternPrefab;
     private GameObject _light;
-
+    [SerializeField] private Vector3 _lightPosition;
+    
     public void Awake()
     {
         _ItemType = ItemType.Light;
@@ -25,8 +26,9 @@ public class LightItem : ItemObject
         if (_light == null)
         {
             _light = Instantiate(_lanternPrefab, _Player.transform);
-        }
-       
+            _light.transform.localPosition = _lightPosition;
+
+        }       
     }
 
 
