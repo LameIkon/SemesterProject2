@@ -18,14 +18,10 @@ public class ChestManager : MonoBehaviour
         _chestCanvas.SetActive(false);
     }
 
-
-   
     void OnEnable()
     {       
         InputReader.OnInteractEvent += HandleInteract;
         InputReader.OnPickEvent += HandleInteract;
-
-  
     }
 
     private void OnDisable()
