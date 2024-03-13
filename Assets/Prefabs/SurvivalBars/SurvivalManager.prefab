@@ -77,8 +77,8 @@ MonoBehaviour:
     ConstantValue: 0.1
     Variable: {fileID: 0}
   _outSideTemp:
-    UseConstant: 0
-    ConstantValue: 0
+    UseConstant: 1
+    ConstantValue: -12
     Variable: {fileID: 11400000, guid: 933760dd8b0e27f4c8a5d03d9d6a0547, type: 2}
   _heatSource:
     UseConstant: 0

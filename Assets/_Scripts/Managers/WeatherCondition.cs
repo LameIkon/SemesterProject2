@@ -6,35 +6,48 @@ using UnityEngine.VFX;
 
 public class WeatherCondition : MonoBehaviour
 {
-    SurvivalManager _SurvivalManager; // get temperature an increase the rate of depletion
-    PlayerController _playerController; // Get movement speed and reduce it
-    // Get light source and reduce the light amount emitted
+    [Header("Weather Types")] // By default they start being disabled since in unity editor the effects love to run constantly
+    [SerializeField] private GameObject _blizzard;
+    [SerializeField] private GameObject _snow; 
+    [SerializeField] private GameObject _fog; 
 
-
-    [Header("Weather Types")]
-    [SerializeField] private GameObject _blizzard; // Only used to disable, since its annoying in Unity Editor to have constant effects running
-    [SerializeField] private GameObject _snow; // Only used to disable, since its annoying in Unity Editor to have constant effects running
-    [SerializeField] private GameObject _fog; // Only used to disable, since its annoying in Unity Editor to have constant effects running
-
-    [Header("Weather Data")]
+    [Header("Weather Effects")]
     [SerializeField] private ParticleSystem _blizzardEffect; 
     [SerializeField] private VisualEffect _blizzardFogEffect;
     [SerializeField] private ParticleSystem _snowEffect;
     [SerializeField] private VisualEffect _fogEffect;
 
-    [Header("Data")]
-    //[SerializeField] private int _counter = 0;
-    [SerializeField] private FloatReference _outSideTemp;
-    [SerializeField] private FloatReferencer _freezePoint;
-    private float count = 50;
+
+    [Header(" Temperatures")]
+    [SerializeField] private float _defaultTemp = -15f; // defauly temperature without any weather conditions
+    [Space (10f)]        
+    [SerializeField] private float _blizzardTemp = -45f; // Temperature in a blizzard
+    [SerializeField] private float _snowTemp = -35f; // temperature in a snow weather
+    [SerializeField] private float _fogTemp = -25f; // temperature in a fog
+
+    public static float _CurrentOutsideTemperature; // This is the current temperature. Used to store the temperatures
+
+
+
+
+    [Header("Weather Checkers")] // Currently not being used by anything
+    public bool _IsBlizzard;
+    public bool _IsSnow;
+    public bool _IsFog; 
+
     private int _timeBetweenMin = 100;
     private int _timeBetweenMax = 200;
     private bool _isChoosingWeather;
     private bool _canChooseWeather; // Used to check for certain conditions, like being inside a house. 
 
+    //[SerializeField] private FloatReferencer _playerSpeed;
+
+
     void Awake()
     {
+        _CurrentOutsideTemperature = _defaultTemp; // Set current temperature to default
 
+        //_playerSpeed.SetValue(10);
     }
 
     // Start is called before the first frame update
@@ -122,12 +135,14 @@ public class WeatherCondition : MonoBehaviour
             _blizzard.SetActive(true); // Make it active
         }
 
-        _blizzardEffect.Play(); // Start Blizzard effect
-        _blizzardFogEffect.Play(); // Start Fog effect
+        if(!_IsSnow && !_IsFog)
+        {
+            _blizzardEffect.Play(); // Start Blizzard effect
+            _blizzardFogEffect.Play(); // Start Fog effect
+            _IsBlizzard = true;
 
-        //_outSideTemp.Value = 0;
-
-        //Invoke("ResetWeather", 20f);
+            _CurrentOutsideTemperature = _blizzardTemp;
+        }
     }
 
     void Fog()
@@ -137,7 +152,13 @@ public class WeatherCondition : MonoBehaviour
             _fog.SetActive(true); // Make it active
         }
 
-        _fogEffect.Play();
+        if (!_IsBlizzard && !_IsSnow)
+        {
+            _fogEffect.Play();
+            _IsFog = true;
+
+            _CurrentOutsideTemperature = _fogTemp;
+        }
     }
 
     void Snow()
@@ -147,7 +168,13 @@ public class WeatherCondition : MonoBehaviour
             _snow.SetActive(true); // Make it active
         }
 
-        _snowEffect.Play();
+        if (!_IsBlizzard && !_IsFog)
+        {
+            _snowEffect.Play();
+            _IsSnow = true;
+
+            _CurrentOutsideTemperature = _snowTemp;
+        }
     }
 
     void ResetWeather() // Reset everything back to default
@@ -157,5 +184,13 @@ public class WeatherCondition : MonoBehaviour
         _blizzardFogEffect.Stop();
         _fogEffect.Stop();
         _snowEffect.Stop();
+
+        //Reset bool checkers. Used for other scripts to detect.
+        _IsBlizzard = false;
+        _IsSnow = false;
+        _IsFog = false;
+
+        // Reset to default temperature
+        _CurrentOutsideTemperature = _defaultTemp;
     }
 }
