@@ -10,7 +10,8 @@ public class ChestManager : MonoBehaviour
     [SerializeField] private ChestFiller _chestFiller;
 
     private bool _canOpenChest = false;
-
+    private bool _neverOpenedBefore = true;
+    private bool _chestIsfilled = false;
 
     private void Start()
     {
@@ -24,10 +25,7 @@ public class ChestManager : MonoBehaviour
         InputReader.OnInteractEvent += HandleInteract;
         InputReader.OnPickEvent += HandleInteract;
 
-        if (_chestFiller != null)
-        {
-            _chestInventory.InitializeInventory(_chestFiller.ReturnSlots());
-        }
+  
     }
 
     private void OnDisable()
@@ -36,6 +34,14 @@ public class ChestManager : MonoBehaviour
         InputReader.OnPickEvent -= HandleInteract;
     }
 
+    private void Update()
+    {
+        if(!_neverOpenedBefore && !_chestIsfilled)
+        {
+            _chestIsfilled = true;
+            FillUpChest();  
+        }
+    }
 
     void HandleInteract()
     {
@@ -50,6 +56,7 @@ public class ChestManager : MonoBehaviour
         if (collision.gameObject.name == "Player") 
         {
             _canOpenChest = true;
+            _neverOpenedBefore = false;
            
         }        
     }
@@ -62,13 +69,17 @@ public class ChestManager : MonoBehaviour
             _canOpenChest=false;
         }
     }
-
+    private void FillUpChest()
+    {
+        if (_chestFiller != null)
+        {
+            _chestInventory.InitializeInventory(_chestFiller.ReturnSlots());
+        }
+    }
 
     private void OpenChest()
     {
         _chestCanvas.SetActive(true);
     }
-
-
 
 }
