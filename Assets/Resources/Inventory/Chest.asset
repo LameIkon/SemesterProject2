@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6dbd26130aaeeb469d02b103ecbc445, type: 3}
+  m_Name: Chest
+  m_EditorClassIdentifier: 
+  _ItemsDataBase: {fileID: 11400000, guid: 6aab6e98529b36a40aa4942653918f7e, type: 2}
+  _SavePath: 
+  _Container:
+    _Slots:
+    - _AllowedItems: 
+      _Item:
+        _ItemName: 
+        _ID: 0
+      _Amount: 5
+    - _AllowedItems: 
+      _Item:
+        _ItemName: 
+        _ID: 1
+      _Amount: 2
+    - _AllowedItems: 
+      _Item:
+        _ItemName: 
+        _ID: -1
+      _Amount: 0
+    - _AllowedItems: 
+      _Item:
+        _ItemName: 
+        _ID: -1
+      _Amount: 0
+    - _AllowedItems: 
+      _Item:
+        _ItemName: 
+        _ID: -1
+      _Amount: 0
+    - _AllowedItems: 
+      _Item:
+        _ItemName: 
+        _ID: -1
+      _Amount: 0
+  _InventoryFiller: {fileID: 11400000, guid: e74e3c51be8288c44b62073374ca6d1f, type: 2}

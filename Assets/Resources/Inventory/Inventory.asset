@@ -136,3 +136,4 @@ MonoBehaviour:
         _ItemName: 
         _ID: -1
       _Amount: 0
+  _InventoryFiller: {fileID: 0}

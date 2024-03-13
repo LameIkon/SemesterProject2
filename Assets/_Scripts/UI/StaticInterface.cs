@@ -25,9 +25,7 @@ public class StaticInterface : UserInterface
             AddEvent(obj, EventTriggerType.EndDrag, delegate { OnDragEnd(obj); });
             AddEvent(obj, EventTriggerType.Drag, delegate { OnDrag(obj); });
             _Inventory.GetSlots[i]._SlotDisplay = obj;
-            _SlotsOnInterface.Add(obj, _Inventory.GetSlots[i]);
-
-            
+            _SlotsOnInterface.Add(obj, _Inventory.GetSlots[i]);            
             
         }
     }

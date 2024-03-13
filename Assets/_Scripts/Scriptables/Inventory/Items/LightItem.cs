@@ -28,6 +28,8 @@ public class LightItem : ItemObject
             _light = Instantiate(_lanternPrefab, _Player.transform);
             _light.transform.localPosition = _lightPosition;
 
+
+
         }       
     }
 

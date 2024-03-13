@@ -17,8 +17,23 @@ public class InventoryObject : ScriptableObject
     public string _SavePath;
     public Inventory _Container;
     public InventorySlot[] GetSlots { get { return _Container._Slots; } }
+    // public ChestFiller _InventoryFiller;
 
+    public void InitializeInventory (InventorySlot[] slots)
+    {
+        for (int i = 0; i < slots.Length; i++)
+        {
+            AddItem(slots[i]._Item, slots[i]._Amount);
+        }
+    }
 
+    //private void OnEnable()
+    //{
+    //    if(_InventoryFiller != null)
+    //    {
+    //        InitializeInventory(_InventoryFiller.ReturnSlots());
+    //    }
+    //}
 
     public bool AddItem (Item item, int amount)
     {
