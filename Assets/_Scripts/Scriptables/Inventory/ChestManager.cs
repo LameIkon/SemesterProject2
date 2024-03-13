@@ -6,17 +6,34 @@ using UnityEngine;
 public class ChestManager : MonoBehaviour
 {
     [SerializeField] private GameObject _chestCanvas;
-    [SerializeField] private InventoryObject _chestInventory;
+    private InventoryObject _chestInventory;
     [SerializeField] private ChestFiller _chestFiller;
+    private StaticInterface _chestInterface;
+    
 
     private bool _canOpenChest = false;
-    private bool _neverOpenedBefore = true;
     private bool _chestIsfilled = false;
 
     private void Start()
-    {
+    { 
+
+        _chestInventory = ScriptableObject.CreateInstance<InventoryObject>();
+        _chestInterface = _chestCanvas.GetComponent<StaticInterface>();
+        _chestInterface._Inventory = _chestInventory;
+
+
         _chestCanvas.SetActive(false);
+
+        if (!_chestIsfilled)
+        {
+            _chestIsfilled = true;
+            FillUpChest();
+        }
+
+        
     }
+
+
 
     void OnEnable()
     {       
@@ -30,14 +47,6 @@ public class ChestManager : MonoBehaviour
         InputReader.OnPickEvent -= HandleInteract;
     }
 
-    private void Update()
-    {
-        if(!_neverOpenedBefore && !_chestIsfilled)
-        {
-            _chestIsfilled = true;
-            FillUpChest();  
-        }
-    }
 
     void HandleInteract()
     {
@@ -52,7 +61,7 @@ public class ChestManager : MonoBehaviour
         if (collision.gameObject.name == "Player") 
         {
             _canOpenChest = true;
-            _neverOpenedBefore = false;
+           
            
         }        
     }

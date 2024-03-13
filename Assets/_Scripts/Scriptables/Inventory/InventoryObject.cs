@@ -17,6 +17,8 @@ public class InventoryObject : ScriptableObject
     public string _SavePath;
     public Inventory _Container;
     public InventorySlot[] GetSlots { get { return _Container._Slots; } }
+    // public InventorySlot[] SetSlots { set; private get; }
+
     // public ChestFiller _InventoryFiller;
 
     public void InitializeInventory (InventorySlot[] slots)
