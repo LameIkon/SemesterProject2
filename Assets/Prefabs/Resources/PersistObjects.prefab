@@ -2941,21 +2941,9 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 3164609379974477179}
     - target: {fileID: 7071212026655611817, guid: 5f68667c624044144aaece0f732353f6, type: 3}
-      propertyPath: _playerMaxSpeed
-      value: 
-      objectReference: {fileID: 11400000, guid: e7e9492c6772eff409146c465b7df292, type: 2}
-    - target: {fileID: 7071212026655611817, guid: 5f68667c624044144aaece0f732353f6, type: 3}
-      propertyPath: _playerMinSpeed
-      value: 
-      objectReference: {fileID: 11400000, guid: c2b2a737c49715042ad371b698aaf08c, type: 2}
-    - target: {fileID: 7071212026655611817, guid: 5f68667c624044144aaece0f732353f6, type: 3}
       propertyPath: _blizzardFogEffect
       value: 
       objectReference: {fileID: 8794226987472724107}
-    - target: {fileID: 7071212026655611817, guid: 5f68667c624044144aaece0f732353f6, type: 3}
-      propertyPath: _CurrentOutsideTemperature
-      value: 
-      objectReference: {fileID: 11400000, guid: 933760dd8b0e27f4c8a5d03d9d6a0547, type: 2}
     - target: {fileID: 8338497903177906760, guid: 5f68667c624044144aaece0f732353f6, type: 3}
       propertyPath: m_Name
       value: WeatherManager

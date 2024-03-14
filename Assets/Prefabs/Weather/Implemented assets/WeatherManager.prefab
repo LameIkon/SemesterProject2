@@ -55,6 +55,13 @@ MonoBehaviour:
   _blizzardTemp: -45
   _snowTemp: -35
   _fogTemp: -20
-  _IsBlizzard: 0
-  _IsSnow: 0
-  _IsFog: 0
+  _CurrentOutsideTemperature: {fileID: 11400000, guid: 933760dd8b0e27f4c8a5d03d9d6a0547, type: 2}
+  _playerMaxSpeed: {fileID: 11400000, guid: e7e9492c6772eff409146c465b7df292, type: 2}
+  _playerMinSpeed: {fileID: 11400000, guid: c2b2a737c49715042ad371b698aaf08c, type: 2}
+  _blizzardSpeedDebuff: 0.5
+  _snowSpeedDebuff: 0.15
+  _fogSpeedDebuff: 0.5
+  _defaultStaminaRegen: 5
+  _blizzardStaminaRegen: 50
+  _snowStaminaRegen: 15
+  _fogStaminaRegen: 5

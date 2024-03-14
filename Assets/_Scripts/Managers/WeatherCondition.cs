@@ -26,7 +26,7 @@ public class WeatherCondition : MonoBehaviour
     [Header("Temperatures")]
     [SerializeField] private float _defaultTemp = -15f; // Default temperature without any weather conditions
     [Space(10f)]
-    [SerializeField] private float _blizzardTemp = -45f; // Temperature in a blizzard
+    [SerializeField] private float _blizzardTemp = -450f; // Temperature in a blizzard
     [SerializeField] private float _snowTemp = -35f; // temperature in a snow weather
     [SerializeField] private float _fogTemp = -25f; // temperature in a fog
 
