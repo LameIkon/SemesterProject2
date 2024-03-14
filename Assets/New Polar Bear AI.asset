@@ -16,3 +16,4 @@ MonoBehaviour:
     MinValue: 0.5
     MaxValue: 0.8
   _aggroRange: 2
+  _damage: 10

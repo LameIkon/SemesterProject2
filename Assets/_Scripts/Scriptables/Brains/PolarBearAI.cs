@@ -10,6 +10,7 @@ public class PolarBearAI : BrainAI
     // [SerializeField] private RangedFloat _fireTime;
     [SerializeField] private RangedFloat _waitBetweenWalk;
     [SerializeField] private int _aggroRange;
+    [SerializeField] private float _damage;
     
 
 
@@ -66,18 +67,32 @@ public class PolarBearAI : BrainAI
             Vector3 vectorBetween = targetPosition - ownPosition;
             Vector3 unitVectorBetween = (vectorBetween).normalized;
 
-
-            if (vectorBetween.x > _aggroVector.x || vectorBetween.x < -_aggroVector.x && vectorBetween.y > _aggroVector.y || vectorBetween.y < -_aggroVector.y)
+           
+            if (vectorBetween == unitVectorBetween) 
             {
-                WalkRandom();
+                //Debug.Log((ownPosition + 1.2f * unitVectorBetween));
+                Collider2D[] hits = Physics2D.OverlapBoxAll((ownPosition + 1.2f*unitVectorBetween), Vector2.one, 0f);
+                foreach (var hit in hits) 
+                {
+                    hit.GetComponent<IDamageable>()?.TakeDamage(_damage);
+                }
             }
-            else
-            {
+            else 
                 Walk(GiveDirectionTowardsPlayer(unitVectorBetween), brain);
-            }
+
+
+
+            //if (vectorBetween.x > _aggroVector.x || vectorBetween.x < -_aggroVector.x && vectorBetween.y > _aggroVector.y || vectorBetween.y < -_aggroVector.y)
+            //{
+            //    WalkRandom();
+            //}
+            //else
+            //{
+            //}
         }
 
     }
+
 
     private void WalkRandom() 
     {
