@@ -14,7 +14,7 @@ public abstract class UserInterface: MonoBehaviour
 {
     
     public InventoryObject _Inventory;
-  
+
 
     public Dictionary<GameObject, InventorySlot> _SlotsOnInterface = new Dictionary<GameObject, InventorySlot>();
 

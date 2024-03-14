@@ -138,6 +138,7 @@ MonoBehaviour:
   _whatStopsMovement:
   - serializedVersion: 2
     m_Bits: 64
+  _stamina: {fileID: 11400000, guid: c3d7f87802b2aa447a728af33e442d66, type: 2}
 --- !u!50 &2218026908373558036
 Rigidbody2D:
   serializedVersion: 4

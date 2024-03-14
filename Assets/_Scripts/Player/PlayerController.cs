@@ -83,7 +83,6 @@ public class PlayerController : MovementController
     void HandleRunCancled() 
     {
         SetSpeed(_speedReference.GetMinValue());
-        _moveSpeed = _speedReference.GetMinValue();
     } 
     #endregion
 

@@ -13,7 +13,7 @@ using Image = UnityEngine.UI.Image;
 [CreateAssetMenu(fileName = "New Inventory", menuName = "Iventory System/Inventory")]
 public class InventoryObject : ScriptableObject
 {
-    public ItemDatabaseObject _ItemsDataBase;    
+    public ItemDatabaseObject _ItemsDataBase;
     public string _SavePath;
     public Inventory _Container;
     public InventorySlot[] GetSlots { get { return _Container._Slots; } }
@@ -21,8 +21,10 @@ public class InventoryObject : ScriptableObject
 
     // public ChestFiller _InventoryFiller;
 
-    public void InitializeInventory (InventorySlot[] slots)
+    public void InitializeInventory(InventorySlot[] slots, ItemDatabaseObject database, Inventory inventory)
     {
+        _ItemsDataBase = database;
+
         for (int i = 0; i < slots.Length; i++)
         {
             AddItem(slots[i]._Item, slots[i]._Amount);
@@ -165,8 +167,18 @@ public class InventoryObject : ScriptableObject
 [System.Serializable]
 public class Inventory
 {
-    public InventorySlot[] _Slots = new InventorySlot[24];
+    public InventorySlot[] _Slots;
+    //= new InventorySlot[24];
 
+    public Inventory(InventorySlot[] slots)
+    {
+        _Slots = slots;
+    }
+
+    public Inventory() 
+    {
+        _Slots = new InventorySlot[24];
+    }
     public void Clear()
     {
         for (int i = 0; i < _Slots.Length; i++)

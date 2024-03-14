@@ -4,7 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class GameManager : MonoBehaviour
+public class GameManager : PersistentSingleton<GameManager>
 {
     private InputReader _inputs; 
 
@@ -12,8 +12,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject _inventoryMenu;
 
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         if (_inputs == null) 
         {
             _inputs = ScriptableObject.CreateInstance<InputReader>();

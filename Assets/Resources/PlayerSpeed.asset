@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maniputatedValue: {fileID: 0}
   _maxValue:
-    UseConstant: 1
+    UseConstant: 0
     ConstantValue: 6.5
-    Variable: {fileID: 0}
+    Variable: {fileID: 11400000, guid: e7e9492c6772eff409146c465b7df292, type: 2}
   _minValue:
-    UseConstant: 1
+    UseConstant: 0
     ConstantValue: 4
-    Variable: {fileID: 0}
+    Variable: {fileID: 11400000, guid: c2b2a737c49715042ad371b698aaf08c, type: 2}

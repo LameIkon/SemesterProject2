@@ -267,17 +267,6 @@
                 },
                 {
                     "name": "",
-                    "id": "a0ee5c42-a4d4-4cee-acfc-a9d5efd01706",
-                    "path": "<Keyboard>/numpadEnter",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Interact",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "7431d3fc-c0f2-499e-9011-fb5585148cc9",
                     "path": "<Keyboard>/escape",
                     "interactions": "",
@@ -651,17 +640,6 @@
                     "name": "",
                     "id": "cd7617f6-7d48-44de-b80d-0d4bddc1d30c",
                     "path": "<Keyboard>/enter",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Pick",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "0776fb37-dd20-4ee4-85b0-5851d7ede45c",
-                    "path": "<Keyboard>/numpadEnter",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

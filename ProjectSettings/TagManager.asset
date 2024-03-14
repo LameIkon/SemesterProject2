@@ -6,6 +6,7 @@ TagManager:
   tags:
   - PlayerLight
   - InventoryUI
+  - Lantern
   layers:
   - Default
   - TransparentFX

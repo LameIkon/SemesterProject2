@@ -62,11 +62,12 @@ public class ToolbarManager : MonoBehaviour
 
     public void UseFoodInSlot()
     {
-        var itemInSlot = _toolbarInventory.GetSlots[_selectedSlot];
         if (_selectedSlot < 0)
         {
             return; 
         }
+
+        var itemInSlot = _toolbarInventory.GetSlots[_selectedSlot];
       
         if (itemInSlot.ItemObject != null && itemInSlot.ItemObject._ItemType == ItemType.Food) //checks that there is an item object in the slot
         {
@@ -85,20 +86,20 @@ public class ToolbarManager : MonoBehaviour
 
     public void UseLightInSlot()
     {
-        var itemInSlot = _toolbarInventory.GetSlots[_selectedSlot];
        
-
         if (_selectedSlot < 0)
         {
             return;
         }
 
+        var itemInSlot = _toolbarInventory.GetSlots[_selectedSlot];
 
         if (itemInSlot.ItemObject != null && itemInSlot.ItemObject._ItemType == ItemType.Light && !_lightIsActive)
         {
             itemInSlot.ItemObject.Action();
             _saveLightItemIndex = _selectedSlot;
             _lightIsActive = true;
+            _lantern = GameObject.FindGameObjectWithTag("Lantern");
         }
 
         else if (_lightIsActive)
@@ -113,15 +114,16 @@ public class ToolbarManager : MonoBehaviour
 
     public void DisableLight(int i)
     {
-        if (_selectedSlot < 0)
+        if (_selectedSlot < 0 ||  _lantern == null)
         {
             return;
         }
 
-
+                
+        
         if (i != _saveLightItemIndex)
         {
-            //_toolbarInventory.GetSlots[saveLightItemIndex].ItemObject.DisableAction();
+            _lightIsActive = false;
             _lantern.SetActive(false);
         }
     }

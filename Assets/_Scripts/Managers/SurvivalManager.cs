@@ -161,8 +161,6 @@ public class SurvivalManager : MonoBehaviour, IDamageable, IFreezeable, IStarvea
 
     private float TemperatureChecker()
     {
-            _outSideTemp.ConstantValue = WeatherCondition._CurrentOutsideTemperature; // Checks the current temperature outside
-
 
         if (_heatSource <= 0 && ColdResChecker())
         {

@@ -51,10 +51,10 @@ MonoBehaviour:
   _blizzardFogEffect: {fileID: 0}
   _snowEffect: {fileID: 0}
   _fogEffect: {fileID: 0}
-  _defaultTemp: -20
+  _defaultTemp: -15
   _blizzardTemp: -45
   _snowTemp: -35
-  _fogTemp: -25
+  _fogTemp: -20
   _IsBlizzard: 0
   _IsSnow: 0
   _IsFog: 0

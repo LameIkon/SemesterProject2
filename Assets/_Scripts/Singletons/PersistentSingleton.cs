@@ -3,7 +3,7 @@ using UnityEngine;
 [ HelpURL("https://www.youtube.com/watch?v=LFOXge7Ak3E")]
 public class PersistentSingleton<T> : MonoBehaviour where T : Component
 {
-    private bool _autoUnparentOnAwake = true;
+    private bool  _autoUnparentOnAwake = true;
 
     protected static T _instance;
 

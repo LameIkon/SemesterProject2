@@ -3,9 +3,8 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SceneSwapManager : MonoBehaviour
+public class SceneSwapManager : Singleton<SceneSwapManager>
 {
-    public static SceneSwapManager _Instance;
     private static bool _loadFromDoor;
     private GameObject _player;
     private Collider2D _playerCol;
@@ -13,12 +12,9 @@ public class SceneSwapManager : MonoBehaviour
     private Vector3 _playerSpawnPosition;  
     private DoorTriggerInteraction.DoorToSpawnAt _doorToSpawnTo;
 
-    private void Awake()
+    protected override void Awake()
     {
-        if (_Instance == null)
-        {
-            _Instance = this;
-        }
+        base.Awake();
         _player = GameObject.FindGameObjectWithTag("Player");
         _playerCol = _player.GetComponent<Collider2D>();
         
