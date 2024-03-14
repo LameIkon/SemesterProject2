@@ -11,7 +11,8 @@ public class PolarBearAI : BrainAI
     [SerializeField] private RangedFloat _waitBetweenWalk;
     [SerializeField] private int _aggroRange;
     [SerializeField] private float _damage;
-    
+    [SerializeField] private float _attackRange;
+
 
 
     private const string _playerTag = "Player";
@@ -27,7 +28,7 @@ public class PolarBearAI : BrainAI
         brain.Remember(_stateTimeout, Random.Range(_waitBetweenWalk.MinValue, _waitBetweenWalk.MaxValue));
     }
 
-    private MovementController _move; 
+    private MovementController _move;
 
     public override void Think(AIThinker brain)
     {
@@ -44,7 +45,7 @@ public class PolarBearAI : BrainAI
             _move = brain.GetComponent<MovementController>();
         }
 
-        if (!target) 
+        if (!target)
         {
             //target = GameObject
             //            .FindGameObjectsWithTag("Player")
@@ -67,17 +68,17 @@ public class PolarBearAI : BrainAI
             Vector3 vectorBetween = targetPosition - ownPosition;
             Vector3 unitVectorBetween = (vectorBetween).normalized;
 
-           
-            if (vectorBetween == unitVectorBetween) 
+
+            if (vectorBetween == _attackRange * unitVectorBetween)
             {
-                //Debug.Log((ownPosition + 1.2f * unitVectorBetween));
-                Collider2D[] hits = Physics2D.OverlapBoxAll((ownPosition + 1.2f*unitVectorBetween), Vector2.one, 0f);
-                foreach (var hit in hits) 
+                Debug.Log((ownPosition + _attackRange * unitVectorBetween));
+                Collider2D[] hits = Physics2D.OverlapBoxAll((ownPosition + _attackRange * unitVectorBetween), _attackRange * Vector2.one, 0f);
+                foreach (var hit in hits)
                 {
                     hit.GetComponent<IDamageable>()?.TakeDamage(_damage);
                 }
             }
-            else 
+            else
                 Walk(GiveDirectionTowardsPlayer(unitVectorBetween), brain);
 
 
@@ -94,12 +95,12 @@ public class PolarBearAI : BrainAI
     }
 
 
-    private void WalkRandom() 
+    private void WalkRandom()
     {
-            _move.Move(new Vector3(Random.Range(-1, 2), Random.Range(-1, 2), 0));
+        _move.Move(new Vector3(Random.Range(-1, 2), Random.Range(-1, 2), 0));
     }
 
-    private void Walk(Directions direction, AIThinker brain) 
+    private void Walk(Directions direction, AIThinker brain)
     {
         switch (direction)
         {
@@ -243,6 +244,28 @@ public class PolarBearAI : BrainAI
         brain.Remember(_stateTimeout, Random.Range(_waitBetweenWalk.MinValue, _waitBetweenWalk.MaxValue));
     }
 
+
+    //Look at this, this is coursing bugs
+
+    public bool V3LessThanEqual(Vector3 v1, Vector3 v2) 
+    {
+        if (v1.x <= v2.x && v1.y <= v2.y && v1.z <= v2.z)
+        {
+            return true;
+        }
+        else
+            return false;
+    }
+
+    public bool V3GreaterThanEqual(Vector3 v1, Vector3 v2) 
+    {
+        if (v1.x >= v2.x && v1.y >= v2.y && v1.z >= v2.z)
+        {
+            return true;
+        }
+        else
+            return false;
+    }
 
     /*
                 switch (GiveDirection(dir))

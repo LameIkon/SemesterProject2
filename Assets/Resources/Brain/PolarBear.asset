@@ -10,10 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6e4d3505e4a1ddc4d8d111a1465a2613, type: 3}
-  m_Name: New Polar Bear AI
+  m_Name: PolarBear
   m_EditorClassIdentifier: 
   _waitBetweenWalk:
     MinValue: 0.5
     MaxValue: 0.8
   _aggroRange: 2
   _damage: 10
+  _attackRange: 3
