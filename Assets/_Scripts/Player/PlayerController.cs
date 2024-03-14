@@ -1,12 +1,13 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerController : MovementController
 {
-
     private Vector2 _moveVector;
-
 
     private void OnEnable()
     {
@@ -73,9 +74,18 @@ public class PlayerController : MovementController
     void HandleRunCancled() 
     {
         _moveSpeed = _speedReference.GetMinValue();
-    }
-
-
+    } 
     #endregion
 
+    public static void DeactivatePlayerControls()
+    {
+        // Kode til at deaktivere movement
+    }
+    
+    public static void ActivatePlayerControls()
+    {
+        // Kode til at aktivere movement
+    }
 }
+
+
