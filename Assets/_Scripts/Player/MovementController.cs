@@ -1,3 +1,4 @@
+using UnityEditor.Rendering;
 using UnityEngine;
 
 public class MovementController : MonoBehaviour
@@ -11,18 +12,24 @@ public class MovementController : MonoBehaviour
     [SerializeField, Tooltip("Select what layers should block movement")]
     LayerMask[] _whatStopsMovement; // This is made into an array as the layers that stop Movement should not change during runtime, therefore it is redundat to make it a List
 
-
+    [SerializeField] private float _currentSpeed;
     void Awake()
     {
         _movePoint.parent = null; //detachs the MovePoint as a child of player. Not acutally needed. 
-        _moveSpeed = _speedReference.GetMinValue(); // Sets the walking speed 
+        _moveSpeed = _speedReference.GetMinValue(); // Sets the walking speed
+        _currentSpeed = _moveSpeed;
+
     }
 
 
 
     protected virtual void FixedUpdate() 
     {
-        transform.position = Vector3.MoveTowards(transform.position, _movePoint.position, _moveSpeed * Time.fixedDeltaTime); // this "transforms our position to move towards the new point
+
+        _currentSpeed = _moveSpeed - (_moveSpeed * WeatherCondition._MovementSpeedDebuff / 100);
+        
+       
+        transform.position = Vector3.MoveTowards(transform.position, _movePoint.position, _currentSpeed * Time.fixedDeltaTime); // this "transforms our position to move towards the new point
     }
 
     public void Move(Vector3 direction)

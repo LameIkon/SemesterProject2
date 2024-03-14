@@ -8,6 +8,7 @@ public class PlayerController : MovementController
     private Vector2 _moveVector;
 
 
+
     private void OnEnable()
     {
         InputReader.OnMoveEvent += HandleMove;
@@ -40,6 +41,8 @@ public class PlayerController : MovementController
     {
 
         // Because the inputs are normalized we need to set the values to 1 for the move system to work properly
+         //_moveSpeed = _moveSpeed -(_moveSpeed*WeatherCondition._CurrentOutsideTemperature/100);
+
 
         if (dir.x > .5f)
         {
@@ -68,11 +71,13 @@ public class PlayerController : MovementController
     void HandleRunStart() 
     {
         _moveSpeed = _speedReference.GetMaxValue();
+        //_moveSpeed = _moveSpeed - (_moveSpeed * WeatherCondition._MovementSpeedDebuff / 100);
     }
 
     void HandleRunCancled() 
     {
         _moveSpeed = _speedReference.GetMinValue();
+        //_moveSpeed = _moveSpeed - (_moveSpeed * WeatherCondition._MovementSpeedDebuff / 100);
     }
 
 

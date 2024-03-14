@@ -17,9 +17,14 @@ public class WeatherCondition : MonoBehaviour
     [SerializeField] private ParticleSystem _snowEffect;
     [SerializeField] private VisualEffect _fogEffect;
 
+    [Header("Weather Checkers")] // Currently not being used by anything
+    public static bool _IsBlizzard;
+    public static bool _IsSnow;
+    public static bool _IsFog; 
 
-    [Header(" Temperatures")]
-    [SerializeField] private float _defaultTemp = -15f; // defauly temperature without any weather conditions
+    [Space (10f)]   
+    [Header("Temperatures")]
+    [SerializeField] private float _defaultTemp = -15f; // Default temperature without any weather conditions
     [Space (10f)]        
     [SerializeField] private float _blizzardTemp = -45f; // Temperature in a blizzard
     [SerializeField] private float _snowTemp = -35f; // temperature in a snow weather
@@ -27,27 +32,32 @@ public class WeatherCondition : MonoBehaviour
 
     public static float _CurrentOutsideTemperature; // This is the current temperature. Used to store the temperatures
 
+    [Header("Movement Speed debuff")]
+    [SerializeField] private float _defaultSpeed = 0f; // Default speed without any weather conditions
+    [Space (10f)]        
+    [SerializeField] private float _blizzardSpeedDebuff = 50f; // Speed% in a blizzard
+    [SerializeField] private float _snowSpeedDebuff = 15f; // Speed% in a snow weather
+    [SerializeField] private float _fogSpeedDebuff = 5f; // Speed% in a fog
 
+    public static float _MovementSpeedDebuff = 0f; // Used in other scripts to impact a movement debuff. Consider this as percantage
 
-
-    [Header("Weather Checkers")] // Currently not being used by anything
-    public bool _IsBlizzard;
-    public bool _IsSnow;
-    public bool _IsFog; 
+    [Header("Stamina Regen")]
+    [SerializeField] private float _defaultStaminaRegen = 5f; // Default stamina regen without any weather conditions
+    [Space (10f)]        
+    [SerializeField] private float _blizzardStaminaRegen = 50f; // Regen in a blizzard
+    [SerializeField] private float _snowStaminaRegen = 15f; // Regen in a snow weather
+    [SerializeField] private float _fogStaminaRegen = 5f; // Regen in a fog
 
     private int _timeBetweenMin = 100;
     private int _timeBetweenMax = 200;
     private bool _isChoosingWeather;
     private bool _canChooseWeather; // Used to check for certain conditions, like being inside a house. 
 
-    //[SerializeField] private FloatReferencer _playerSpeed;
 
 
     void Awake()
     {
         _CurrentOutsideTemperature = _defaultTemp; // Set current temperature to default
-
-        //_playerSpeed.SetValue(10);
     }
 
     // Start is called before the first frame update
@@ -110,23 +120,6 @@ public class WeatherCondition : MonoBehaviour
         //Timer();
     }
 
-    //void Timer()
-    //{
-    //    if (!_isChoosingWeather)
-    //    {
-    //        _isChoosingWeather = true;
-    //        //_counter = Random.Range(_timeBetweenMin, _timeBetweenMax);
-    //        StartCoroutine(ChangeWeather());
-    //    }
-    //}
-
-    //IEnumerator ChangeWeather()
-    //{
-    //    Blizzard();
-    //    yield return new WaitForSeconds(_counter); // Amount of time for the ongoing weather
-    //    ResetWeather(); // Reset
-    //    _isChoosingWeather = false;
-    //}
 
     void Blizzard()
     {
@@ -141,7 +134,9 @@ public class WeatherCondition : MonoBehaviour
             _blizzardFogEffect.Play(); // Start Fog effect
             _IsBlizzard = true;
 
-            _CurrentOutsideTemperature = _blizzardTemp;
+            _CurrentOutsideTemperature = _blizzardTemp; // Change current temperature
+
+            _MovementSpeedDebuff = _blizzardSpeedDebuff; // Give movement speed debuff
         }
     }
 
@@ -157,7 +152,9 @@ public class WeatherCondition : MonoBehaviour
             _fogEffect.Play();
             _IsFog = true;
 
-            _CurrentOutsideTemperature = _fogTemp;
+            _CurrentOutsideTemperature = _fogTemp; // Change current temperature
+
+            _MovementSpeedDebuff = _fogSpeedDebuff; // Give movement speed debuff
         }
     }
 
@@ -173,7 +170,9 @@ public class WeatherCondition : MonoBehaviour
             _snowEffect.Play();
             _IsSnow = true;
 
-            _CurrentOutsideTemperature = _snowTemp;
+            _CurrentOutsideTemperature = _snowTemp; // Change current temperature
+
+            _MovementSpeedDebuff = _snowSpeedDebuff; // Give movement speed debuff
         }
     }
 
@@ -192,5 +191,8 @@ public class WeatherCondition : MonoBehaviour
 
         // Reset to default temperature
         _CurrentOutsideTemperature = _defaultTemp;
+
+        // Reset to default movement speed
+        _MovementSpeedDebuff = _defaultSpeed;
     }
 }
