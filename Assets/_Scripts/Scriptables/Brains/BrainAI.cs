@@ -19,5 +19,6 @@ public enum Directions
     NE,
     NW,
     SE,
-    SW
+    SW,
+    None
 }

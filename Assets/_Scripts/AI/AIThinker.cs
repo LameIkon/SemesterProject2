@@ -8,19 +8,19 @@ public class AIThinker : MonoBehaviour
 {
     [SerializeField] private BrainAI _brain;
 
-    private Dictionary<string, object> memory;
+    private Dictionary<string, object> _memory;
 
     public T Remember<T>(string key)
     {
         object result;
-        if (!memory.TryGetValue(key, out result))
+        if (!_memory.TryGetValue(key, out result))
             return default(T);
         return (T)result;
     }
 
     public void Remember<T>(string key, T value)
     {
-        memory[key] = value;
+        _memory[key] = value;
     }
 
 
@@ -32,7 +32,7 @@ public class AIThinker : MonoBehaviour
             return;
         }
 
-        memory = new Dictionary<string, object>();
+        _memory = new Dictionary<string, object>();
         _brain.Initialize(this);
     }
 

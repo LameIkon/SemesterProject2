@@ -15,6 +15,7 @@ public class RandomWalkAI : BrainAI
     private const string _walkState = "walkState";
     // private const string _state = "state";
 
+    private MovementController _move;
 
 
     public override void Initialize(AIThinker brain)
@@ -33,12 +34,15 @@ public class RandomWalkAI : BrainAI
 
         var state = brain.Remember<Directions>(_walkState);
 
-        var move = brain.GetComponent<MovementController>();
+        if (_move == null)
+        {
+            _move = brain.GetComponent<MovementController>();
+        }
 
         if (stateTimeout < 0)
         {
             SetTimeout(brain);
-            move.Move(new Vector3(Random.Range(-1, 2), Random.Range(-1, 2), 0));
+            _move.Move(new Vector3(Random.Range(-1, 2), Random.Range(-1, 2), 0));
 
         }
 

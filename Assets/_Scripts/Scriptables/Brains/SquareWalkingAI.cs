@@ -42,7 +42,6 @@ public class SquareWalkingAI : BrainAI
         if (stateTimeout < 0)
         {
             SetTimeout(brain);
-            Debug.Log(counter);
 
             switch (GiveDirection())
             {

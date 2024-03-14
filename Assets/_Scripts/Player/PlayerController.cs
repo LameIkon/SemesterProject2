@@ -8,6 +8,7 @@ using UnityEngine.InputSystem;
 public class PlayerController : MovementController
 {
     private Vector2 _moveVector;
+    [SerializeField] private FloatVariable _stamina;
 
     private void OnEnable()
     {
@@ -32,6 +33,11 @@ public class PlayerController : MovementController
             Move(_moveVector);
         }
 
+    }
+
+    private void SetSpeed(float speed) 
+    {
+        _moveSpeed = speed; 
     }
 
     #region EventHandlers
@@ -68,11 +74,15 @@ public class PlayerController : MovementController
 
     void HandleRunStart() 
     {
-        _moveSpeed = _speedReference.GetMaxValue();
+        if (_stamina.GetValue() > 0f) 
+        {
+            SetSpeed(_speedReference.GetMaxValue());
+        }
     }
 
     void HandleRunCancled() 
     {
+        SetSpeed(_speedReference.GetMinValue());
         _moveSpeed = _speedReference.GetMinValue();
     } 
     #endregion

@@ -134,6 +134,7 @@ public class SurvivalManager : MonoBehaviour, IDamageable, IFreezeable, IStarvea
         _healthPoint.SetValue(70);
         _hungerPoint.SetValue(100);
         _freezePoint.SetValue(100);
+        _staminaPoint.SetValue(100);
     }
 
 
