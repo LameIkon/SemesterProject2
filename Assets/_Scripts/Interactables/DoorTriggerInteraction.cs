@@ -19,6 +19,7 @@ public class DoorTriggerInteraction : TriggerInteractBase
     [Space(10f)] 
     [Header("This door")] 
     public DoorToSpawnAt _CurrentDoorPosition;
+    
     public override void Interact()
     {
         SceneSwapManager.SwapSceneFromDoorUse(_sceneToLoad, _doorToSpawnTo);

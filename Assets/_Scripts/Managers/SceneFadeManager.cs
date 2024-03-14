@@ -15,7 +15,10 @@ public class SceneFadeManager : MonoBehaviour
     
     private void Awake()
     {
-        if (_Instance == null) { _Instance = this; } 
+        if (_Instance == null)
+        {
+            _Instance = this;
+        } 
         _fadeOutStartColor.a = 0f;
     }
 

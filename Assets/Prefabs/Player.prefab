@@ -298,12 +298,20 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5424926233369021202, guid: cd7dfcc1d52457a40bbee757da76f392, type: 3}
+      propertyPath: m_FalloffIntensity
+      value: 0.816
+      objectReference: {fileID: 0}
+    - target: {fileID: 5424926233369021202, guid: cd7dfcc1d52457a40bbee757da76f392, type: 3}
       propertyPath: m_NormalMapQuality
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5424926233369021202, guid: cd7dfcc1d52457a40bbee757da76f392, type: 3}
       propertyPath: m_NormalMapDistance
       value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 5424926233369021202, guid: cd7dfcc1d52457a40bbee757da76f392, type: 3}
+      propertyPath: m_PointLightOuterAngle
+      value: 108.139336
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
