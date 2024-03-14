@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 
@@ -15,6 +16,21 @@ public class ButtonInteraction : MonoBehaviour
     {
         currentIndex = -1;
         startedSelection = false;
+    }
+
+    private void OnEnable()
+    {
+        currentIndex = -1;
+        startedSelection = false;
+    }
+
+    private void OnDisable()
+    {
+        if (EventSystem.current != null) // Ensure no null reference when you exit the scene 
+        {
+            EventSystem.current.SetSelectedGameObject(null);
+        }
+        
     }
 
     // Update is called once per frame
