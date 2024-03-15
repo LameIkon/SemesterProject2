@@ -743,13 +743,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _staminaValue: {fileID: 11400000, guid: c3d7f87802b2aa447a728af33e442d66, type: 2}
   _staminaUseOnRun:
-    UseConstant: 1
+    UseConstant: 0
     ConstantValue: 0.2
-    Variable: {fileID: 0}
+    Variable: {fileID: 11400000, guid: cc49dbba9ef7b074598ddbeff2ff8bbc, type: 2}
   _staminaRegen:
-    UseConstant: 1
+    UseConstant: 0
     ConstantValue: 0.05
-    Variable: {fileID: 0}
+    Variable: {fileID: 11400000, guid: 546967a3e1f68a94d92f1f717d1d768d, type: 2}
   _maxStamina:
     UseConstant: 0
     ConstantValue: 0
