@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -34,7 +35,6 @@ public class GameManager : PersistentSingleton<GameManager>
         {
             _inventoryMenu.SetActive(false);
         }
-
 
         // Here we subscribe the events to the handlers
         InputReader.OnPauseEvent += HandlePause;

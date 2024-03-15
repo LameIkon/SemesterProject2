@@ -6,9 +6,9 @@ using System;
 public class InputReader : ScriptableObject, GameInput.IGameplayActions, GameInput.IUIActions
 {
 
-    private GameInput _gameInput;
+    public static GameInput _gameInput;
 
-    private bool _isUI = false;
+    public static bool _isUI = false;
 
 
     private void OnEnable() 
@@ -47,7 +47,7 @@ public class InputReader : ScriptableObject, GameInput.IGameplayActions, GameInp
 
     // These two methods switch the the layouts that are used
     
-    private void SetGameplay() 
+    public static void SetGameplay() 
     {
         _gameInput.UI.Disable();
         _gameInput.Gameplay.Enable();
@@ -127,6 +127,12 @@ public class InputReader : ScriptableObject, GameInput.IGameplayActions, GameInp
             SetGameplay(); // Important, here we switch to the Gameplay control scheme
         }
 
+    }
+
+    public static void OnResumeButton() // Called in PauseManager
+    {
+       _isUI = false;
+       SetGameplay();
     }
 
     public void OnInventoryClose(InputAction.CallbackContext context)

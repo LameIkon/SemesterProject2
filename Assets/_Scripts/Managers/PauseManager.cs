@@ -15,6 +15,8 @@ public class PauseManager : MonoBehaviour
     public GameObject PauseMenu;
     public GameObject Options;
 
+    //public static bool _CallInputReader;
+
     private void Start()
     {
         //initialize by setting the active page to the main menu.
@@ -55,6 +57,8 @@ public class PauseManager : MonoBehaviour
     public void ResumeButton()
     {
         gameManager.HandleResume(); // call the gameManager to close the pause screen
+        InputReader.OnResumeButton();
+
     }
 
     // change page 
