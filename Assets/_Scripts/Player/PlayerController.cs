@@ -32,7 +32,10 @@ public class PlayerController : MovementController
         {
             Move(_moveVector);
         }
-
+        if (_stamina.GetValue() <= 0f)
+        {
+            HandleRunCancled();
+        }
     }
 
     private void SetSpeed(float speed) 

@@ -746,6 +746,14 @@ MonoBehaviour:
     UseConstant: 1
     ConstantValue: 0.2
     Variable: {fileID: 0}
+  _staminaRegen:
+    UseConstant: 1
+    ConstantValue: 0.05
+    Variable: {fileID: 0}
+  _maxStamina:
+    UseConstant: 0
+    ConstantValue: 0
+    Variable: {fileID: 11400000, guid: 80e4c72db125bab448d3ce635c113a3d, type: 2}
 --- !u!1 &2629717339842938436
 GameObject:
   m_ObjectHideFlags: 0
@@ -3135,6 +3143,22 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6831859028144599906, guid: 48cc3c46621aa674db0e2ce4ce8a527f, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7291018795672212913, guid: 48cc3c46621aa674db0e2ce4ce8a527f, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7291018795672212913, guid: 48cc3c46621aa674db0e2ce4ce8a527f, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7291018795672212913, guid: 48cc3c46621aa674db0e2ce4ce8a527f, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7291018795672212913, guid: 48cc3c46621aa674db0e2ce4ce8a527f, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
