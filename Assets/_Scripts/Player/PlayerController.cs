@@ -32,7 +32,8 @@ public class PlayerController : MovementController
         {
             Move(_moveVector);
         }
-        if (_stamina.GetValue() <= 0f)
+
+        if (_stamina.GetValue() <= 0f) // Update if stamina reaches 0 to set Movement speed
         {
             HandleRunCancled();
         }

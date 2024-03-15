@@ -29,6 +29,7 @@ public class InputReader : ScriptableObject, GameInput.IGameplayActions, GameInp
 
     // The events that other scripts can subscribe to, for information for gameplay.
     public static event Action<Vector2> OnMoveEvent; // This sends a Vector2 along with the event
+    public static event Action OnMoveStopEvent;
     public static event Action OnInteractEvent; 
     public static event Action OnPauseEvent;
     public static event Action OnInventoryOpenEvent;
@@ -69,6 +70,14 @@ public class InputReader : ScriptableObject, GameInput.IGameplayActions, GameInp
     public void OnMove(InputAction.CallbackContext context)
     {
         OnMoveEvent?.Invoke(context.ReadValue<Vector2>()); // The context.ReadValue is used because the input is set to Value in the Input System, the OnMoveEvent will then invoke the Event with the Vector2
+    }
+
+    public void OnMoveStop(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+        {
+            OnMoveStopEvent?.Invoke();
+        }
     }
 
     public void OnInteract(InputAction.CallbackContext context)

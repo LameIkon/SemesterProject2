@@ -6,21 +6,21 @@ using UnityEngine.SceneManagement;
 public class PauseManager : MonoBehaviour
 {
     // current gameobject as active
-    private GameObject activePage;
-    [SerializeField] private GameManager gameManager;
+    private GameObject _activePage;
+    [SerializeField] private GameManager _gameManager;
 
-    private float transitionTime = 0; // change this depending if you want a transition
+    private float _transitionTime = 0; // change this depending if you want a transition
 
     //gameobjects to transition between
-    public GameObject PauseMenu;
-    public GameObject Options;
+    public GameObject _PauseMenu;
+    public GameObject _Options;
 
     //public static bool _CallInputReader;
 
     private void Start()
     {
         //initialize by setting the active page to the main menu.
-        activePage = PauseMenu;
+        _activePage = _PauseMenu;
     }
 
 
@@ -31,20 +31,20 @@ public class PauseManager : MonoBehaviour
         //if on mainScreen 
         if (PauseScreen)
         {
-            yield return new WaitForSeconds(transitionTime);
+            yield return new WaitForSeconds(_transitionTime);
             PauseScreen = false;
         }
         else if (!PauseScreen) //if not on mainScreen 
         {
-            yield return new WaitForSeconds(transitionTime);
+            yield return new WaitForSeconds(_transitionTime);
             PauseScreen = true;
         }
 
-        activePage.SetActive(false); //deactivate the current active page
+        _activePage.SetActive(false); //deactivate the current active page
         newPage.SetActive(true); //activate the new page
 
 
-        activePage = newPage; //the new active page is now considered the activePage
+        _activePage = newPage; //the new active page is now considered the activePage
     }
 
     /// <summary>
@@ -56,7 +56,7 @@ public class PauseManager : MonoBehaviour
 
     public void ResumeButton()
     {
-        gameManager.HandleResume(); // Call the gameManager to close the pause screen
+        _gameManager.HandleResume(); // Call the gameManager to close the pause screen
         InputReader.OnResumeButton(); // Call the InputReader to enable other UI again
 
     }
@@ -64,7 +64,7 @@ public class PauseManager : MonoBehaviour
     // change page 
     public void TransitiontoPage(GameObject newPage)
     {
-        if (newPage != activePage) // this might be reduntant: It checks if the page you want to go to is not the same page 
+        if (newPage != _activePage) // this might be reduntant: It checks if the page you want to go to is not the same page 
         {
             StartCoroutine(Transition(newPage));
         }

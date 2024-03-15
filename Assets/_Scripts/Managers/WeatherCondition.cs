@@ -42,12 +42,19 @@ public class WeatherCondition : MonoBehaviour
 
     public static float _MovementSpeedDebuff = 0f; // Used in other scripts to impact a movement debuff. Consider this as percantage
 
-    [Header("Stamina Regen")]
+    [Header("Stamina Regen")] // Weather effects will affect the amount of stamina you have and how much you gain
+    [SerializeField] private float _defaultMaxStamina = 5f; // Max stamina at default
     [SerializeField] private float _defaultStaminaRegen = 5f; // Default stamina regen without any weather conditions
     [Space(10f)]
+    [SerializeField] private float _blizzardMaxStamina = 50f; // Max stamina in a blizzard
     [SerializeField] private float _blizzardStaminaRegen = 50f; // Regen in a blizzard
+    [SerializeField] private float _snowMaxStamina = 15f; // Max stamina in a snow weather
     [SerializeField] private float _snowStaminaRegen = 15f; // Regen in a snow weather
+    [SerializeField] private float _fogMaxStamina = 5f; // Max stamina in a fog
     [SerializeField] private float _fogStaminaRegen = 5f; // Regen in a fog
+
+    [SerializeField] private FloatVariable _CurrentMaxStamina; // This is the current max stamina
+    [SerializeField] private FloatVariable _CurrentStaminaRegen; // This is the current stamina regen
 
     private int _timeBetweenMin = 100;
     private int _timeBetweenMax = 200;
@@ -142,6 +149,8 @@ public class WeatherCondition : MonoBehaviour
             _IsBlizzard = true;
 
             _CurrentOutsideTemperature.SetValue(_blizzardTemp); // Change current temperature
+            _CurrentMaxStamina.SetValue(_blizzardMaxStamina); // change current max stamina
+            _CurrentStaminaRegen.SetValue(_blizzardStaminaRegen); // change current stamina regen 
 
             //SetPlayerSpeed(_blizzardSpeedDebuff) ; // Give movement speed debuff
         }
@@ -160,6 +169,8 @@ public class WeatherCondition : MonoBehaviour
             _IsFog = true;
 
             _CurrentOutsideTemperature.SetValue(_fogTemp); // Change current temperature
+            _CurrentMaxStamina.SetValue(_fogMaxStamina); // change current max stamina
+            _CurrentStaminaRegen.SetValue(_fogStaminaRegen); // change current stamina regen 
 
             //SetPlayerSpeed(_fogSpeedDebuff); // Give movement speed debuff
         }
@@ -178,6 +189,8 @@ public class WeatherCondition : MonoBehaviour
             _IsSnow = true;
 
             _CurrentOutsideTemperature.SetValue(_snowTemp); // Change current temperature
+            _CurrentMaxStamina.SetValue(_snowMaxStamina); // change current max stamina
+            _CurrentStaminaRegen.SetValue(_snowStaminaRegen); // change current stamina regen 
 
             //SetPlayerSpeed(_snowSpeedDebuff); // Give movement speed debuff
         }
@@ -196,10 +209,12 @@ public class WeatherCondition : MonoBehaviour
         _IsSnow = false;
         _IsFog = false;
 
-        // Reset to default temperature
+        // Reset to default conditions
         _CurrentOutsideTemperature.SetValue(_defaultTemp);
+        _CurrentMaxStamina.SetValue(_defaultMaxStamina);
+        _CurrentStaminaRegen.SetValue(_defaultStaminaRegen);
 
         // Reset to default movement speed
-       //SetPlayerSpeed(1f);
+        //SetPlayerSpeed(1f);
     }
 }

@@ -9,35 +9,60 @@ public class RunManager : MonoBehaviour, ITireable
     [SerializeField] private FloatReference _staminaRegen;
     [SerializeField] private FloatReference _maxStamina;
 
-
+    private bool _isMoving;
+    private bool _isRunning;
+    private bool _checkOnce = true;
     void OnEnable() 
     {
-        InputReader.OnRunStartEvent += HandleRunStart;
+        InputReader.OnMoveEvent += MovingChecker;
+        InputReader.OnRunStartEvent += RunningChecker;
         InputReader.OnRunCancelEvent += HandleRunCancel;
     }
 
     void OnDisable() 
     {
-        InputReader.OnRunStartEvent -= HandleRunStart;
+        InputReader.OnMoveEvent -= MovingChecker;
+        InputReader.OnRunStartEvent -= RunningChecker;
         InputReader.OnRunCancelEvent -= HandleRunCancel;
     }
 
     Coroutine running;
     Coroutine regen;
-
-    void HandleRunStart() 
+    private void Update()
+    {
+        if (_isMoving && _isRunning && _checkOnce) // Only start running if you are moving and pressing run
+        {
+            StartRunning();
+            _checkOnce = false; // Ensure only 1 instance of the Coroutine
+        }
+    }
+    void StartRunning()
     {
         running = StartCoroutine(UseStamina());
-        if(regen != null) 
+        if (regen != null)
         {
             StopCoroutine(regen); // Stop regen when you start to run
         }
+    }
+    void RunningChecker() 
+    {
+        _isRunning = true; // You are now pressing run
+    }
+
+    void MovingChecker(Vector2 dir)
+    {
+        _isMoving = true; // You are now pressing move
     }
 
     void HandleRunCancel() 
     {
         StopCoroutine(running); 
         regen = StartCoroutine(RegenStamina()); // Start regen when you stop running
+        
+        // Reset all conditions
+        _isMoving = false;
+        _isRunning = false;
+        _checkOnce = true;
     }
 
 
@@ -53,14 +78,13 @@ public class RunManager : MonoBehaviour, ITireable
 
     private IEnumerator RegenStamina()
     {
-        Debug.Log("Regen");
         yield return new WaitForSeconds(3f); // Small delay before recovering stamina
-        while (_staminaValue.GetValue() <= _maxStamina) // while value is below max possible stamina
+        while (_staminaValue.GetValue() <= _maxStamina) // While value is below max possible stamina
         {
             GainStamina(_staminaRegen);
             yield return null;
         }
-        yield return null; // when reached max stop
+        yield return null; // Stop when reached max
     }
 
     public void LoseStamina(float amount)

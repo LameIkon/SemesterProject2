@@ -2031,9 +2031,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc71a4d87f087ae48ac9d6c1981262e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MainMenu: {fileID: 2100427273}
-  Options: {fileID: 501391647}
-  Credits: {fileID: 217138937}
+  _MainMenu: {fileID: 2100427273}
+  _Options: {fileID: 240546118}
+  _Credits: {fileID: 508734993}
 --- !u!1 &904313587
 GameObject:
   m_ObjectHideFlags: 0
@@ -3546,7 +3546,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: GAME NAME
+  m_text: FROSTBOUND
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 87f25fc2de03e9946b267b8df3e85fe6, type: 2}
   m_sharedMaterial: {fileID: 9054108129265998816, guid: 87f25fc2de03e9946b267b8df3e85fe6, type: 2}

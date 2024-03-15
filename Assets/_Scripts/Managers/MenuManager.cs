@@ -2,48 +2,47 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using static System.TimeZoneInfo;
 
 public class MenuManager : MonoBehaviour
 {
     // current gameobject as active
-    private GameObject activePage;
+    private GameObject _activePage;
 
-    private float transitionTime = 0; // change this depending if you want a transition
+    private float _transitionTime = 0; // change this depending if you want a transition
 
     //gameobjects to transition between
-    public GameObject MainMenu;
-    public GameObject Options;
-    public GameObject Credits;
+    public GameObject _MainMenu;
+    public GameObject _Options;
+    public GameObject _Credits;
 
     private void Start()
     {
         //initialize by setting the active page to the main menu.
-        activePage = MainMenu;
+        _activePage = _MainMenu;
     }
 
 
-    private bool mainScreen = true; //this will always know its the mainScreen since it starts on MainMenu
+    private bool _mainScreen = true; //this will always know its the mainScreen since it starts on MainMenu
 
     IEnumerator Transition(GameObject newPage)
     {
         //if on mainScreen 
-        if (mainScreen)
+        if (_mainScreen)
         {
-            yield return new WaitForSeconds(transitionTime);
-            mainScreen = false;
+            yield return new WaitForSeconds(_transitionTime);
+            _mainScreen = false;
         }
-        else if (!mainScreen) //if not on mainScreen 
+        else if (!_mainScreen) //if not on mainScreen 
         {
-            yield return new WaitForSeconds(transitionTime);
-            mainScreen = true;
+            yield return new WaitForSeconds(_transitionTime);
+            _mainScreen = true;
         }
 
-        activePage.SetActive(false); //deactivate the current active page
+        _activePage.SetActive(false); //deactivate the current active page
         newPage.SetActive(true); //activate the new page
 
 
-        activePage = newPage; //the new active page is now considered the activePage
+        _activePage = newPage; //the new active page is now considered the activePage
 
         //currentButtonInteraction.SetActive(false);
         //newButton.SetActive(true);
@@ -74,7 +73,7 @@ public class MenuManager : MonoBehaviour
     // change page 
     public void TransitiontoPage(GameObject newPage)
     {
-        if (newPage != activePage) // this might be reduntant: It checks if the page you want to go to is not the same page 
+        if (newPage != _activePage) // this might be reduntant: It checks if the page you want to go to is not the same page 
         {
             StartCoroutine(Transition(newPage));
         }
