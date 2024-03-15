@@ -741,7 +741,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ced527ffdceaf946962a7fd2a8288a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _staminaValue: {fileID: 11400000, guid: c3d7f87802b2aa447a728af33e442d66, type: 2}
+  _maxStaminaValue: {fileID: 11400000, guid: 80e4c72db125bab448d3ce635c113a3d, type: 2}
+  _staminaRegenValue:
+    UseConstant: 1
+    ConstantValue: 0.1
+    Variable: {fileID: 0}
   _staminaUseOnRun:
     UseConstant: 1
     ConstantValue: 0.2
@@ -1992,7 +1996,7 @@ Transform:
   m_GameObject: {fileID: 6444383724621754770}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 6.1473722, y: -3.9962525, z: -10.011621}
+  m_LocalPosition: {x: 4.1473722, y: -3.9962525, z: -10.011621}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3135,6 +3139,22 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6831859028144599906, guid: 48cc3c46621aa674db0e2ce4ce8a527f, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7291018795672212913, guid: 48cc3c46621aa674db0e2ce4ce8a527f, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7291018795672212913, guid: 48cc3c46621aa674db0e2ce4ce8a527f, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7291018795672212913, guid: 48cc3c46621aa674db0e2ce4ce8a527f, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7291018795672212913, guid: 48cc3c46621aa674db0e2ce4ce8a527f, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}

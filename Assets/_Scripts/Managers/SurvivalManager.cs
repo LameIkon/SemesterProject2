@@ -129,6 +129,7 @@ public class SurvivalManager : MonoBehaviour, IDamageable, IFreezeable, IStarvea
     }
 
 
+
     void Start()
     {
         _healthPoint.SetValue(70);
