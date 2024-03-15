@@ -66,16 +66,9 @@ public class MenuManager : MonoBehaviour
     //exit the game
     public void ExitButton()
     {
-        // only quits the editor if its the unity editor application
-        if(UnityEditor.EditorApplication.isPlaying == true)
-        {
-            UnityEditor.EditorApplication.isPlaying = false;
-        }
-        else
-        {
-            //when the game is not in the unity editor application quit with this method
-            Application.Quit();
-        }     
+        //when the game is not in the unity editor application quit with this method
+        Application.Quit();
+    
     }
 
     // change page 
