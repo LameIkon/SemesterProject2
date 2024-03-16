@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class RunManager : MonoBehaviour, ITireable
 {
@@ -9,9 +10,11 @@ public class RunManager : MonoBehaviour, ITireable
     [SerializeField] private FloatReference _staminaRegen;
     [SerializeField] private FloatReference _maxStamina;
 
-    private bool _isMoving;
+    //public static bool _isMoving;
     private bool _isRunning;
+    private bool _isMoving;
     private bool _checkOnce = true;
+    private bool _checkOnce1 = true;
     void OnEnable() 
     {
         InputReader.OnMoveEvent += MovingChecker;
@@ -35,6 +38,16 @@ public class RunManager : MonoBehaviour, ITireable
             StartRunning();
             _checkOnce = false; // Ensure only 1 instance of the Coroutine
         }
+        if (!_isMoving && !_checkOnce || !_isRunning && !_checkOnce)
+        {
+            _checkOnce = true;
+            if (running != null)
+            {
+                StopCoroutine(running);
+
+            }
+            regen = StartCoroutine(RegenStamina()); // Start regen when you stop running
+        }
     }
     void StartRunning()
     {
@@ -52,17 +65,16 @@ public class RunManager : MonoBehaviour, ITireable
     void MovingChecker(Vector2 dir)
     {
         _isMoving = true; // You are now pressing move
+
+        if (dir == Vector2.zero)
+        {
+            _isMoving = false; // you released pressing move
+        }
     }
 
     void HandleRunCancel() 
     {
-        StopCoroutine(running); 
-        regen = StartCoroutine(RegenStamina()); // Start regen when you stop running
-        
-        // Reset all conditions
-        _isMoving = false;
         _isRunning = false;
-        _checkOnce = true;
     }
 
 
