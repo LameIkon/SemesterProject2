@@ -72,6 +72,8 @@ public class WeatherCondition : MonoBehaviour
     void Awake()
     {
         _CurrentOutsideTemperature.SetValue(_defaultTemp); // Set current temperature to default
+        _CurrentStaminaUse.SetValue(_defaultStaminaUse); // Set current stamina use on run to default
+        _CurrentStaminaRegen.SetValue(_defaultStaminaRegen); // Set current stamina regen to default
     }
 
     // Start is called before the first frame update

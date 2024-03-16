@@ -14,7 +14,6 @@ public class RunManager : MonoBehaviour, ITireable
     private bool _isRunning;
     private bool _isMoving;
     private bool _checkOnce = true;
-    private bool _checkOnce1 = true;
     void OnEnable() 
     {
         InputReader.OnMoveEvent += MovingChecker;

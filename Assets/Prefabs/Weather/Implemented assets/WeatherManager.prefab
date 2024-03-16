@@ -61,13 +61,13 @@ MonoBehaviour:
   _blizzardSpeedDebuff: 0.5
   _snowSpeedDebuff: 0.15
   _fogSpeedDebuff: 0.5
-  _defaultStaminaUse: 0.2
+  _defaultStaminaUse: 0.075
   _defaultStaminaRegen: 0.05
-  _blizzardStaminaUse: 0.3
+  _blizzardStaminaUse: 0.15
   _blizzardStaminaRegen: 0.025
-  _snowStaminaUse: 0.22
+  _snowStaminaUse: 0.1
   _snowStaminaRegen: 0.4
-  _fogStaminaUse: 0.24
+  _fogStaminaUse: 0.8
   _fogStaminaRegen: 0.45
   _CurrentStaminaUse: {fileID: 11400000, guid: cc49dbba9ef7b074598ddbeff2ff8bbc, type: 2}
   _CurrentStaminaRegen: {fileID: 11400000, guid: 546967a3e1f68a94d92f1f717d1d768d, type: 2}
