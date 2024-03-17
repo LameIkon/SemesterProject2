@@ -36,7 +36,7 @@ public class CursorManager : MonoBehaviour
 
         if (hit.collider != null) 
         {
-            Debug.Log("Name Of Object: " + hit.collider.name);
+            //Debug.Log("Name Of Object: " + hit.collider.name);
         }
     }
     

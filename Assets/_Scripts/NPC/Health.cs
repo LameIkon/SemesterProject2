@@ -2,20 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NPCHealth : MonoBehaviour, IDamageable
+public class Health : MonoBehaviour, IDamageable
 {
     [SerializeField] private FloatReference _maxHealth;
     [SerializeField] private FloatVariable _health;
 
-    void Awake() 
+    protected virtual void Awake()
     {
-        _health = ScriptableObject.CreateInstance<FloatVariable>();
-        _health.SetValue(_maxHealth);
+        if (_health == null)
+        {
+            _health = ScriptableObject.CreateInstance<FloatVariable>();
+            _health.SetValue(_maxHealth);
+        }
+        
     }
 
     public void Die()
     {
-        Destroy(gameObject);        
+        //Destroy(gameObject);        
     }
 
     public void TakeDamage(float damageAmount)

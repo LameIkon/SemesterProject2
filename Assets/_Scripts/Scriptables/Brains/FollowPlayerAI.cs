@@ -2,18 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Brain/PolarBear")]
-public class PolarBearAI : BrainAI
+[CreateAssetMenu(menuName = "Brain/FollowPlayer")]
+public class FollowPlayerAI : BrainAI
 {
     // [SerializeField] private RangedFloat _idleTime;
     // [SerializeField] private RangedFloat _moveTime;  
     // [SerializeField] private RangedFloat _fireTime;
     [SerializeField] private RangedFloat _waitBetweenWalk;
-    [SerializeField] private RangedFloat _waitBetweenAttack;
-    [SerializeField] private int _aggroRange;
-    [SerializeField] private float _damage;
-    [SerializeField] private float _attackRange;
-
+    [SerializeField] private float _rangeToPlayerStop;
 
 
     private const string _playerTag = "Player";
@@ -48,79 +44,46 @@ public class PolarBearAI : BrainAI
 
         if (!target)
         {
-            //target = GameObject
-            //            .FindGameObjectsWithTag("Player")
-            //            .OrderBy(go => Vector3.Distance(go.transform.position, brain.transform.position))
-            //            .FirstOrDefault(go => go != brain.gameObject);
 
             target = GameObject.FindGameObjectWithTag(_playerTag);
 
             brain.Remember(_target, target);
         }
 
-        Vector3 _aggroVector = new Vector3(_aggroRange, _aggroRange, 0);
 
         if (stateTimeout < 0)
         {
-            
 
             Vector3 targetPosition = target.transform.position;
             Vector3 ownPosition = brain.transform.position;
             Vector3 vectorBetween = targetPosition - ownPosition;
             Vector3 unitVectorBetween = (vectorBetween).normalized;
 
-
-            //if (AttackRange(vectorBetween, _attackRange * unitVectorBetween, _attackRange))
-            //{
-            //    SetTimeoutAttack(brain);
-            //    Debug.Log((ownPosition + _attackRange * unitVectorBetween));
-            //    Collider2D[] hits = Physics2D.OverlapBoxAll((ownPosition + _attackRange * unitVectorBetween), _attackRange * Vector2.one, 0f);
-
-
-            //    foreach (var hit in hits)
-            //    {
-            //        hit.GetComponent<IDamageable>()?.TakeDamage(_damage);
-
-            //    }
-            //}
-
-        if (AttackRange(vectorBetween, _attackRange * unitVectorBetween, _attackRange))
-        {
-            SetTimeoutAttack(brain);
-            Collider2D[] hits = Physics2D.OverlapCircleAll(ownPosition, 1.8f*_attackRange);
-
-
-            foreach (var hit in hits)
-            {
-                if (hit.GetComponent<AIThinker>() != null) 
-                {
-                    continue;
-                }
-
-                hit.GetComponent<IDamageable>()?.TakeDamage(_damage);
-
-            }
-        }
-        else
+            if (RangeHolder(vectorBetween, _rangeToPlayerStop * unitVectorBetween, _rangeToPlayerStop))
             {
                 SetTimeoutWalk(brain);
-                
-                Walk(GiveDirectionTowardsPlayer(unitVectorBetween), brain);
-                
             }
+            else
+            {
+                SetTimeoutWalk(brain);
 
-
-            //if (vectorBetween.x > _aggroVector.x || vectorBetween.x < -_aggroVector.x && vectorBetween.y > _aggroVector.y || vectorBetween.y < -_aggroVector.y)
-            //{
-            //    WalkRandom();
-            //}
-            //else
-            //{
-            //}
+                Walk(GiveDirectionTowardsPlayer(unitVectorBetween), brain);
+            }
+            
         }
 
     }
-    
+
+    public bool RangeHolder(Vector3 v1, Vector3 v2, float range)
+    {
+        if (Vector3.Distance(v1, v2) < range)
+        {
+            return true;
+        }
+        else
+            return false;
+    }
+
 
     private void WalkRandom()
     {
@@ -270,93 +233,6 @@ public class PolarBearAI : BrainAI
     {
         brain.Remember(_stateTimeout, Random.Range(_waitBetweenWalk.MinValue, _waitBetweenWalk.MaxValue));
     }
-    private void SetTimeoutAttack(AIThinker brain)
-    {
-        brain.Remember(_stateTimeout, Random.Range(_waitBetweenAttack.MinValue, _waitBetweenAttack.MaxValue));
-    }
-
-
-    //Look at this, this is coursing bugs
-
-    public bool AttackRange(Vector3 v1, Vector3 v2, float range)
-    {
-        if (Vector3.Distance(v1, v2) < range)
-        {
-            return true;
-        }
-        else
-            return false; 
-    }
-
-    public bool V3GreaterThanEqual(Vector3 v1, Vector3 v2) 
-    {
-        if (v1.x >= v2.x && v1.y >= v2.y && v1.z >= v2.z)
-        {
-            return true;
-        }
-        else
-            return false;
-    }
-
-    /*
-                switch (GiveDirection(dir))
-        {
-            case Directions.N:
-
-                SetTimeout(brain);
-
-                _move.Move(Vector3.up);
-                break;
-
-            case Directions.S:
-
-                SetTimeout(brain);
-
-                _move.Move(Vector3.down);
-                break;
-
-            case Directions.E:
-                SetTimeout(brain);
-
-                _move.Move(Vector3.right);
-                break;
-
-            case Directions.W:
-                SetTimeout(brain);
-
-                _move.Move(Vector3.left);
-                break;
-
-            case Directions.NE:
-                SetTimeout(brain);
-
-                _move.Move(Vector3.up + Vector3.right);
-                break;
-
-            case Directions.NW:
-                SetTimeout(brain);
-
-                _move.Move(Vector3.up + Vector3.left);
-                break;
-
-            case Directions.SE:
-                SetTimeout(brain);
-
-                _move.Move(Vector3.down + Vector3.right);
-                break;
-
-            case Directions.SW:
-                SetTimeout(brain);
-
-                _move.Move(Vector3.down + Vector3.left);
-                break;
-
-            default:
-
-                break;
-
-        }
-     */
 
 
 }
