@@ -2031,6 +2031,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc71a4d87f087ae48ac9d6c1981262e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _firstScene:
+    _sceneAsset: {fileID: 102900000, guid: 3c5051dc1b4f98c42bba7523e3067672, type: 3}
+    _sceneName: MainHub
   _MainMenu: {fileID: 2100427273}
   _Options: {fileID: 240546118}
   _Credits: {fileID: 508734993}

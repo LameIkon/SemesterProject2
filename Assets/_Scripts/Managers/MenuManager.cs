@@ -10,6 +10,8 @@ public class MenuManager : MonoBehaviour
 
     private float _transitionTime = 0; // change this depending if you want a transition
 
+    [SerializeField] private SceneField _firstScene;
+
     //gameobjects to transition between
     public GameObject _MainMenu;
     public GameObject _Options;
@@ -59,16 +61,25 @@ public class MenuManager : MonoBehaviour
     //play game 
     public void PlayButton()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.LoadScene(_firstScene);
     }
 
+
+
+
     //exit the game
-    /*public void ExitButton()
+    public void ExitButton()
     {
+        // only quits the editor if its the unity editor application
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#endif
+
         //when the game is not in the unity editor application quit with this method
         Application.Quit();
-    
+
     }
+
 
     // change page 
     public void TransitiontoPage(GameObject newPage)
@@ -79,4 +90,5 @@ public class MenuManager : MonoBehaviour
         }
     }
 
+    
 }
