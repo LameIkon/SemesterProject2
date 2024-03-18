@@ -33,7 +33,8 @@ public class DialogueManager : MonoBehaviour
 
     [Header("Stored data")]
     public bool _Oneclick; // Used to ensure that only 1 dialogue can happen at a time
-    public bool _DialogueExited = false; // Used to check if an dialogue is ongoing. Same as _oneclick but just made easier to understand the use of the bool
+    public bool _DialogueExited; // Used to check if an dialogue is ongoing. Same as _oneclick but just made easier to understand the use of the bool
+    public bool _StartedDialogue; // Used to check if an dialogue is started. Used in other scripts to call if an dialogue was called
     public List<string> _SavedTags = new List<string>(); // Save all tags and store them for other scripts to use. 
     public string _NPCName; // Use the name of the current person you talk with
 
@@ -73,6 +74,7 @@ public class DialogueManager : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.E)) // Press E to open dialogue UI
             {
                 _Oneclick = true; // Ensure only 1 instance. Used in other scripts
+                _StartedDialogue = true; // Used to to tell that an dialogue was started
                 refreshUI();
             }
         }
@@ -193,6 +195,7 @@ public class DialogueManager : MonoBehaviour
         _story = new Story(DialogueData.text); // Change file to the same dialogueData. Must be done otherwise you cant repeat the same dialouge
         _Oneclick = false; // Ensures 1 instance
         _DialogueExited = true; // Announces that the exitDialogue was called (used to check if player exited dialogue)
+        _StartedDialogue = false; // announces that the dialogue has ended
         Invoke("SetDialogueExitFalse", 0f); // Used to give a small frame for the text to change to the alternative text
     }
 

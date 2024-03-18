@@ -7,9 +7,13 @@ using UnityEngine;
 public class StartDialogue : MonoBehaviour
 {
     private bool _startDialogue;
+    private GameObject _highlight; // Used to get the GameObject named highligh
+    private GameObject _textbox; // Used to get the GameObject named textbox
+    private GameObject _showInteraction; // Used to get the GameObject named showInteraction
+    private bool _interactionChecker;
 
     [Header("NPC Name")]
-    public string _NPCname; // Insert the name of the NPC in the inspector
+    public string _NPCName; // Insert the name of the NPC in the inspector
 
     [Header("Default Dialogue")]
     [SerializeField] private TextAsset _defaultDialogue;
@@ -23,6 +27,21 @@ public class StartDialogue : MonoBehaviour
     [Header ("Selected Dialogue")]
     [SerializeField] private TextAsset _chosenDialogue;
 
+    private void Awake()
+    {
+        // Fist child is canvas and the next is the child of the canvas
+        _highlight = transform.GetChild(0).GetChild(0).gameObject; // Get the child of child attached to the parent.
+        _textbox = transform.GetChild(0).GetChild(1).gameObject; // Get the child of child attached to the parent.
+        _showInteraction = transform.GetChild(0).GetChild(2).gameObject; // Get the child of child attached to the parent.
+
+    }
+
+    private void Start()
+    {
+        // Ensure not being show at start
+        _highlight.SetActive(false);
+        _showInteraction.SetActive(false);
+    }
 
 
     // Update is called once per frame
@@ -34,27 +53,40 @@ public class StartDialogue : MonoBehaviour
            if (DialogueManager.instance._DialogueExited) // Only run this when _dialogueExited bool from the singleton is true. used to check when you exit the dialogue
            {
                 UpdateDialogue();
+                _showInteraction.SetActive(true); // Show interactions after you end conversation
+                _interactionChecker = false; // you can now show interaction again
+            }
+           if (DialogueManager.instance._StartedDialogue && !_interactionChecker) // Only run this when you start a dialogue
+           {
+                _showInteraction.SetActive(false); // Hide Interaction
+                _interactionChecker = true;
+                Debug.Log("called");
            }
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (other.gameObject.name == "Player" && !DialogueManager.instance._Oneclick) // Detect if the collision is the gameobject called Player
+        if (collision.gameObject.name == "Player" && !DialogueManager.instance._Oneclick) // Detect if the collision is the gameobject called Player
         {
             //Debug.Log("Enter");
-            DialogueManager.instance._NPCName = _NPCname;
+            DialogueManager.instance._NPCName = _NPCName;
             UpdateDialogue();
             _startDialogue = true; // Set to true allowing start dialogue (Warning be sure there arent overlapping triggers, might cause problems)
+
+            _showInteraction.SetActive(true); // Show Interaction
+            _highlight.SetActive(false); // Hide highlight to not overlap with showInteraction
         }
     }
 
-    private void OnTriggerExit2D(Collider2D other)
+    private void OnTriggerExit2D(Collider2D collision)
     {
-        if (other.gameObject.name == "Player") // Detect if the collision is the gameobject called Player
+        if (collision.gameObject.name == "Player") // Detect if the collision is the gameobject called Player
         {
             //Debug.Log("Exit");
             _startDialogue = false; // Set to false to disable dialogue options
+
+            _showInteraction.SetActive(false); // Dont show interaction
         }
     }
 
