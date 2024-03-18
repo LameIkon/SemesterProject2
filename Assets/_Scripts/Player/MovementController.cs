@@ -18,8 +18,6 @@ public class MovementController : MonoBehaviour
         _moveSpeed = _speedReference.GetMinValue(); // Sets the walking speed 
     }
 
-
-
     protected virtual void FixedUpdate() 
     {
         transform.position = Vector3.MoveTowards(transform.position, _movePoint.position, _moveSpeed * Time.fixedDeltaTime); // this "transforms our position to move towards the new point

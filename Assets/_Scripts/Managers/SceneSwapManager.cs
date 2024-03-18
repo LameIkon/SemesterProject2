@@ -7,7 +7,7 @@ public class SceneSwapManager : Singleton<SceneSwapManager>
 {
     private static bool _loadFromDoor;
     private GameObject _player;
-    private Collider2D _playerCol;
+    private GameObject _playerMovePoint;
     private Collider2D _doorCol;
     private Vector3 _playerSpawnPosition;  
     private DoorTriggerInteraction.DoorToSpawnAt _doorToSpawnTo;
@@ -16,8 +16,9 @@ public class SceneSwapManager : Singleton<SceneSwapManager>
     {
         base.Awake();
         _player = GameObject.FindGameObjectWithTag("Player");
-        _playerCol = _player.GetComponent<Collider2D>();
-        
+        _playerMovePoint = GameObject.FindGameObjectWithTag("PlayerMovePoint");
+        // _playerCol = _player.GetComponent<Collider2D>(); Har hele tiden troet at Collideren sad på Playeren som et child-objekt, var så forvirret
+
     }
     private void OnEnable() { SceneManager.sceneLoaded += OnSceneLoad; }
     private void OnDisable() { SceneManager.sceneLoaded -= OnSceneLoad; }
@@ -30,7 +31,7 @@ public class SceneSwapManager : Singleton<SceneSwapManager>
 
     private IEnumerator FadeOutThenChangeScene(SceneField myScene, DoorTriggerInteraction.DoorToSpawnAt doorToSpawnAt = DoorTriggerInteraction.DoorToSpawnAt.None)
     {
-        PlayerController.DeactivatePlayerControls();
+        // PlayerController.DeactivatePlayerControls();
         SceneFadeManager._Instance.StartFadeOut();
 
         while (SceneFadeManager._Instance._IsFadingOut)
@@ -47,7 +48,7 @@ public class SceneSwapManager : Singleton<SceneSwapManager>
         {
             yield return null;
         }
-        PlayerController.ActivatePlayerControls();
+        // PlayerController.ActivatePlayerControls();
     }
     
     private void OnSceneLoad(Scene scene, LoadSceneMode mode)   // Kaldes når en ny scene indlæses (også i starten)
@@ -57,7 +58,10 @@ public class SceneSwapManager : Singleton<SceneSwapManager>
         {
             StartCoroutine(ActivatePlayerControlsAfterFadeIn());
             FindDoor(_doorToSpawnTo);
+            
             _player.transform.position = _playerSpawnPosition;
+            _playerMovePoint.transform.position = _playerSpawnPosition;
+           
             _loadFromDoor = false;
         }
     }
@@ -79,8 +83,8 @@ public class SceneSwapManager : Singleton<SceneSwapManager>
     }
 
     private void CalculateSpawnPosition()
-    {
-        // Skriv det sted vi vil have at spilleren skal spawne på
-        // Brug _playerCol
+    { 
+        // float colliderHeight = _playerMovePoint.transform.position.y;
+        // _playerSpawnPosition = _doorCol.transform.position - new Vector3(1f, 5f /*colliderHeight*/, 0f);
     }
 }

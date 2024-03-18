@@ -63,7 +63,7 @@ public class MenuManager : MonoBehaviour
     }
 
     //exit the game
-    public void ExitButton()
+    /*public void ExitButton()
     {
         //when the game is not in the unity editor application quit with this method
         Application.Quit();
