@@ -86,15 +86,18 @@ public class PlayerController : MovementController
     } 
     #endregion
 
-    public static void DeactivatePlayerControls()
-    {
-        // Kode til at deaktivere movement
-    }
+    // <NOT NECESSARY>
+    // public static void DeactivatePlayerControls()
+    // {
+    //     // Kode til at deaktivere movement
+    // }
+    //
+    // public static void ActivatePlayerControls()
+    // {
+    //     // Kode til at aktivere movement
+    // }
+    // </NOT NECESSARY>
     
-    public static void ActivatePlayerControls()
-    {
-        // Kode til at aktivere movement
-    }
 }
 
 

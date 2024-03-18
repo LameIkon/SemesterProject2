@@ -10,6 +10,7 @@ public class TriggerInteractBase : MonoBehaviour, IInteractable
     
     // private void OnEnable() { InputReader.OnInteractEvent += HandleInteract; }   // Nødvendig i sammenhæng med loading af scener MED Interaction-knappen
     // private void OnDisable() { InputReader.OnInteractEvent -= HandleInteract; }  // Nødvendig i sammenhæng med loading af scener MED Interaction-knappen
+    
     private void Start()
     {
         _Player = GameObject.FindWithTag("Player"); // Sørger for at det kun er spilleren der kan interagere med døren
