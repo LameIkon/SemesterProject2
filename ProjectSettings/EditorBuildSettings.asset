@@ -14,4 +14,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/TemplateScenes/AdamScenes/Scene_1.unity
     guid: b34b7dda95eb9ea4ebb68be12d359996
+  - enabled: 1
+    path: Assets/Scene1.unity
+    guid: 4a233b7d881af0842a937457f17ffbcb
+  - enabled: 1
+    path: Assets/Scene2.unity
+    guid: 94f6a2af13217cb40a038c439d89c733
   m_configObjects: {}
