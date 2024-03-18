@@ -4,11 +4,19 @@ using UnityEngine.InputSystem;
 
 public class RunManager : MonoBehaviour, ITireable
 {
-
+    [Header("Stamina")]
     [SerializeField] private FloatVariable _staminaValue;
     [SerializeField] private FloatReference _staminaUseOnRun;
     [SerializeField] private FloatReference _staminaRegen;
     [SerializeField] private FloatReference _maxStamina;
+
+    [Header("Hunger")]
+    [SerializeField] private FloatVariable _hungerValue;
+    [SerializeField] private FloatReference _HungerUseOnRun;
+
+    [Header("Temperature")]
+    [SerializeField] private FloatVariable _tempValue;
+    [SerializeField] private FloatReference _TempGainOnRun;
 
     //public static bool _isMoving;
     private bool _isRunning;
@@ -82,6 +90,8 @@ public class RunManager : MonoBehaviour, ITireable
         while (_staminaValue.GetValue() > 0f) 
         {
             LoseStamina(_staminaUseOnRun);
+            LoseHunger(_HungerUseOnRun);
+            GainTemperature(_TempGainOnRun);
             yield return null;
         }
         yield return null;
@@ -98,13 +108,27 @@ public class RunManager : MonoBehaviour, ITireable
         yield return null; // Stop when reached max
     }
 
+    // When running you will lose stamina
     public void LoseStamina(float amount)
     {
         _staminaValue.ApplyChange(-amount);
     }
 
+    // When not running you will regen your stamina
     public void GainStamina(float amount)
     {
         _staminaValue.ApplyChange(amount);
+    }
+
+    // When running you will lose hunger
+    public void LoseHunger(float amount)
+    {
+        _hungerValue.ApplyChange(-amount);
+    }
+
+    // When running you will gain heat
+    public void GainTemperature(float amount)
+    {
+        _tempValue.ApplyChange(amount);
     }
 }
