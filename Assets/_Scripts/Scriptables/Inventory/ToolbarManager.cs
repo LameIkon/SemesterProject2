@@ -11,7 +11,7 @@ public class ToolbarManager : MonoBehaviour
     [SerializeField] GameObject [] _inventorySlotPrefabs;
     private int _selectedSlot = -1;
     [SerializeField] private Color _selectedColor, _notSelectedColor;
-    [SerializeField] private GameObject _lantern;
+    private GameObject _lantern;
     private bool _lightIsActive = false;
 
     private int _saveLightItemIndex;
@@ -95,7 +95,7 @@ public class ToolbarManager : MonoBehaviour
         var itemInSlot = _toolbarInventory.GetSlots[_selectedSlot];
 
         if (itemInSlot.ItemObject != null && itemInSlot.ItemObject._ItemType == ItemType.Light && !_lightIsActive)
-        {
+        {            
             itemInSlot.ItemObject.Action();
             _saveLightItemIndex = _selectedSlot;
             _lightIsActive = true;
@@ -110,8 +110,6 @@ public class ToolbarManager : MonoBehaviour
 
     }
 
-
-
     public void DisableLight(int i)
     {
         if (_selectedSlot < 0 ||  _lantern == null)
@@ -119,15 +117,20 @@ public class ToolbarManager : MonoBehaviour
             return;
         }
 
-                
-        
         if (i != _saveLightItemIndex)
+        {
+            _lightIsActive = false;
+            _lantern.SetActive(false);
+        }      
+    }
+
+    private void Update()
+    {
+        if (_toolbarInventory.GetSlots[_selectedSlot].ItemObject == null || _toolbarInventory.GetSlots[_selectedSlot].ItemObject._ItemType != ItemType.Light)
         {
             _lightIsActive = false;
             _lantern.SetActive(false);
         }
     }
-
-
 
 }
