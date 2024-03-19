@@ -2944,17 +2944,9 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 3328642294214393803}
     - target: {fileID: 7071212026655611817, guid: 5f68667c624044144aaece0f732353f6, type: 3}
-      propertyPath: _fogTemp
-      value: -0.07
-      objectReference: {fileID: 0}
-    - target: {fileID: 7071212026655611817, guid: 5f68667c624044144aaece0f732353f6, type: 3}
       propertyPath: _blizzard
       value: 
       objectReference: {fileID: 326462551040516645}
-    - target: {fileID: 7071212026655611817, guid: 5f68667c624044144aaece0f732353f6, type: 3}
-      propertyPath: _snowTemp
-      value: -0.1
-      objectReference: {fileID: 0}
     - target: {fileID: 7071212026655611817, guid: 5f68667c624044144aaece0f732353f6, type: 3}
       propertyPath: _fogEffect
       value: 
@@ -2963,14 +2955,6 @@ PrefabInstance:
       propertyPath: _snowEffect
       value: 
       objectReference: {fileID: 7027136137152218439}
-    - target: {fileID: 7071212026655611817, guid: 5f68667c624044144aaece0f732353f6, type: 3}
-      propertyPath: _defaultTemp
-      value: -0.15
-      objectReference: {fileID: 0}
-    - target: {fileID: 7071212026655611817, guid: 5f68667c624044144aaece0f732353f6, type: 3}
-      propertyPath: _blizzardTemp
-      value: -0.2
-      objectReference: {fileID: 0}
     - target: {fileID: 7071212026655611817, guid: 5f68667c624044144aaece0f732353f6, type: 3}
       propertyPath: _blizzardEffect
       value: 
@@ -3321,6 +3305,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3563838114784374177}
     m_Modifications:
+    - target: {fileID: 4251317389186133514, guid: 3f597885cafe1da4b8d04aa0c8fe3a19, type: 3}
+      propertyPath: _freezeDamage.ConstantValue
+      value: 0.02
+      objectReference: {fileID: 0}
     - target: {fileID: 7501362769553029342, guid: 3f597885cafe1da4b8d04aa0c8fe3a19, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
