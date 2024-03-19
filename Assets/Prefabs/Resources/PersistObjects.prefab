@@ -2944,9 +2944,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 3328642294214393803}
     - target: {fileID: 7071212026655611817, guid: 5f68667c624044144aaece0f732353f6, type: 3}
+      propertyPath: _fogTemp
+      value: -0.07
+      objectReference: {fileID: 0}
+    - target: {fileID: 7071212026655611817, guid: 5f68667c624044144aaece0f732353f6, type: 3}
       propertyPath: _blizzard
       value: 
       objectReference: {fileID: 326462551040516645}
+    - target: {fileID: 7071212026655611817, guid: 5f68667c624044144aaece0f732353f6, type: 3}
+      propertyPath: _snowTemp
+      value: -0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 7071212026655611817, guid: 5f68667c624044144aaece0f732353f6, type: 3}
       propertyPath: _fogEffect
       value: 
@@ -2955,6 +2963,14 @@ PrefabInstance:
       propertyPath: _snowEffect
       value: 
       objectReference: {fileID: 7027136137152218439}
+    - target: {fileID: 7071212026655611817, guid: 5f68667c624044144aaece0f732353f6, type: 3}
+      propertyPath: _defaultTemp
+      value: -0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7071212026655611817, guid: 5f68667c624044144aaece0f732353f6, type: 3}
+      propertyPath: _blizzardTemp
+      value: -0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 7071212026655611817, guid: 5f68667c624044144aaece0f732353f6, type: 3}
       propertyPath: _blizzardEffect
       value: 
@@ -2965,7 +2981,7 @@ PrefabInstance:
       objectReference: {fileID: 8794226987472724107}
     - target: {fileID: 8338497903177906760, guid: 5f68667c624044144aaece0f732353f6, type: 3}
       propertyPath: m_Name
-      value: WeatherManager
+      value: EnvironmentManager
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

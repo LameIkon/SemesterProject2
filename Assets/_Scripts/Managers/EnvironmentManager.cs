@@ -4,8 +4,10 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 using UnityEngine.VFX;
 
-public class WeatherCondition : MonoBehaviour
+public class EnvironmentManager : MonoBehaviour
 {
+    public static EnvironmentManager instance { get; private set; }
+
     [Header("Weather Types")] // By default they start being disabled since in unity editor the effects love to run constantly
     [SerializeField] private GameObject _blizzard;
     [SerializeField] private GameObject _snow;
@@ -71,6 +73,16 @@ public class WeatherCondition : MonoBehaviour
 
     void Awake()
     {
+        // Ensure only 1 singleton of this script
+        if (instance != null && instance != this)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            instance = this;
+        }
+
         _CurrentOutsideTemperature.SetValue(_defaultTemp); // Set current temperature to default
         _CurrentStaminaUse.SetValue(_defaultStaminaUse); // Set current stamina use on run to default
         _CurrentStaminaRegen.SetValue(_defaultStaminaRegen); // Set current stamina regen to default
@@ -137,7 +149,7 @@ public class WeatherCondition : MonoBehaviour
     }
 
 
-    void Blizzard()
+    public void Blizzard()
     {
         if (!_blizzard.activeInHierarchy) // Checks if the GameObject is active in the scene
         {
@@ -158,7 +170,7 @@ public class WeatherCondition : MonoBehaviour
         }
     }
 
-    void Fog()
+    public void Fog()
     {
         if (!_fog.activeInHierarchy) // Checks if the GameObject is active in the scene
         {
@@ -178,7 +190,7 @@ public class WeatherCondition : MonoBehaviour
         }
     }
 
-    void Snow()
+    public void Snow()
     {
         if (!_snow.activeInHierarchy) // Checks if the GameObject is active in the scene
         {
@@ -198,7 +210,7 @@ public class WeatherCondition : MonoBehaviour
         }
     }
 
-    void ResetWeather() // Reset everything back to default
+    public void ResetWeather() // Reset everything back to default
     {
         // Stop all visual weather conditions
         _blizzardEffect.Stop();
