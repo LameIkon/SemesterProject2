@@ -2,7 +2,7 @@ Welcome! What can i do for you?
 ->main
 
 ===main===
-* [Hello] 
+* [Hello]
     hi
     ->continue
 * [Where am i?]

@@ -2,7 +2,7 @@ did you talk with him?
 ->main
 
 ===main===
-* [he wasn't so fun to talk to] 
+* [he wasn't so fun to talk to]
     well, he isnt the most social guy but he is a nice guy once you get to learn him a bit more
    ->continue
    

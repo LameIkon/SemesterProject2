@@ -2,7 +2,7 @@ What do you want?
 ->main
 
 ===main===
-* [nothing much] 
+* [nothing much]
     then scram!
     ->END
 * [Joe Told me to talk with you]
