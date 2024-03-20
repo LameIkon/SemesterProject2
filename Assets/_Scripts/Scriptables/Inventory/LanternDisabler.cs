@@ -17,6 +17,4 @@ public class LanternDisabler : MonoBehaviour
             _LoadedSTATIC = false;
         }
     }
-
-
 }

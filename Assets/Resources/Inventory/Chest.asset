@@ -19,16 +19,6 @@ MonoBehaviour:
     - _AllowedItems: 
       _Item:
         _ItemName: 
-        _ID: 0
-      _Amount: 5
-    - _AllowedItems: 
-      _Item:
-        _ItemName: 
-        _ID: 1
-      _Amount: 2
-    - _AllowedItems: 
-      _Item:
-        _ItemName: 
         _ID: -1
       _Amount: 0
     - _AllowedItems: 
@@ -46,4 +36,13 @@ MonoBehaviour:
         _ItemName: 
         _ID: -1
       _Amount: 0
-  _InventoryFiller: {fileID: 11400000, guid: e74e3c51be8288c44b62073374ca6d1f, type: 2}
+    - _AllowedItems: 
+      _Item:
+        _ItemName: 
+        _ID: -1
+      _Amount: 0
+    - _AllowedItems: 
+      _Item:
+        _ItemName: 
+        _ID: -1
+      _Amount: 0

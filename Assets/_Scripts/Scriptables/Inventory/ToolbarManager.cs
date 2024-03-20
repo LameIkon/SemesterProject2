@@ -125,12 +125,14 @@ public class ToolbarManager : MonoBehaviour
     }
 
     private void Update()
-    {
-        if (_toolbarInventory.GetSlots[_selectedSlot].ItemObject == null || _toolbarInventory.GetSlots[_selectedSlot].ItemObject._ItemType != ItemType.Light)
+    {        
+        if (_lightIsActive)
         {
-            _lightIsActive = false;
-            _lantern.SetActive(false);
-        }
+            if (_toolbarInventory.GetSlots[_selectedSlot].ItemObject == null || _toolbarInventory.GetSlots[_selectedSlot].ItemObject._ItemType != ItemType.Light)
+            {
+                _lightIsActive = false;
+                _lantern.SetActive(false);
+            }
+        }               
     }
-
 }

@@ -66,10 +66,10 @@ public abstract class UserInterface: MonoBehaviour
         }
     }
 
-    //void Update()
-    //{
-    //    slotsOnInterface.UpdateSlotDisplay();
-    //}
+    void Update()
+    {
+        _SlotsOnInterface.UpdateSlotDisplay();
+    }
 
 
     public abstract void CreateSlots();     

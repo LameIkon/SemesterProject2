@@ -167,8 +167,8 @@ public class InventoryObject : ScriptableObject
 [System.Serializable]
 public class Inventory
 {
-    public InventorySlot[] _Slots;
-    //= new InventorySlot[24];
+    public InventorySlot[] _Slots;  
+        //new InventorySlot[24];
 
     public Inventory(InventorySlot[] slots)
     {
