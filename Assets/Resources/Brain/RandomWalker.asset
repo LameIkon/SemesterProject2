@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: RandomWalker
   m_EditorClassIdentifier: 
   _waitBetweenWalk:
-    MinValue: 0.2
-    MaxValue: 2
+    MinValue: 5
+    MaxValue: 75

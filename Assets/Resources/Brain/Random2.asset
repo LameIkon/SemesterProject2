@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Random2
   m_EditorClassIdentifier: 
   _waitBetweenWalk:
-    MinValue: 0.8
-    MaxValue: 1
+    MinValue: 500
+    MaxValue: 501
