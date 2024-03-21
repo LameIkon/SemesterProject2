@@ -85,6 +85,6 @@ public class SceneSwapManager : Singleton<SceneSwapManager>
     private void CalculateSpawnPosition()
     { 
         // float colliderHeight = _playerMovePoint.transform.position.y;
-        _playerSpawnPosition = _doorCol.transform.position - Vector3.zero;
+        _playerSpawnPosition = _doorCol.transform.position + 2*Vector3.up;
     }
 }

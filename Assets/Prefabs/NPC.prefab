@@ -266,7 +266,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44104277ad51be84dbf3418408084b38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moveSpeed: 5
+  _speedReference: {fileID: 11400000, guid: a65b9bbaf99eae348b5d0a13bcc3f742, type: 2}
   _movePoint: {fileID: 1198013764802760651}
   _whatStopsMovement:
   - serializedVersion: 2
