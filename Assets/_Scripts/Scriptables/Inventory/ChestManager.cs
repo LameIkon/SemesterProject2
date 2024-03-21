@@ -45,8 +45,15 @@ public class ChestManager : MonoBehaviour
             _chestInterface._Inventory = _chestInventory;
             _chestCanvas.SetActive(false);
 
-
-            if (!_chestIsfilled)
+            if (_chestCanvas != null)
+            {
+                Debug.Log("Found GameObject with tag 'Chest': " + _chestCanvas.name);
+            }
+            else
+            {
+                Debug.Log("Did not find GameObject with tag 'Chest'");
+            }
+                if (!_chestIsfilled)
             {
                 _chestIsfilled = true;
                 FillUpChest();
