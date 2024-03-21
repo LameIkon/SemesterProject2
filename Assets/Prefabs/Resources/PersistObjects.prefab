@@ -728,7 +728,6 @@ MonoBehaviour:
   - {fileID: 6870474000156794599}
   _selectedColor: {r: 0.011764727, g: 0.09596022, b: 0.7921569, a: 0.7372549}
   _notSelectedColor: {r: 1, g: 1, b: 1, a: 0.4392157}
-  _lantern: {fileID: 0}
 --- !u!1 &2455864267815336737
 GameObject:
   m_ObjectHideFlags: 0
@@ -2154,7 +2153,7 @@ Transform:
   m_GameObject: {fileID: 6444383724621754770}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.6473722, y: 4.4962525, z: -9.988379}
+  m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2196,7 +2195,7 @@ Camera:
   far clip plane: 5000
   field of view: 40
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 6
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -2320,7 +2319,7 @@ MonoBehaviour:
   m_Follow: {fileID: 4258235403361773495}
   m_Lens:
     FieldOfView: 40
-    OrthographicSize: 5
+    OrthographicSize: 6
     NearClipPlane: 0.1
     FarClipPlane: 5000
     Dutch: 0
@@ -4032,6 +4031,14 @@ PrefabInstance:
       propertyPath: _InventoryPrefab
       value: 
       objectReference: {fileID: 4038510048974629389, guid: f7e58fdc455397748817f9ff95f2e526, type: 3}
+    - target: {fileID: 7522777667968764942, guid: b9dfd3daabca6cd4794851981d7cf56f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7522777667968764942, guid: b9dfd3daabca6cd4794851981d7cf56f, type: 3}
+      propertyPath: m_TagString
+      value: Chest
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

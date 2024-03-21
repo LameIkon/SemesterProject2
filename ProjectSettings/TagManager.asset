@@ -8,6 +8,7 @@ TagManager:
   - InventoryUI
   - Lantern
   - PlayerMovePoint
+  - Chest
   layers:
   - Default
   - TransparentFX

@@ -29,7 +29,6 @@ public class InputReader : ScriptableObject, GameInput.IGameplayActions, GameInp
 
     // The events that other scripts can subscribe to, for information for gameplay.
     public static event Action<Vector2> OnMoveEvent; // This sends a Vector2 along with the event
-    public static event Action OnMoveStopEvent;
     public static event Action OnInteractEvent; 
     public static event Action OnPauseEvent;
     public static event Action OnInventoryOpenEvent;

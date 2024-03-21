@@ -58,10 +58,10 @@ public class EnvironmentManager : MonoBehaviour
     [SerializeField] private FloatVariable _CurrentStaminaUse; // This is the current max stamina
     [SerializeField] private FloatVariable _CurrentStaminaRegen; // This is the current stamina regen
 
-    private int _timeBetweenMin = 100;
-    private int _timeBetweenMax = 200;
-    private bool _isChoosingWeather;
-    private bool _canChooseWeather; // Used to check for certain conditions, like being inside a house. 
+    //private int _timeBetweenMin = 100;
+    //private int _timeBetweenMax = 200;
+    //private bool _isChoosingWeather;
+    //private bool _canChooseWeather; // Used to check for certain conditions, like being inside a house. 
 
 
     //private void SetPlayerSpeed(float debuff)

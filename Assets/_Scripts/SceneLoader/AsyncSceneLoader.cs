@@ -9,55 +9,67 @@ public class AsyncSceneLoader : MonoBehaviour
 {
 
 
-    [SerializeField] private BoxCollider2D _sceneTrigger;
-    [SerializeField] private bool _loadScenes;
+    private BoxCollider2D _sceneTrigger;
 
+    //[SerializeField] private SceneField[] _scenes;
     [SerializeField] private SceneField[] _scenes;
 
-
+    private void Awake()
+    {
+        _sceneTrigger = GetComponent<BoxCollider2D>();
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (_loadScenes)
-        {
-            if (_scenes.Length == 0) return;
 
-            if (collision.CompareTag("Player"))
+        if (_scenes.Length == 0) return;
+
+        if (collision.CompareTag("Player"))
+        {
+            foreach (var scene in _scenes)
             {
-                foreach (var scene in _scenes)
+                if (UnloadScene(scene)) 
                 {
-                    LoadScene(scene);
+                    return;
                 }
             }
+        }
+
+        if (_scenes.Length == 0) return;
+
+        if (collision.CompareTag("Player"))
+        {
+            foreach (var scene in _scenes)
+            {
+                LoadScene(scene);
+            }
+        }
+
+    }
+
+    private bool LoadScene(SceneField scene) 
+    {
+        if (!SceneManager.GetSceneByName(scene).isLoaded)
+        {
+            SceneManager.LoadSceneAsync(scene, LoadSceneMode.Additive);
+            return true;
         }
         else
         {
-            if (_scenes.Length == 0) return;
-
-            if (collision.CompareTag("Player"))
-            {
-                foreach (var scene in _scenes)
-                {
-                    UnloadScene(scene);
-                }
-            }
+            return false;
         }
     }
 
-    private void LoadScene(SceneField scene) 
-    {
-        if (SceneManager.GetSceneByName(scene).isLoaded)
-        {
-            return;
-        }
-        SceneManager.LoadSceneAsync(scene, LoadSceneMode.Additive);
-    }
-
-    private void UnloadScene(SceneField scene) 
+    private bool UnloadScene(SceneField scene) 
     {
         if (SceneManager.GetSceneByName(scene).isLoaded)
         {
             SceneManager.UnloadSceneAsync(scene, UnloadSceneOptions.None);
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
 

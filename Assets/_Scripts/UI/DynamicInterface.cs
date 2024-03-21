@@ -14,6 +14,8 @@ public class DynamicInterface : UserInterface
     public int NUMBER_OF_COLUMN;
     public int Y_SPACE_BETWEEN_ITEM;
 
+    public bool _ClearInventory;
+
     public override void CreateSlots()
     {
         _SlotsOnInterface = new Dictionary<GameObject, InventorySlot>();
@@ -42,10 +44,12 @@ public class DynamicInterface : UserInterface
 
     public void OnApplicationQuit()
     {
-
-        for (int i = 0; i < _Inventory.GetSlots.Length; i++)
+        if (!_ClearInventory)
         {
-            _Inventory.GetSlots[i].RemoveItem();
-        }
+            for (int i = 0; i < _Inventory.GetSlots.Length; i++)
+            {
+                _Inventory.GetSlots[i].RemoveItem();
+            }
+        }   
     }
 }

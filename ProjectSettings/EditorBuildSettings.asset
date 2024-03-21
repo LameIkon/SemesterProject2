@@ -18,15 +18,30 @@ EditorBuildSettings:
     path: Assets/Scenes/TroelsScene/Scene1.unity
     guid: 4a233b7d881af0842a937457f17ffbcb
   - enabled: 1
-    path: Assets/ShipInside.unity
-    guid: b059dac21651569449f1979053b42c2c
-  - enabled: 1
-    path: Assets/ShipOutside.unity
+    path: Assets/Scenes/Ship/ShipOutside.unity
     guid: cd22cb3b6f4efe74a88d52c0c3a0e5ac
   - enabled: 1
-    path: Assets/Scene2.unity
+    path: Assets/Scenes/Ship/ShipInsideReal.unity
+    guid: 705aa24cd08232546a65faae48da3e27
+  - enabled: 1
+    path: Assets/Scenes/TroelsScene/Scene2.unity
     guid: 94f6a2af13217cb40a038c439d89c733
   - enabled: 1
     path: Assets/Scenes/TemplateScenes/AdamScenes/MainHub.unity
     guid: 3c5051dc1b4f98c42bba7523e3067672
+  - enabled: 1
+    path: Assets/Scenes/Outside/Outside11.unity
+    guid: 01702497778f7464c86f5be87607ba29
+  - enabled: 1
+    path: Assets/Scenes/Outside/Outside12.unity
+    guid: 8523c1a7169d1db4390e6a05197a9b16
+  - enabled: 1
+    path: Assets/Scenes/Outside/Outside10.unity
+    guid: 14bec47c565edc048a96ceaabe709236
+  - enabled: 1
+    path: Assets/Scenes/Outside/Outside02.unity
+    guid: 07d4c0e82d1961746976669567fc17e2
+  - enabled: 1
+    path: Assets/Scenes/Outside/Outside00.unity
+    guid: 80ff4ace7dc10ba4dbb35bc1b1821064
   m_configObjects: {}
