@@ -16,5 +16,5 @@ MonoBehaviour:
 
     If value above 0 you gain
     heat'
-  _value: -50
+  _value: -15
   _onValueChanged: {fileID: 0}
