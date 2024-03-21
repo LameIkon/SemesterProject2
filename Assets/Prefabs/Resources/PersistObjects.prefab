@@ -4028,6 +4028,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: d3a3244f4fd2b4742b57fd7ec9d0cd25, type: 2}
     - target: {fileID: 6526240742651209817, guid: b9dfd3daabca6cd4794851981d7cf56f, type: 3}
+      propertyPath: _ClearInventory
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6526240742651209817, guid: b9dfd3daabca6cd4794851981d7cf56f, type: 3}
       propertyPath: _InventoryPrefab
       value: 
       objectReference: {fileID: 4038510048974629389, guid: f7e58fdc455397748817f9ff95f2e526, type: 3}

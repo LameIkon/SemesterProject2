@@ -38432,7 +38432,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _scenes:
   - _sceneAsset: {fileID: 102900000, guid: cd22cb3b6f4efe74a88d52c0c3a0e5ac, type: 3}
-    _sceneName: ShipOutside
+    _sceneName: Outside01Ship
 --- !u!61 &2008236893
 BoxCollider2D:
   m_ObjectHideFlags: 0

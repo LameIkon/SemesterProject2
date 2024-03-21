@@ -7,7 +7,7 @@ using UnityEngine;
 [RequireComponent(typeof(BoxCollider2D))]
 public class ChestManager : MonoBehaviour
 {
-    [SerializeField] private GameObject _chestCanvas;
+    [SerializeField] private static GameObject _chestCanvas;
     [SerializeField] private InventoryObject _chestInventory;
     [SerializeField] private ChestFiller _chestFiller;
     [SerializeField] private ItemDatabaseObject _database;
