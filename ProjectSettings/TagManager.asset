@@ -9,6 +9,7 @@ TagManager:
   - Lantern
   - PlayerMovePoint
   - Chest
+  - Bonfire
   layers:
   - Default
   - TransparentFX
