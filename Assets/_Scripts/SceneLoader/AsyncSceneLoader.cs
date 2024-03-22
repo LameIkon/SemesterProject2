@@ -11,8 +11,11 @@ public class AsyncSceneLoader : MonoBehaviour
 
     private BoxCollider2D _sceneTrigger;
 
-    //[SerializeField] private SceneField[] _scenes;
-    [SerializeField] private SceneField[] _scenes;
+    [SerializeField] private SceneField[] _loadScenes;
+    [SerializeField] private SceneField[] _unloadScenes;
+
+    bool _loaded = false;
+
 
     private void Awake()
     {
@@ -22,54 +25,42 @@ public class AsyncSceneLoader : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
 
-        if (_scenes.Length == 0) return;
 
-        if (collision.CompareTag("Player"))
+        if (collision.CompareTag("Player") && _unloadScenes.Length != 0)
         {
-            foreach (var scene in _scenes)
-            {
-                if (UnloadScene(scene)) 
-                {
-                    return;
-                }
-            }
+            StartCoroutine(UnloadScene(_unloadScenes));
+            
         }
 
-        if (_scenes.Length == 0) return;
-
-        if (collision.CompareTag("Player"))
+        if (collision.CompareTag("Player") && _loadScenes.Length != 0)
         {
-            foreach (var scene in _scenes)
-            {
-                LoadScene(scene);
-            }
+            StartCoroutine(LoadScene(_loadScenes));
         }
 
     }
 
-    private bool LoadScene(SceneField scene) 
+    private IEnumerator LoadScene(SceneField[] scenes) 
     {
-        if (!SceneManager.GetSceneByName(scene).isLoaded)
+        foreach (var scene in scenes)
         {
-            SceneManager.LoadSceneAsync(scene, LoadSceneMode.Additive);
-            return true;
-        }
-        else
-        {
-            return false;
+            if (!SceneManager.GetSceneByName(scene).isLoaded)
+            {
+                SceneManager.LoadSceneAsync(scene, LoadSceneMode.Additive);
+            }
+            yield return new WaitForSeconds(0.1f);
         }
     }
 
-    private bool UnloadScene(SceneField scene) 
+    private IEnumerator UnloadScene(SceneField[] scenes) 
     {
-        if (SceneManager.GetSceneByName(scene).isLoaded)
+        foreach (var scene in scenes)
         {
-            SceneManager.UnloadSceneAsync(scene, UnloadSceneOptions.None);
-            return true;
-        }
-        else
-        {
-            return false;
+            if (SceneManager.GetSceneByName(scene).isLoaded)
+            {
+                SceneManager.UnloadSceneAsync(scene, UnloadSceneOptions.None);
+            }
+            yield return new WaitForFixedUpdate();
+            
         }
     }
 

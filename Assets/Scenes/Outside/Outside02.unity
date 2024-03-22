@@ -2623,9 +2623,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96818496d960bc1458a401ea02f16521, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _scenes:
-  - _sceneAsset: {fileID: 102900000, guid: 8523c1a7169d1db4390e6a05197a9b16, type: 3}
-    _sceneName: Outside12
+  _loadScenes: []
+  _unloadScenes: []
 --- !u!61 &1190034815
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2686,7 +2685,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1241502878
 Transform:
   m_ObjectHideFlags: 0
@@ -38430,9 +38429,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96818496d960bc1458a401ea02f16521, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _scenes:
-  - _sceneAsset: {fileID: 102900000, guid: cd22cb3b6f4efe74a88d52c0c3a0e5ac, type: 3}
-    _sceneName: Outside01Ship
+  _loadScenes: []
+  _unloadScenes: []
 --- !u!61 &2008236893
 BoxCollider2D:
   m_ObjectHideFlags: 0
