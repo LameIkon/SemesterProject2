@@ -38,6 +38,7 @@ public class StaticInterface : UserInterface
         for (int i = 0; i < _Inventory.GetSlots.Length; i++)
         {
             _Inventory.GetSlots[i].RemoveItem();
+           
         }        
     }
 

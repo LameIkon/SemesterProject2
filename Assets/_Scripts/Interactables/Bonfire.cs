@@ -13,7 +13,7 @@ public class Bonfire : MonoBehaviour
     [SerializeField] private InventoryObject _bonfireInventory;
     private StaticInterface _bonfireInterface;
     [SerializeField] private bool _canOpenBonfire = false;
-    [SerializeField] public int _BurningTime;
+    private float _burningTime = 10;
 
 
 
@@ -25,12 +25,8 @@ public class Bonfire : MonoBehaviour
     private IEnumerator _leftoverCoroutine;
 
     private bool _turn = false;
+    private bool _coroutineActive = false;
 
-
-
-    /// <summary>
-    /// Can't put wood in AND get warmth without going in and out
-    /// </summary>
 
     private void Update()
     {
@@ -43,12 +39,17 @@ public class Bonfire : MonoBehaviour
             _bonfireInterface._Inventory = _bonfireInventory;
         }
 
+
         if (_playerIsClose && _bonfireLit && !_isTriggeredOnce)
         {
             _isTriggeredOnce = true;
             _systemFloat.ApplyChange(_restoreValue);
         }
-       
+
+        else if (_playerIsClose && !_coroutineActive)
+        {
+            BurningWood();            
+        }       
     }
 
     void OnEnable()
@@ -84,9 +85,15 @@ public class Bonfire : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             _playerIsClose = true;
-            _burnCoroutine = BurningTime(_BurningTime);
             _canOpenBonfire = true;
-            BurningWood();
+
+            if(_burnCoroutine == null)
+            {
+                _burnCoroutine = BurningTime(_burningTime);
+            }
+            
+            
+           // BurningWood();
            // _systemFloat.ApplyChange(_restoreValue);
         }       
     }
@@ -97,14 +104,15 @@ public class Bonfire : MonoBehaviour
         {
             _bonfireCanvas.SetActive(false);
             _playerIsClose = false;
-            _canOpenBonfire = false;            
-            _leftoverCoroutine = LeftoverTime(_BurningTime);
+            _canOpenBonfire = false; 
+            
+            _leftoverCoroutine = LeftoverTime(_burningTime);
             
 
             if (_bonfireLit)
             {
                 _isTriggeredOnce = false;
-                StopCoroutine(_burnCoroutine);
+                StopCoroutine(_burnCoroutine);               
                 _systemFloat.ApplyChange(-_restoreValue);
                 StartCoroutine(_leftoverCoroutine);
             }            
@@ -114,31 +122,43 @@ public class Bonfire : MonoBehaviour
 
     private void BurningWood ()
     {
-        if (_bonfireInventory.GetSlots[0].ItemObject._ItemType == ItemType.Fuel)
+        if (_bonfireInventory.GetSlots[0].ItemObject == null)
+        {
+            _bonfireLit = false;
+            return;
+        }
+
+        if (_bonfireInventory.GetSlots[0].ItemObject._ItemType == ItemType.Fuel && _bonfireInventory.GetSlots[0].ItemObject != null)
         {
             _bonfireLit = true;
             StartCoroutine(_burnCoroutine);
-        }
-
-        else if (_bonfireInventory.GetSlots[0].ItemObject == null)
-        {
-            _bonfireLit = false;
-        }
+          //  StartCoroutine(BurningTime(_burningTime));
+        }      
+       
     }
 
 
-    IEnumerator BurningTime (int time)
-    {        
+    IEnumerator BurningTime (float time)
+    {
+        _coroutineActive = true;
+        print("BurningTime activated");
         yield return new WaitForSeconds(time);
+        print("wood Burned");
         _bonfireInventory.GetSlots[0].RemoveItem();
         _systemFloat.ApplyChange(-_restoreValue);
         _bonfireLit = false;
         _isTriggeredOnce = false;
+        _coroutineActive = false;
+        
     }
 
-    IEnumerator LeftoverTime (int time)
+    IEnumerator LeftoverTime (float time)
     {
+        print("leftOverTime Started");
         yield return new WaitForSeconds(time);
+        print("LeftoverTime done");
+        _bonfireLit = false;
+        _coroutineActive = false;
         _bonfireInventory.GetSlots[0].RemoveItem();
     }
 
