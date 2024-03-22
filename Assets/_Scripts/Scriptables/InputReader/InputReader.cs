@@ -107,7 +107,7 @@ public class InputReader : ScriptableObject, GameInput.IGameplayActions, GameInp
 
     public void OnNavigate(InputAction.CallbackContext context)
     {
-        OnNavigateEvent?.Invoke(context.ReadValue<Vector2>());
+        //OnNavigateEvent?.Invoke(context.ReadValue<Vector2>());
     }
 
     public void OnPick(InputAction.CallbackContext context)

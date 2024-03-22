@@ -43,6 +43,7 @@ public class CursorManager : MonoBehaviour
     private void HandleMousePosition(Vector2 pos) 
     {
         _mousePosition = pos;
+
     }
     
     private void HandleLeftMouseClick() 
@@ -50,12 +51,35 @@ public class CursorManager : MonoBehaviour
         DetectObject();
     }
     
+    private static Dictionary<int, Vector2> _mouseDictionary;
+
     public static void MouseRotation(Transform transform)   // Metoden sørger for at koordinatsystemet (som sporer muspositionen) forbliver i midten af skæremen og ikke i nederste venstre hjørne
     {
-        _mousePositionRotation = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;  // Her centraliserer vi muspositionen i midten af skærmen
+
+        Vector2 mousePos = Vector2.left;
+
+        if (_mousePosition != Vector2.zero)
+        {
+            _mouseDictionary.Remove(1);
+            mousePos = _mousePosition;
+            _mouseDictionary.Add(1, mousePos);
+        }
+        else 
+        {
+            if (_mouseDictionary.ContainsKey(1))
+            {
+                mousePos = _mouseDictionary[1];
+            }
+        }
+
+        _mousePositionRotation = Camera.main.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, 0)) - transform.position;  // Her centraliserer vi muspositionen i midten af skærmen
         float angle = Mathf.Atan2(_mousePositionRotation.y, _mousePositionRotation.x) * Mathf.Rad2Deg; 
         _rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
+
         transform.rotation = _rotation;
     }
+
+
+
 }
 

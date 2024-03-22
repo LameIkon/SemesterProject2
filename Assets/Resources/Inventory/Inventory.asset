@@ -29,13 +29,13 @@ MonoBehaviour:
     - _AllowedItems: 
       _Item:
         _ItemName: 
-        _ID: 2
-      _Amount: 1
+        _ID: 0
+      _Amount: 20
     - _AllowedItems: 
       _Item:
         _ItemName: 
-        _ID: 2
-      _Amount: 1
+        _ID: -1
+      _Amount: 0
     - _AllowedItems: 
       _Item:
         _ItemName: 
