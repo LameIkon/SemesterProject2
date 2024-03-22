@@ -16,7 +16,7 @@ MonoBehaviour:
   _SavePath: 
   _Container:
     _Slots:
-    - _AllowedItems: 
+    - _AllowedItems: 03000000
       _Item:
         _ItemName: 
         _ID: -1

@@ -13,11 +13,13 @@ public class Bonfire : MonoBehaviour
     [SerializeField] private InventoryObject _bonfireInventory;
     private StaticInterface _bonfireInterface;
     [SerializeField] private bool _canOpenBonfire = false;
-    [SerializeField] private int _burningTime;
+    [SerializeField] public int _BurningTime;
 
 
 
     private bool _bonfireLit = false;
+    private bool _playerIsClose = false;
+    private bool _isTriggeredOnce = false;
 
     private IEnumerator _burnCoroutine;
     private IEnumerator _leftoverCoroutine;
@@ -40,6 +42,13 @@ public class Bonfire : MonoBehaviour
             _bonfireInterface = _bonfireCanvas.GetComponent<StaticInterface>();
             _bonfireInterface._Inventory = _bonfireInventory;
         }
+
+        if (_playerIsClose && _bonfireLit && !_isTriggeredOnce)
+        {
+            _isTriggeredOnce = true;
+            _systemFloat.ApplyChange(_restoreValue);
+        }
+       
     }
 
     void OnEnable()
@@ -74,7 +83,8 @@ public class Bonfire : MonoBehaviour
 
         if (collision.CompareTag("Player"))
         {
-            _burnCoroutine = BurningTime(_burningTime);
+            _playerIsClose = true;
+            _burnCoroutine = BurningTime(_BurningTime);
             _canOpenBonfire = true;
             BurningWood();
            // _systemFloat.ApplyChange(_restoreValue);
@@ -85,11 +95,15 @@ public class Bonfire : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
+            _bonfireCanvas.SetActive(false);
+            _playerIsClose = false;
             _canOpenBonfire = false;            
-            _leftoverCoroutine = LeftoverTime(_burningTime);
+            _leftoverCoroutine = LeftoverTime(_BurningTime);
+            
 
             if (_bonfireLit)
             {
+                _isTriggeredOnce = false;
                 StopCoroutine(_burnCoroutine);
                 _systemFloat.ApplyChange(-_restoreValue);
                 StartCoroutine(_leftoverCoroutine);
@@ -105,16 +119,21 @@ public class Bonfire : MonoBehaviour
             _bonfireLit = true;
             StartCoroutine(_burnCoroutine);
         }
+
+        else if (_bonfireInventory.GetSlots[0].ItemObject == null)
+        {
+            _bonfireLit = false;
+        }
     }
 
 
     IEnumerator BurningTime (int time)
-    {
-        _systemFloat.ApplyChange(_restoreValue);
+    {        
         yield return new WaitForSeconds(time);
         _bonfireInventory.GetSlots[0].RemoveItem();
         _systemFloat.ApplyChange(-_restoreValue);
         _bonfireLit = false;
+        _isTriggeredOnce = false;
     }
 
     IEnumerator LeftoverTime (int time)
