@@ -1,8 +1,10 @@
 using UnityEngine;
 
+// The PersistentSingleton class ensures that only one of these objects exists, it will also not be unloaded between scenes
 [ HelpURL("https://www.youtube.com/watch?v=LFOXge7Ak3E")]
 public class PersistentSingleton<T> : MonoBehaviour where T : Component
 {
+    
     private bool  _autoUnparentOnAwake = true;
 
     protected static T _instance;

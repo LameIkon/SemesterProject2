@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: snow_2
+  m_Name: WoodenSternLeft
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 21300000, guid: fcd89667e54ce4a48b204f9242d0c4c4, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c86cc90bb8e36cd4ba6fa7c78bb405eb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1
