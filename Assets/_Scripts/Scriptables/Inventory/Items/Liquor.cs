@@ -22,7 +22,6 @@ public class Liquor : ItemObject
     {
         _SystemFloatHunger.ApplyChange(RestoreHunger);
         _SystemFloatHunger.ApplyChange(RestoreFreeze);
-
     }
 
     public override void DisableAction()

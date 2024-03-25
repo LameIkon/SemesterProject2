@@ -1,11 +1,10 @@
-using Ink.Parsed;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
-public class Bonfire : MonoBehaviour
+public class Campfire : MonoBehaviour
 {
+
     [SerializeField] private FloatVariable _systemFloat;
     [SerializeField] private float _restoreValue;
 
@@ -15,45 +14,33 @@ public class Bonfire : MonoBehaviour
     [SerializeField] private bool _canOpenBonfire = false;
     [SerializeField] private float _burningTime;
 
-
-
     private bool _bonfireLit = false;
-    private bool _playerIsClose = false;
     private bool _isTriggeredOnce = false;
     private bool _coroutineBurnActive = false;
     private bool _coroutineLeftoverActive = false;
+    private bool _hasDeappliedValue = false;
 
     private IEnumerator _burnCoroutine;
     private IEnumerator _leftoverCoroutine;
 
     private bool _turn = false;
-   
+
 
 
     private void Update()
     {
+        // Loads variables AFTER persisentObject is loaded into scene.
         if (LanternDisabler._LoadedSTATIC)
         {
-            _bonfireCanvas = GameObject.FindWithTag("Bonfire");          
+            _bonfireCanvas = GameObject.FindWithTag("Bonfire");
             _bonfireCanvas.SetActive(false);
 
             _bonfireInterface = _bonfireCanvas.GetComponent<StaticInterface>();
             _bonfireInterface._Inventory = _bonfireInventory;
         }
-
-
-        if (_playerIsClose && _bonfireLit && !_isTriggeredOnce)
-        {
-            _isTriggeredOnce = true;
-            _systemFloat.ApplyChange(_restoreValue);
-        }
-
-        else if (_playerIsClose && !_coroutineBurnActive)
-        {
-            BurningWood();            
-        }       
     }
 
+    //handle event on Interact
     void OnEnable()
     {
         InputReader.OnInteractEvent += HandleInteract;
@@ -65,6 +52,7 @@ public class Bonfire : MonoBehaviour
         InputReader.OnInteractEvent -= HandleInteract;
         InputReader.OnPickEvent -= HandleInteract;
     }
+
 
     void HandleInteract()
     {
@@ -81,23 +69,30 @@ public class Bonfire : MonoBehaviour
     }
 
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
 
         if (collision.CompareTag("Player"))
         {
-            _playerIsClose = true;
+         
             _canOpenBonfire = true;
 
-            if(_burnCoroutine == null)
+            if (_burnCoroutine == null)
             {
-                _burnCoroutine = BurningTime(_burningTime);
+                _burnCoroutine = BurningTime(_burningTime);   //saves coroutine in variable
             }
-            
-            
-           // BurningWood();
-           // _systemFloat.ApplyChange(_restoreValue);
-        }       
+
+            if (_bonfireLit && !_isTriggeredOnce)
+            {
+                _isTriggeredOnce = true;
+                _systemFloat.ApplyChange(_restoreValue);  //apllies _restoreValue to heatSource
+            }
+
+            else if (!_coroutineBurnActive)
+            {
+                BurningWood();
+            }
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -105,28 +100,27 @@ public class Bonfire : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             _bonfireCanvas.SetActive(false);
-            _playerIsClose = false;
-            _canOpenBonfire = false; 
-            
+            _canOpenBonfire = false;
+
             _leftoverCoroutine = LeftoverTime(_burningTime);
-            
 
             if (_bonfireLit)
             {
                 _isTriggeredOnce = false;
-                StopCoroutine(_burnCoroutine);               
+                StopCoroutine(_burnCoroutine);
                 _systemFloat.ApplyChange(-_restoreValue);
+                _hasDeappliedValue = true;
 
-                if(!_coroutineLeftoverActive)
+                if (!_coroutineLeftoverActive)
                 {
                     StartCoroutine(_leftoverCoroutine);
-                }      
-            }            
+                }
+            }
         }
     }
 
 
-    private void BurningWood ()
+    private void BurningWood()
     {
         if (_bonfireInventory.GetSlots[0].ItemObject == null)
         {
@@ -138,12 +132,12 @@ public class Bonfire : MonoBehaviour
         {
             _bonfireLit = true;
             StartCoroutine(_burnCoroutine);
-          //  StartCoroutine(BurningTime(_burningTime));
-        }    
+            //  StartCoroutine(BurningTime(_burningTime));
+        }
     }
 
 
-    IEnumerator BurningTime (float time)
+    IEnumerator BurningTime(float time)
     {
         _coroutineBurnActive = true;
         print("BurningTime activated");
@@ -151,13 +145,13 @@ public class Bonfire : MonoBehaviour
         print("wood Burned");
         _bonfireInventory.GetSlots[0].RemoveItem();
         _systemFloat.ApplyChange(-_restoreValue);
+        _hasDeappliedValue = true;
         _bonfireLit = false;
         _isTriggeredOnce = false;
         _coroutineBurnActive = false;
-        
     }
 
-    IEnumerator LeftoverTime (float time)
+    IEnumerator LeftoverTime(float time)
     {
         print("leftOverTime Started");
         _coroutineLeftoverActive = true;
@@ -168,5 +162,12 @@ public class Bonfire : MonoBehaviour
         _coroutineBurnActive = false;
         _isTriggeredOnce = false;
         _bonfireInventory.GetSlots[0].RemoveItem();
+
+        if(!_hasDeappliedValue)
+        {
+            _hasDeappliedValue = true;
+            _systemFloat.ApplyChange(-_restoreValue);
+           //  _hasDeappliedValue = false;
+        }
     }
 }
