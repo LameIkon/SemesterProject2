@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
   m_Name: WoodenBoards4
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 21300000, guid: d08e00c434f004043bdd7486caec81c3, type: 3}
+  m_Sprite: {fileID: 21300000, guid: fb9e1579b4c2d1845920ae9b56ecb1d1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1

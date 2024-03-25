@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
   m_Name: WoodenBoardsBackLeft
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 21300000, guid: b5fe8b3b83590a04884467c1e76994d1, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 17e382174802a0846890b1273dbc2d8b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1

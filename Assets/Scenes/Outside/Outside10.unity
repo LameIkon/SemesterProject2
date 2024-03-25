@@ -138,7 +138,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &39518208
 Transform:
   m_ObjectHideFlags: 0
@@ -17771,9 +17771,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96818496d960bc1458a401ea02f16521, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _scenes:
-  - _sceneAsset: {fileID: 102900000, guid: 01702497778f7464c86f5be87607ba29, type: 3}
-    _sceneName: Outside11
+  _loadScenes: []
+  _unloadScenes: []
 --- !u!61 &1080965243
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -32061,9 +32060,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96818496d960bc1458a401ea02f16521, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _scenes:
-  - _sceneAsset: {fileID: 102900000, guid: 80ff4ace7dc10ba4dbb35bc1b1821064, type: 3}
-    _sceneName: Outside00
+  _loadScenes: []
+  _unloadScenes: []
 --- !u!61 &1979961819
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -11,66 +11,66 @@ public class AsyncSceneLoader : MonoBehaviour
 
     private BoxCollider2D _sceneTrigger;
 
-    //[SerializeField] private SceneField[] _scenes;
-    [SerializeField] private SceneField[] _scenes;
+    [SerializeField] private SceneField[] _loadScenes; // This is the array of scenes that get loaded
+    [SerializeField] private SceneField[] _unloadScenes; // This is the array of scenes that get unloaded
+
 
     private void Awake()
     {
-        _sceneTrigger = GetComponent<BoxCollider2D>();
+        _sceneTrigger = GetComponent<BoxCollider2D>(); // Gets the collider on the gameObject
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
 
-        if (_scenes.Length == 0) return;
-
-        if (collision.CompareTag("Player"))
+        if (collision.CompareTag("Player") && _unloadScenes.Length != 0) // We get the Player and ensure that the _unloadScenes array is not null
         {
-            foreach (var scene in _scenes)
-            {
-                if (UnloadScene(scene)) 
-                {
-                    return;
-                }
-            }
+            StartCoroutine(UnloadScene(_unloadScenes)); // The Coroutine to unload the scenes is started
+            
         }
 
-        if (_scenes.Length == 0) return;
-
-        if (collision.CompareTag("Player"))
+        if (collision.CompareTag("Player") && _loadScenes.Length != 0) // We get the Player and ensure that  the _loadScenes array is not null
         {
-            foreach (var scene in _scenes)
-            {
-                LoadScene(scene);
-            }
+            StartCoroutine(LoadScene(_loadScenes)); // The Coroutine to load the scenes is started
         }
 
     }
 
-    private bool LoadScene(SceneField scene) 
+    // The Coroutine for loading the scenes 
+    private IEnumerator LoadScene(SceneField[] scenes) 
     {
-        if (!SceneManager.GetSceneByName(scene).isLoaded)
+        foreach (var scene in scenes) // looping over all the scenes in the array
         {
-            SceneManager.LoadSceneAsync(scene, LoadSceneMode.Additive);
-            return true;
-        }
-        else
-        {
-            return false;
+            if (!SceneManager.GetSceneByName(scene).isLoaded) // We check that the scene is not loaded such that it does not load already loaded scenes
+            {
+                SceneManager.LoadSceneAsync(scene, LoadSceneMode.Additive); // This is how we load multiple scenes together
+            }
+            while (!SceneManager.GetSceneByName(scene).isLoaded)
+            {
+                yield return null; // This will yield untill the scene has been loaded, if this was not here the game lags when to many scenes are loaded at once
+            }
         }
     }
 
-    private bool UnloadScene(SceneField scene) 
+    private IEnumerator UnloadScene(SceneField[] scenes) 
     {
-        if (SceneManager.GetSceneByName(scene).isLoaded)
+        foreach (var scene in scenes)
         {
-            SceneManager.UnloadSceneAsync(scene, UnloadSceneOptions.None);
-            return true;
+            if (SceneManager.GetSceneByName(scene).isLoaded)
+            {
+                SceneManager.UnloadSceneAsync(scene, UnloadSceneOptions.None);
+            }
+            while (SceneManager.GetSceneByName(scene).isLoaded) 
+            { 
+                yield return null; 
+            }
+            
         }
-        else
-        {
-            return false;
-        }
+    }
+
+    private void Reset()
+    {
+        _sceneTrigger.isTrigger = true;
     }
 
 }
