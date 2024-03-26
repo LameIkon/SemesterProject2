@@ -10,6 +10,8 @@ public class PlayerController : MovementController
     private Vector2 _moveVector;
     [SerializeField] private FloatVariable _stamina;
 
+    public Animator _PlayerAnimations;
+
     private void OnEnable()
     {
         InputReader.OnMoveEvent += HandleMove;
@@ -55,19 +57,23 @@ public class PlayerController : MovementController
         if (dir.x > .5f)
         {
             dir.x = 1;
+            _PlayerAnimations.Play("Idle_SideRight");
         }
         else if (dir.x < -.5f)
         {
             dir.x = -1;
+             _PlayerAnimations.Play("Idle_SideLeft");
         }
 
         if (dir.y > .5f)
         {
             dir.y = 1;
+             _PlayerAnimations.Play("Idle_Back");
         }
         else if (dir.y < -.5f)
         {
             dir.y = -1;
+             _PlayerAnimations.Play("Running_Front");
         }
 
         _moveVector = dir; // Here the direction vector is set to the _moveVector
