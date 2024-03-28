@@ -46,7 +46,6 @@ public abstract class UserInterface: MonoBehaviour
         CreateSlots();
         AddEvent(gameObject, EventTriggerType.PointerEnter, delegate { OnEnterInterface(gameObject); });
         AddEvent(gameObject, EventTriggerType.PointerExit, delegate { OnExitInterface(gameObject); });
-
     }
 
     private void OnSlotUpdate(InventorySlot slot)
@@ -87,7 +86,6 @@ public abstract class UserInterface: MonoBehaviour
     public void OnEnter(GameObject obj)
     {
         MouseData._SlotHoveredOver = obj;
-     
     }
 
     public void OnExit(GameObject obj)
