@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: d08104e0b9d384d4eb912304d6814a2a
+guid: c94dc9060c258a14691ff41dc219a183
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,7 +110,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Human_Idle_Front-Sheet_0
+      name: Human_Moving_Back-Sheet_0
       rect:
         serializedVersion: 2
         x: 0
@@ -124,14 +124,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c676fe4c78da2fb4aa7a4ed9e9da6f64
-      internalID: 1906206607
+      spriteID: 41d4c83392d0c8e4a82247a8e314cc91
+      internalID: -1916536103
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Human_Idle_Front-Sheet_1
+      name: Human_Moving_Back-Sheet_1
       rect:
         serializedVersion: 2
         x: 32
@@ -145,14 +145,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6e6fbf1f637085248a828b2ce4d79448
-      internalID: -241593954
+      spriteID: 5deefd1816aae614d856da33b4d83bc1
+      internalID: -942125038
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Human_Idle_Front-Sheet_2
+      name: Human_Moving_Back-Sheet_2
       rect:
         serializedVersion: 2
         x: 64
@@ -166,14 +166,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d1ab94494983e6043b149c5a6722023a
-      internalID: -2146542588
+      spriteID: 5a5cca0801356114ba821211214471dd
+      internalID: 185504268
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Human_Idle_Front-Sheet_3
+      name: Human_Moving_Back-Sheet_3
       rect:
         serializedVersion: 2
         x: 96
@@ -187,14 +187,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 09d864e1d79af984cbb20e1b53f9f839
-      internalID: -190307004
+      spriteID: 86c45fff4fd542d47bd682c109337bf9
+      internalID: 1824260847
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Human_Idle_Front-Sheet_4
+      name: Human_Moving_Back-Sheet_4
       rect:
         serializedVersion: 2
         x: 128
@@ -208,14 +208,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 31f5cd1b74bc7f44eb15cf97cf4d42a1
-      internalID: -994008182
+      spriteID: ac29f5762475b58489ab7886db8a4e26
+      internalID: -227960571
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Human_Idle_Front-Sheet_5
+      name: Human_Moving_Back-Sheet_5
       rect:
         serializedVersion: 2
         x: 160
@@ -229,14 +229,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3b5c873c4e9ecc54880a81557ffafc12
-      internalID: 1012380964
+      spriteID: 219a4cd8a96c59d43b1a84ffa8f5de74
+      internalID: -1480173267
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Human_Idle_Front-Sheet_6
+      name: Human_Moving_Back-Sheet_6
       rect:
         serializedVersion: 2
         x: 192
@@ -250,14 +250,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5905998f1437b1944a7e6b0ced4f6a03
-      internalID: 176518906
+      spriteID: 93ecb83760907c94797eb5f535837661
+      internalID: -1125943421
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Human_Idle_Front-Sheet_7
+      name: Human_Moving_Back-Sheet_7
       rect:
         serializedVersion: 2
         x: 224
@@ -271,14 +271,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4105c93d81f74fe4dbf1dbb479c8a7cc
-      internalID: 888181898
+      spriteID: b6be385c6bc505c479e40ae45215b222
+      internalID: 631144271
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Human_Idle_Front-Sheet_8
+      name: Human_Moving_Back-Sheet_8
       rect:
         serializedVersion: 2
         x: 256
@@ -292,8 +292,176 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3ca02909526db884db2a3fd98953853d
-      internalID: -427486813
+      spriteID: b05f96005b08baf4aa1469d350202900
+      internalID: -486895619
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Human_Moving_Back-Sheet_9
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bfb44530d4aebf2499f278db168de22a
+      internalID: -1976205866
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Human_Moving_Back-Sheet_10
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b627cc3c672fb31408a6e39ce43e5d5a
+      internalID: -1057345841
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Human_Moving_Back-Sheet_11
+      rect:
+        serializedVersion: 2
+        x: 352
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6c8dd40d9448ec746bc834d65db6942c
+      internalID: 744435356
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Human_Moving_Back-Sheet_12
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 051828d31c43bd1448d2f43dbedf86ec
+      internalID: -1857396562
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Human_Moving_Back-Sheet_13
+      rect:
+        serializedVersion: 2
+        x: 416
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c8f8f8080543ea045bc47d0751960f5e
+      internalID: 328431296
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Human_Moving_Back-Sheet_14
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fc7fd54e3c4ded649833cc0926a73272
+      internalID: 1427530071
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Human_Moving_Back-Sheet_15
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c47bb2d3ea7cd44469a9aa27de7b1e12
+      internalID: -477963199
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Human_Moving_Back-Sheet_16
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2ef05437fcb0c3d46b8480c2336b6774
+      internalID: -208477464
       vertices: []
       indices: 
       edges: []
@@ -309,15 +477,23 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Human_Idle_Front-Sheet_0: 1906206607
-      Human_Idle_Front-Sheet_1: -241593954
-      Human_Idle_Front-Sheet_2: -2146542588
-      Human_Idle_Front-Sheet_3: -190307004
-      Human_Idle_Front-Sheet_4: -994008182
-      Human_Idle_Front-Sheet_5: 1012380964
-      Human_Idle_Front-Sheet_6: 176518906
-      Human_Idle_Front-Sheet_7: 888181898
-      Human_Idle_Front-Sheet_8: -427486813
+      Human_Moving_Back-Sheet_0: -1916536103
+      Human_Moving_Back-Sheet_1: -942125038
+      Human_Moving_Back-Sheet_10: -1057345841
+      Human_Moving_Back-Sheet_11: 744435356
+      Human_Moving_Back-Sheet_12: -1857396562
+      Human_Moving_Back-Sheet_13: 328431296
+      Human_Moving_Back-Sheet_14: 1427530071
+      Human_Moving_Back-Sheet_15: -477963199
+      Human_Moving_Back-Sheet_16: -208477464
+      Human_Moving_Back-Sheet_2: 185504268
+      Human_Moving_Back-Sheet_3: 1824260847
+      Human_Moving_Back-Sheet_4: -227960571
+      Human_Moving_Back-Sheet_5: -1480173267
+      Human_Moving_Back-Sheet_6: -1125943421
+      Human_Moving_Back-Sheet_7: 631144271
+      Human_Moving_Back-Sheet_8: -486895619
+      Human_Moving_Back-Sheet_9: -1976205866
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

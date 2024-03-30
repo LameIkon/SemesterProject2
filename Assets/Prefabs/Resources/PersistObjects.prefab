@@ -3943,7 +3943,7 @@ PrefabInstance:
     - target: {fileID: 968936245807734540, guid: e36a38a4dc77a644bbfbe397c4ca9e30, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: -1638345707, guid: e2a7a1c2fecc27b439919cf5c5a0fca8, type: 3}
+      objectReference: {fileID: 1906206607, guid: d08104e0b9d384d4eb912304d6814a2a, type: 3}
     - target: {fileID: 968936245807734540, guid: e36a38a4dc77a644bbfbe397c4ca9e30, type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 1
@@ -3985,9 +3985,13 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 2691581505823338532, guid: e36a38a4dc77a644bbfbe397c4ca9e30, type: 3}
-      propertyPath: _PlayerAnimations
+      propertyPath: _animator
       value: 
       objectReference: {fileID: 1177097097165489872}
+    - target: {fileID: 2691581505823338532, guid: e36a38a4dc77a644bbfbe397c4ca9e30, type: 3}
+      propertyPath: _PlayerAnimations
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 7245225677334882465, guid: e36a38a4dc77a644bbfbe397c4ca9e30, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

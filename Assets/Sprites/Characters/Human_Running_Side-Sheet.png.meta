@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: d08104e0b9d384d4eb912304d6814a2a
+guid: 62ca1028fe18a1345bd4f22408287db8
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,7 +110,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Human_Idle_Front-Sheet_0
+      name: Human_Running_Side-Sheet_0
       rect:
         serializedVersion: 2
         x: 0
@@ -124,14 +124,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c676fe4c78da2fb4aa7a4ed9e9da6f64
-      internalID: 1906206607
+      spriteID: 73048465cc8c98c4887a130f9e46d38f
+      internalID: 1432548574
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Human_Idle_Front-Sheet_1
+      name: Human_Running_Side-Sheet_1
       rect:
         serializedVersion: 2
         x: 32
@@ -145,14 +145,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6e6fbf1f637085248a828b2ce4d79448
-      internalID: -241593954
+      spriteID: d1064874272aedb49b96e557d322b923
+      internalID: 158360963
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Human_Idle_Front-Sheet_2
+      name: Human_Running_Side-Sheet_2
       rect:
         serializedVersion: 2
         x: 64
@@ -166,14 +166,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d1ab94494983e6043b149c5a6722023a
-      internalID: -2146542588
+      spriteID: 1f717c61a0b5c2e4582cf98f1d486127
+      internalID: -2081475545
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Human_Idle_Front-Sheet_3
+      name: Human_Running_Side-Sheet_3
       rect:
         serializedVersion: 2
         x: 96
@@ -187,14 +187,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 09d864e1d79af984cbb20e1b53f9f839
-      internalID: -190307004
+      spriteID: a82630631f402ce41a44afa17a6587a8
+      internalID: 415733849
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Human_Idle_Front-Sheet_4
+      name: Human_Running_Side-Sheet_4
       rect:
         serializedVersion: 2
         x: 128
@@ -208,14 +208,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 31f5cd1b74bc7f44eb15cf97cf4d42a1
-      internalID: -994008182
+      spriteID: 7a8728636e75dc34ab15c042999ccbfa
+      internalID: 1707840126
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Human_Idle_Front-Sheet_5
+      name: Human_Running_Side-Sheet_5
       rect:
         serializedVersion: 2
         x: 160
@@ -229,14 +229,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3b5c873c4e9ecc54880a81557ffafc12
-      internalID: 1012380964
+      spriteID: 94e6357514ad6a64ba9792c75f4ddd6f
+      internalID: -1916346506
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Human_Idle_Front-Sheet_6
+      name: Human_Running_Side-Sheet_6
       rect:
         serializedVersion: 2
         x: 192
@@ -250,14 +250,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5905998f1437b1944a7e6b0ced4f6a03
-      internalID: 176518906
+      spriteID: d140f99752423be4fa1293a8c95ab655
+      internalID: 124925627
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Human_Idle_Front-Sheet_7
+      name: Human_Running_Side-Sheet_7
       rect:
         serializedVersion: 2
         x: 224
@@ -271,14 +271,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4105c93d81f74fe4dbf1dbb479c8a7cc
-      internalID: 888181898
+      spriteID: b9f70afa81605384c8f48b7b61b25372
+      internalID: -1186168515
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Human_Idle_Front-Sheet_8
+      name: Human_Running_Side-Sheet_8
       rect:
         serializedVersion: 2
         x: 256
@@ -292,8 +292,71 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3ca02909526db884db2a3fd98953853d
-      internalID: -427486813
+      spriteID: 4a9b9f37a687837468e80cba6e682811
+      internalID: 1973056454
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Human_Running_Side-Sheet_9
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9c55c013b0819844e961742e34b892f5
+      internalID: 1461730715
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Human_Running_Side-Sheet_10
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 39acede8e59379d40a60ee7f974d4460
+      internalID: -581097272
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Human_Running_Side-Sheet_11
+      rect:
+        serializedVersion: 2
+        x: 352
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a80b1cb994eb28c4eb4216b6fcfdf062
+      internalID: 393159282
       vertices: []
       indices: 
       edges: []
@@ -309,15 +372,18 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Human_Idle_Front-Sheet_0: 1906206607
-      Human_Idle_Front-Sheet_1: -241593954
-      Human_Idle_Front-Sheet_2: -2146542588
-      Human_Idle_Front-Sheet_3: -190307004
-      Human_Idle_Front-Sheet_4: -994008182
-      Human_Idle_Front-Sheet_5: 1012380964
-      Human_Idle_Front-Sheet_6: 176518906
-      Human_Idle_Front-Sheet_7: 888181898
-      Human_Idle_Front-Sheet_8: -427486813
+      Human_Running_Side-Sheet_0: 1432548574
+      Human_Running_Side-Sheet_1: 158360963
+      Human_Running_Side-Sheet_10: -581097272
+      Human_Running_Side-Sheet_11: 393159282
+      Human_Running_Side-Sheet_2: -2081475545
+      Human_Running_Side-Sheet_3: 415733849
+      Human_Running_Side-Sheet_4: 1707840126
+      Human_Running_Side-Sheet_5: -1916346506
+      Human_Running_Side-Sheet_6: 124925627
+      Human_Running_Side-Sheet_7: -1186168515
+      Human_Running_Side-Sheet_8: 1973056454
+      Human_Running_Side-Sheet_9: 1461730715
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
