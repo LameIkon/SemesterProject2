@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: SquareRadius2
   m_EditorClassIdentifier: 
   _waitBetweenWalk:
-    MinValue: 0.5
-    MaxValue: 0.8
+    MinValue: 2
+    MaxValue: 2
   _squareSize: 2

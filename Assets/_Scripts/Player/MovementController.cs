@@ -1,4 +1,6 @@
+using System.Collections;
 using System.Runtime.CompilerServices;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class MovementController : MonoBehaviour
@@ -19,12 +21,19 @@ public class MovementController : MonoBehaviour
     [SerializeField] protected Animator _animator;
     protected string _lookingDirection; // Used to check what direction is moving towards
     protected float _walkingSpeed; // Used to check if the player is running
+    protected bool _isIdling;
 
     void Awake()
     {
         _movePoint.parent = null; //detachs the MovePoint as a child of player. Not acutally needed. 
         _moveSpeed = _speedReference.GetMinValue(); // Sets the walking speed 
         _walkingSpeed = _speedReference.GetMinValue(); // Used to check if _moveSpeed gets changed.
+        StopAllCoroutines();
+    }
+
+    private void Start()
+    {
+        //StartCoroutine(IdleAnimate());         
     }
 
     protected virtual void FixedUpdate() 
@@ -91,9 +100,14 @@ public class MovementController : MonoBehaviour
     private void Update() // Animations
     {
         if (Vector3.Distance(transform.position, _movePoint.position) == 0) //Checks when you are standing still
+        {
+            if (!_isIdling)
             {
                 IdleAnimation();
+                _isIdling = true;
             }
+                
+        }
     }
 
     void StartAnimation()
@@ -102,6 +116,7 @@ public class MovementController : MonoBehaviour
             {
             if (Vector3.Distance(transform.position, _movePoint.position) >= 1f) // Only change when you move 1 tile
             {
+                _isIdling = false;
                 if (_walkingSpeed < _moveSpeed) // If your moveSpeed is faster than your walkingpeed it means you are running
                 {
                     RunningAnimation();
@@ -114,8 +129,15 @@ public class MovementController : MonoBehaviour
         } 
     }
 
+    void CheckIdleState()
+    {
+         if (Vector3.Distance(transform.position, _movePoint.position) == 0) //Checks when you are standing still
+            {
+                IdleAnimation();
+            }
+    }
 
-
+    IEnumerator idleCoroutine;
     void IdleAnimation()
     {
         switch (_lookingDirection)
@@ -131,12 +153,70 @@ public class MovementController : MonoBehaviour
                 return;
             case "Front":
                 _animator.Play("Idle_Front");
+                //if (idleCoroutine != null)
+                //{
+                //    StopCoroutine(idleCoroutine);
+                //    Debug.Log("stop");
+                //}
+                //idleCoroutine = IdleAnimate();
+                //StartCoroutine(idleCoroutine);
                 return;
             default: 
+                //if (idleCoroutine != null)
+                //{
+                //    StopCoroutine(idleCoroutine);
+                //    Debug.Log("stop");
+                //}
+                //idleCoroutine = IdleAnimate();
+                //StartCoroutine(idleCoroutine);
                 _animator.Play("Idle_Front");
                 break;
         }
     }
+
+    ////IEnumerator IdleAnimate()
+    ////{
+    ////    while (true)
+    ////    {
+    ////        Debug.Log("Cycle");
+    ////        IdleFrontVariations();
+    ////        yield return new WaitUntil(() => IsAnimationFinished());
+    ////        Debug.Log("Animation finished");
+    ////        yield return new WaitForSeconds(2);
+    ////    }
+    ////}
+    //bool IsAnimationFinished()
+    //{
+    //    // Check if the current animation is finished playing
+    //    return _animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1; // 1 indicate the end of an animation se;
+    //}
+
+    //void IdleFrontVariations()
+    //{
+    //    int number = Random.Range(0,8);
+    //    Debug.Log(number);
+    //    switch (number)
+    //    {
+    //        case 0:
+    //        case 1:
+    //        case 2:
+    //        case 3:
+    //        case 4:
+    //        case 5:
+    //            _animator.Play("Idle_Front");
+    //            return;
+    //        case 6:
+    //            _animator.Play("Idle_Front_Var_1_1");
+    //            return;
+    //        case 7:
+    //            _animator.Play("Idle_Front_Var_1_2");
+    //            return;
+    //        default:
+    //            _animator.Play("Idle_Front");
+    //            break;
+
+    //    }
+    //}
 
     void MoveAnimation()
     {
