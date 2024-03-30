@@ -15,7 +15,7 @@ public class MovementController : MonoBehaviour
     [SerializeField, Tooltip("Select what layers should block movement")]
     LayerMask[] _whatStopsMovement; // This is made into an array as the layers that stop Movement should not change during runtime, therefore it is redundat to make it a List
 
-    [Header("Animator")] 
+
     [SerializeField] protected Animator _animator;
     protected string _lookingDirection; // Used to check what direction is moving towards
     protected float _walkingSpeed; // Used to check if the player is running
@@ -24,38 +24,14 @@ public class MovementController : MonoBehaviour
     {
         _movePoint.parent = null; //detachs the MovePoint as a child of player. Not acutally needed. 
         _moveSpeed = _speedReference.GetMinValue(); // Sets the walking speed 
-        _walkingSpeed = _speedReference.GetMinValue();
+        _walkingSpeed = _speedReference.GetMinValue(); // Used to check if _moveSpeed gets changed.
     }
 
     protected virtual void FixedUpdate() 
     {
         transform.position = Vector3.MoveTowards(transform.position, _movePoint.position, _moveSpeed * Time.fixedDeltaTime); // this "transforms our position to move towards the new point
-
-
     }
 
-    private void Update() // Animations
-    {
-        if (_animator != null)
-        {
-            if (Vector3.Distance(transform.position, _movePoint.position) >= 1f)
-            {
-                if (_walkingSpeed < _moveSpeed) // If your moveSpeed is faster than your walkingpeed it means you are running
-                {
-                 RunningAnimation();
-                }
-                else
-                {
-                    MoveAnimation(); 
-                }
-            }
-
-            if (Vector3.Distance(transform.position, _movePoint.position) == 0) //Checks when you are standing still
-            {
-                IdleAnimation();
-            }
-        }
-    }
 
     public void Move(Vector3 direction)
     {
@@ -85,8 +61,12 @@ public class MovementController : MonoBehaviour
             direction.y = -1;
             _lookingDirection = "Front";
             }
+        StartAnimation();
         }
+
     }
+
+  
 
     // This method is made such that you do not need to hard code in the layers that stop movement
     private bool CanMove(Vector3 direction) 
@@ -107,9 +87,37 @@ public class MovementController : MonoBehaviour
         return _movePoint.position + direction;
     }
 
+      
+    private void Update() // Animations
+    {
+        if (Vector3.Distance(transform.position, _movePoint.position) == 0) //Checks when you are standing still
+            {
+                IdleAnimation();
+            }
+    }
+
+    void StartAnimation()
+    {
+        if (_animator != null)
+            {
+            if (Vector3.Distance(transform.position, _movePoint.position) >= 1f) // Only change when you move 1 tile
+            {
+                if (_walkingSpeed < _moveSpeed) // If your moveSpeed is faster than your walkingpeed it means you are running
+                {
+                    RunningAnimation();
+                }
+                else
+                {
+                    MoveAnimation(); 
+                }
+            }
+        } 
+    }
+
+
+
     void IdleAnimation()
     {
-        Debug.Log("Idle");
         switch (_lookingDirection)
         {
             case "Right":
@@ -132,7 +140,6 @@ public class MovementController : MonoBehaviour
 
     void MoveAnimation()
     {
-        Debug.Log("moving");
         switch (_lookingDirection)
         {
             case "Right":
@@ -155,7 +162,6 @@ public class MovementController : MonoBehaviour
 
     void RunningAnimation()
     {
-        Debug.Log("Running");
         switch (_lookingDirection)
         {
             case "Right":
