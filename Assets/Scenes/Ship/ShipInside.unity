@@ -21695,7 +21695,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6604010110430928078, guid: bb96241f00fb15940ada3d2d15844200, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6989921327751538064, guid: bb96241f00fb15940ada3d2d15844200, type: 3}
       propertyPath: _brain
@@ -23346,7 +23346,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6604010110430928078, guid: bb96241f00fb15940ada3d2d15844200, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7104037758981524048, guid: bb96241f00fb15940ada3d2d15844200, type: 3}
       propertyPath: m_Mesh
@@ -30096,7 +30096,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6604010110430928078, guid: bb96241f00fb15940ada3d2d15844200, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6989921327751538064, guid: bb96241f00fb15940ada3d2d15844200, type: 3}
       propertyPath: _brain
