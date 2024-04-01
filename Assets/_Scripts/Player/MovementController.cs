@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
 public class MovementController : MonoBehaviour
 {
 
@@ -10,10 +11,20 @@ public class MovementController : MonoBehaviour
 
     [SerializeField, Tooltip("Select what layers should block movement")]
     LayerMask[] _whatStopsMovement; // This is made into an array as the layers that stop Movement should not change during runtime, therefore it is redundat to make it a List
+    [SerializeField] LayerMask _snowLayer;
+    [SerializeField] LayerMask _woodLayer;
+
+    [Header("Audio Sounds"), SerializeField]
+    private AudioEvent _snowStepSound;
+    [SerializeField] private AudioEvent _woodStepSound;
+    [SerializeField] private AudioEvent _stopMoveSound;
+    private AudioSource _audioSource;
+
 
 
     void Awake()
     {
+        _audioSource = GetComponent<AudioSource>();
         _movePoint.parent = null; //detachs the MovePoint as a child of player. Not acutally needed. 
         _moveSpeed = _speedReference.GetMinValue(); // Sets the walking speed 
     }
@@ -28,17 +39,49 @@ public class MovementController : MonoBehaviour
         if (CanMove(direction)) // if we DON't overlap with any colliders on nonwalkable layers, we CAN move.
         {
             _movePoint.position = MovePosition(direction); //basicly we dont actually move the "player" we move the invisible movePoint, and the player constantly "MoveTowards" that point in FixedUpdate.
+
+            if (_woodStepSound != null && !_audioSource.isPlaying)
+            {
+                _woodStepSound.Play(_audioSource);
+            }
         }
     }
 
     // This method is made such that you do not need to hard code in the layers that stop movement
-    private bool CanMove(Vector3 direction) 
+    private bool CanMove(Vector3 direction)
     {
         bool canMove = true; // We asume you can move 
-        
+
         for (int i = 0; i < _whatStopsMovement.Length; i++)   // Here we iterate over the array to check if you can move to that position
         {
             canMove = !Physics2D.OverlapCircle(MovePosition(direction), 0.2f, _whatStopsMovement[i]); // We check if the _movePoint overlaps a layer it is stopped by, if it does it will return true and then we take the oposite of that
+        }
+
+        if (canMove)
+        {
+            Debug.Log("StopSound?");
+            if (_stopMoveSound != null)
+            {
+                _stopMoveSound.Play(_audioSource);
+            }
+        }
+        else 
+        {
+            if (Physics2D.OverlapCircle(MovePosition(direction), 0.2f, _woodLayer))
+            {
+                Debug.Log("WoodLayer");
+                if (_woodStepSound != null) 
+                {
+                    _woodStepSound.Play(_audioSource);
+                }
+            }
+            else if (Physics2D.OverlapCircle(MovePosition(direction), 0.2f, _snowLayer)) 
+            {
+                if (_snowStepSound != null) 
+                {
+                    _snowStepSound.Play(_audioSource);
+                }
+            }
         }
 
         return canMove;
