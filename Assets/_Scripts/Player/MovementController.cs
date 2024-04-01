@@ -99,15 +99,17 @@ public class MovementController : MonoBehaviour
       
     private void Update() // Animations
     {
-        if (Vector3.Distance(transform.position, _movePoint.position) == 0) //Checks when you are standing still
+        if (_animator != null)
         {
-            if (!_isIdling)
+            if (Vector3.Distance(transform.position, _movePoint.position) == 0) //Checks when you are standing still
             {
+                if (!_isIdling)
+                {
                 IdleAnimation();
                 _isIdling = true;
+                }               
             }
-                
-        }
+        }        
     }
 
     void StartAnimation()

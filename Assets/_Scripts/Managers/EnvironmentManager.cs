@@ -12,12 +12,15 @@ public class EnvironmentManager : MonoBehaviour
     [SerializeField] private GameObject _blizzard;
     [SerializeField] private GameObject _snow;
     [SerializeField] private GameObject _fog;
+    public GameObject _barrierBlizzard;
 
     [Header("Weather Effects")]
     [SerializeField] private ParticleSystem _blizzardEffect;
     [SerializeField] private VisualEffect _blizzardFogEffect;
     [SerializeField] private ParticleSystem _snowEffect;
     [SerializeField] private VisualEffect _fogEffect;
+    public ParticleSystem _barrierBlizzardEffect;
+    public VisualEffect _barrierBlizzardFogEffect;
 
     [Header("Weather Checkers")] // Currently not being used by anything
     public static bool _IsBlizzard;
@@ -31,6 +34,7 @@ public class EnvironmentManager : MonoBehaviour
     [SerializeField] private float _blizzardTemp = -450f; // Temperature in a blizzard
     [SerializeField] private float _snowTemp = -35f; // temperature in a snow weather
     [SerializeField] private float _fogTemp = -25f; // temperature in a fog
+    [SerializeField] private float _barrierBlizzardTemp = -60f; // Temperature in an area you shouldnt be
 
     [SerializeField] private FloatVariable _CurrentOutsideTemperature; // This is the current temperature. Used to store the temperatures
 
@@ -210,6 +214,20 @@ public class EnvironmentManager : MonoBehaviour
         }
     }
 
+    public void BarrierBlizzard()
+    {
+        if (!_barrierBlizzard.activeInHierarchy) // Checks if the GameObject is active in the scene
+        {
+            _barrierBlizzard.SetActive(true); // Make it active
+        }
+
+        _barrierBlizzardEffect.Play();
+        _barrierBlizzardFogEffect.Play();
+
+        _CurrentOutsideTemperature.SetValue(_barrierBlizzardTemp); // Change current temperature
+
+    }
+
     public void ResetWeather() // Reset everything back to default
     {
         // Stop all visual weather conditions
@@ -230,5 +248,21 @@ public class EnvironmentManager : MonoBehaviour
 
         // Reset to default movement speed
         //SetPlayerSpeed(1f);
+    }
+
+    public void ExitBlizzardBarrier()
+    {
+        _CurrentOutsideTemperature.SetValue(_defaultTemp);
+    }
+
+    public void RemoveBarrier() // works exactly like resetWeather but needs to be independent
+    {
+        _barrierBlizzardEffect.Stop();
+        _barrierBlizzardFogEffect.Stop();
+
+        if (!_blizzard && !_IsSnow && !_IsFog) // only change if no other weather effects is ongoing
+        {
+            _CurrentOutsideTemperature.SetValue(_defaultTemp);
+        }
     }
 }
