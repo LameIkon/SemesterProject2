@@ -19,7 +19,7 @@ public class Health : MonoBehaviour, IDamageable
 
     public void Die()
     {
-        //Destroy(gameObject);        
+        Destroy(gameObject);        
     }
 
     public void TakeDamage(float damageAmount)

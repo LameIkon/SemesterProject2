@@ -150,6 +150,7 @@ MonoBehaviour:
   _snowStepSound: {fileID: 0}
   _woodStepSound: {fileID: 11400000, guid: 93f58c167a5675b48ab67bb925ad6e1c, type: 2}
   _stopMoveSound: {fileID: 0}
+  _animator: {fileID: 0}
   _stamina: {fileID: 11400000, guid: c3d7f87802b2aa447a728af33e442d66, type: 2}
 --- !u!50 &2218026908373558036
 Rigidbody2D:
@@ -411,7 +412,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40801b429848bff41a8a6b82dcf0bd5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bulletDamage: 0
+  _bulletDamage: 10
   _bulletSpeed: 0
 --- !u!1001 &2156550378514944284
 PrefabInstance:

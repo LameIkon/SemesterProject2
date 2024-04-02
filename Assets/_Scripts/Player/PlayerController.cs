@@ -10,11 +10,15 @@ public class PlayerController : MovementController
     private Vector2 _moveVector;
     [SerializeField] private FloatVariable _stamina;
 
+    private bool _inDialogue = false;
+
     private void OnEnable()
     {
         InputReader.OnMoveEvent += HandleMove;
         InputReader.OnRunStartEvent += HandleRunStart;
         InputReader.OnRunCancelEvent += HandleRunCancled;
+        StartDialogue.OnDialogueStartedEvent += HandleDialogueStart;
+        DialogueManager.OnDialogueEndedEvent += HandleDialogueEnd;
     }
 
     private void OnDisable()
@@ -22,6 +26,8 @@ public class PlayerController : MovementController
         InputReader.OnMoveEvent -= HandleMove;
         InputReader.OnRunStartEvent -= HandleRunStart;
         InputReader.OnRunCancelEvent -= HandleRunCancled;
+        StartDialogue.OnDialogueStartedEvent -= HandleDialogueStart;
+        DialogueManager.OnDialogueEndedEvent -= HandleDialogueEnd;
     }
 
     private void Start()
@@ -33,16 +39,18 @@ public class PlayerController : MovementController
     {
         base.FixedUpdate();
 
-        if (Vector3.Distance(transform.position, _movePoint.position) <= .05f) //makes sure you can't move if u have not reached ur new position yet.
+        if (!_inDialogue)
         {
-            Move(_moveVector);
+            if (Vector3.Distance(transform.position, _movePoint.position) <= .05f) //makes sure you can't move if u have not reached ur new position yet.
+            {
+                Move(_moveVector);
 
-        }
+            }
 
-
-        if (_stamina.GetValue() <= 0f) // Update if stamina reaches 0 to set Movement speed
-        {
-            HandleRunCancled();
+            if (_stamina.GetValue() <= 0f) // Update if stamina reaches 0 to set Movement speed
+            {
+                HandleRunCancled();
+            }
         }
     }
 
@@ -94,7 +102,17 @@ public class PlayerController : MovementController
     void HandleRunCancled() 
     {
         SetSpeed(_speedReference.GetMinValue());
-    } 
+    }
+
+    void HandleDialogueStart() 
+    {
+        _inDialogue = true;
+    }
+
+    void HandleDialogueEnd() 
+    {
+        _inDialogue = false;
+    }
     #endregion
 
     // <NOT NECESSARY>
