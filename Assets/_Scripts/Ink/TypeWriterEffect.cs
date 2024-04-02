@@ -6,7 +6,7 @@ using UnityEngine;
 public class TypeWriterEffect : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _textComponent;
-    [SerializeField] private string[] _lines;
+    [SerializeField, TextArea(2,4)] private string[] _lines;
     [SerializeField] private float _textSpeed;
     private int _index;
 
