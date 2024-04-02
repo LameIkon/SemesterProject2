@@ -16,7 +16,10 @@ public class LightRotation : MonoBehaviour
 
     void Update()
     {
-        CursorManager.MouseRotation(_lightTransform);
+        if (_lightTransform != null)
+        {
+            CursorManager.MouseRotation(_lightTransform);
+        }
     }
 
     //transform.up = CursorManager._mousePosition;  // Bruges i forlængelse med metoden ovenover

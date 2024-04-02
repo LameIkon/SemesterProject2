@@ -27,6 +27,8 @@ public class StartDialogue : MonoBehaviour
     [Header ("Selected Dialogue")]
     [SerializeField] private TextAsset _chosenDialogue;
 
+    public static event Action OnDialogueStartedEvent;
+
     private void Awake()
     {
         // Fist child is canvas and the next is the child of the canvas
@@ -61,6 +63,7 @@ public class StartDialogue : MonoBehaviour
                 _showInteraction.SetActive(false); // Hide Interaction
                 _interactionChecker = true;
                 Debug.Log("called");
+                OnDialogueStartedEvent?.Invoke(); // This event is called such NPC do not move during dialogue
            }
         }
     }

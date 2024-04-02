@@ -1,5 +1,5 @@
 using Ink.Runtime;
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using System.Xml.Serialization;
 using TMPro;
@@ -41,6 +41,7 @@ public class DialogueManager : MonoBehaviour
     [Header("Selected Dialogue")]
     public TextAsset DialogueData; // Used in other scripts to change the data. Other scripts will store their choosen dialogue data here
 
+    public static event Action OnDialogueEndedEvent; // Event for when Dialogue is finnished
 
     void Awake()
     {
@@ -203,6 +204,7 @@ public class DialogueManager : MonoBehaviour
     void SetDialogueExitFalse()
     {
         _DialogueExited = false;
+        OnDialogueEndedEvent?.Invoke(); // Event for when the dialogue is finnished 
     }
 
     string LoadNameOFNPC()
@@ -213,8 +215,6 @@ public class DialogueManager : MonoBehaviour
         }
         return _NPCName;
     }
-
-
 
 
 }

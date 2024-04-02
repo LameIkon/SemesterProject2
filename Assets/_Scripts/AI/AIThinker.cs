@@ -10,6 +10,8 @@ public class AIThinker : MonoBehaviour
 
     private Dictionary<string, object> _memory;
 
+    private bool inDialogue = false;
+
     public T Remember<T>(string key)
     {
         object result;
@@ -26,6 +28,10 @@ public class AIThinker : MonoBehaviour
 
     void OnEnable()
     {
+
+        StartDialogue.OnDialogueStartedEvent += HandleDialogueStart; // Handles events for dialogue to make NPC stop walking
+        DialogueManager.OnDialogueEndedEvent += HandleDialogueEnd;
+
         if (!_brain)
         {
             enabled = false;
@@ -36,14 +42,34 @@ public class AIThinker : MonoBehaviour
         _brain.Initialize(this);
     }
 
+    private void OnDisable()
+    {
+        StartDialogue.OnDialogueStartedEvent -= HandleDialogueStart;
+        DialogueManager.OnDialogueEndedEvent -= HandleDialogueEnd;
+    }
+
     void Update()
     {
-        _brain.Think(this);
+        if (!inDialogue)
+        {
+            _brain.Think(this);
+        }
     }
 
     public void SetBrain(BrainAI brain) 
     {
         _brain = brain; 
+    }
+
+
+    void HandleDialogueStart() 
+    {
+        inDialogue = true;
+    }
+
+    void HandleDialogueEnd() 
+    {
+        inDialogue = false;
     }
 
 }

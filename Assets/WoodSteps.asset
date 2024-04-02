@@ -13,12 +13,10 @@ MonoBehaviour:
   m_Name: WoodSteps
   m_EditorClassIdentifier: 
   _clips:
-  - {fileID: 8300000, guid: 992b20083d1c83b4c9a415e9196a7e54, type: 3}
-  - {fileID: 8300000, guid: 6d90d9ddbee6ab947ae2e94f3c307266, type: 3}
   - {fileID: 8300000, guid: 8b9b0fc0b68addb40b25a782477fd929, type: 3}
   _volume:
-    MinValue: 0.6
+    MinValue: 0.8
     MaxValue: 1
   _pitch:
-    MinValue: 0.6
-    MaxValue: 1.4
+    MinValue: 0.9
+    MaxValue: 1.1

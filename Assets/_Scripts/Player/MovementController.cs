@@ -40,9 +40,30 @@ public class MovementController : MonoBehaviour
         {
             _movePoint.position = MovePosition(direction); //basicly we dont actually move the "player" we move the invisible movePoint, and the player constantly "MoveTowards" that point in FixedUpdate.
 
-            if (_woodStepSound != null && !_audioSource.isPlaying)
+            FootstepSound(direction); // Does net work
+        }
+    }
+
+
+    private void FootstepSound(Vector3 dir)  // This does not work yet.
+    {
+        Ray ray = Camera.main.ScreenPointToRay(_movePoint.position);
+        RaycastHit2D[] hit = Physics2D.GetRayIntersectionAll(ray);
+
+        if (Physics2D.OverlapCircle(MovePosition(dir), 0.2f, _snowLayer))
+        {
+            Debug.Log("WoodLayer");
+            if (_woodStepSound != null)
             {
                 _woodStepSound.Play(_audioSource);
+            }
+        }
+        else if (Physics2D.OverlapCircle(MovePosition(dir), 0.2f, _snowLayer))
+        {
+            Debug.Log("SnowLayer");
+            if (_snowStepSound != null)
+            {
+                _snowStepSound.Play(_audioSource);
             }
         }
     }
@@ -57,32 +78,6 @@ public class MovementController : MonoBehaviour
             canMove = !Physics2D.OverlapCircle(MovePosition(direction), 0.2f, _whatStopsMovement[i]); // We check if the _movePoint overlaps a layer it is stopped by, if it does it will return true and then we take the oposite of that
         }
 
-        if (canMove)
-        {
-            Debug.Log("StopSound?");
-            if (_stopMoveSound != null)
-            {
-                _stopMoveSound.Play(_audioSource);
-            }
-        }
-        else 
-        {
-            if (Physics2D.OverlapCircle(MovePosition(direction), 0.2f, _woodLayer))
-            {
-                Debug.Log("WoodLayer");
-                if (_woodStepSound != null) 
-                {
-                    _woodStepSound.Play(_audioSource);
-                }
-            }
-            else if (Physics2D.OverlapCircle(MovePosition(direction), 0.2f, _snowLayer)) 
-            {
-                if (_snowStepSound != null) 
-                {
-                    _snowStepSound.Play(_audioSource);
-                }
-            }
-        }
 
         return canMove;
     }
