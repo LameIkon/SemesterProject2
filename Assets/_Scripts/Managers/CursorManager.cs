@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -50,36 +51,26 @@ public class CursorManager : MonoBehaviour
     {
         DetectObject();
     }
-    
-    private static Dictionary<int, Vector2> _mouseDictionary;
 
     public static void MouseRotation(Transform transform)   // Metoden sørger for at koordinatsystemet (som sporer muspositionen) forbliver i midten af skæremen og ikke i nederste venstre hjørne
     {
 
-        //Vector2 mousePos = Vector2.left;
+        if (_mousePosition == Vector2.zero) // the mouse event will be a zero vector when the inventory is opened, this will return and not recalculate the rotation
+        {
+            return;
+        }
+        else 
+        {
+        
+            _mousePositionRotation = Camera.main.ScreenToWorldPoint(new Vector3(_mousePosition.x, _mousePosition.y, 0)) - transform.position;  // Her centraliserer vi muspositionen i midten af skærmen
+            float angle = Mathf.Atan2(_mousePositionRotation.y, _mousePositionRotation.x) * Mathf.Rad2Deg; 
+            _rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
 
-        //if (_mousePosition != Vector2.zero)
-        //{
-        //    _mouseDictionary.Remove(1);
-        //    mousePos = _mousePosition;
-        //    _mouseDictionary.Add(1, mousePos);
-        //}
-        //else 
-        //{
-        //    if (_mouseDictionary.ContainsKey(1))
-        //    {
-        //        mousePos = _mouseDictionary[1];
-        //    }
-        //}
+            transform.rotation = _rotation;
 
-        _mousePositionRotation = Camera.main.ScreenToWorldPoint(new Vector3(_mousePosition.x, _mousePosition.y, 0)) - transform.position;  // Her centraliserer vi muspositionen i midten af skærmen
-        float angle = Mathf.Atan2(_mousePositionRotation.y, _mousePositionRotation.x) * Mathf.Rad2Deg; 
-        _rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
+        }
 
-        transform.rotation = _rotation;
     }
-
-
 
 }
 
