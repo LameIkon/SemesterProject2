@@ -4923,7 +4923,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8439986373081254643}
-  - component: {fileID: 2472840839706759424}
   - component: {fileID: 3362203924102397197}
   m_Layer: 0
   m_Name: Campfire
@@ -4950,23 +4949,6 @@ Transform:
   - {fileID: 8247182503912091517}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2472840839706759424
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6289178074522413936}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 156ea289a1e39d84ca89bfdb7541ba75, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _systemFloat: {fileID: 11400000, guid: 8382a9fb60e247d4b8eefb7b46bd55f3, type: 2}
-  _restoreValue: 40
-  _bonfireInventory: {fileID: 0}
-  _canOpenBonfire: 0
-  _burningTime: 0
 --- !u!61 &3362203924102397197
 BoxCollider2D:
   m_ObjectHideFlags: 0

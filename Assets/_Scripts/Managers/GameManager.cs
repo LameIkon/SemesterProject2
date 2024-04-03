@@ -11,6 +11,7 @@ public class GameManager : PersistentSingleton<GameManager>
 
     [SerializeField] private GameObject _pauseMenu;
     [SerializeField] private GameObject _inventoryMenu;
+    
 
 
     protected override void Awake()
@@ -23,9 +24,8 @@ public class GameManager : PersistentSingleton<GameManager>
     }
 
     private void Start() 
-    {
-
-
+    {       
+   
         if (_pauseMenu != null)
         {
             // We set the Pause and Inventory Menus to false when we start
