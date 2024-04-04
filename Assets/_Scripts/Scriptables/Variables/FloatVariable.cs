@@ -6,7 +6,7 @@ public class FloatVariable : VariableBase
 
     [SerializeField] private float _value;
 
-    [SerializeField, Tooltip("Called when the value of the Variable changes, it can be null")] 
+    [SerializeField, Tooltip("Called when the value of the Variable changes, it can be null")]
     private GameEvent _onValueChanged;
 
 
@@ -37,20 +37,24 @@ public class FloatVariable : VariableBase
         OnValueChanged();
     }
 
-    public float GetValue() 
-    {  
-        return _value; 
+    public float GetValue()
+    {
+        return _value;
     }
 
     #endregion
 
     // Used to update other scripts when they the value is changed
-    private void OnValueChanged() 
+    private void OnValueChanged()
     {
         if (_onValueChanged != null)
         {
             _onValueChanged.Raise();
         }
+    }
+
+    public static implicit operator float(FloatVariable v) {
+        return v.GetValue();    
     }
 
 }
