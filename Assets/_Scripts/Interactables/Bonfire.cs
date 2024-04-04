@@ -23,13 +23,22 @@ public class Bonfire : MonoBehaviour
     private bool _coroutineBurnActive = false; //tracks if coroutine is started
     private bool _coroutineLeftoverActive = false; //tracks if coroutine is started
     private bool _deAppliedValue = false; //tracks if the value applied has been deapplied again
+    private bool _isTriggeredOnceNegative = false;
+
+    private FloatVariable _floatVariable;
 
     private IEnumerator _burnCoroutine;
-    private IEnumerator _leftoverCoroutine;  
+    private IEnumerator _leftoverCoroutine;
 
+    private void Start()
+    {
+        _floatVariable = ScriptableObject.CreateInstance<FloatVariable>();
+        _floatVariable.SetValue(40);
+    }
 
     private void Update()
     {
+        
 
         //after the persistantObject is loaded we get inventory from the canvas and set it to our scriptableObject "bonfire"(inventory).
         if (LanternDisabler._LoadedSTATIC)
@@ -41,6 +50,7 @@ public class Bonfire : MonoBehaviour
         //This needs to be in update otherwise when u put wood on fire it wont apply right away.
         if (_playerIsClose && _bonfireLit && !_isTriggeredOnce)
         {
+            _isTriggeredOnceNegative = false;
             _isTriggeredOnce = true; //makes sure we dont apply the closeToHeat value more then once.
             _systemFloat.ApplyChange(_restoreValue); //applies the heat value so that we get warmer as long as the fire burns.
         }
@@ -54,6 +64,18 @@ public class Bonfire : MonoBehaviour
         {
             _deAppliedValue = false; //only place for this to be set to false again.
         }
+
+        if (!_deAppliedValue && !_bonfireLit && !_isTriggeredOnceNegative)
+        {
+            if (_systemFloat.GetValue() <= _floatVariable.GetValue())
+            {
+                print("Deapplied value");
+                _isTriggeredOnceNegative = true;
+                _systemFloat.ApplyChange(-_restoreValue);
+            }
+        }
+
+
 
     }
 
