@@ -43,6 +43,8 @@ public class DialogueManager : MonoBehaviour
 
     public static event Action OnDialogueEndedEvent; // Event for when Dialogue is finnished
 
+    private bool _hasInteracted = false;
+
     void Awake()
     {
         // Ensure only 1 singleton of this script
@@ -56,6 +58,15 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
+    private void OnEnable()
+    {
+        InputReader.OnInteractEvent += HandleInteract;
+    }
+
+    private void OnDisable()
+    {
+        InputReader.OnInteractEvent -= HandleInteract;
+    }
 
     public void InsertDialogue()
     {
@@ -71,13 +82,14 @@ public class DialogueManager : MonoBehaviour
     {
         if (DialogueData != null) // Only if there is data are you allowed to start a dialogue
         {
-            //just to test
-            if (Input.GetKeyDown(KeyCode.E)) // Press E to open dialogue UI
+            if (_hasInteracted)
             {
+                _hasInteracted= false;
                 _Oneclick = true; // Ensure only 1 instance. Used in other scripts
                 _StartedDialogue = true; // Used to to tell that an dialogue was started
                 refreshUI();
             }
+
         }
     }
 
@@ -214,6 +226,12 @@ public class DialogueManager : MonoBehaviour
             _NPCName = "";
         }
         return _NPCName;
+    }
+
+
+    void HandleInteract() 
+    {
+        _hasInteracted = true;
     }
 
 
