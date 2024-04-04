@@ -29,7 +29,8 @@ public class InputReader : ScriptableObject, GameInput.IGameplayActions, GameInp
 
     // The events that other scripts can subscribe to, for information for gameplay.
     public static event Action<Vector2> OnMoveEvent; // This sends a Vector2 along with the event
-    public static event Action OnInteractEvent; 
+    public static event Action OnInteractEvent;
+    public static event Action OnInteractEventCancled;
     public static event Action OnPauseEvent;
     public static event Action OnInventoryOpenEvent;
 
@@ -77,6 +78,11 @@ public class InputReader : ScriptableObject, GameInput.IGameplayActions, GameInp
         if (context.phase == InputActionPhase.Performed)  // This is only true on the Performed stage when the button is pressed, there is also the .Canceled and .Started
         {
             OnInteractEvent?.Invoke();
+        }
+
+        if (context.phase == InputActionPhase.Canceled) 
+        {
+            OnInteractEventCancled?.Invoke();
         }
     }
 

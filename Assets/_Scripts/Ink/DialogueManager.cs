@@ -61,11 +61,13 @@ public class DialogueManager : MonoBehaviour
     private void OnEnable()
     {
         InputReader.OnInteractEvent += HandleInteract;
+        InputReader.OnInteractEventCancled += HandleInteractCancled;
     }
 
     private void OnDisable()
     {
         InputReader.OnInteractEvent -= HandleInteract;
+        InputReader.OnInteractEventCancled -= HandleInteractCancled;
     }
 
     public void InsertDialogue()
@@ -234,5 +236,9 @@ public class DialogueManager : MonoBehaviour
         _hasInteracted = true;
     }
 
+    void HandleInteractCancled() 
+    {
+        _hasInteracted = false;
+    }
 
 }
