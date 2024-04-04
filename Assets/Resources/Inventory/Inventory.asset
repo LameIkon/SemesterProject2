@@ -19,120 +19,20 @@ MonoBehaviour:
     - _AllowedItems: 
       _Item:
         _ItemName: 
-        _ID: 2
+        _ID: 5
       _Amount: 1
     - _AllowedItems: 
       _Item:
         _ItemName: 
-        _ID: -1
-      _Amount: 0
+        _ID: 5
+      _Amount: 1
     - _AllowedItems: 
       _Item:
         _ItemName: 
-        _ID: -1
-      _Amount: 0
+        _ID: 5
+      _Amount: 1
     - _AllowedItems: 
       _Item:
         _ItemName: 
-        _ID: -1
-      _Amount: 0
-    - _AllowedItems: 
-      _Item:
-        _ItemName: 
-        _ID: -1
-      _Amount: 0
-    - _AllowedItems: 
-      _Item:
-        _ItemName: 
-        _ID: -1
-      _Amount: 0
-    - _AllowedItems: 
-      _Item:
-        _ItemName: 
-        _ID: -1
-      _Amount: 0
-    - _AllowedItems: 
-      _Item:
-        _ItemName: 
-        _ID: -1
-      _Amount: 0
-    - _AllowedItems: 
-      _Item:
-        _ItemName: 
-        _ID: -1
-      _Amount: 0
-    - _AllowedItems: 
-      _Item:
-        _ItemName: 
-        _ID: -1
-      _Amount: 0
-    - _AllowedItems: 
-      _Item:
-        _ItemName: 
-        _ID: -1
-      _Amount: 0
-    - _AllowedItems: 
-      _Item:
-        _ItemName: 
-        _ID: -1
-      _Amount: 0
-    - _AllowedItems: 
-      _Item:
-        _ItemName: 
-        _ID: -1
-      _Amount: 0
-    - _AllowedItems: 
-      _Item:
-        _ItemName: 
-        _ID: -1
-      _Amount: 0
-    - _AllowedItems: 
-      _Item:
-        _ItemName: 
-        _ID: -1
-      _Amount: 0
-    - _AllowedItems: 
-      _Item:
-        _ItemName: 
-        _ID: -1
-      _Amount: 0
-    - _AllowedItems: 
-      _Item:
-        _ItemName: 
-        _ID: -1
-      _Amount: 0
-    - _AllowedItems: 
-      _Item:
-        _ItemName: 
-        _ID: -1
-      _Amount: 0
-    - _AllowedItems: 
-      _Item:
-        _ItemName: 
-        _ID: -1
-      _Amount: 0
-    - _AllowedItems: 
-      _Item:
-        _ItemName: 
-        _ID: -1
-      _Amount: 0
-    - _AllowedItems: 
-      _Item:
-        _ItemName: 
-        _ID: -1
-      _Amount: 0
-    - _AllowedItems: 
-      _Item:
-        _ItemName: 
-        _ID: -1
-      _Amount: 0
-    - _AllowedItems: 
-      _Item:
-        _ItemName: 
-        _ID: -1
-      _Amount: 0
-    - _AllowedItems: 
-      _Item:
-        _ItemName: 
-        _ID: -1
-      _Amount: 0
+        _ID: 2
+      _Amount: 1

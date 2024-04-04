@@ -177,7 +177,7 @@ public class Inventory
 
     public Inventory() 
     {
-        _Slots = new InventorySlot[24];
+        _Slots = new InventorySlot[4];
     }
     public void Clear()
     {
