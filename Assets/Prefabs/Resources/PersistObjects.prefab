@@ -4106,6 +4106,30 @@ PrefabInstance:
       propertyPath: _PlayerAnimations
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 3653541594756567097, guid: e36a38a4dc77a644bbfbe397c4ca9e30, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.02999997
+      objectReference: {fileID: 0}
+    - target: {fileID: 3653541594756567097, guid: e36a38a4dc77a644bbfbe397c4ca9e30, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3653541594756567097, guid: e36a38a4dc77a644bbfbe397c4ca9e30, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3653541594756567097, guid: e36a38a4dc77a644bbfbe397c4ca9e30, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3653541594756567097, guid: e36a38a4dc77a644bbfbe397c4ca9e30, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3653541594756567097, guid: e36a38a4dc77a644bbfbe397c4ca9e30, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7245225677334882465, guid: e36a38a4dc77a644bbfbe397c4ca9e30, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
