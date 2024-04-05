@@ -147,7 +147,7 @@ public class DialogueManager : MonoBehaviour
             Button endDialogueButton = Instantiate(_buttonPrefab); // Create button with prefab
             endDialogueButton.transform.SetParent(buttonHolder.transform, false); // Set buttons to the parent but keep its own transform
             TextMeshProUGUI endDialogueText = endDialogueButton.GetComponentInChildren<TextMeshProUGUI>(); // Create a new attribute choiceText as TextMeshProGUI
-            endDialogueText.text = "End Dialogue"; // The button text is set to End Dialogue 
+            endDialogueText.text = "[End Dialogue]"; // The button text is set to End Dialogue 
 
             endDialogueButton.onClick.AddListener(delegate
             {
