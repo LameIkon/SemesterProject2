@@ -525,6 +525,24 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""LeftClick"",
+                    ""type"": ""Button"",
+                    ""id"": ""57f50dfe-52be-48b0-bf68-685e628995fb"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""RightClick"",
+                    ""type"": ""Button"",
+                    ""id"": ""676bfad4-0b7d-4956-8004-d57adb781335"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -758,6 +776,28 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""action"": ""Button5"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ebfb311c-77f5-4c25-a15c-a6f43d0417d6"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LeftClick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8b3bea2e-77e5-4877-a72f-0073f43f26ab"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RightClick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -798,6 +838,8 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         m_UI_Button4 = m_UI.FindAction("Button4", throwIfNotFound: true);
         m_UI_Button5 = m_UI.FindAction("Button5", throwIfNotFound: true);
         m_UI_Button6 = m_UI.FindAction("Button6", throwIfNotFound: true);
+        m_UI_LeftClick = m_UI.FindAction("LeftClick", throwIfNotFound: true);
+        m_UI_RightClick = m_UI.FindAction("RightClick", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1019,6 +1061,8 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_UI_Button4;
     private readonly InputAction m_UI_Button5;
     private readonly InputAction m_UI_Button6;
+    private readonly InputAction m_UI_LeftClick;
+    private readonly InputAction m_UI_RightClick;
     public struct UIActions
     {
         private @GameInput m_Wrapper;
@@ -1033,6 +1077,8 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         public InputAction @Button4 => m_Wrapper.m_UI_Button4;
         public InputAction @Button5 => m_Wrapper.m_UI_Button5;
         public InputAction @Button6 => m_Wrapper.m_UI_Button6;
+        public InputAction @LeftClick => m_Wrapper.m_UI_LeftClick;
+        public InputAction @RightClick => m_Wrapper.m_UI_RightClick;
         public InputActionMap Get() { return m_Wrapper.m_UI; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1072,6 +1118,12 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @Button6.started += instance.OnButton6;
             @Button6.performed += instance.OnButton6;
             @Button6.canceled += instance.OnButton6;
+            @LeftClick.started += instance.OnLeftClick;
+            @LeftClick.performed += instance.OnLeftClick;
+            @LeftClick.canceled += instance.OnLeftClick;
+            @RightClick.started += instance.OnRightClick;
+            @RightClick.performed += instance.OnRightClick;
+            @RightClick.canceled += instance.OnRightClick;
         }
 
         private void UnregisterCallbacks(IUIActions instance)
@@ -1106,6 +1158,12 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @Button6.started -= instance.OnButton6;
             @Button6.performed -= instance.OnButton6;
             @Button6.canceled -= instance.OnButton6;
+            @LeftClick.started -= instance.OnLeftClick;
+            @LeftClick.performed -= instance.OnLeftClick;
+            @LeftClick.canceled -= instance.OnLeftClick;
+            @RightClick.started -= instance.OnRightClick;
+            @RightClick.performed -= instance.OnRightClick;
+            @RightClick.canceled -= instance.OnRightClick;
         }
 
         public void RemoveCallbacks(IUIActions instance)
@@ -1161,5 +1219,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         void OnButton4(InputAction.CallbackContext context);
         void OnButton5(InputAction.CallbackContext context);
         void OnButton6(InputAction.CallbackContext context);
+        void OnLeftClick(InputAction.CallbackContext context);
+        void OnRightClick(InputAction.CallbackContext context);
     }
 }

@@ -21,6 +21,7 @@ public class ToolbarManager : MonoBehaviour
         InputReader.OnButtonPressEvent += HandleButtonPress;
         InputReader.OnInteractEvent += HandleInteract;
         InputReader.OnPickEvent += HandleInteract;
+        InputReader.OnRightClickEvent += HandleRightClick;
     }
 
     private void OnDisable()
@@ -28,13 +29,17 @@ public class ToolbarManager : MonoBehaviour
         InputReader.OnButtonPressEvent -= HandleButtonPress;
         InputReader.OnInteractEvent -= HandleInteract;
         InputReader.OnPickEvent -= HandleInteract;
+        InputReader.OnRightClickEvent -= HandleRightClick;
     }
 
+    void HandleRightClick() 
+    {
+        UseLightInSlot();
+    }
 
     void HandleInteract() 
     {
         UseFoodInSlot();
-        UseLightInSlot();
     }
 
     void HandleButtonPress(int i) 
