@@ -123,13 +123,14 @@ public class Bonfire : MonoBehaviour
     IEnumerator BurningTime (float time)
     {
         _coroutineBurnActive = true;
-        print("BurningTime activated");
+        _bonfireInventory.GetSlots[0].RemoveItem();
+     //   print("BurningTime activated");
         yield return new WaitForSeconds(time);
-        print("wood Burned");     
+      //  print("wood Burned");     
         _bonfireLit = false;
         _isTriggeredOnce = false;
         _coroutineBurnActive = false;
-        _bonfireInventory.GetSlots[0].RemoveItem();
+        
 
         if(_systemFloat >= _restoreValue)
         {
@@ -141,15 +142,15 @@ public class Bonfire : MonoBehaviour
     //Otherwise you only need 1 wood, cus u could go in and out of the triggerCollider before the wood burns out. Since we stop "BurningTime" if we leave trigger.
     IEnumerator LeftoverTime (float time)
     {
-        print("leftOverTime Started");
+        // print("leftOverTime Started");
         _coroutineLeftoverActive = true;
         yield return new WaitForSeconds(time);
-        print("LeftoverTime done");
+       // print("LeftoverTime done");
         _coroutineLeftoverActive = false;
         _bonfireLit = false;
         _coroutineBurnActive = false;
         _isTriggeredOnce = false;
-        _bonfireInventory.GetSlots[0].RemoveItem();
+       // _bonfireInventory.GetSlots[0].RemoveItem();
 
         if (_systemFloat >= _restoreValue)
         {
