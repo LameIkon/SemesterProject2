@@ -4068,27 +4068,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1160302121837910531, guid: e36a38a4dc77a644bbfbe397c4ca9e30, type: 3}
       propertyPath: m_SpriteTilingProperty.pivot.x
-      value: 0.49999997
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1160302121837910531, guid: e36a38a4dc77a644bbfbe397c4ca9e30, type: 3}
       propertyPath: m_SpriteTilingProperty.pivot.y
-      value: -0.04347826
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1160302121837910531, guid: e36a38a4dc77a644bbfbe397c4ca9e30, type: 3}
       propertyPath: m_SpriteTilingProperty.newSize.x
-      value: 3.68
+      value: 2.2857144
       objectReference: {fileID: 0}
     - target: {fileID: 1160302121837910531, guid: e36a38a4dc77a644bbfbe397c4ca9e30, type: 3}
       propertyPath: m_SpriteTilingProperty.newSize.y
-      value: 0.23
+      value: 2.2857144
       objectReference: {fileID: 0}
     - target: {fileID: 1160302121837910531, guid: e36a38a4dc77a644bbfbe397c4ca9e30, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
-      value: 3.68
+      value: 2.2857144
       objectReference: {fileID: 0}
     - target: {fileID: 1160302121837910531, guid: e36a38a4dc77a644bbfbe397c4ca9e30, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.y
-      value: 0.23
+      value: 2.2857144
       objectReference: {fileID: 0}
     - target: {fileID: 1160302121837910531, guid: e36a38a4dc77a644bbfbe397c4ca9e30, type: 3}
       propertyPath: m_SpriteTilingProperty.adaptiveTilingThreshold
@@ -4208,7 +4208,7 @@ Animator:
   m_GameObject: {fileID: 5299421031862777781}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: d787fba9ac3400547917fc564c8985f2, type: 2}
+  m_Controller: {fileID: 9100000, guid: bf9ff247a1a5461438da28c737495ee3, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

@@ -165,89 +165,31 @@ public class MovementController : MonoBehaviour
                 return;
             case "Front":
                 _animator.Play("Idle_Front");
-                //if (idleCoroutine != null)
-                //{
-                //    StopCoroutine(idleCoroutine);
-                //    Debug.Log("stop");
-                //}
-                //idleCoroutine = IdleAnimate();
-                //StartCoroutine(idleCoroutine);
                 return;
             default: 
-                //if (idleCoroutine != null)
-                //{
-                //    StopCoroutine(idleCoroutine);
-                //    Debug.Log("stop");
-                //}
-                //idleCoroutine = IdleAnimate();
-                //StartCoroutine(idleCoroutine);
                 _animator.Play("Idle_Front");
                 break;
         }
     }
-
-    ////IEnumerator IdleAnimate()
-    ////{
-    ////    while (true)
-    ////    {
-    ////        Debug.Log("Cycle");
-    ////        IdleFrontVariations();
-    ////        yield return new WaitUntil(() => IsAnimationFinished());
-    ////        Debug.Log("Animation finished");
-    ////        yield return new WaitForSeconds(2);
-    ////    }
-    ////}
-    //bool IsAnimationFinished()
-    //{
-    //    // Check if the current animation is finished playing
-    //    return _animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1; // 1 indicate the end of an animation se;
-    //}
-
-    //void IdleFrontVariations()
-    //{
-    //    int number = Random.Range(0,8);
-    //    Debug.Log(number);
-    //    switch (number)
-    //    {
-    //        case 0:
-    //        case 1:
-    //        case 2:
-    //        case 3:
-    //        case 4:
-    //        case 5:
-    //            _animator.Play("Idle_Front");
-    //            return;
-    //        case 6:
-    //            _animator.Play("Idle_Front_Var_1_1");
-    //            return;
-    //        case 7:
-    //            _animator.Play("Idle_Front_Var_1_2");
-    //            return;
-    //        default:
-    //            _animator.Play("Idle_Front");
-    //            break;
-
-    //    }
-    //}
 
     void MoveAnimation()
     {
         switch (_lookingDirection)
         {
             case "Right":
-                _animator.Play("Moving_SideRight");
+                _animator.Play("Walking_SideRight");
                 return;
             case "Left":
-                _animator.Play("Moving_SideLeft");
+                _animator.Play("Walking_SideLeft");
                 return;
             case "Back":
-                _animator.Play("Moving_Back");
+                _animator.Play("Walking_Back");
                 return;
             case "Front":
-                _animator.Play("Moving_Front");
+                _animator.Play("Walking_Front");
                 return;
             default: 
-                _animator.Play("Moving_Front");
+                _animator.Play("Walking_Front");
                 break;
         }
     }
