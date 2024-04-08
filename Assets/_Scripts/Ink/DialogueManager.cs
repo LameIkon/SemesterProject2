@@ -37,7 +37,7 @@ public class DialogueManager : MonoBehaviour
     public bool _StartedDialogue; // Used to check if an dialogue is started. Used in other scripts to call if an dialogue was called
     public List<string> _SavedTags = new List<string>(); // Save all tags and store them for other scripts to use. 
     public string _NPCName; // Use the name of the current person you talk with
-
+    public bool _OnlyOneInteractionActive = true; // Used in other scritps to ensure instances will only run if we allow it to. for example chat highlight should be disabled when in dialogue
     [Header("Selected Dialogue")]
     public TextAsset DialogueData; // Used in other scripts to change the data. Other scripts will store their choosen dialogue data here
 
@@ -56,6 +56,7 @@ public class DialogueManager : MonoBehaviour
         {
             instance = this;
         }
+        _OnlyOneInteractionActive = true;
     }
 
     private void OnEnable()
