@@ -17,10 +17,6 @@ public class PauseManager : MonoBehaviour
     [SerializeField] GameObject _PauseMenuCanvas;
 
     //public static bool _CallInputReader;
-    private void OnLevelWasLoaded()
-    {
-        //_PauseMenuCanvas.SetActive(false); // When loading between scenes deactivate pauseMenu
-    }
 
     private void Start()
     {
