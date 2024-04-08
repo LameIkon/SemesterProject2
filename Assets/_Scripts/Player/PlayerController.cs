@@ -11,6 +11,7 @@ public class PlayerController : MovementController
     [SerializeField] private FloatVariable _stamina;
 
     private bool _inDialogue = false;
+    public static event Action<Vector2> OnMovePositionEvent;
 
     private void OnEnable()
     {
@@ -44,10 +45,10 @@ public class PlayerController : MovementController
             if (Vector3.Distance(transform.position, _movePoint.position) <= .05f) //makes sure you can't move if u have not reached ur new position yet.
             {
                 Move(_moveVector);
-
+                OnMovePositionEvent?.Invoke(transform.position); // This sends the position of the player used to get the sound of walking.
             }
 
-            if (_stamina.GetValue() <= 0f) // Update if stamina reaches 0 to set Movement speed
+            if (_stamina <= 0f) // Update if stamina reaches 0 to set Movement speed
             {
                 HandleRunCancled();
             }
