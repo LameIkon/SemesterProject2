@@ -16272,6 +16272,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1101388726}
   - component: {fileID: 1101388727}
+  - component: {fileID: 1101388728}
   m_Layer: 0
   m_Name: Grid
   m_TagString: Untagged
@@ -16314,6 +16315,18 @@ Grid:
   m_CellGap: {x: 0, y: 0, z: 0}
   m_CellLayout: 0
   m_CellSwizzle: 0
+--- !u!114 &1101388728
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1101388725}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce81999087a977f4a8fc4abb82fcfbf8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1204965277
 GameObject:
   m_ObjectHideFlags: 0
@@ -21146,6 +21159,14 @@ PrefabInstance:
     - target: {fileID: 137564886644129694, guid: 7ef746ed304431a459d867535c3149df, type: 3}
       propertyPath: m_Offset.x
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6026324582721455493, guid: 7ef746ed304431a459d867535c3149df, type: 3}
+      propertyPath: _doorToSpawnTo
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6026324582721455493, guid: 7ef746ed304431a459d867535c3149df, type: 3}
+      propertyPath: _CurrentDoorPosition
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7262070356260346082, guid: 7ef746ed304431a459d867535c3149df, type: 3}
       propertyPath: m_Name

@@ -38,11 +38,15 @@ public class TileMapManager : PersistentSingleton<TileMapManager>
     private void OnEnable()
     {
         PlayerController.OnMovePositionEvent += PlayWalkingAudio;
+        SceneLoadTileManager.OnSceneLoadedEvent += AddTilemap;
+        SceneLoadTileManager.OnSceneUnloadedEvent += RemoveTilemap;
     }
 
     private void OnDisable()
     {
         PlayerController.OnMovePositionEvent -= PlayWalkingAudio;
+        SceneLoadTileManager.OnSceneUnloadedEvent -= AddTilemap;
+        SceneLoadTileManager.OnSceneUnloadedEvent -= RemoveTilemap;
     }
 
 
