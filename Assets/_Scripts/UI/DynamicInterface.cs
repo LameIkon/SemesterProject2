@@ -42,9 +42,10 @@ public class DynamicInterface : UserInterface
 
     }
 
-    public void OnApplicationQuit()
+    public void Awake()
     {
-        if (!_ClearInventory)
+
+        if (_ClearInventory)
         {
             for (int i = 0; i < _Inventory.GetSlots.Length; i++)
             {

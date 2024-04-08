@@ -32,7 +32,7 @@ public class StaticInterface : UserInterface
 
 
 
-    public void OnApplicationQuit()
+    public void Awake()
     {
 
         for (int i = 0; i < _Inventory.GetSlots.Length; i++)
