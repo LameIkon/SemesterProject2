@@ -15,7 +15,7 @@ public class ButtonInteraction : MonoBehaviour
 
     // Used to fade image in
     private float fadeInTime = 0.1f;
-    private float currentAlpha = 0f;
+    //private float currentAlpha = 0f;
 
     private void Start()
     {
@@ -43,13 +43,13 @@ public class ButtonInteraction : MonoBehaviour
     {
         // Checks if any key is pressed at the start. Used to start selection at 0
         if (!startedSelection)
-            {
-                FirstInteraction();
-            }
+        {
+            FirstInteraction();
+        }
         else
-            {
-                InteractionWithButtons();
-            }
+        {
+            InteractionWithButtons();
+        }
     }
 
     void FirstInteraction()
@@ -89,7 +89,9 @@ public class ButtonInteraction : MonoBehaviour
     {
 
         // Deselect the currently selected button
-        buttons[currentIndex].Select();
+        //buttons[currentIndex].Select();
+
+        //StartCoroutine(DeSelectionPolish());
 
         // Move the selection index in the given direction
         currentIndex = (currentIndex + direction + buttons.Length) % buttons.Length;
@@ -115,10 +117,12 @@ public class ButtonInteraction : MonoBehaviour
 
         // Check if the selected button has image children
         Image[] childImages = buttons[currentIndex].GetComponentsInChildren<Image>();
-        Debug.Log(currentIndex);
+
         // Skip the first image
         for (int i = 1; i < childImages.Length; i++)
         {
+            float currentAlpha = 0f;
+
             Image childImage = childImages[i];
             while (currentAlpha < 1f)
             {
@@ -140,10 +144,9 @@ public class ButtonInteraction : MonoBehaviour
     {
 
         // Check if the selected button has image children
-        Image[] childImages = buttons[currentIndex-1].GetComponentsInChildren<Image>();
-        Debug.Log(currentIndex);
+        Image[] childImages = buttons[currentIndex].GetComponentsInChildren<Image>();
 
-        currentAlpha = 1f;
+        float currentAlpha = 1f;
 
         // Skip the first image
         for (int i = 1; i < childImages.Length; i++)
