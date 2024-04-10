@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8247182503912091517
 Transform:
   m_ObjectHideFlags: 0
@@ -48,7 +48,7 @@ ParticleSystem:
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
   emitterVelocityMode: 1
-  looping: 1
+  looping: 0
   prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
@@ -4903,7 +4903,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 0d3375c57b76d37468e6ebd982306470, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 84a559670be27a54793ca28187c13fb5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -4924,6 +4924,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8439986373081254643}
   - component: {fileID: 3362203924102397197}
+  - component: {fileID: 2781318481826526339}
   m_Layer: 0
   m_Name: Campfire
   m_TagString: Untagged
@@ -4994,6 +4995,27 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 4, y: 4}
   m_EdgeRadius: 0
+--- !u!114 &2781318481826526339
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6289178074522413936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 156ea289a1e39d84ca89bfdb7541ba75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _bonfireInventory: {fileID: 11400000, guid: f7f9c7de6b0011c4ea0d25001dec73e0, type: 2}
+  _particles: {fileID: 1072604257937489875}
+  _lights: {fileID: 7328163693546525948}
+  _spriteRenderer: {fileID: 3964829904795129734}
+  _campfireLitSprite: {fileID: 21300000, guid: 0d3375c57b76d37468e6ebd982306470, type: 3}
+  _campfireUnlitSprite: {fileID: 21300000, guid: 84a559670be27a54793ca28187c13fb5, type: 3}
+  _systemFloat: {fileID: 11400000, guid: 8382a9fb60e247d4b8eefb7b46bd55f3, type: 2}
+  _restoreValue: 40
+  _burningTime: 10
 --- !u!1 &7328163693546525948
 GameObject:
   m_ObjectHideFlags: 0
@@ -5004,6 +5026,7 @@ GameObject:
   m_Component:
   - component: {fileID: 676325794154723572}
   - component: {fileID: 736148800603328609}
+  - component: {fileID: 1821095794771344652}
   m_Layer: 0
   m_Name: Light
   m_TagString: Untagged
@@ -5076,3 +5099,31 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   - {x: 0.5, y: 0.5, z: 0}
   - {x: -0.5, y: 0.5, z: 0}
+--- !u!114 &1821095794771344652
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7328163693546525948}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 441a82c80e0156047ad49a6694bf41d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _lightColor:
+    UseConstant: 1
+    ConstantColor: {r: 0.8757565, g: 0.9433962, b: 0.93555796, a: 1}
+    Variable: {fileID: 0}
+  _lightInnerRadius:
+    MinValue: 1.5
+    MaxValue: 2
+  _lightOuterRadius:
+    MinValue: 8.5
+    MaxValue: 9.5
+  _lightSize:
+    UseConstant: 1
+    ConstantValue: 0
+    Variable: {fileID: 0}
+  _lightTime: 0.1
+  _lerpAmount: 0.08

@@ -28348,17 +28348,13 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2472840839706759424, guid: c86bc54ac953c5d47965d2ff1e85ff31, type: 3}
-      propertyPath: _burningTime
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 2472840839706759424, guid: c86bc54ac953c5d47965d2ff1e85ff31, type: 3}
-      propertyPath: _bonfireInventory
-      value: 
-      objectReference: {fileID: 11400000, guid: f7f9c7de6b0011c4ea0d25001dec73e0, type: 2}
     - target: {fileID: 6289178074522413936, guid: c86bc54ac953c5d47965d2ff1e85ff31, type: 3}
       propertyPath: m_Name
       value: Campfire
+      objectReference: {fileID: 0}
+    - target: {fileID: 7328163693546525948, guid: c86bc54ac953c5d47965d2ff1e85ff31, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8439986373081254643, guid: c86bc54ac953c5d47965d2ff1e85ff31, type: 3}
       propertyPath: m_LocalPosition.x
@@ -28403,68 +28399,8 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6289178074522413936, guid: c86bc54ac953c5d47965d2ff1e85ff31, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2134791079}
-    - targetCorrespondingSourceObject: {fileID: 7328163693546525948, guid: c86bc54ac953c5d47965d2ff1e85ff31, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2134791081}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c86bc54ac953c5d47965d2ff1e85ff31, type: 3}
---- !u!1 &2134791078 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6289178074522413936, guid: c86bc54ac953c5d47965d2ff1e85ff31, type: 3}
-  m_PrefabInstance: {fileID: 2134791077}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &2134791079
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2134791078}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 156ea289a1e39d84ca89bfdb7541ba75, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _bonfireInventory: {fileID: 11400000, guid: f7f9c7de6b0011c4ea0d25001dec73e0, type: 2}
-  _systemFloat: {fileID: 11400000, guid: 8382a9fb60e247d4b8eefb7b46bd55f3, type: 2}
-  _restoreValue: 40
-  _burningTime: 10
---- !u!1 &2134791080 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7328163693546525948, guid: c86bc54ac953c5d47965d2ff1e85ff31, type: 3}
-  m_PrefabInstance: {fileID: 2134791077}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &2134791081
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2134791080}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 441a82c80e0156047ad49a6694bf41d7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _lightColor:
-    UseConstant: 1
-    ConstantColor: {r: 0.8757565, g: 0.9433962, b: 0.93555796, a: 1}
-    Variable: {fileID: 0}
-  _lightInnerRadius:
-    MinValue: 1.5
-    MaxValue: 2
-  _lightOuterRadius:
-    MinValue: 8.5
-    MaxValue: 9.5
-  _lightSize:
-    UseConstant: 1
-    ConstantValue: 0
-    Variable: {fileID: 0}
-  _lightTime: 0.1
-  _lerpAmount: 0.08
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

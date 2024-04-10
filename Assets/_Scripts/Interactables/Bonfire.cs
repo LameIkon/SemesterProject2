@@ -9,12 +9,17 @@ public class Bonfire : MonoBehaviour
 {
 
     [SerializeField] private InventoryObject _bonfireInventory;
-    private StaticInterface _bonfireInterface;
-   
+    [SerializeField] private GameObject _particles;
+    [SerializeField] private GameObject _lights;
+    // private StaticInterface _bonfireInterface
+    [SerializeField] private SpriteRenderer _spriteRenderer;
+    [SerializeField] private Sprite _campfireLitSprite;
+    [SerializeField] private Sprite _campfireUnlitSprite;
 
     [SerializeField] private FloatVariable _systemFloat; //closeToheatSource needs to go here.
     [SerializeField] private float _restoreValue; //how warm we get when fire is burning.
     [SerializeField] private float _burningTime; //How long the wood burns before its gone
+
 
     public static bool _canOpenBonfire = false;  //needs to be static for use in CampfireManager.script where we open the canvas
 
@@ -62,17 +67,13 @@ public class Bonfire : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+       
         if (collision.CompareTag("Player"))
         {
             _playerIsClose = true;
             _canOpenBonfire = true;
 
             _burnCoroutine = BurningTime(_burningTime);
-
-            //if (_burnCoroutine == null)
-            //{
-            //_burnCoroutine = BurningTime(_burningTime);
-            //}
         }       
     }
 
@@ -116,23 +117,30 @@ public class Bonfire : MonoBehaviour
         else if (_bonfireInventory.GetSlots[0].ItemObject._ItemType == ItemType.Fuel && _bonfireInventory.GetSlots[0].ItemObject != null)
         {
             _bonfireLit = true;
+            _particles.SetActive(true);
+            _lights.SetActive(true);
+            _spriteRenderer.sprite = _campfireLitSprite;
             StartCoroutine(_burnCoroutine);
         }    
     }
 
     IEnumerator BurningTime (float time)
     {
-        _coroutineBurnActive = true;
         _bonfireInventory.GetSlots[0].RemoveItem();
+        _coroutineBurnActive = true;       
      //   print("BurningTime activated");
         yield return new WaitForSeconds(time);
-      //  print("wood Burned");     
+        _spriteRenderer.sprite = _campfireUnlitSprite;
+        _particles.SetActive(false);
+        _lights.SetActive(false);
+        //  print("wood Burned");     
         _bonfireLit = false;
         _isTriggeredOnce = false;
         _coroutineBurnActive = false;
-        
+      
 
-        if(_systemFloat >= _restoreValue)
+
+        if (_systemFloat >= _restoreValue)
         {
             _systemFloat.ApplyChange(-_restoreValue);
         }  
@@ -145,12 +153,16 @@ public class Bonfire : MonoBehaviour
         // print("leftOverTime Started");
         _coroutineLeftoverActive = true;
         yield return new WaitForSeconds(time);
-       // print("LeftoverTime done");
+        // print("LeftoverTime done");
+        _spriteRenderer.sprite = _campfireUnlitSprite;
+        _particles.SetActive(false);
+        _lights.SetActive(false);
         _coroutineLeftoverActive = false;
         _bonfireLit = false;
         _coroutineBurnActive = false;
         _isTriggeredOnce = false;
-       // _bonfireInventory.GetSlots[0].RemoveItem();
+    
+        // _bonfireInventory.GetSlots[0].RemoveItem();
 
         if (_systemFloat >= _restoreValue)
         {
