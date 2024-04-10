@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Xml.Serialization;
 using TMPro;
+using UnityEditor.Animations;
 using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.UI;
@@ -29,7 +30,9 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private GameObject _buttonHolderPrefab; // Child GameObject of _dialogueAnswerPrefab
     [SerializeField] private Button _buttonPrefab; // Buttons on _buttonHolderPrefab
 
-
+    [Header("Animations Elements")]
+    [SerializeField] private GameObject _captainProfile;
+    [SerializeField] private GameObject _scientistProfile;
 
     [Header("Stored data")]
     public bool _Oneclick; // Used to ensure that only 1 dialogue can happen at a time
@@ -38,6 +41,10 @@ public class DialogueManager : MonoBehaviour
     public List<string> _SavedTags = new List<string>(); // Save all tags and store them for other scripts to use. 
     public string _NPCName; // Use the name of the current person you talk with
     public bool _OnlyOneInteractionActive = true; // Used in other scritps to ensure instances will only run if we allow it to. for example chat highlight should be disabled when in dialogue
+
+    [Header("Selected Person")]
+    public string _NPCImage;
+
     [Header("Selected Dialogue")]
     public TextAsset DialogueData; // Used in other scripts to change the data. Other scripts will store their choosen dialogue data here
 
@@ -122,6 +129,10 @@ public class DialogueManager : MonoBehaviour
         // Insert data into nameholder
         TextMeshProUGUI nameHolderText = nameholder.GetComponentInChildren<TextMeshProUGUI>();
         nameHolderText.text = LoadNameOFNPC();
+
+        //// Insert image of person you are talking to into profile
+        //Animator profile = nameholder.GetComponentInChildren<Animator>();
+        //LoadImageOFNPC(profile);
 
         // Insert dialogue data into dialogue and answer box
         TextMeshProUGUI dialogueText = dialogueAnswerPrefab.GetComponentInChildren<TextMeshProUGUI>();
@@ -229,6 +240,31 @@ public class DialogueManager : MonoBehaviour
             _NPCName = "";
         }
         return _NPCName;
+    }
+
+    void LoadImageOFNPC(Animator profile)
+    {
+        Animator selectAnimation = null;
+
+        if (_NPCName == "Scientist")
+        {
+            //selectAnimation = _scientistProfile;
+        }
+        else if (_NPCName == "Captain")
+        {
+            //selectAnimation = _captainProfile;
+        }
+        else if (_NPCName == "Spy")
+        {
+            print("spy");
+        }
+        else
+        {
+            print("default");
+        }
+
+        // Assign the new animator
+        profile.runtimeAnimatorController = selectAnimation.runtimeAnimatorController;
     }
 
 

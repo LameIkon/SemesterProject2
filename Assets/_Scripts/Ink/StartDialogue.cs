@@ -43,6 +43,9 @@ public class StartDialogue : MonoBehaviour
         // Ensure not being show at start
         _highlight.SetActive(false);
         _showInteraction.SetActive(false);
+
+        // Check for name
+
     }
 
 
