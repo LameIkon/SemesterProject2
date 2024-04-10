@@ -13,6 +13,7 @@ public class ToolbarManager : MonoBehaviour
     [SerializeField] private Color _selectedColor, _notSelectedColor;
     private GameObject _lantern;
     private bool _lightIsActive = false;
+    private bool _defaultIsActive = false;
 
     private int _saveLightItemIndex;
 
@@ -40,6 +41,7 @@ public class ToolbarManager : MonoBehaviour
     void HandleInteract() 
     {
         UseFoodInSlot();
+        UseDefaultInSlot();
     }
 
     void HandleButtonPress(int i) 
@@ -88,6 +90,29 @@ public class ToolbarManager : MonoBehaviour
             }           
         }
     }
+
+    public void UseDefaultInSlot ()
+    {
+        if (_selectedSlot < 0)
+        {
+            return;
+        }
+
+        var itemInSlot = _toolbarInventory.GetSlots[_selectedSlot];
+
+        if (itemInSlot.ItemObject != null && itemInSlot.ItemObject._ItemType == ItemType.Default && !_defaultIsActive)
+        {
+            itemInSlot.ItemObject.Action();
+            _defaultIsActive = true;
+        }
+
+        else if (_defaultIsActive)
+        {
+            itemInSlot.ItemObject.DisableAction();
+            _defaultIsActive = false;
+        }
+    }
+
 
     public void UseLightInSlot()
     {
@@ -138,6 +163,15 @@ public class ToolbarManager : MonoBehaviour
                 _lightIsActive = false;
                 _lantern.SetActive(false);
             }
-        }               
+        }
+
+        if (_defaultIsActive)
+        {
+            if (_toolbarInventory.GetSlots[_selectedSlot].ItemObject == null || _toolbarInventory.GetSlots[_selectedSlot].ItemObject._ItemType != ItemType.Default)
+            {
+                _defaultIsActive = false;
+                ItemManager._JournalCanvasSTATIC.SetActive(false);
+            }
+        }
     }
 }

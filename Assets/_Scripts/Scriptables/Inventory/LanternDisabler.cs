@@ -6,6 +6,7 @@ public class LanternDisabler : MonoBehaviour
 {
     public static bool _LoadedSTATIC = false;
     public static GameObject _LanternSTATIC;
+   
 
 
     private void LateUpdate()
