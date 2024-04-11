@@ -110,7 +110,6 @@ public class Bonfire : MonoBehaviour
         if (_bonfireInventory.GetSlots[0].ItemObject == null) 
         {
             _bonfireLit = false;
-            return;
         }
 
         //checks if the item in the slot is of type "Fuel" and not null

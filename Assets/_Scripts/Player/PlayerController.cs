@@ -46,7 +46,7 @@ public class PlayerController : MovementController
                 Move(_moveVector);
                 if (_isMoving)
                 {
-                    OnMovePositionEvent?.Invoke(transform.position); // This sends the position of the player used to get the sound of walking.
+                   // OnMovePositionEvent?.Invoke(transform.position); // This sends the position of the player used to get the sound of walking.
                 }
             }
 

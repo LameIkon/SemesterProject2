@@ -17,6 +17,7 @@ VAR firstTimeAsking = true
         -> main
         
     * [See you]
+        Goodbye
         -> END
 
 
