@@ -28,13 +28,13 @@ public class SceneSwapManager : Singleton<SceneSwapManager>
 
     public static void SwapSceneFromDoorUse(SceneField myScene, DoorTriggerInteraction.DoorToSpawnAt doorToSpawnAt)
     {
+        OnSceneUnloadedEvent?.Invoke();
         _loadFromDoor = true;
         _Instance.StartCoroutine(_Instance.FadeOutThenChangeScene(myScene, doorToSpawnAt));
     }
 
     private IEnumerator FadeOutThenChangeScene(SceneField myScene, DoorTriggerInteraction.DoorToSpawnAt doorToSpawnAt = DoorTriggerInteraction.DoorToSpawnAt.None)
     {
-        // PlayerController.DeactivatePlayerControls();
         SceneFadeManager._Instance.StartFadeOut();
 
         while (SceneFadeManager._Instance._IsFadingOut)
@@ -42,7 +42,9 @@ public class SceneSwapManager : Singleton<SceneSwapManager>
             yield return null;
         }
         _doorToSpawnTo = doorToSpawnAt;
-        SceneManager.LoadScene(myScene);
+        SceneManager.LoadScene(myScene, LoadSceneMode.Single);
+        while (!SceneManager.GetSceneByName(myScene).isLoaded) { yield return null; }
+        OnSceneLoadedEvent?.Invoke();
     }
 
     private IEnumerator ActivatePlayerControlsAfterFadeIn()
@@ -67,7 +69,6 @@ public class SceneSwapManager : Singleton<SceneSwapManager>
            
             _loadFromDoor = false;
 
-            OnSceneLoadedEvent?.Invoke();
         }
     }
 
@@ -127,7 +128,7 @@ public class SceneSwapManager : Singleton<SceneSwapManager>
         }
     }
     Vector3 DoorSpawn(Vector3 doorPosition, Vector3 spawnPosition) 
-        {
-            return doorPosition + 2*spawnPosition;
-        }
+    {
+        return doorPosition + 2*spawnPosition;
+    }
 }

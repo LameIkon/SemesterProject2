@@ -2032,8 +2032,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _firstScene:
-    _sceneAsset: {fileID: 102900000, guid: 705aa24cd08232546a65faae48da3e27, type: 3}
-    _sceneName: ShipInside
+    m_SceneAsset: {fileID: 102900000, guid: 705aa24cd08232546a65faae48da3e27, type: 3}
+    m_SceneName: ShipInside
   _MainMenu: {fileID: 2100427273}
   _Options: {fileID: 240546118}
   _Credits: {fileID: 508734993}

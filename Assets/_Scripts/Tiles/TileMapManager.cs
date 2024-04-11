@@ -132,4 +132,9 @@ public class TileMapManager : PersistentSingleton<TileMapManager>
         }
     }
 
+    private void OnApplicationQuit()
+    {
+        ClearTilemap();
+    }
+
 }
