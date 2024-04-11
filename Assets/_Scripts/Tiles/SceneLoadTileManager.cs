@@ -4,16 +4,37 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 
 // Script not finished
-public class SceneLoadTileManager : PersistentSingleton<SceneLoadTileManager>
+public class SceneLoadTileManager : MonoBehaviour
 {
 
     public static event Action<Tilemap[]> OnSceneLoadedEvent;
+    public static event Action<Tilemap[]> OnSceneUnloadedEvent;
 
 
-    private Tilemap[] OnSceneLoad() 
+    private void OnSceneLoad() 
     {
-        return GetComponentsInChildren<Tilemap>();
+        OnSceneLoadedEvent?.Invoke(GetComponentsInChildren<Tilemap>());
     }
 
+    private void OnSceneUnload() 
+    {
+        OnSceneUnloadedEvent?.Invoke(GetComponentsInChildren<Tilemap>());
+    }
+
+    private void OnEnable() 
+    {
+        AsyncSceneLoader.OnSceneLoadedEvent += OnSceneLoad;
+        AsyncSceneLoader.OnSceneUnloadedEvent += OnSceneUnload;
+        SceneSwapManager.OnSceneLoadedEvent += OnSceneLoad;
+        SceneSwapManager.OnSceneUnloadedEvent += OnSceneUnload;
+    }
+
+    private void OnDisable() 
+    {
+        AsyncSceneLoader.OnSceneLoadedEvent -= OnSceneLoad;
+        AsyncSceneLoader.OnSceneUnloadedEvent -= OnSceneUnload;
+        SceneSwapManager.OnSceneLoadedEvent -= OnSceneLoad;
+        SceneSwapManager.OnSceneUnloadedEvent -= OnSceneUnload;
+    }
 
 }

@@ -12,8 +12,8 @@ VAR firstTimeAsking = true
         I think it is an impossible one.
         -> mission
         
-    * Where are we?
-        Stop yourself.
+    * [Where are we?]
+        In Greenland, you should know this!
         -> main
         
     * [See you]

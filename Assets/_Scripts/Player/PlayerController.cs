@@ -1,9 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class PlayerController : MovementController
 {
@@ -11,6 +9,7 @@ public class PlayerController : MovementController
     [SerializeField] private FloatVariable _stamina;
 
     private bool _inDialogue = false;
+    private bool _isMoving = false;
     public static event Action<Vector2> OnMovePositionEvent;
 
     private void OnEnable()
@@ -45,7 +44,10 @@ public class PlayerController : MovementController
             if (Vector3.Distance(transform.position, _movePoint.position) <= .05f) //makes sure you can't move if u have not reached ur new position yet.
             {
                 Move(_moveVector);
-                OnMovePositionEvent?.Invoke(transform.position); // This sends the position of the player used to get the sound of walking.
+                if (_isMoving)
+                {
+                    OnMovePositionEvent?.Invoke(transform.position); // This sends the position of the player used to get the sound of walking.
+                }
             }
 
             if (_stamina <= 0f) // Update if stamina reaches 0 to set Movement speed
@@ -66,7 +68,14 @@ public class PlayerController : MovementController
     // This is the handler for the OnMoveEvent 
     private void HandleMove(Vector2 dir)
     {
-
+        if (dir != Vector2.zero)
+        {
+            _isMoving = true;
+        }
+        else
+        {
+            _isMoving = false;
+        }
         // Because the inputs are normalized we need to set the values to 1 for the move system to work properly
 
         if (dir.x > .5f)

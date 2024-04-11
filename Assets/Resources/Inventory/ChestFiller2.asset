@@ -17,7 +17,7 @@ MonoBehaviour:
     _Item:
       _ItemName: 
       _ID: 0
-    _Amount: 20
+    _Amount: 15
   - _AllowedItems: 
     _Item:
       _ItemName: 

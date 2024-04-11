@@ -12,6 +12,9 @@ public class SceneSwapManager : Singleton<SceneSwapManager>
     private Vector3 _playerSpawnPosition;  
     private DoorTriggerInteraction.DoorToSpawnAt _doorToSpawnTo;
 
+    public static event Action OnSceneLoadedEvent;
+    public static event Action OnSceneUnloadedEvent;
+
     protected override void Awake()
     {
         base.Awake();
@@ -25,13 +28,13 @@ public class SceneSwapManager : Singleton<SceneSwapManager>
 
     public static void SwapSceneFromDoorUse(SceneField myScene, DoorTriggerInteraction.DoorToSpawnAt doorToSpawnAt)
     {
+        OnSceneUnloadedEvent?.Invoke();
         _loadFromDoor = true;
         _Instance.StartCoroutine(_Instance.FadeOutThenChangeScene(myScene, doorToSpawnAt));
     }
 
     private IEnumerator FadeOutThenChangeScene(SceneField myScene, DoorTriggerInteraction.DoorToSpawnAt doorToSpawnAt = DoorTriggerInteraction.DoorToSpawnAt.None)
     {
-        // PlayerController.DeactivatePlayerControls();
         SceneFadeManager._Instance.StartFadeOut();
 
         while (SceneFadeManager._Instance._IsFadingOut)
@@ -39,7 +42,9 @@ public class SceneSwapManager : Singleton<SceneSwapManager>
             yield return null;
         }
         _doorToSpawnTo = doorToSpawnAt;
-        SceneManager.LoadScene(myScene);
+        SceneManager.LoadScene(myScene, LoadSceneMode.Single);
+        while (!SceneManager.GetSceneByName(myScene).isLoaded) { yield return null; }
+        OnSceneLoadedEvent?.Invoke();
     }
 
     private IEnumerator ActivatePlayerControlsAfterFadeIn()
@@ -63,6 +68,7 @@ public class SceneSwapManager : Singleton<SceneSwapManager>
             _playerMovePoint.transform.position = _playerSpawnPosition;
            
             _loadFromDoor = false;
+
         }
     }
 
@@ -76,15 +82,53 @@ public class SceneSwapManager : Singleton<SceneSwapManager>
             {
                 _doorCol = doors[i].gameObject.GetComponent<Collider2D>();
                 
-                CalculateSpawnPosition();
+                CalculateSpawnPosition(doorSpawnNumber);
                 return;
             }
         }
     }
 
-    private void CalculateSpawnPosition()
-    { 
-        // float colliderHeight = _playerMovePoint.transform.position.y;
-        _playerSpawnPosition = _doorCol.transform.position + 2*Vector3.up;
+    private void CalculateSpawnPosition(DoorTriggerInteraction.DoorToSpawnAt doorNumber)
+    {
+
+        Vector3 doorPosition = _doorCol.transform.position;
+
+
+        switch (doorNumber)
+        {
+            case DoorTriggerInteraction.DoorToSpawnAt.Main:
+                _playerSpawnPosition = DoorSpawn(doorPosition, Vector3.up);
+                break;
+
+            case DoorTriggerInteraction.DoorToSpawnAt.One:
+                _playerSpawnPosition = DoorSpawn(doorPosition, Vector3.left);
+                break;
+
+            case DoorTriggerInteraction.DoorToSpawnAt.Two:
+                _playerSpawnPosition = DoorSpawn(doorPosition, Vector3.right);
+                break;
+
+            case DoorTriggerInteraction.DoorToSpawnAt.Three:
+                _playerSpawnPosition = DoorSpawn(doorPosition, Vector3.down);
+                break;
+
+            case DoorTriggerInteraction.DoorToSpawnAt.Four:
+                _playerSpawnPosition = DoorSpawn(doorPosition, Vector3.one);
+                break;
+
+            case DoorTriggerInteraction.DoorToSpawnAt.None:
+                _playerSpawnPosition = DoorSpawn(_playerSpawnPosition, Vector3.zero);
+                break;
+
+            default:
+                _playerSpawnPosition = DoorSpawn(doorPosition, Vector3.zero);
+                break;
+
+
+        }
+    }
+    Vector3 DoorSpawn(Vector3 doorPosition, Vector3 spawnPosition) 
+    {
+        return doorPosition + 2*spawnPosition;
     }
 }
