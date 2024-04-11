@@ -136,6 +136,7 @@ public class Bonfire : MonoBehaviour
         _bonfireLit = false;
         _isTriggeredOnce = false;
         _coroutineBurnActive = false;
+        _burnCoroutine = BurningTime(_burningTime);
       
 
 
