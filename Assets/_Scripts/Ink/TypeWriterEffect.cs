@@ -10,10 +10,23 @@ public class TypeWriterEffect : MonoBehaviour
     [SerializeField] private float _textSpeed;
     private int _index;
 
+    [Space (10), SerializeField] private bool _automaticStart;
+
 
     private void Awake()
     {
-        gameObject.SetActive(false); // if there isnt any dialogue deactivate.
+        if (!_automaticStart)
+        {
+            gameObject.SetActive(false); // if there isnt any dialogue deactivate.
+        }
+    }
+
+    private void Start()
+    {
+        if (_automaticStart) // Used if you want to start the chat right away
+        {
+            StartChatBubble();
+        }
     }
 
     public void StartChatBubble()

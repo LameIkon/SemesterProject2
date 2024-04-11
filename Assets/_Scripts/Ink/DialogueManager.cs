@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Xml.Serialization;
 using TMPro;
+using UnityEditor.Animations;
 using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,21 +16,15 @@ public class DialogueManager : MonoBehaviour
     private Story _story; // Dialogue will be stored in this value
 
     [Header("UI Elements")] // each prefab has components that determinds the layout of the dialogue
-    //[SerializeField] private TextMeshProUGUI _textPrefab;
-    
-    //[SerializeField] private Image _dialogueImagePrefab;
-
     [SerializeField] private GameObject _dialogueLayoutPrefab; // Parent GameObject
-
     [SerializeField] private GameObject _nameHolderPrefab; // Child GameObject of _dialogueLayoutPrefab
-    //[SerializeField] private TextMeshProUGUI _nameHolderTextPrefab; // Text on _nameHolderPrefab
-
     [SerializeField] private GameObject _dialogueAnswerHolderPrefab;  // Child GameObject of _dialogueLayoutPrefab
-    //[SerializeField] private TextMeshProUGUI _dialoguePrefab; // Text on _dialogueAnswerPrefab
     [SerializeField] private GameObject _buttonHolderPrefab; // Child GameObject of _dialogueAnswerPrefab
     [SerializeField] private Button _buttonPrefab; // Buttons on _buttonHolderPrefab
 
-
+    [Header("Animations Elements")]
+    [SerializeField] private GameObject _captainProfile; // Child GameObject of _nameHolderPrefab
+    [SerializeField] private GameObject _scientistProfile; // Child GameObject of _nameHolderPrefab
 
     [Header("Stored data")]
     public bool _Oneclick; // Used to ensure that only 1 dialogue can happen at a time
@@ -37,6 +32,10 @@ public class DialogueManager : MonoBehaviour
     public bool _StartedDialogue; // Used to check if an dialogue is started. Used in other scripts to call if an dialogue was called
     public List<string> _SavedTags = new List<string>(); // Save all tags and store them for other scripts to use. 
     public string _NPCName; // Use the name of the current person you talk with
+    public bool _OnlyOneInteractionActive = true; // Used in other scritps to ensure instances will only run if we allow it to. for example chat highlight should be disabled when in dialogue
+
+    [Header("Selected Person")]
+    public string _NPCImage;
 
     [Header("Selected Dialogue")]
     public TextAsset DialogueData; // Used in other scripts to change the data. Other scripts will store their choosen dialogue data here
@@ -56,6 +55,7 @@ public class DialogueManager : MonoBehaviour
         {
             instance = this;
         }
+        _OnlyOneInteractionActive = true;
     }
 
     private void OnEnable()
@@ -107,6 +107,7 @@ public class DialogueManager : MonoBehaviour
         GameObject nameholder = Instantiate(_nameHolderPrefab); // Takes a image prefab
         nameholder.transform.SetParent(dialogueLayout.transform, false); // Set Image to the parent but keep its own transform
 
+
         // Creating the dialogue and answer box
         GameObject dialogueAnswerPrefab = Instantiate(_dialogueAnswerHolderPrefab); // Takes a textfile prefab with predefined settings
         dialogueAnswerPrefab.transform.SetParent(dialogueLayout.transform, false); // Set dialogue to the parent but keep its own transform
@@ -121,6 +122,9 @@ public class DialogueManager : MonoBehaviour
         // Insert data into nameholder
         TextMeshProUGUI nameHolderText = nameholder.GetComponentInChildren<TextMeshProUGUI>();
         nameHolderText.text = LoadNameOFNPC();
+
+        //Inser Image into profile
+        LoadImageOFNPC(nameholder);
 
         // Insert dialogue data into dialogue and answer box
         TextMeshProUGUI dialogueText = dialogueAnswerPrefab.GetComponentInChildren<TextMeshProUGUI>();
@@ -228,6 +232,35 @@ public class DialogueManager : MonoBehaviour
             _NPCName = "";
         }
         return _NPCName;
+    }
+
+    void LoadImageOFNPC(GameObject nameholder)
+    {
+        // Creating image for dialoguebox
+       
+
+        if (_NPCName == "Scientist")
+        {
+            Debug.Log("Scientist");
+            GameObject profile = Instantiate(_scientistProfile); // Takes a gameobject prefab
+            profile.transform.SetParent(nameholder.transform, false); // Set Image to the parent but keep its own transform
+        }
+        else if (_NPCName == "Captain")
+        {
+            Debug.Log("Captain");
+            GameObject profile = Instantiate(_captainProfile); // Takes a gameobject prefab
+            profile.transform.SetParent(nameholder.transform, false); // Set Image to the parent but keep its own transform
+        }
+        else if (_NPCName == "Spy")
+        {
+            print("spy");
+        }
+        else
+        {
+            Debug.Log("default");
+            GameObject profile = Instantiate(_captainProfile); // Takes a gameobject prefab
+            profile.transform.SetParent(nameholder.transform, false); // Set Image to the parent but keep its own transform
+        }
     }
 
 

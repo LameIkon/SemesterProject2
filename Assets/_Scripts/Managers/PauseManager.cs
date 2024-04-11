@@ -14,12 +14,12 @@ public class PauseManager : MonoBehaviour
     //gameobjects to transition between
     public GameObject _PauseMenu;
     public GameObject _Options;
+    [SerializeField] GameObject _PauseMenuCanvas;
 
     //public static bool _CallInputReader;
 
     private void Start()
     {
-        //initialize by setting the active page to the main menu.
         _activePage = _PauseMenu;
     }
 
@@ -58,7 +58,6 @@ public class PauseManager : MonoBehaviour
     {
         _gameManager.HandleResume(); // Call the gameManager to close the pause screen
         InputReader.OnResumeButton(); // Call the InputReader to enable other UI again
-
     }
 
     // change page 
@@ -72,6 +71,8 @@ public class PauseManager : MonoBehaviour
 
     public void ExitToMenu()
     {
+        _PauseMenuCanvas.SetActive(false); // When loading between scenes deactivate pauseMenu
+        ResumeButton();
         SceneManager.LoadScene("MainMenu");
     }
 }

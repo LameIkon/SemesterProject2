@@ -141,15 +141,6 @@ public class MovementController : MonoBehaviour
         } 
     }
 
-    void CheckIdleState()
-    {
-         if (Vector3.Distance(transform.position, _movePoint.position) == 0) //Checks when you are standing still
-            {
-                IdleAnimation();
-            }
-    }
-
-    IEnumerator idleCoroutine;
     void IdleAnimation()
     {
         switch (_lookingDirection)

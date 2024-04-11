@@ -7,6 +7,7 @@ public class DynamicInterface : UserInterface
 {
 
     public GameObject _InventoryPrefab;
+    [SerializeField] private GameObject _Container;
 
     public int X_START;
     public int Y_START;
@@ -22,7 +23,7 @@ public class DynamicInterface : UserInterface
 
         for (int i = 0; i < _Inventory.GetSlots.Length; i++)
         {
-            var obj = Instantiate(_InventoryPrefab, Vector3.zero, Quaternion.identity, transform);
+            var obj = Instantiate(_InventoryPrefab, _Container.transform.position, _Container.transform.rotation, _Container.transform);
             obj.GetComponent<RectTransform>().localPosition = GetPosition(i);
 
             AddEvent(obj, EventTriggerType.PointerEnter, delegate { OnEnter(obj); });
