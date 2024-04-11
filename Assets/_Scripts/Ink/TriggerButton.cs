@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class ButtonTrigger : MonoBehaviour, ISelectHandler, IDeselectHandler,  IPointerEnterHandler, IPointerExitHandler
+public class ButtonTrigger : MonoBehaviour, ISelectHandler, IDeselectHandler, IPointerEnterHandler, IPointerExitHandler
 {
     private float _fadeInTime = 0.1f; // Amount of time to fade in and out
     private float _totalMouseMovement = 0f; // Amount you have moved your mouse
