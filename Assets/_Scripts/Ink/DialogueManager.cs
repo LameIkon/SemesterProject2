@@ -16,23 +16,15 @@ public class DialogueManager : MonoBehaviour
     private Story _story; // Dialogue will be stored in this value
 
     [Header("UI Elements")] // each prefab has components that determinds the layout of the dialogue
-    //[SerializeField] private TextMeshProUGUI _textPrefab;
-    
-    //[SerializeField] private Image _dialogueImagePrefab;
-
     [SerializeField] private GameObject _dialogueLayoutPrefab; // Parent GameObject
-
     [SerializeField] private GameObject _nameHolderPrefab; // Child GameObject of _dialogueLayoutPrefab
-    //[SerializeField] private TextMeshProUGUI _nameHolderTextPrefab; // Text on _nameHolderPrefab
-
     [SerializeField] private GameObject _dialogueAnswerHolderPrefab;  // Child GameObject of _dialogueLayoutPrefab
-    //[SerializeField] private TextMeshProUGUI _dialoguePrefab; // Text on _dialogueAnswerPrefab
     [SerializeField] private GameObject _buttonHolderPrefab; // Child GameObject of _dialogueAnswerPrefab
     [SerializeField] private Button _buttonPrefab; // Buttons on _buttonHolderPrefab
 
     [Header("Animations Elements")]
-    [SerializeField] private GameObject _captainProfile;
-    [SerializeField] private GameObject _scientistProfile;
+    [SerializeField] private GameObject _captainProfile; // Child GameObject of _nameHolderPrefab
+    [SerializeField] private GameObject _scientistProfile; // Child GameObject of _nameHolderPrefab
 
     [Header("Stored data")]
     public bool _Oneclick; // Used to ensure that only 1 dialogue can happen at a time
@@ -115,6 +107,7 @@ public class DialogueManager : MonoBehaviour
         GameObject nameholder = Instantiate(_nameHolderPrefab); // Takes a image prefab
         nameholder.transform.SetParent(dialogueLayout.transform, false); // Set Image to the parent but keep its own transform
 
+
         // Creating the dialogue and answer box
         GameObject dialogueAnswerPrefab = Instantiate(_dialogueAnswerHolderPrefab); // Takes a textfile prefab with predefined settings
         dialogueAnswerPrefab.transform.SetParent(dialogueLayout.transform, false); // Set dialogue to the parent but keep its own transform
@@ -130,9 +123,8 @@ public class DialogueManager : MonoBehaviour
         TextMeshProUGUI nameHolderText = nameholder.GetComponentInChildren<TextMeshProUGUI>();
         nameHolderText.text = LoadNameOFNPC();
 
-        //// Insert image of person you are talking to into profile
-        //Animator profile = nameholder.GetComponentInChildren<Animator>();
-        //LoadImageOFNPC(profile);
+        //Inser Image into profile
+        LoadImageOFNPC(nameholder);
 
         // Insert dialogue data into dialogue and answer box
         TextMeshProUGUI dialogueText = dialogueAnswerPrefab.GetComponentInChildren<TextMeshProUGUI>();
@@ -242,17 +234,22 @@ public class DialogueManager : MonoBehaviour
         return _NPCName;
     }
 
-    void LoadImageOFNPC(Animator profile)
+    void LoadImageOFNPC(GameObject nameholder)
     {
-        Animator selectAnimation = null;
+        // Creating image for dialoguebox
+       
 
         if (_NPCName == "Scientist")
         {
             //selectAnimation = _scientistProfile;
+            Instantiate(_scientistProfile); // Takes a gameobject prefab
+            nameholder.transform.SetParent(nameholder.transform, false); // Set Image to the parent but keep its own transform
         }
         else if (_NPCName == "Captain")
         {
             //selectAnimation = _captainProfile;
+            Instantiate(_captainProfile); // Takes a gameobject prefab
+            nameholder.transform.SetParent(nameholder.transform, false); // Set Image to the parent but keep its own transform
         }
         else if (_NPCName == "Spy")
         {
@@ -261,10 +258,10 @@ public class DialogueManager : MonoBehaviour
         else
         {
             print("default");
+            //selectAnimation = _captainProfile;
+            GameObject profileholder = Instantiate(_captainProfile); // Takes a gameobject prefab
+            nameholder.transform.SetParent(nameholder.transform, false); // Set Image to the parent but keep its own transform
         }
-
-        // Assign the new animator
-        profile.runtimeAnimatorController = selectAnimation.runtimeAnimatorController;
     }
 
 
