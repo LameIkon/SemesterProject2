@@ -241,15 +241,15 @@ public class DialogueManager : MonoBehaviour
 
         if (_NPCName == "Scientist")
         {
-            //selectAnimation = _scientistProfile;
-            Instantiate(_scientistProfile); // Takes a gameobject prefab
-            nameholder.transform.SetParent(nameholder.transform, false); // Set Image to the parent but keep its own transform
+            Debug.Log("Scientist");
+            GameObject profile = Instantiate(_scientistProfile); // Takes a gameobject prefab
+            profile.transform.SetParent(nameholder.transform, false); // Set Image to the parent but keep its own transform
         }
         else if (_NPCName == "Captain")
         {
-            //selectAnimation = _captainProfile;
-            Instantiate(_captainProfile); // Takes a gameobject prefab
-            nameholder.transform.SetParent(nameholder.transform, false); // Set Image to the parent but keep its own transform
+            Debug.Log("Captain");
+            GameObject profile = Instantiate(_captainProfile); // Takes a gameobject prefab
+            profile.transform.SetParent(nameholder.transform, false); // Set Image to the parent but keep its own transform
         }
         else if (_NPCName == "Spy")
         {
@@ -257,10 +257,9 @@ public class DialogueManager : MonoBehaviour
         }
         else
         {
-            print("default");
-            //selectAnimation = _captainProfile;
-            GameObject profileholder = Instantiate(_captainProfile); // Takes a gameobject prefab
-            nameholder.transform.SetParent(nameholder.transform, false); // Set Image to the parent but keep its own transform
+            Debug.Log("default");
+            GameObject profile = Instantiate(_captainProfile); // Takes a gameobject prefab
+            profile.transform.SetParent(nameholder.transform, false); // Set Image to the parent but keep its own transform
         }
     }
 
