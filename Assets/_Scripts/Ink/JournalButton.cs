@@ -27,6 +27,12 @@ public class JournalButton : MonoBehaviour
         }
     }
 
+    public void PreviousPage()
+    {
+        _page2.SetActive(false); // Deactivate current page
+        _page1.SetActive(true); // Activate prevoius page
+    }
+
     public void ExitPage()
     {
        this.gameObject.SetActive(false); // Deactivate the journal
