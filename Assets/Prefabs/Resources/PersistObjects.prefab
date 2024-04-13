@@ -4684,6 +4684,14 @@ PrefabInstance:
       propertyPath: _blizzardFogEffect
       value: 
       objectReference: {fileID: 8794226987472724107}
+    - target: {fileID: 7071212026655611817, guid: 5f68667c624044144aaece0f732353f6, type: 3}
+      propertyPath: _insideScene.m_SceneName
+      value: ShipInside
+      objectReference: {fileID: 0}
+    - target: {fileID: 7071212026655611817, guid: 5f68667c624044144aaece0f732353f6, type: 3}
+      propertyPath: _insideScene.m_SceneAsset
+      value: 
+      objectReference: {fileID: 102900000, guid: 705aa24cd08232546a65faae48da3e27, type: 3}
     - target: {fileID: 8338497903177906760, guid: 5f68667c624044144aaece0f732353f6, type: 3}
       propertyPath: m_Name
       value: EnvironmentManager
@@ -7205,14 +7213,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3318503064608217018}
     m_Modifications:
-    - target: {fileID: 1393042862867239259, guid: 3bd13d619094d8544a258a73d50c1dee, type: 3}
-      propertyPath: _activateMovement
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1393042862867239259, guid: 3bd13d619094d8544a258a73d50c1dee, type: 3}
-      propertyPath: _activateTemperature
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3402788156572480543, guid: 3bd13d619094d8544a258a73d50c1dee, type: 3}
       propertyPath: m_Pivot.x
       value: 0

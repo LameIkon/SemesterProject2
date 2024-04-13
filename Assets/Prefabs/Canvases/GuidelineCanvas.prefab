@@ -1400,19 +1400,33 @@ MonoBehaviour:
   _showInventoryInteraction: 0
   _showChestInteraction: 0
   _showCampfireInteraction: 0
+  _showTemperature: 0
+  _showHealth: 0
+  _showFood: 0
+  _showStamina: 0
   _finishedMovement: 0
   _finishedRunning: 0
   _finishedInventoryInteraction: 0
   _finishedChestInteraction: 0
   _finishedCampfireInteraction: 0
+  _finishedTemperature: 0
+  _finishedHealth: 0
+  _finishedFood: 0
+  _finishedStamina: 0
   _movementCanvas: {fileID: 1613685754710016024}
   _runningCanvas: {fileID: 6708148263077226605}
   _inventoryCanvas: {fileID: 3849267755938205980}
   _chestCanvas: {fileID: 742158990728481300}
   _campfireCanvas: {fileID: 5487577167162574984}
+  _healthAnimator: {fileID: 0}
+  _temperatureAnimator: {fileID: 0}
+  _foodAnimator: {fileID: 0}
+  _staminaAnimator: {fileID: 0}
   _inventoryScreen: {fileID: 0}
   _chestScreen: {fileID: 0}
   _campFireScreen: {fileID: 0}
+  _isMoving: 0
+  _isRunning: 0
 --- !u!114 &1393042862867239259
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1430,6 +1444,9 @@ MonoBehaviour:
   _activateInventory: 0
   _activateChest: 0
   _activateCampFire: 0
+  _activateTemperature: 0
+  _activateFood: 0
+  _activateStamina: 0
 --- !u!1 &8878926917991798766
 GameObject:
   m_ObjectHideFlags: 0

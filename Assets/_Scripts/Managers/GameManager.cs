@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
 
 public class GameManager : PersistentSingleton<GameManager>
@@ -11,8 +12,9 @@ public class GameManager : PersistentSingleton<GameManager>
 
     [SerializeField] private GameObject _pauseMenu;
     [SerializeField] private GameObject _inventoryMenu;
-    
+    [SerializeField] private Scene _mainMenu;
 
+    private bool _mainSceneBool;
 
     protected override void Awake()
     {
@@ -35,6 +37,7 @@ public class GameManager : PersistentSingleton<GameManager>
         {
             _inventoryMenu.SetActive(false);
         }
+        CheckScene();
 
         // Here we subscribe the events to the handlers
         InputReader.OnPauseEvent += HandlePause;
@@ -51,17 +54,42 @@ public class GameManager : PersistentSingleton<GameManager>
         InputReader.OnInventoryCloseEvent -= HandleInvertoryClose;
     }
 
+    private void OnLevelWasLoaded(int level)
+    {
+        CheckScene();
+    }
+
+    void CheckScene()
+    {
+        Scene currentScene = SceneManager.GetActiveScene();
+
+        if (currentScene.name == _mainMenu.name)
+        {
+            _mainSceneBool = true;
+        }
+        else
+        {
+            _mainSceneBool = false;
+        }
+    }
+
     private void HandlePause() 
     {
-        _pauseMenu.SetActive(true);
-        Time.timeScale = 0f;
+        if (_mainSceneBool)
+        {
+            _pauseMenu.SetActive(true);
+            Time.timeScale = 0f;
+        }
     }
 
     public void HandleResume() 
     {
-        _pauseMenu.SetActive(false);
-        _inventoryMenu.SetActive(false); // Important we close both the inventory and the pause menus here. This will mean if you have the inventory open and the OnResumeEvent fires it will close the inventory 
-        Time.timeScale = 1.0f;
+        if (_mainSceneBool)
+        {
+            _pauseMenu.SetActive(false);
+            _inventoryMenu.SetActive(false); // Important we close both the inventory and the pause menus here. This will mean if you have the inventory open and the OnResumeEvent fires it will close the inventory 
+            Time.timeScale = 1.0f;
+        }
     }
 
     private void HandleInventoryOpen() 

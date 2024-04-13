@@ -52,6 +52,8 @@ public class GuidelineManager : MonoBehaviour
     [SerializeField, Space(5)] private bool _isMoving;
     [SerializeField] private bool _isRunning;
 
+    private float _delayTimer;
+
 
     private void Awake()
     {
@@ -239,19 +241,16 @@ public class GuidelineManager : MonoBehaviour
 
     IEnumerator FadeOut(GameObject canvas)
     {
-        //var canvasAlpha = canvas.GetComponent<CanvasGroup>().alpha;
+        yield return new WaitForSeconds(2);
         float currentAlpha = 1.0f;
 
         while (currentAlpha >= 0)
         {
             currentAlpha -= Time.deltaTime / 2; // Change the currentAlpha. 
-            //canvasAlpha = currentAlpha;
             canvas.GetComponent<CanvasGroup>().alpha = currentAlpha;
-            yield return null;
-            
+            yield return null;           
         }
     }
-
 }
 
 

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ActivateGuideline : MonoBehaviour
 {
+    // This script is used as testing for the GuidelineManager only
+    [Header("Check activation")]
     [SerializeField] private bool _activateMovement;
     [SerializeField] private bool _activateRunning;
     [SerializeField] private bool _activateInventory;
@@ -13,6 +15,17 @@ public class ActivateGuideline : MonoBehaviour
     [SerializeField, Space(5)] private bool _activateTemperature;
     [SerializeField] private bool _activateFood;
     [SerializeField] private bool _activateStamina;
+
+
+    private bool _finishedMovement;
+    private bool _finishedRunning;
+    private bool _finishedInventory;
+    private bool _finishedChest;
+    private bool _finishedCampFire;
+
+    private bool _finishedTemperature;    
+    private bool _finishedFood;
+    private bool _finishedStamina;
 
     private void Awake()
     {
@@ -27,8 +40,63 @@ public class ActivateGuideline : MonoBehaviour
         _activateTemperature = false;
     }
 
+    private void Start()
+    {
+        Invoke("ShowMovement", 1.5f);
+    }
+
+    private void OnValidate()
+    {
+        StartGuideline(); // Only used in the editor to test
+    }
+
+    private void OnEnable()
+    {
+        InputReader.OnInventoryOpenEvent += ShowHunger;
+    }
+
     // Update is called once per frame
     void Update()
+    {
+
+        if (EnvironmentManager.instance._outside && !_finishedTemperature)
+        {
+            GuidelineManager.instance.ShowTemperature();
+            _finishedTemperature = true;
+        }
+    }
+
+
+    void ShowMovement()
+    {
+        if (!_finishedMovement)
+        {
+            GuidelineManager.instance.ShowMovement();
+            _finishedMovement = true;
+        }
+    }
+
+    void ShowHunger()
+    {
+        if (!_finishedFood)
+        {
+            GuidelineManager.instance.ShowFood();
+            _finishedFood = true;
+        }        
+    }
+
+    void ShowStamina()
+    {
+        if (!_finishedStamina)
+        {
+            GuidelineManager.instance.ShowStamina();
+            _finishedStamina = true;
+        }
+    }
+
+
+
+    void StartGuideline()
     {
         if (_activateMovement)
         {
@@ -71,6 +139,5 @@ public class ActivateGuideline : MonoBehaviour
             GuidelineManager.instance.ShowTemperature();
             _activateTemperature = false;
         }
-
     }
 }

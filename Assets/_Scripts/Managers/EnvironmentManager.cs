@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.VFX;
 
 public class EnvironmentManager : MonoBehaviour
@@ -61,6 +62,10 @@ public class EnvironmentManager : MonoBehaviour
 
     [SerializeField] private FloatVariable _CurrentStaminaUse; // This is the current max stamina
     [SerializeField] private FloatVariable _CurrentStaminaRegen; // This is the current stamina regen
+
+    [Header("Scenes")]
+    public bool _inside;
+    public bool _outside;
 
     //private int _timeBetweenMin = 100;
     //private int _timeBetweenMax = 200;
@@ -137,6 +142,11 @@ public class EnvironmentManager : MonoBehaviour
         {
             ResetWeather();
         }
+    }
+
+    private void OnLevelWasLoaded(int level)
+    {
+        CheckScene();
     }
 
     // Update is called once per frame
@@ -263,6 +273,25 @@ public class EnvironmentManager : MonoBehaviour
         if (!_blizzard && !_IsSnow && !_IsFog) // only change if no other weather effects is ongoing
         {
             _CurrentOutsideTemperature.SetValue(_defaultTemp);
+        }
+    }
+
+    void CheckScene()
+    {
+        Scene currentScene = SceneManager.GetActiveScene();
+
+
+        switch (currentScene.name)
+        {
+            case "ShipInside": // Change this to be equal to the ship interior scene
+                _inside = true;
+                _outside = false;
+                break;
+
+            default:
+                _outside = true;
+                _inside = false;
+                break;
         }
     }
 }
