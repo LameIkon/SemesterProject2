@@ -9,7 +9,7 @@ public class PlayerController : MovementController
     [SerializeField] private FloatVariable _stamina;
 
     private bool _inDialogue = false;
-    private bool _isMoving = false;
+    public bool _isMoving = false;
     public static event Action<Vector2> OnMovePositionEvent;
 
     private void OnEnable()
@@ -75,6 +75,7 @@ public class PlayerController : MovementController
         else
         {
             _isMoving = false;
+            GuidelineManager.instance.ResetMovingBool(); // Used to check off if the player is not moving
         }
         // Because the inputs are normalized we need to set the values to 1 for the move system to work properly
 

@@ -10,6 +10,10 @@ public class ActivateGuideline : MonoBehaviour
     [SerializeField] private bool _activateChest;
     [SerializeField] private bool _activateCampFire;
 
+    [SerializeField, Space(5)] private bool _activateTemperature;
+    [SerializeField] private bool _activateFood;
+    [SerializeField] private bool _activateStamina;
+
     private void Awake()
     {
         _activateMovement = false;
@@ -17,6 +21,10 @@ public class ActivateGuideline : MonoBehaviour
         _activateInventory = false;
         _activateChest = false;
         _activateCampFire = false;
+
+        _activateFood = false;
+        _activateStamina = false;
+        _activateTemperature = false;
     }
 
     // Update is called once per frame
@@ -47,5 +55,22 @@ public class ActivateGuideline : MonoBehaviour
             GuidelineManager.instance.ShowCampfire();
             _activateCampFire = false;
         }
+
+        if (_activateFood)
+        {
+            GuidelineManager.instance.ShowFood();
+            _activateFood = false;
+        }
+        if (_activateStamina)
+        {
+            GuidelineManager.instance.ShowStamina();
+            _activateStamina = false;
+        }
+        if (_activateTemperature)
+        {
+            GuidelineManager.instance.ShowTemperature();
+            _activateTemperature = false;
+        }
+
     }
 }

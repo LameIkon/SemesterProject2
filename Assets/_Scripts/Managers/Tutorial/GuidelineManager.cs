@@ -14,6 +14,7 @@ public class GuidelineManager : MonoBehaviour
     [SerializeField] private bool _showCampfireInteraction;
 
     [SerializeField, Space(5)] private bool _showTemperature;
+    [SerializeField] private bool _showHealth;
     [SerializeField] private bool _showFood;
     [SerializeField] private bool _showStamina;
 
@@ -25,6 +26,7 @@ public class GuidelineManager : MonoBehaviour
     [SerializeField] private bool _finishedCampfireInteraction;
 
     [SerializeField, Space(5)] private bool _finishedTemperature;
+    [SerializeField] private bool _finishedHealth;
     [SerializeField] private bool _finishedFood;
     [SerializeField] private bool _finishedStamina;
 
@@ -36,17 +38,20 @@ public class GuidelineManager : MonoBehaviour
     [SerializeField] private GameObject _campfireCanvas;
 
     [Header("Surivival Bars")]
-    [SerializeField] private GameObject _temperature;
-    [SerializeField] private GameObject _food;
-    [SerializeField] private GameObject _stamina;
+    [SerializeField] private Animator _healthAnimator;
+    [SerializeField] private Animator _temperatureAnimator;
+    [SerializeField] private Animator _foodAnimator;
+    [SerializeField] private Animator _staminaAnimator;
 
-    [Header("Data")]
+    [Header("Inventory Screens")]
     [SerializeField] private GameObject _inventoryScreen;
     [SerializeField] private GameObject _chestScreen;
     [SerializeField] private GameObject _campFireScreen;
 
+
     [SerializeField, Space(5)] private bool _isMoving;
     [SerializeField] private bool _isRunning;
+
 
     private void Awake()
     {
@@ -79,8 +84,8 @@ public class GuidelineManager : MonoBehaviour
 
     // Start is called before the first frame update
     void Start()
-    { 
-
+    {
+        Invoke("ShowHealth", 0.5f);
     }
 
     // Update is called once per frame
@@ -116,10 +121,13 @@ public class GuidelineManager : MonoBehaviour
         InputReader.OnRunCancelEvent += ResetRunningBool;
     }
 
+    public void ResetMovingBool()
+    {
+        _isMoving = false;
+    }
+
     void ResetRunningBool()
     {
-        Debug.Log("not Running");
-        _isMoving = false;
         _isRunning = false;
     }
 
@@ -150,7 +158,31 @@ public class GuidelineManager : MonoBehaviour
     public void ShowCampfire()
     {
         _campfireCanvas.SetActive(true);
-        _showCampfireInteraction= true;
+        _showCampfireInteraction = true;
+    }
+
+    void ShowHealth()
+    {
+        _healthAnimator.Play("SlideInLeft");
+        _finishedHealth = true;
+    }
+
+    public void ShowTemperature()
+    {
+        _temperatureAnimator.Play("SlideInLeft");
+        _finishedTemperature = true;
+    }
+
+    public void ShowFood()
+    {
+        _foodAnimator.Play("SlideInLeft");
+        _finishedFood = true;
+    }
+
+    public void ShowStamina()
+    {
+        _staminaAnimator.Play("SlideInLeft");
+        _finishedStamina = true;
     }
 
     void StopMovement(Vector2 vector)
@@ -167,7 +199,7 @@ public class GuidelineManager : MonoBehaviour
     void StopRunning()
     {
         _isRunning = true;
-        if (_showRunning)
+        if (_showRunning && _isMoving && _isRunning)
         {
             _showRunning = false;
             _finishedRunning = true;
@@ -212,7 +244,7 @@ public class GuidelineManager : MonoBehaviour
 
         while (currentAlpha >= 0)
         {
-            currentAlpha -= Time.deltaTime / 1; // Change the currentAlpha
+            currentAlpha -= Time.deltaTime / 2; // Change the currentAlpha. 
             //canvasAlpha = currentAlpha;
             canvas.GetComponent<CanvasGroup>().alpha = currentAlpha;
             yield return null;
