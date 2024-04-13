@@ -13,6 +13,10 @@ public class GuidelineManager : MonoBehaviour
     [SerializeField] private bool _showChestInteraction;
     [SerializeField] private bool _showCampfireInteraction;
 
+    [SerializeField, Space(5)] private bool _showTemperature;
+    [SerializeField] private bool _showFood;
+    [SerializeField] private bool _showStamina;
+
     [Header("Boolean Finish Checkmarks")] //  Used to check if an guideline was finished
     [SerializeField] private bool _finishedMovement;
     [SerializeField] private bool _finishedRunning;
@@ -20,6 +24,9 @@ public class GuidelineManager : MonoBehaviour
     [SerializeField] private bool _finishedChestInteraction;
     [SerializeField] private bool _finishedCampfireInteraction;
 
+    [SerializeField, Space(5)] private bool _finishedTemperature;
+    [SerializeField] private bool _finishedFood;
+    [SerializeField] private bool _finishedStamina;
 
     [Header("Canvases")]
     [SerializeField] private GameObject _movementCanvas;
@@ -28,12 +35,18 @@ public class GuidelineManager : MonoBehaviour
     [SerializeField] private GameObject _chestCanvas;
     [SerializeField] private GameObject _campfireCanvas;
 
+    [Header("Surivival Bars")]
+    [SerializeField] private GameObject _temperature;
+    [SerializeField] private GameObject _food;
+    [SerializeField] private GameObject _stamina;
+
     [Header("Data")]
     [SerializeField] private GameObject _inventoryScreen;
     [SerializeField] private GameObject _chestScreen;
     [SerializeField] private GameObject _campFireScreen;
 
-    private Vector2 _position = Vector2.zero;
+    [SerializeField, Space(5)] private bool _isMoving;
+    [SerializeField] private bool _isRunning;
 
     private void Awake()
     {
@@ -87,17 +100,27 @@ public class GuidelineManager : MonoBehaviour
         {
             StopCampFire();
         }
-
-        if (_showRunning)
-        {
-            StopRunning();
-        }
     }
 
 
     private void OnEnable()
     {
         InputReader.OnMoveEvent += StopMovement;
+        InputReader.OnRunStartEvent += StopRunning;
+    }
+
+    private void OnDisable()
+    {
+        InputReader.OnMoveEvent -= StopMovement;
+        InputReader.OnRunStartEvent -= StopRunning;
+        InputReader.OnRunCancelEvent += ResetRunningBool;
+    }
+
+    void ResetRunningBool()
+    {
+        Debug.Log("not Running");
+        _isMoving = false;
+        _isRunning = false;
     }
 
     public void ShowMovement()
@@ -132,6 +155,7 @@ public class GuidelineManager : MonoBehaviour
 
     void StopMovement(Vector2 vector)
     {
+        _isMoving = true;
         if (_showMovement)
         {
             _showMovement = false;
@@ -142,6 +166,7 @@ public class GuidelineManager : MonoBehaviour
 
     void StopRunning()
     {
+        _isRunning = true;
         if (_showRunning)
         {
             _showRunning = false;
