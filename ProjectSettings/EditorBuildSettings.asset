@@ -20,4 +20,16 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Outside/Outside02.unity
     guid: e5a42f1ee5992814faa02cd63cae8c26
+  - enabled: 1
+    path: Assets/Scenes/AdamScenes/ShipInside/AdamShipInside.unity
+    guid: 9b0b655a574a5294b8a37aeb7e798cfd
+  - enabled: 1
+    path: Assets/Scenes/AdamScenes/Outside/AdamOut02.unity
+    guid: 8acd07eecafb2d24e8f606359ec02752
+  - enabled: 1
+    path: Assets/Scenes/AdamScenes/Outside/AdamOut01.unity
+    guid: 6949d0fb5b66867448e3a0ae7583a19b
+  - enabled: 1
+    path: Assets/Scenes/AdamScenes/Outside/AdamOut03.unity
+    guid: 9dcaae8c5e4e08944b55f019c07963b7
   m_configObjects: {}
