@@ -10,8 +10,8 @@ public class GameManager : PersistentSingleton<GameManager>
 {
     private InputReader _inputs; 
 
-    [SerializeField] private GameObject _pauseMenu;
-    [SerializeField] private GameObject _inventoryMenu;
+    [SerializeField] private UnityEngine.GameObject _pauseMenu;
+    [SerializeField] private UnityEngine.GameObject _inventoryMenu;
     [SerializeField] private Scene _mainMenu;
 
     private bool _mainSceneBool;

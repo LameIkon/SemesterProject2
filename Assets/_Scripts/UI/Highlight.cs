@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class Highlight : MonoBehaviour
 {
-    [SerializeField] private GameObject _showInteraction; // Used to get the GameObject named showInteraction
+    [SerializeField] private UnityEngine.GameObject _showInteraction; // Used to get the GameObject named showInteraction
 
     private void Start()
     {
         // Fist child is canvas and the next is the child of the canvas
-        _showInteraction = transform.GetChild(1).GetChild(0).gameObject; // Get the child of child attached to the parent.
+        //_showInteraction = transform.GetChild(1).GetChild(0).gameObject; // Get the child of child attached to the parent.
         _showInteraction.SetActive(false); // Set false if by chance its active
     }
 

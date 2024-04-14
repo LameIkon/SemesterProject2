@@ -10,10 +10,10 @@ public class EnvironmentManager : MonoBehaviour
     public static EnvironmentManager instance { get; private set; }
 
     [Header("Weather Types")] // By default they start being disabled since in unity editor the effects love to run constantly
-    [SerializeField] private GameObject _blizzard;
-    [SerializeField] private GameObject _snow;
-    [SerializeField] private GameObject _fog;
-    public GameObject _barrierBlizzard;
+    [SerializeField] private UnityEngine.GameObject _blizzard;
+    [SerializeField] private UnityEngine.GameObject _snow;
+    [SerializeField] private UnityEngine.GameObject _fog;
+    public UnityEngine.GameObject _barrierBlizzard;
 
     [Header("Weather Effects")]
     [SerializeField] private ParticleSystem _blizzardEffect;

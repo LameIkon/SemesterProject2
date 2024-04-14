@@ -7,13 +7,13 @@ using UnityEngine.UI;
 public class StaticInterface : UserInterface
 {
 
-    public GameObject[] _Slots;
+    public UnityEngine.GameObject[] _Slots;
 
 
 
     public override void CreateSlots()
     {
-        _SlotsOnInterface = new Dictionary<GameObject, InventorySlot> ();
+        _SlotsOnInterface = new Dictionary<UnityEngine.GameObject, InventorySlot>();
 
         for (int i = 0; i < _Inventory.GetSlots.Length; i++)
         {

@@ -4,7 +4,7 @@ using UnityEngine;
 [RequireComponent(typeof(BoxCollider2D))]
 public class TriggerInteractBase : MonoBehaviour, IInteractable
 {
-    public GameObject _Player { get; set; }  // Initialiseres i Start()
+    public UnityEngine.GameObject _Player { get; set; }  // Initialiseres i Start()
     public bool _CanInteract { get; set; }   // Nødvendig i sammenhæng med loading af scener MED Interaction-knappen
     public virtual void Interact() { }  // Overrides i DoorTriggerInteraction.cs
     
@@ -13,7 +13,7 @@ public class TriggerInteractBase : MonoBehaviour, IInteractable
     
     private void Start()
     {
-        _Player = GameObject.FindWithTag("Player"); // Sørger for at det kun er spilleren der kan interagere med døren
+        _Player = UnityEngine.GameObject.FindWithTag("Player"); // Sørger for at det kun er spilleren der kan interagere med døren
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

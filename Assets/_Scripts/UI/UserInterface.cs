@@ -16,7 +16,7 @@ public abstract class UserInterface: MonoBehaviour
     public InventoryObject _Inventory;
 
 
-    public Dictionary<GameObject, InventorySlot> _SlotsOnInterface = new Dictionary<GameObject, InventorySlot>();
+    public Dictionary<UnityEngine.GameObject, InventorySlot> _SlotsOnInterface = new Dictionary<UnityEngine.GameObject, InventorySlot>();
 
 
     //void OnEnable() 
@@ -74,7 +74,7 @@ public abstract class UserInterface: MonoBehaviour
     public abstract void CreateSlots();     
 
 
-    protected void AddEvent(GameObject obj, EventTriggerType type, UnityAction<BaseEventData> action)
+    protected void AddEvent(UnityEngine.GameObject obj, EventTriggerType type, UnityAction<BaseEventData> action)
     {
         EventTrigger trigger = obj.GetComponent<EventTrigger>();
         var eventTrigger = new EventTrigger.Entry();
@@ -83,40 +83,40 @@ public abstract class UserInterface: MonoBehaviour
         trigger.triggers.Add(eventTrigger);
     }
 
-    public void OnEnter(GameObject obj)
+    public void OnEnter(UnityEngine.GameObject obj)
     {
         MouseData._SlotHoveredOver = obj;
     }
 
-    public void OnExit(GameObject obj)
+    public void OnExit(UnityEngine.GameObject obj)
     {
         MouseData._SlotHoveredOver = null;
 
     }
 
-    public void OnEnterInterface(GameObject obj)
+    public void OnEnterInterface(UnityEngine.GameObject obj)
     {
        MouseData._InterfaceMouseIsOver = obj.GetComponent<UserInterface>();
 
     }
 
-    public void OnExitInterface(GameObject obj)
+    public void OnExitInterface(UnityEngine.GameObject obj)
     {
 
         MouseData._InterfaceMouseIsOver = null;
     }
 
-    public void OnDragStart(GameObject obj)
+    public void OnDragStart(UnityEngine.GameObject obj)
     {       
         MouseData._TempItemBeingDragged = CreateTempItem(obj);        
     }
 
-    public GameObject CreateTempItem(GameObject obj)
+    public UnityEngine.GameObject CreateTempItem(UnityEngine.GameObject obj)
     {
-        GameObject tempItem = null;
+        UnityEngine.GameObject tempItem = null;
         if (_SlotsOnInterface[obj]._Item._ID >= 0)
         {
-            tempItem = new GameObject();
+            tempItem = new UnityEngine.GameObject();
             var rt = tempItem.AddComponent<RectTransform>();
             rt.sizeDelta = new Vector2(50, 50);
             tempItem.transform.SetParent(transform.parent);
@@ -127,7 +127,7 @@ public abstract class UserInterface: MonoBehaviour
         return tempItem;
     }
 
-    public void OnDragEnd(GameObject obj)
+    public void OnDragEnd(UnityEngine.GameObject obj)
     {
 
         Destroy(MouseData._TempItemBeingDragged);
@@ -143,7 +143,7 @@ public abstract class UserInterface: MonoBehaviour
         }       
     }
 
-    public void OnDrag(GameObject obj)
+    public void OnDrag(UnityEngine.GameObject obj)
     {
         if (MouseData._TempItemBeingDragged != null)
         {
@@ -157,17 +157,17 @@ public abstract class UserInterface: MonoBehaviour
 public static class MouseData
 {
     public static UserInterface _InterfaceMouseIsOver;
-    public static GameObject _TempItemBeingDragged;  
-    public static GameObject _SlotHoveredOver;
+    public static UnityEngine.GameObject _TempItemBeingDragged;  
+    public static UnityEngine.GameObject _SlotHoveredOver;
 }
 
 
 
 public static class ExtensionMethods
 {
-    public static void UpdateSlotDisplay(this Dictionary<GameObject, InventorySlot> slotsOnInterface)
+    public static void UpdateSlotDisplay(this Dictionary<UnityEngine.GameObject, InventorySlot> slotsOnInterface)
     {
-        foreach (KeyValuePair<GameObject, InventorySlot> slot in slotsOnInterface)
+        foreach (KeyValuePair<UnityEngine.GameObject, InventorySlot> slot in slotsOnInterface)
         {
             if (slot.Value._Item._ID >= 0)
             {

@@ -42,7 +42,7 @@ public class ActivateGuideline : MonoBehaviour
 
     private void Start()
     {
-        Invoke("ShowMovement", 1.5f);
+        Invoke("ShowMovement", 0.5f);
     }
 
     private void OnValidate()
@@ -58,7 +58,31 @@ public class ActivateGuideline : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        ShowTemperature();
+        ShowInventory();
+    }
 
+
+    void ShowMovement() // Activated automatically at start of game
+    {
+        if (!_finishedMovement)
+        {
+            StartCoroutine(GuidelineManager.instance.ShowMovement());
+            _finishedMovement = true;
+        }
+    }
+
+    void ShowHunger() // Activated when opening inventory
+    {
+        if (!_finishedFood)
+        {
+            StartCoroutine(GuidelineManager.instance.ShowFood());
+            _finishedFood = true;
+        }        
+    }
+
+    void ShowTemperature() // Activated when going outside ship
+    {
         if (EnvironmentManager.instance._outside && !_finishedTemperature)
         {
             GuidelineManager.instance.ShowTemperature();
@@ -66,23 +90,13 @@ public class ActivateGuideline : MonoBehaviour
         }
     }
 
-
-    void ShowMovement()
+    void ShowCampFire()
     {
-        if (!_finishedMovement)
+        if (!_finishedCampFire)
         {
-            GuidelineManager.instance.ShowMovement();
-            _finishedMovement = true;
+            GuidelineManager.instance.ShowCampfire();
+            _finishedCampFire = true;
         }
-    }
-
-    void ShowHunger()
-    {
-        if (!_finishedFood)
-        {
-            GuidelineManager.instance.ShowFood();
-            _finishedFood = true;
-        }        
     }
 
     void ShowStamina()
@@ -91,6 +105,15 @@ public class ActivateGuideline : MonoBehaviour
         {
             GuidelineManager.instance.ShowStamina();
             _finishedStamina = true;
+        }
+    }
+
+    void ShowInventory() // Activated when exiting dialogue
+    {
+        if (DialogueManager.instance._DialogueExited && !_finishedInventory)
+        {
+            StartCoroutine(GuidelineManager.instance.ShowInventory());
+            _finishedInventory = true;
         }
     }
 
@@ -105,7 +128,7 @@ public class ActivateGuideline : MonoBehaviour
         }
         if (_activateRunning)
         {
-            GuidelineManager.instance.ShowRunning();
+            StartCoroutine(GuidelineManager.instance.ShowRunning());
             _activateRunning = false;
         }
         if (_activateInventory)

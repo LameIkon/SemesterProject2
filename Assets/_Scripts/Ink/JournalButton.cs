@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class JournalButton : MonoBehaviour
 {
-    [SerializeField] private GameObject _page1;
-    [SerializeField] private GameObject _page2;
+    [SerializeField] private UnityEngine.GameObject _page1;
+    [SerializeField] private UnityEngine.GameObject _page2;
 
     private void OnEnable()
     {

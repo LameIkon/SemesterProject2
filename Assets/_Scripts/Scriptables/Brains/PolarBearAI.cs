@@ -33,7 +33,7 @@ public class PolarBearAI : BrainAI
 
     public override void Think(AIThinker brain)
     {
-        GameObject target = brain.Remember<GameObject>(_target);
+        UnityEngine.GameObject target = brain.Remember<UnityEngine.GameObject>(_target);
         float stateTimeout = brain.Remember<float>(_stateTimeout);
         stateTimeout -= Time.deltaTime;
         brain.Remember(_stateTimeout, stateTimeout);
@@ -53,7 +53,7 @@ public class PolarBearAI : BrainAI
             //            .OrderBy(go => Vector3.Distance(go.transform.position, brain.transform.position))
             //            .FirstOrDefault(go => go != brain.gameObject);
 
-            target = GameObject.FindGameObjectWithTag(_playerTag);
+            target = UnityEngine.GameObject.FindGameObjectWithTag(_playerTag);
 
             brain.Remember(_target, target);
         }

@@ -8,10 +8,10 @@ using UnityEngine.UI;
 public class ToolbarManager : MonoBehaviour
 {
     [SerializeField] InventoryObject _toolbarInventory;
-    [SerializeField] GameObject [] _inventorySlotPrefabs;
+    [SerializeField] UnityEngine.GameObject [] _inventorySlotPrefabs;
     private int _selectedSlot = -1;
     [SerializeField] private Color _selectedColor, _notSelectedColor;
-    private GameObject _lantern;
+    private UnityEngine.GameObject _lantern;
     private bool _lightIsActive = false;
     private bool _defaultIsActive = false;
 
@@ -129,7 +129,7 @@ public class ToolbarManager : MonoBehaviour
             itemInSlot.ItemObject.Action();
             _saveLightItemIndex = _selectedSlot;
             _lightIsActive = true;
-            _lantern = GameObject.FindGameObjectWithTag("Lantern");
+            _lantern = UnityEngine.GameObject.FindGameObjectWithTag("Lantern");
         }
 
         else if (_lightIsActive)

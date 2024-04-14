@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class CampfireManager : MonoBehaviour
 {
-    [SerializeField] public GameObject _bonfireCanvas; //we cant have this static or we cant see it in inspector and drag canvas into slot
-    public static GameObject _bonfireCanvasSTATIC; //we need a static variable so that we can acces it in Bonfire.Script
+    [SerializeField] public UnityEngine.GameObject _bonfireCanvas; //we cant have this static or we cant see it in inspector and drag canvas into slot
+    public static UnityEngine.GameObject _bonfireCanvasSTATIC; //we need a static variable so that we can acces it in Bonfire.Script
 
     //[SerializeField] private bool _useBonfire;
     private bool _turn = false;

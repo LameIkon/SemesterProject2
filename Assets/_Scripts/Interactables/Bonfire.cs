@@ -9,8 +9,8 @@ public class Bonfire : MonoBehaviour
 {
 
     [SerializeField] private InventoryObject _bonfireInventory;
-    [SerializeField] private GameObject _particles;
-    [SerializeField] private GameObject _lights;
+    [SerializeField] private UnityEngine.GameObject _particles;
+    [SerializeField] private UnityEngine.GameObject _lights;
     // private StaticInterface _bonfireInterface
     [SerializeField] private SpriteRenderer _spriteRenderer;
     [SerializeField] private Sprite _campfireLitSprite;

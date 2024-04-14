@@ -2,16 +2,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TriggerChatBubble : MonoBehaviour
+public class TriggerTemperatureGuide : MonoBehaviour
 {
     [SerializeField] private ChatBubble _chatBubble; // Get the assigned chat that should be started
+    private bool _startOnce;
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    // Start is called before the first frame update
+    void Start()
     {
-        if (collision.gameObject.name == "Player")
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        TemperatureChatGuide();
+    }
+
+    void TemperatureChatGuide()
+    {
+        if (EnvironmentManager.instance._outside && !_startOnce)
         {
+            _startOnce = true;
             _chatBubble.StartChatBubble(); // Communicate to the gameobject to start the chat
             gameObject.SetActive(false); // Deactivate this script since it served its purpose. Might be changed to destroy later
         }
+
     }
 }

@@ -6,15 +6,15 @@ using UnityEngine.SceneManagement;
 public class PauseManager : MonoBehaviour
 {
     // current gameobject as active
-    private GameObject _activePage;
+    private UnityEngine.GameObject _activePage;
     [SerializeField] private GameManager _gameManager;
 
     private float _transitionTime = 0; // change this depending if you want a transition
 
     //gameobjects to transition between
-    public GameObject _PauseMenu;
-    public GameObject _Options;
-    [SerializeField] GameObject _PauseMenuCanvas;
+    public UnityEngine.GameObject _PauseMenu;
+    public UnityEngine.GameObject _Options;
+    [SerializeField] UnityEngine.GameObject _PauseMenuCanvas;
 
     //public static bool _CallInputReader;
 
@@ -26,7 +26,7 @@ public class PauseManager : MonoBehaviour
 
     private bool PauseScreen = true; //this will always know its the PauseScreen since it starts on PauseMenu
 
-    IEnumerator Transition(GameObject newPage)
+    IEnumerator Transition(UnityEngine.GameObject newPage)
     {
         //if on mainScreen 
         if (PauseScreen)
@@ -61,7 +61,7 @@ public class PauseManager : MonoBehaviour
     }
 
     // change page 
-    public void TransitiontoPage(GameObject newPage)
+    public void TransitiontoPage(UnityEngine.GameObject newPage)
     {
         if (newPage != _activePage) // this might be reduntant: It checks if the page you want to go to is not the same page 
         {

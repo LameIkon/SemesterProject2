@@ -28,7 +28,7 @@ public class PersistentSingleton<T> : MonoBehaviour where T : Component
                 _instance = FindAnyObjectByType<T>();
                 if (_instance == null)
                 {
-                    GameObject go = new GameObject(typeof(T).Name);
+                    UnityEngine.GameObject go = new UnityEngine.GameObject(typeof(T).Name);
                     _instance = go.AddComponent<T>();
 
                 }

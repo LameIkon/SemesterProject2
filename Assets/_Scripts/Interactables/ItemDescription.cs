@@ -7,13 +7,13 @@ using UnityEngine.InputSystem;
 
 public class ItemDescription : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    [SerializeField] private GameObject _slot;
-    [SerializeField] private GameObject _itemDescription;
+    [SerializeField] private UnityEngine.GameObject _slot;
+    [SerializeField] private UnityEngine.GameObject _itemDescription;
     [SerializeField, TextArea(2, 4)] private string _description;
 
-    [SerializeField] private GameObject _itemDescriptionPrefab;
+    [SerializeField] private UnityEngine.GameObject _itemDescriptionPrefab;
 
-    [SerializeField] private GameObject _canvas;
+    [SerializeField] private UnityEngine.GameObject _canvas;
 
     private bool _hovering;
 
@@ -25,7 +25,7 @@ public class ItemDescription : MonoBehaviour, IPointerEnterHandler, IPointerExit
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePos.z = 0f;
 
-        GameObject description = Instantiate(_itemDescriptionPrefab);
+        UnityEngine.GameObject description = Instantiate(_itemDescriptionPrefab);
 
         description.transform.position = mousePos;
         description.transform.SetParent(_canvas.transform, false);

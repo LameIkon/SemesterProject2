@@ -6,7 +6,7 @@ public class Initialize : MonoBehaviour
     
     public static Initialize instance;
 
-    private GameObject _persistanceObject; // Store the value. used to activate and disable the GameObject
+    private UnityEngine.GameObject _persistanceObject; // Store the value. used to activate and disable the GameObject
     private static bool _initialized = true; // Ensures only 1 instance of running some code once
     private bool _checkInstances; // Used to ensure that OnLevelWasLoaded only get run after it gets checked if there is more instances.
 
@@ -25,7 +25,7 @@ public class Initialize : MonoBehaviour
 
         if (_initialized) // Just does this once
         {
-            _persistanceObject = Instantiate(Resources.Load("PersistObjects")) as GameObject; // Instantiate the persistant Objects
+            _persistanceObject = Instantiate(Resources.Load("PersistObjects")) as UnityEngine.GameObject; // Instantiate the persistant Objects
             DontDestroyOnLoad(_persistanceObject); // Ensure not being destroyed 
             _persistanceObject.SetActive(false); // Initialize it to be false to not effect anything in MainMenu
             _initialized = false; // This will never be able to run again

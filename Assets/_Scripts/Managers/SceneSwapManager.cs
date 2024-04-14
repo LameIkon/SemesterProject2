@@ -6,8 +6,8 @@ using UnityEngine.SceneManagement;
 public class SceneSwapManager : Singleton<SceneSwapManager>
 {
     private static bool _loadFromDoor;
-    private GameObject _player;
-    private GameObject _playerMovePoint;
+    private UnityEngine.GameObject _player;
+    private UnityEngine.GameObject _playerMovePoint;
     private Collider2D _doorCol;
     private Vector3 _playerSpawnPosition;  
     private DoorTriggerInteraction.DoorToSpawnAt _doorToSpawnTo;
@@ -18,8 +18,8 @@ public class SceneSwapManager : Singleton<SceneSwapManager>
     protected override void Awake()
     {
         base.Awake();
-        _player = GameObject.FindGameObjectWithTag("Player");
-        _playerMovePoint = GameObject.FindGameObjectWithTag("PlayerMovePoint");
+        _player = UnityEngine.GameObject.FindGameObjectWithTag("Player");
+        _playerMovePoint = UnityEngine.GameObject.FindGameObjectWithTag("PlayerMovePoint");
         // _playerCol = _player.GetComponent<Collider2D>(); Har hele tiden troet at Collideren sad på Playeren som et child-objekt, var så forvirret
 
     }

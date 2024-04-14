@@ -7,7 +7,7 @@ using UnityEngine;
 [RequireComponent(typeof(BoxCollider2D))]
 public class ChestManager : MonoBehaviour
 {
-    [SerializeField] private static GameObject _chestCanvas;
+    [SerializeField] private static UnityEngine.GameObject _chestCanvas;
     [SerializeField] private InventoryObject _chestInventory;
     [SerializeField] private ChestFiller _chestFiller;
     [SerializeField] private ItemDatabaseObject _database;
@@ -40,7 +40,7 @@ public class ChestManager : MonoBehaviour
     {
         if (LanternDisabler._LoadedSTATIC) 
         {
-            _chestCanvas = GameObject.FindWithTag("Chest");
+            _chestCanvas = UnityEngine.GameObject.FindWithTag("Chest");
             _chestInterface = _chestCanvas.GetComponent<StaticInterface>();
             _chestInterface._Inventory = _chestInventory;
             _chestCanvas.SetActive(false);
