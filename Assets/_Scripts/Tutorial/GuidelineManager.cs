@@ -390,8 +390,8 @@ public class GuidelineManager : MonoBehaviour
 
         // Reset inventory screens
         _inventoryScreen.SetActive(false);
-        _chestScreen.SetActive(false);
-        _campFireScreen.SetActive(false);
+        _chestCanvas.SetActive(false);
+        _campfireCanvas.SetActive(false);
         _movementCanvas.SetActive(false);
         _runningCanvas.SetActive(false);
         _ToolbarCanvas.SetActive(false);

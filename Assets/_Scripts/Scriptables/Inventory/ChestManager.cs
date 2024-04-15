@@ -36,7 +36,7 @@ public class ChestManager : MonoBehaviour
     }
 
 
-    private void FixedUpdate()
+    private void Update()
     {
         if (LanternDisabler._LoadedSTATIC) 
         {
@@ -114,7 +114,7 @@ public class ChestManager : MonoBehaviour
         _chestCanvas.SetActive(_turn);
 
         // check interactability 
-        //Interactable();
+        Interactable();
     }
 
     void Interactable()
