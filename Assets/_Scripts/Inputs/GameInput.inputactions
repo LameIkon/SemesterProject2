@@ -96,36 +96,9 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Button3",
+                    "name": "Eat",
                     "type": "Button",
-                    "id": "0f94ac25-e86f-4e3f-bf29-a2582f12d69c",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Button4",
-                    "type": "Button",
-                    "id": "9238db41-f7c7-42ba-8c61-62135d2a0b9b",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Button5",
-                    "type": "Button",
-                    "id": "80ecc9a6-68d9-4d4b-a8f3-997ad530990c",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Button6",
-                    "type": "Button",
-                    "id": "5abfb28e-6602-4ad6-8409-dd34ee2c3c67",
+                    "id": "18280935-f0d7-4d97-8f2b-f712bab6e271",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -366,45 +339,12 @@
                 },
                 {
                     "name": "",
-                    "id": "a5323665-c068-449d-acc4-b4c3a2458fce",
-                    "path": "<Keyboard>/3",
+                    "id": "c6f9413f-d119-4193-9a1b-d8241614fa48",
+                    "path": "<Keyboard>/q",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Button3",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "1d09a168-75ad-47dd-8670-333151552514",
-                    "path": "<Keyboard>/4",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Button4",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "5d39720d-0344-4e1f-9410-6394cb1ba594",
-                    "path": "<Keyboard>/5",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Button5",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "85d3e4fb-41d2-4046-a8cb-c8caee31b0b4",
-                    "path": "<Keyboard>/6",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Button6",
+                    "action": "Eat",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -422,6 +362,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "Eat",
+                    "type": "Button",
+                    "id": "8d23d404-4ae2-4342-9731-5a8b060611b4",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Pick",
@@ -463,42 +412,6 @@
                     "name": "Button2",
                     "type": "Button",
                     "id": "b4ed04b8-42ff-468e-b028-7534295bbcd9",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Button3",
-                    "type": "Button",
-                    "id": "6333de3c-a629-4cc6-a1ce-3a5ff31f6601",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Button4",
-                    "type": "Button",
-                    "id": "f1a362b7-8e74-4e25-be5b-d4c1ed4bbd47",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Button5",
-                    "type": "Button",
-                    "id": "16e33536-d52b-4837-8c8d-f47a17e0110b",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Button6",
-                    "type": "Button",
-                    "id": "0f8c7304-9cac-4377-85b8-5915930f7adf",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -702,56 +615,12 @@
                 },
                 {
                     "name": "",
-                    "id": "d7f7013e-9e53-4bde-9e65-03fe4f400d4a",
-                    "path": "<Keyboard>/6",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Button6",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "37c033cb-9a54-4fcc-985d-12f426c75a54",
                     "path": "<Keyboard>/2",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Button2",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "5d954c22-0fc1-451c-b51d-592a0ebb53be",
-                    "path": "<Keyboard>/3",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Button3",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "114e785e-24fe-4cb2-b77a-1cc179c001a6",
-                    "path": "<Keyboard>/4",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Button4",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "8546143e-980d-479a-8aa7-fa5e96c5a067",
-                    "path": "<Keyboard>/5",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Button5",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -774,6 +643,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "RightClick",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e36fc96a-1ea0-489e-babe-96e5f1226d54",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Eat",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

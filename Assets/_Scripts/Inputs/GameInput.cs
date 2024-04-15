@@ -118,36 +118,9 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Button3"",
+                    ""name"": ""Eat"",
                     ""type"": ""Button"",
-                    ""id"": ""0f94ac25-e86f-4e3f-bf29-a2582f12d69c"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Button4"",
-                    ""type"": ""Button"",
-                    ""id"": ""9238db41-f7c7-42ba-8c61-62135d2a0b9b"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Button5"",
-                    ""type"": ""Button"",
-                    ""id"": ""80ecc9a6-68d9-4d4b-a8f3-997ad530990c"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Button6"",
-                    ""type"": ""Button"",
-                    ""id"": ""5abfb28e-6602-4ad6-8409-dd34ee2c3c67"",
+                    ""id"": ""18280935-f0d7-4d97-8f2b-f712bab6e271"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -388,45 +361,12 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""a5323665-c068-449d-acc4-b4c3a2458fce"",
-                    ""path"": ""<Keyboard>/3"",
+                    ""id"": ""c6f9413f-d119-4193-9a1b-d8241614fa48"",
+                    ""path"": ""<Keyboard>/q"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Button3"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""1d09a168-75ad-47dd-8670-333151552514"",
-                    ""path"": ""<Keyboard>/4"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Button4"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""5d39720d-0344-4e1f-9410-6394cb1ba594"",
-                    ""path"": ""<Keyboard>/5"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Button5"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""85d3e4fb-41d2-4046-a8cb-c8caee31b0b4"",
-                    ""path"": ""<Keyboard>/6"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Button6"",
+                    ""action"": ""Eat"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -444,6 +384,15 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Eat"",
+                    ""type"": ""Button"",
+                    ""id"": ""8d23d404-4ae2-4342-9731-5a8b060611b4"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 },
                 {
                     ""name"": ""Pick"",
@@ -485,42 +434,6 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""name"": ""Button2"",
                     ""type"": ""Button"",
                     ""id"": ""b4ed04b8-42ff-468e-b028-7534295bbcd9"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Button3"",
-                    ""type"": ""Button"",
-                    ""id"": ""6333de3c-a629-4cc6-a1ce-3a5ff31f6601"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Button4"",
-                    ""type"": ""Button"",
-                    ""id"": ""f1a362b7-8e74-4e25-be5b-d4c1ed4bbd47"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Button5"",
-                    ""type"": ""Button"",
-                    ""id"": ""16e33536-d52b-4837-8c8d-f47a17e0110b"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Button6"",
-                    ""type"": ""Button"",
-                    ""id"": ""0f8c7304-9cac-4377-85b8-5915930f7adf"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -724,56 +637,12 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""d7f7013e-9e53-4bde-9e65-03fe4f400d4a"",
-                    ""path"": ""<Keyboard>/6"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Button6"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""37c033cb-9a54-4fcc-985d-12f426c75a54"",
                     ""path"": ""<Keyboard>/2"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Button2"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""5d954c22-0fc1-451c-b51d-592a0ebb53be"",
-                    ""path"": ""<Keyboard>/3"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Button3"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""114e785e-24fe-4cb2-b77a-1cc179c001a6"",
-                    ""path"": ""<Keyboard>/4"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Button4"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""8546143e-980d-479a-8aa7-fa5e96c5a067"",
-                    ""path"": ""<Keyboard>/5"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Button5"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -796,6 +665,17 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""RightClick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e36fc96a-1ea0-489e-babe-96e5f1226d54"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Eat"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -822,22 +702,16 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         m_Gameplay_Run = m_Gameplay.FindAction("Run", throwIfNotFound: true);
         m_Gameplay_Button1 = m_Gameplay.FindAction("Button1", throwIfNotFound: true);
         m_Gameplay_Button2 = m_Gameplay.FindAction("Button2", throwIfNotFound: true);
-        m_Gameplay_Button3 = m_Gameplay.FindAction("Button3", throwIfNotFound: true);
-        m_Gameplay_Button4 = m_Gameplay.FindAction("Button4", throwIfNotFound: true);
-        m_Gameplay_Button5 = m_Gameplay.FindAction("Button5", throwIfNotFound: true);
-        m_Gameplay_Button6 = m_Gameplay.FindAction("Button6", throwIfNotFound: true);
+        m_Gameplay_Eat = m_Gameplay.FindAction("Eat", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
+        m_UI_Eat = m_UI.FindAction("Eat", throwIfNotFound: true);
         m_UI_Pick = m_UI.FindAction("Pick", throwIfNotFound: true);
         m_UI_Resume = m_UI.FindAction("Resume", throwIfNotFound: true);
         m_UI_InventoryClose = m_UI.FindAction("InventoryClose", throwIfNotFound: true);
         m_UI_Button1 = m_UI.FindAction("Button1", throwIfNotFound: true);
         m_UI_Button2 = m_UI.FindAction("Button2", throwIfNotFound: true);
-        m_UI_Button3 = m_UI.FindAction("Button3", throwIfNotFound: true);
-        m_UI_Button4 = m_UI.FindAction("Button4", throwIfNotFound: true);
-        m_UI_Button5 = m_UI.FindAction("Button5", throwIfNotFound: true);
-        m_UI_Button6 = m_UI.FindAction("Button6", throwIfNotFound: true);
         m_UI_LeftClick = m_UI.FindAction("LeftClick", throwIfNotFound: true);
         m_UI_RightClick = m_UI.FindAction("RightClick", throwIfNotFound: true);
     }
@@ -911,10 +785,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_Gameplay_Run;
     private readonly InputAction m_Gameplay_Button1;
     private readonly InputAction m_Gameplay_Button2;
-    private readonly InputAction m_Gameplay_Button3;
-    private readonly InputAction m_Gameplay_Button4;
-    private readonly InputAction m_Gameplay_Button5;
-    private readonly InputAction m_Gameplay_Button6;
+    private readonly InputAction m_Gameplay_Eat;
     public struct GameplayActions
     {
         private @GameInput m_Wrapper;
@@ -929,10 +800,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         public InputAction @Run => m_Wrapper.m_Gameplay_Run;
         public InputAction @Button1 => m_Wrapper.m_Gameplay_Button1;
         public InputAction @Button2 => m_Wrapper.m_Gameplay_Button2;
-        public InputAction @Button3 => m_Wrapper.m_Gameplay_Button3;
-        public InputAction @Button4 => m_Wrapper.m_Gameplay_Button4;
-        public InputAction @Button5 => m_Wrapper.m_Gameplay_Button5;
-        public InputAction @Button6 => m_Wrapper.m_Gameplay_Button6;
+        public InputAction @Eat => m_Wrapper.m_Gameplay_Eat;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -972,18 +840,9 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @Button2.started += instance.OnButton2;
             @Button2.performed += instance.OnButton2;
             @Button2.canceled += instance.OnButton2;
-            @Button3.started += instance.OnButton3;
-            @Button3.performed += instance.OnButton3;
-            @Button3.canceled += instance.OnButton3;
-            @Button4.started += instance.OnButton4;
-            @Button4.performed += instance.OnButton4;
-            @Button4.canceled += instance.OnButton4;
-            @Button5.started += instance.OnButton5;
-            @Button5.performed += instance.OnButton5;
-            @Button5.canceled += instance.OnButton5;
-            @Button6.started += instance.OnButton6;
-            @Button6.performed += instance.OnButton6;
-            @Button6.canceled += instance.OnButton6;
+            @Eat.started += instance.OnEat;
+            @Eat.performed += instance.OnEat;
+            @Eat.canceled += instance.OnEat;
         }
 
         private void UnregisterCallbacks(IGameplayActions instance)
@@ -1018,18 +877,9 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @Button2.started -= instance.OnButton2;
             @Button2.performed -= instance.OnButton2;
             @Button2.canceled -= instance.OnButton2;
-            @Button3.started -= instance.OnButton3;
-            @Button3.performed -= instance.OnButton3;
-            @Button3.canceled -= instance.OnButton3;
-            @Button4.started -= instance.OnButton4;
-            @Button4.performed -= instance.OnButton4;
-            @Button4.canceled -= instance.OnButton4;
-            @Button5.started -= instance.OnButton5;
-            @Button5.performed -= instance.OnButton5;
-            @Button5.canceled -= instance.OnButton5;
-            @Button6.started -= instance.OnButton6;
-            @Button6.performed -= instance.OnButton6;
-            @Button6.canceled -= instance.OnButton6;
+            @Eat.started -= instance.OnEat;
+            @Eat.performed -= instance.OnEat;
+            @Eat.canceled -= instance.OnEat;
         }
 
         public void RemoveCallbacks(IGameplayActions instance)
@@ -1052,15 +902,12 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_UI;
     private List<IUIActions> m_UIActionsCallbackInterfaces = new List<IUIActions>();
     private readonly InputAction m_UI_Navigate;
+    private readonly InputAction m_UI_Eat;
     private readonly InputAction m_UI_Pick;
     private readonly InputAction m_UI_Resume;
     private readonly InputAction m_UI_InventoryClose;
     private readonly InputAction m_UI_Button1;
     private readonly InputAction m_UI_Button2;
-    private readonly InputAction m_UI_Button3;
-    private readonly InputAction m_UI_Button4;
-    private readonly InputAction m_UI_Button5;
-    private readonly InputAction m_UI_Button6;
     private readonly InputAction m_UI_LeftClick;
     private readonly InputAction m_UI_RightClick;
     public struct UIActions
@@ -1068,15 +915,12 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         private @GameInput m_Wrapper;
         public UIActions(@GameInput wrapper) { m_Wrapper = wrapper; }
         public InputAction @Navigate => m_Wrapper.m_UI_Navigate;
+        public InputAction @Eat => m_Wrapper.m_UI_Eat;
         public InputAction @Pick => m_Wrapper.m_UI_Pick;
         public InputAction @Resume => m_Wrapper.m_UI_Resume;
         public InputAction @InventoryClose => m_Wrapper.m_UI_InventoryClose;
         public InputAction @Button1 => m_Wrapper.m_UI_Button1;
         public InputAction @Button2 => m_Wrapper.m_UI_Button2;
-        public InputAction @Button3 => m_Wrapper.m_UI_Button3;
-        public InputAction @Button4 => m_Wrapper.m_UI_Button4;
-        public InputAction @Button5 => m_Wrapper.m_UI_Button5;
-        public InputAction @Button6 => m_Wrapper.m_UI_Button6;
         public InputAction @LeftClick => m_Wrapper.m_UI_LeftClick;
         public InputAction @RightClick => m_Wrapper.m_UI_RightClick;
         public InputActionMap Get() { return m_Wrapper.m_UI; }
@@ -1091,6 +935,9 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @Navigate.started += instance.OnNavigate;
             @Navigate.performed += instance.OnNavigate;
             @Navigate.canceled += instance.OnNavigate;
+            @Eat.started += instance.OnEat;
+            @Eat.performed += instance.OnEat;
+            @Eat.canceled += instance.OnEat;
             @Pick.started += instance.OnPick;
             @Pick.performed += instance.OnPick;
             @Pick.canceled += instance.OnPick;
@@ -1106,18 +953,6 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @Button2.started += instance.OnButton2;
             @Button2.performed += instance.OnButton2;
             @Button2.canceled += instance.OnButton2;
-            @Button3.started += instance.OnButton3;
-            @Button3.performed += instance.OnButton3;
-            @Button3.canceled += instance.OnButton3;
-            @Button4.started += instance.OnButton4;
-            @Button4.performed += instance.OnButton4;
-            @Button4.canceled += instance.OnButton4;
-            @Button5.started += instance.OnButton5;
-            @Button5.performed += instance.OnButton5;
-            @Button5.canceled += instance.OnButton5;
-            @Button6.started += instance.OnButton6;
-            @Button6.performed += instance.OnButton6;
-            @Button6.canceled += instance.OnButton6;
             @LeftClick.started += instance.OnLeftClick;
             @LeftClick.performed += instance.OnLeftClick;
             @LeftClick.canceled += instance.OnLeftClick;
@@ -1131,6 +966,9 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @Navigate.started -= instance.OnNavigate;
             @Navigate.performed -= instance.OnNavigate;
             @Navigate.canceled -= instance.OnNavigate;
+            @Eat.started -= instance.OnEat;
+            @Eat.performed -= instance.OnEat;
+            @Eat.canceled -= instance.OnEat;
             @Pick.started -= instance.OnPick;
             @Pick.performed -= instance.OnPick;
             @Pick.canceled -= instance.OnPick;
@@ -1146,18 +984,6 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @Button2.started -= instance.OnButton2;
             @Button2.performed -= instance.OnButton2;
             @Button2.canceled -= instance.OnButton2;
-            @Button3.started -= instance.OnButton3;
-            @Button3.performed -= instance.OnButton3;
-            @Button3.canceled -= instance.OnButton3;
-            @Button4.started -= instance.OnButton4;
-            @Button4.performed -= instance.OnButton4;
-            @Button4.canceled -= instance.OnButton4;
-            @Button5.started -= instance.OnButton5;
-            @Button5.performed -= instance.OnButton5;
-            @Button5.canceled -= instance.OnButton5;
-            @Button6.started -= instance.OnButton6;
-            @Button6.performed -= instance.OnButton6;
-            @Button6.canceled -= instance.OnButton6;
             @LeftClick.started -= instance.OnLeftClick;
             @LeftClick.performed -= instance.OnLeftClick;
             @LeftClick.canceled -= instance.OnLeftClick;
@@ -1202,23 +1028,17 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         void OnRun(InputAction.CallbackContext context);
         void OnButton1(InputAction.CallbackContext context);
         void OnButton2(InputAction.CallbackContext context);
-        void OnButton3(InputAction.CallbackContext context);
-        void OnButton4(InputAction.CallbackContext context);
-        void OnButton5(InputAction.CallbackContext context);
-        void OnButton6(InputAction.CallbackContext context);
+        void OnEat(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
         void OnNavigate(InputAction.CallbackContext context);
+        void OnEat(InputAction.CallbackContext context);
         void OnPick(InputAction.CallbackContext context);
         void OnResume(InputAction.CallbackContext context);
         void OnInventoryClose(InputAction.CallbackContext context);
         void OnButton1(InputAction.CallbackContext context);
         void OnButton2(InputAction.CallbackContext context);
-        void OnButton3(InputAction.CallbackContext context);
-        void OnButton4(InputAction.CallbackContext context);
-        void OnButton5(InputAction.CallbackContext context);
-        void OnButton6(InputAction.CallbackContext context);
         void OnLeftClick(InputAction.CallbackContext context);
         void OnRightClick(InputAction.CallbackContext context);
     }

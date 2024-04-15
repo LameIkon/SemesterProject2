@@ -33,6 +33,7 @@ public class InputReader : ScriptableObject, GameInput.IGameplayActions, GameInp
     public static event Action OnInteractEventCancled;
     public static event Action OnPauseEvent;
     public static event Action OnInventoryOpenEvent;
+    public static event Action OnEatEvent;
 
     public static event Action OnLeftClickEvent;
     public static event Action OnRightClickEvent;
@@ -71,6 +72,14 @@ public class InputReader : ScriptableObject, GameInput.IGameplayActions, GameInp
     {
         OnMoveEvent?.Invoke(context.ReadValue<Vector2>()); // The context.ReadValue is used because the input is set to Value in the Input System, the OnMoveEvent will then invoke the Event with the Vector2
 
+    }
+
+    public void OnEat(InputAction.CallbackContext context) 
+    {
+        if (context.phase == InputActionPhase.Performed)
+        {
+            OnEatEvent?.Invoke();
+        }
     }
 
     public void OnInteract(InputAction.CallbackContext context)
@@ -214,35 +223,5 @@ public class InputReader : ScriptableObject, GameInput.IGameplayActions, GameInp
         }
     }
 
-    public void OnButton3(InputAction.CallbackContext context)
-    {
-        if (context.phase == InputActionPhase.Performed)
-        {
-            //OnButtonPressEvent?.Invoke(2);
-        }
-    }
-
-    public void OnButton4(InputAction.CallbackContext context)
-    {
-        if (context.phase == InputActionPhase.Performed)
-        {
-           // OnButtonPressEvent?.Invoke(3);
-        }
-    }
-
-    public void OnButton5(InputAction.CallbackContext context)
-    {
-        if (context.phase == InputActionPhase.Performed)
-        {
-            //OnButtonPressEvent?.Invoke(4);
-        }
-    }
-
-    public void OnButton6(InputAction.CallbackContext context)
-    {
-        if (context.phase == InputActionPhase.Performed)
-        {
-            //OnButtonPressEvent?.Invoke(5);
-        }
-    }
+    
 }
