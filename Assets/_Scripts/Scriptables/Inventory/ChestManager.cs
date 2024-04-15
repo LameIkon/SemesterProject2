@@ -36,7 +36,7 @@ public class ChestManager : MonoBehaviour
     }
 
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (LanternDisabler._LoadedSTATIC) 
         {
@@ -112,6 +112,15 @@ public class ChestManager : MonoBehaviour
     {
         _turn = !_turn;
         _chestCanvas.SetActive(_turn);
+
+        // check interactability 
+        //Interactable();
+    }
+
+    void Interactable()
+    {
+        // Show or disable E highlight
+        GameManager._hideEInteractables = _turn;
     }
 
 }
