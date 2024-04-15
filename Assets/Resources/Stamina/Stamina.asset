@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Stamina
   m_EditorClassIdentifier: 
   DevDescription: 
-  _value: 75
+  _value: 34.32499
   _onValueChanged: {fileID: 11400000, guid: f0e63aec67a8eeb4f99d94fb7438dd9c, type: 2}
