@@ -3552,7 +3552,8 @@ MonoBehaviour:
   _pauseMenu: {fileID: 3244675476687785349}
   _inventoryMenu: {fileID: 357719788478398293}
   _mainMenu:
-    m_Handle: 0
+    m_SceneAsset: {fileID: 102900000, guid: ed664a99639841645ad53bd805b05881, type: 3}
+    m_SceneName: MainMenu
 --- !u!1 &8628404958196252046
 GameObject:
   m_ObjectHideFlags: 0

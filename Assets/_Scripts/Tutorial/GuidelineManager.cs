@@ -32,16 +32,16 @@ public class GuidelineManager : MonoBehaviour
     [SerializeField] private bool _finishedStamina;
 
     [Header("Canvases")]
-    [SerializeField] private UnityEngine.GameObject _movementCanvas;
-    [SerializeField] private UnityEngine.GameObject _runningCanvas;
-    [SerializeField] private UnityEngine.GameObject _inventoryCanvas;
-    [SerializeField] private UnityEngine.GameObject _chestCanvas;
-    [SerializeField] private UnityEngine.GameObject _campfireCanvas;
-    [SerializeField] private UnityEngine.GameObject _ToolbarCanvas;
+    [SerializeField] private GameObject _movementCanvas;
+    [SerializeField] private GameObject _runningCanvas;
+    [SerializeField] private GameObject _inventoryCanvas;
+    [SerializeField] private GameObject _chestCanvas;
+    [SerializeField] private GameObject _campfireCanvas;
+    [SerializeField] private GameObject _ToolbarCanvas;
 
-    [SerializeField, Space(5)] private UnityEngine.GameObject _temperatureCanvas;
-    [SerializeField] private UnityEngine.GameObject _foodCanvas;
-    [SerializeField] private UnityEngine.GameObject _staminaCanvas;
+    [SerializeField, Space(5)] private GameObject _temperatureCanvas;
+    [SerializeField] private GameObject _foodCanvas;
+    [SerializeField] private GameObject _staminaCanvas;
 
 
     [Header("Surivival Bars")]
@@ -51,9 +51,9 @@ public class GuidelineManager : MonoBehaviour
     [SerializeField] private Animator _staminaAnimator;
 
     [Header("Inventory Screens")]
-    [SerializeField] private UnityEngine.GameObject _inventoryScreen;
-    [SerializeField] private UnityEngine.GameObject _chestScreen;
-    [SerializeField] private UnityEngine.GameObject _campFireScreen;
+    [SerializeField] private GameObject _inventoryScreen;
+    [SerializeField] private GameObject _chestScreen;
+    [SerializeField] private GameObject _campFireScreen;
 
     [Header("Dialogues")]
     [SerializeField] private List<ChatBubble> _chatBubble = new List<ChatBubble>();
@@ -338,7 +338,7 @@ public class GuidelineManager : MonoBehaviour
         _temperatureAnimator.Play("SlideInLeft");
     }
 
-    IEnumerator FadeOut(UnityEngine.GameObject canvas)
+    IEnumerator FadeOut(GameObject canvas)
     {
         yield return new WaitForSeconds(0.5f);
         float currentAlpha = 1.0f;

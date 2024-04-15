@@ -10,9 +10,9 @@ public class GameManager : PersistentSingleton<GameManager>
 {
     private InputReader _inputs; 
 
-    [SerializeField] private UnityEngine.GameObject _pauseMenu;
-    [SerializeField] private UnityEngine.GameObject _inventoryMenu;
-    [SerializeField] private Scene _mainMenu;
+    [SerializeField] private GameObject _pauseMenu;
+    [SerializeField] private GameObject _inventoryMenu;
+    [SerializeField] private SceneField _mainMenu;
 
     private bool _mainSceneBool;
 
@@ -63,7 +63,7 @@ public class GameManager : PersistentSingleton<GameManager>
     {
         Scene currentScene = SceneManager.GetActiveScene();
 
-        if (currentScene.name == _mainMenu.name)
+        if (currentScene.name == _mainMenu)
         {
             _mainSceneBool = true;
         }
@@ -75,7 +75,7 @@ public class GameManager : PersistentSingleton<GameManager>
 
     private void HandlePause() 
     {
-        if (_mainSceneBool)
+        if (!_mainSceneBool)
         {
             _pauseMenu.SetActive(true);
             Time.timeScale = 0f;
@@ -84,7 +84,7 @@ public class GameManager : PersistentSingleton<GameManager>
 
     public void HandleResume() 
     {
-        if (_mainSceneBool)
+        if (!_mainSceneBool)
         {
             _pauseMenu.SetActive(false);
             _inventoryMenu.SetActive(false); // Important we close both the inventory and the pause menus here. This will mean if you have the inventory open and the OnResumeEvent fires it will close the inventory 

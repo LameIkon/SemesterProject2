@@ -218,7 +218,7 @@ public class InputReader : ScriptableObject, GameInput.IGameplayActions, GameInp
     {
         if (context.phase == InputActionPhase.Performed)
         {
-            OnButtonPressEvent?.Invoke(2);
+            //OnButtonPressEvent?.Invoke(2);
         }
     }
 
@@ -226,7 +226,7 @@ public class InputReader : ScriptableObject, GameInput.IGameplayActions, GameInp
     {
         if (context.phase == InputActionPhase.Performed)
         {
-            OnButtonPressEvent?.Invoke(3);
+           // OnButtonPressEvent?.Invoke(3);
         }
     }
 
@@ -234,7 +234,7 @@ public class InputReader : ScriptableObject, GameInput.IGameplayActions, GameInp
     {
         if (context.phase == InputActionPhase.Performed)
         {
-            OnButtonPressEvent?.Invoke(4);
+            //OnButtonPressEvent?.Invoke(4);
         }
     }
 
@@ -242,7 +242,7 @@ public class InputReader : ScriptableObject, GameInput.IGameplayActions, GameInp
     {
         if (context.phase == InputActionPhase.Performed)
         {
-            OnButtonPressEvent?.Invoke(5);
+            //OnButtonPressEvent?.Invoke(5);
         }
     }
 }

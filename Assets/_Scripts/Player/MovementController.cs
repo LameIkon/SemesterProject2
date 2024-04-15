@@ -1,6 +1,4 @@
 using System.Collections;
-using System.Runtime.CompilerServices;
-using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(AudioSource))]
@@ -27,7 +25,7 @@ public class MovementController : MonoBehaviour
     private AudioSource _audioSource;
 
     [SerializeField] protected Animator _animator;
-    protected string _lookingDirection; // Used to check what direction is moving towards
+    public string _lookingDirection; // Used to check what direction is moving towards
     protected float _walkingSpeed; // Used to check if the player is running
     protected bool _isIdling;
 
@@ -38,6 +36,7 @@ public class MovementController : MonoBehaviour
         _moveSpeed = _speedReference.GetMinValue(); // Sets the walking speed 
         _walkingSpeed = _speedReference.GetMinValue(); // Used to check if _moveSpeed gets changed.
         StopAllCoroutines();
+        _lookingDirection = null;
     }
 
     private void Start()
@@ -79,12 +78,17 @@ public class MovementController : MonoBehaviour
             direction.y = -1;
             _lookingDirection = "Front";
             }
-        StartAnimation();
+            StartAnimation();
         }
 
     }
 
-  
+    private void OnDisable()
+    {
+        _lookingDirection = null;
+        _animator.Play("Idle_Front");
+    }
+
 
     // This method is made such that you do not need to hard code in the layers that stop movement
     private bool CanMove(Vector3 direction)
