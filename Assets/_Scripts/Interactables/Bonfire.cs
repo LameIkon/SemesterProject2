@@ -9,8 +9,8 @@ public class Bonfire : MonoBehaviour
 {
 
     [SerializeField] private InventoryObject _bonfireInventory;
-    [SerializeField] private UnityEngine.GameObject _particles;
-    [SerializeField] private UnityEngine.GameObject _lights;
+    [SerializeField] private GameObject _particles;
+    [SerializeField] private GameObject _lights;
     // private StaticInterface _bonfireInterface
     [SerializeField] private SpriteRenderer _spriteRenderer;
     [SerializeField] private Sprite _campfireLitSprite;
@@ -24,7 +24,6 @@ public class Bonfire : MonoBehaviour
     public static bool _canOpenBonfire = false;  //needs to be static for use in CampfireManager.script where we open the canvas
 
     private bool _bonfireLit = false; //tracks when the fire is burning
-    private bool _playerIsClose = false; //tracks if player is close
     private bool _isTriggeredOnce = false;
     private bool _coroutineBurnActive = false; //tracks if coroutine is started
     private bool _coroutineLeftoverActive = false; //tracks if coroutine is started
@@ -48,7 +47,7 @@ public class Bonfire : MonoBehaviour
         //}
 
         //This needs to be in update otherwise when u put wood on fire it wont apply right away.
-        if (_playerIsClose && _bonfireLit && !_isTriggeredOnce)
+        if (_bonfireLit && !_isTriggeredOnce)
         {
             _isTriggeredOnce = true; //makes sure we dont apply the closeToHeat value more then once.
             if(_systemFloat < _restoreValue)
@@ -58,7 +57,7 @@ public class Bonfire : MonoBehaviour
            
         }
         //
-        else if (_playerIsClose && !_coroutineBurnActive)
+        else if (!_coroutineBurnActive)
         {
             BurningWood();            
         }
@@ -70,7 +69,7 @@ public class Bonfire : MonoBehaviour
        
         if (collision.CompareTag("Player"))
         {
-            _playerIsClose = true;
+          
             _canOpenBonfire = true;
 
             _burnCoroutine = BurningTime(_burningTime);
@@ -81,9 +80,10 @@ public class Bonfire : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            _playerIsClose = false;
+      
             _canOpenBonfire = false;
             CampfireManager._bonfireCanvasSTATIC.SetActive(false);
+            GameManager._inventoryMenuSTATIC.SetActive(false);
             _leftoverCoroutine = LeftoverTime(_burningTime);
             
             

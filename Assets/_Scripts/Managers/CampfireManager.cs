@@ -53,6 +53,7 @@ public class CampfireManager : MonoBehaviour
     {
         _turn = !_turn;
         _bonfireCanvas.SetActive(_turn);
+        GameManager._inventoryMenuSTATIC.SetActive(_turn);
     }
 
 

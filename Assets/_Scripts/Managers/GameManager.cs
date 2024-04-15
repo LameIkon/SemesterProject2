@@ -13,6 +13,8 @@ public class GameManager : PersistentSingleton<GameManager>
     [SerializeField] private GameObject _pauseMenu;
     [SerializeField] private GameObject _inventoryMenu;
     [SerializeField] private SceneField _mainMenu;
+    public static GameObject _inventoryMenuSTATIC;
+
 
     private bool _mainSceneBool;
 
@@ -26,7 +28,8 @@ public class GameManager : PersistentSingleton<GameManager>
     }
 
     private void Start() 
-    {       
+    {
+        _inventoryMenuSTATIC = _inventoryMenu;
    
         if (_pauseMenu != null)
         {

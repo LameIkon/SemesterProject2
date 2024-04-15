@@ -7,7 +7,9 @@ using UnityEngine;
 [RequireComponent(typeof(BoxCollider2D))]
 public class ChestManager : MonoBehaviour
 {
-    [SerializeField] private static UnityEngine.GameObject _chestCanvas;
+    [SerializeField] private static GameObject _chestCanvas;
+    
+
     [SerializeField] private InventoryObject _chestInventory;
     [SerializeField] private ChestFiller _chestFiller;
     [SerializeField] private ItemDatabaseObject _database;
@@ -86,8 +88,7 @@ public class ChestManager : MonoBehaviour
     {
         if (collision.gameObject.name == "Player") 
         {
-            _canOpenChest = true;
-           
+            _canOpenChest = true;           
         }        
     }
 
@@ -96,6 +97,7 @@ public class ChestManager : MonoBehaviour
         if (collision.gameObject.name == "Player")
         {
             _chestCanvas.SetActive(false);
+            GameManager._inventoryMenuSTATIC.SetActive(false);
             _canOpenChest=false;
         }
     }
@@ -112,6 +114,6 @@ public class ChestManager : MonoBehaviour
     {
         _turn = !_turn;
         _chestCanvas.SetActive(_turn);
+        GameManager._inventoryMenuSTATIC.SetActive(_turn);
     }
-
 }

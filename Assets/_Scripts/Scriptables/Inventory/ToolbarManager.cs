@@ -14,7 +14,6 @@ public class ToolbarManager : MonoBehaviour
     private UnityEngine.GameObject _lantern;
     private bool _lightIsActive = false;
     private bool _defaultIsActive = false;
-
     private int _saveLightItemIndex;
 
     void OnEnable() 
@@ -90,6 +89,7 @@ public class ToolbarManager : MonoBehaviour
             }           
         }
     }
+
 
     public void UseDefaultInSlot ()
     {
