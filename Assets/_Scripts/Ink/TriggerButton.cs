@@ -11,7 +11,7 @@ public class ButtonTrigger : MonoBehaviour, ISelectHandler, IDeselectHandler, IP
     private float _maxMouseMovementTreshold = 5f; // Amount you are allowed to move before something happens
     private bool _alphaChanged; // Used to check if the alpha got changed
     private bool _selected; // Used to check if selecting or deselecting
-    [SerializeField] private Image[] _buttonChildImage; // Takes all children images of the button
+    //[SerializeField] private Image[] _buttonChildImage; // Takes all children images of the button
 
     private void OnDisable() // When disabled Reset script
     {
@@ -65,7 +65,6 @@ public class ButtonTrigger : MonoBehaviour, ISelectHandler, IDeselectHandler, IP
     IEnumerator SelectionPolish() // Fade images in
     {
         _alphaChanged = true; // tell the script that a change has happened
-
         // Check if the selected button has image children
         Image[] childImages = gameObject.GetComponentsInChildren<Image>();
 
@@ -78,7 +77,7 @@ public class ButtonTrigger : MonoBehaviour, ISelectHandler, IDeselectHandler, IP
             while (currentAlpha < 1f) // while the start value is less than 1
             {
                 // Calculate the new alpha value
-                currentAlpha += Time.deltaTime / _fadeInTime; // Change the currentAlpha 
+                currentAlpha += Time.fixedDeltaTime / _fadeInTime; // Change the currentAlpha. with time scale to ensure it runs when it is paused 
                 currentAlpha = Mathf.Clamp01(currentAlpha); // Ensure that the value is without 0-1 range
 
                 // Apply the new alpha value to the image
@@ -110,7 +109,7 @@ public class ButtonTrigger : MonoBehaviour, ISelectHandler, IDeselectHandler, IP
                 while (currentAlpha > 0f)  // while the start value is less than 1
                 {
                     // Calculate the new alpha value
-                    currentAlpha -= Time.deltaTime / _fadeInTime; // Change the currentAlpha 
+                    currentAlpha -= Time.fixedDeltaTime / _fadeInTime; // Change the currentAlpha 
                     currentAlpha = Mathf.Clamp01(currentAlpha); // Ensure that the value is without 0-1 range
 
                     // Apply the new alpha value to the image

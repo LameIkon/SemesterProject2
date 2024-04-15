@@ -29,15 +29,7 @@ public class ActivateGuideline : MonoBehaviour
 
     private void Awake()
     {
-        _activateMovement = false;
-        _activateRunning = false;
-        _activateInventory = false;
-        _activateChest = false;
-        _activateCampFire = false;
 
-        _activateFood = false;
-        _activateStamina = false;
-        _activateTemperature = false;
     }
 
     private void Start()
@@ -48,6 +40,19 @@ public class ActivateGuideline : MonoBehaviour
     private void OnValidate()
     {
         StartGuideline(); // Only used in the editor to test
+    }
+
+    private void OnDisable()
+    {
+        _activateMovement = false;
+        _activateRunning = false;
+        _activateInventory = false;
+        _activateChest = false;
+        _activateCampFire = false;
+
+        _activateFood = false;
+        _activateStamina = false;
+        _activateTemperature = false;
     }
 
     private void OnEnable()

@@ -287,6 +287,10 @@ public class EnvironmentManager : MonoBehaviour
                 _inside = true;
                 _outside = false;
                 break;
+            case "MainMenu": // Used to reset. Otherwise a bug were you enter and exit then enter game it would consider you outside 
+                _inside = true;
+                _outside = false;
+                break;
 
             default:
                 _outside = true;

@@ -77,28 +77,11 @@ public class GuidelineManager : MonoBehaviour
         {
             instance = this;
         }
-
-
-        // Ensure all booleans are set to false on start
-        _showMovement = false;
-        _showRunning = false;
-        _showInventoryInteraction = false;
-        _showChestInteraction = false;
-        _showCampfireInteraction = false;
-        _isfoodInToolBar = false;
-
-        // Reset alpha
-        _movementCanvas.GetComponent<CanvasGroup>().alpha = 1.0f;
-        _runningCanvas.GetComponent<CanvasGroup>().alpha = 1.0f;
-        _inventoryCanvas.GetComponent<CanvasGroup>().alpha = 1.0f;
-        _chestCanvas.GetComponent<CanvasGroup>().alpha = 1.0f;
-        _campfireCanvas.GetComponent<CanvasGroup>().alpha = 1.0f;
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        Invoke("ShowHealth", 0.5f);
         //FindChatBubble("NPC"); // Find the chatBubble on this specific npc
 
     }
@@ -168,6 +151,8 @@ public class GuidelineManager : MonoBehaviour
     {
         InputReader.OnMoveEvent += StopMovement; // Called whenever you move
         InputReader.OnRunStartEvent += StopRunning; // called whenever you run
+        Invoke("ShowHealth", 0.5f);
+        ResetAnimations(); // Cannot be used on disable since it cause conflict
     }
 
     private void OnDisable()
@@ -175,6 +160,7 @@ public class GuidelineManager : MonoBehaviour
         InputReader.OnMoveEvent -= StopMovement;
         InputReader.OnRunStartEvent -= StopRunning;
         InputReader.OnRunCancelEvent += ResetRunningBool; // called whenever you stop running
+        ResetGuideLine(); // reset all bools and canvases
     }
 
     public void ResetMovingBool() // called from Player Controller to check when you stop moving
@@ -225,6 +211,7 @@ public class GuidelineManager : MonoBehaviour
 
     void ShowHealth()
     {
+        Debug.Log("health");
         _healthAnimator.Play("SlideInLeft");
         _finishedHealth = true;
     }
@@ -333,6 +320,7 @@ public class GuidelineManager : MonoBehaviour
 
     public void CompleteTutorial()
     {
+        _healthAnimator.Play("SlideInLeft");
         _staminaAnimator.Play("SlideInLeft");
         _foodAnimator.Play("SlideInLeft");
         _temperatureAnimator.Play("SlideInLeft");
@@ -349,6 +337,67 @@ public class GuidelineManager : MonoBehaviour
             canvas.GetComponent<CanvasGroup>().alpha = currentAlpha;
             yield return null;           
         }
+    }
+
+    void ResetAnimations()
+    {
+        // Reset animations
+        _healthAnimator.Play("IdleOutsideScreen");
+        _temperatureAnimator.Play("IdleOutsideScreen");
+        _foodAnimator.Play("IdleOutsideScreen");
+        _staminaAnimator.Play("IdleOutsideScreen");
+    }
+
+    void ResetGuideLine()
+    {
+        // Reset boolean checkmarks
+        _showMovement = false;
+        _showRunning = false;
+        _showInventoryInteraction = false;
+        _showChestInteraction = false;
+        _showCampfireInteraction = false;
+        _showTemperature = false;
+        _showHealth = false;
+        _showFood = false;
+        _showStamina = false;
+        _showToolbar = false;
+        _isMoving = false;
+        _isRunning = false;
+        _isfoodInToolBar = false;
+        _numberKeyPressed = false;
+
+        // Reset finish checkmarks
+        _finishedMovement = false;
+        _finishedRunning = false;
+        _finishedInventoryInteraction = false;
+        _finishedChestInteraction = false;
+        _finishedCampfireInteraction = false;
+        _finishedTemperature = false;
+        _finishedHealth = false;
+        _finishedFood = false;
+        _finishedStamina = false;
+
+        // Reset canvas alpha
+        _movementCanvas.GetComponent<CanvasGroup>().alpha = 1.0f;
+        _runningCanvas.GetComponent<CanvasGroup>().alpha = 1.0f;
+        _inventoryCanvas.GetComponent<CanvasGroup>().alpha = 1.0f;
+        _chestCanvas.GetComponent<CanvasGroup>().alpha = 1.0f;
+        _campfireCanvas.GetComponent<CanvasGroup>().alpha = 1.0f;
+        _temperatureCanvas.GetComponent<CanvasGroup>().alpha = 1.0f;
+        _foodCanvas.GetComponent<CanvasGroup>().alpha = 1.0f;
+        _staminaCanvas.GetComponent<CanvasGroup>().alpha = 1.0f;
+        _ToolbarCanvas.GetComponent<CanvasGroup>().alpha = 1.0f;
+
+        // Reset inventory screens
+        _inventoryScreen.SetActive(false);
+        _chestScreen.SetActive(false);
+        _campFireScreen.SetActive(false);
+        _movementCanvas.SetActive(false);
+        _runningCanvas.SetActive(false);
+        _ToolbarCanvas.SetActive(false);
+        _temperatureCanvas.SetActive(false);
+        _staminaCanvas.SetActive(false);
+        _foodCanvas.SetActive(false);
     }
 }
 
