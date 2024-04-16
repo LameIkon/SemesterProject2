@@ -4,43 +4,61 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class ItemDescription : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    [SerializeField] private UnityEngine.GameObject _slot;
-    [SerializeField] private UnityEngine.GameObject _itemDescription;
-    [SerializeField, TextArea(2, 4)] private string _description;
 
-    [SerializeField] private UnityEngine.GameObject _itemDescriptionPrefab;
 
-    [SerializeField] private UnityEngine.GameObject _canvas;
+    [Header("Data on this GameObject")]
+    [SerializeField] private Image _slot; // Slot image to check
+    [SerializeField, TextArea(2, 4)] private string _description; // The items description
+
+    [Header("Description Canvas")]
+    [SerializeField] private GameObject _itemDescriptionCanvas; // The description Canvas
+    //[SerializeField] private Sprite _previousImage; // Used to compare with the previous
+    [SerializeField] private Sprite[] _ignoreImages; // Ignore if its a image you dont want shown
 
     private bool _hovering;
 
+    private void Awake()
+    {
+        _hovering = false;
+        _itemDescriptionCanvas.SetActive(false);
+
+    }
 
     public void OnPointerEnter(PointerEventData eventData) // When mouse is hovering over it
     {
-        _hovering = true;
+        _slot = GetComponent<Image>();
 
-        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        mousePos.z = 0f;
+        foreach (Sprite notIgnoredImage in _ignoreImages)
+        {
+            // drumstick is equl to null
+            if (_slot.sprite != notIgnoredImage) // If the image is not ignored then show description
+            {
+                ShowDescription();
+                Debug.Log("true");
+            }
+        }
 
-        UnityEngine.GameObject description = Instantiate(_itemDescriptionPrefab);
-
-        description.transform.position = mousePos;
-        description.transform.SetParent(_canvas.transform, false);
 
     }
 
     public void OnPointerExit(PointerEventData eventData) // When mouse exit hovering over it
     {
+        _hovering = false;
+        Invoke("HideDescription", 0.3f);
+    }
 
-        Invoke("HideDescription", 1f);
+    private void ShowDescription()
+    {
+        _itemDescriptionCanvas.SetActive(true);
     }
 
     private void HideDescription()
     {
-        //_descriptionbox.SetActive(false);
+        _itemDescriptionCanvas.SetActive(false);
     }
 
 }
