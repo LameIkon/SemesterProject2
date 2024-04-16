@@ -85,7 +85,7 @@ public class ChestManager : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.name == "Player") 
-        {
+        {          
             _canOpenChest = true;
            
         }        
@@ -97,6 +97,7 @@ public class ChestManager : MonoBehaviour
         {
             _chestCanvas.SetActive(false);
             _canOpenChest=false;
+            _turn = false;
         }
     }
     private void FillUpChest()
@@ -112,9 +113,9 @@ public class ChestManager : MonoBehaviour
     {
         _turn = !_turn;
         _chestCanvas.SetActive(_turn);
-
         // check interactability 
         Interactable();
+
     }
 
     void Interactable()

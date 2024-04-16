@@ -39,6 +39,7 @@ public class Highlight : MonoBehaviour
         if (collision.gameObject.name == "Player") // Detect if the collision is the gameobject called Player
         {
             _showInteraction.SetActive(false);
+            GameManager._hideEInteractables = false;
         }
     }
 }
