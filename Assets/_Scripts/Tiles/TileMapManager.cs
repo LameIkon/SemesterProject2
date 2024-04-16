@@ -9,7 +9,7 @@ public class TileMapManager : PersistentSingleton<TileMapManager>
 {
     [SerializeField] private List<Tilemap> _tilemaps; // This is a list because it will change during runtime
 
-    [SerializeField] TileData[] _tileDatas;
+    [SerializeField] private TileData[] _tileDatas; // An array of all the walking sounds that have been will bee used, this is constant
 
     private AudioSource _audioSource;
 
@@ -40,6 +40,7 @@ public class TileMapManager : PersistentSingleton<TileMapManager>
         PlayerController.OnMovePositionEvent += PlayWalkingAudio;
         SceneLoadTileManager.OnSceneLoadedEvent += AddTilemap;
         SceneLoadTileManager.OnSceneUnloadedEvent += RemoveTilemap;
+        SceneLoadTileManager.OnSceneSwapEvent += ClearTilemap;
     }
 
     private void OnDisable()
@@ -47,6 +48,7 @@ public class TileMapManager : PersistentSingleton<TileMapManager>
         PlayerController.OnMovePositionEvent -= PlayWalkingAudio;
         SceneLoadTileManager.OnSceneUnloadedEvent -= AddTilemap;
         SceneLoadTileManager.OnSceneUnloadedEvent -= RemoveTilemap;
+        SceneLoadTileManager.OnSceneSwapEvent -= ClearTilemap;
     }
 
 
@@ -130,6 +132,7 @@ public class TileMapManager : PersistentSingleton<TileMapManager>
         {
             _tilemaps.Remove(map);
         }
+
     }
 
     private void OnApplicationQuit()
