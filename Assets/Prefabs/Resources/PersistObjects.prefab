@@ -2801,6 +2801,7 @@ Transform:
   - {fileID: 460959783313588343}
   - {fileID: 22874291470174953}
   - {fileID: 4018842681856625543}
+  - {fileID: 6449435991073085435}
   m_Father: {fileID: 749328558714079078}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5504083848443026907
@@ -2922,6 +2923,50 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 789d521e32e378443a524fae150b8b4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &6377071625537632196
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6449435991073085435}
+  - component: {fileID: 2781498474709227424}
+  m_Layer: 0
+  m_Name: ChestCanvasManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6449435991073085435
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6377071625537632196}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3563838114784374177}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2781498474709227424
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6377071625537632196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eaba027a8b0250d4c80593f3ab37e81e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &6444383724621754770
@@ -7231,17 +7276,13 @@ PrefabInstance:
     - {fileID: 5591738161705912642, guid: b9dfd3daabca6cd4794851981d7cf56f, type: 3}
     - {fileID: 6804905904576936194, guid: b9dfd3daabca6cd4794851981d7cf56f, type: 3}
     - {fileID: 191860240925473811, guid: b9dfd3daabca6cd4794851981d7cf56f, type: 3}
+    - {fileID: 7522777667968764942, guid: b9dfd3daabca6cd4794851981d7cf56f, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 5046614322251637369, guid: b9dfd3daabca6cd4794851981d7cf56f, type: 3}
       insertIndex: 1
       addedObject: {fileID: 6525940133017176833}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b9dfd3daabca6cd4794851981d7cf56f, type: 3}
---- !u!1 &306306267518299616 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7522777667968764942, guid: b9dfd3daabca6cd4794851981d7cf56f, type: 3}
-  m_PrefabInstance: {fileID: 7793041013007868398}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &357719788478398293 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7552696844170796731, guid: b9dfd3daabca6cd4794851981d7cf56f, type: 3}
@@ -7549,10 +7590,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6319726986988341223, guid: 3bd13d619094d8544a258a73d50c1dee, type: 3}
-      propertyPath: _chestScreen
-      value: 
-      objectReference: {fileID: 306306267518299616}
     - target: {fileID: 6319726986988341223, guid: 3bd13d619094d8544a258a73d50c1dee, type: 3}
       propertyPath: _foodAnimator
       value: 

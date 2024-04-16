@@ -12,27 +12,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6dbd26130aaeeb469d02b103ecbc445, type: 3}
   m_Name: Chest3
   m_EditorClassIdentifier: 
-  _ItemsDataBase: {fileID: 0}
+  _ItemsDataBase: {fileID: 11400000, guid: 6aab6e98529b36a40aa4942653918f7e, type: 2}
   _SavePath: 
   _Container:
     _Slots:
     - _AllowedItems: 
       _Item:
         _ItemName: 
-        _ID: -1
-      _Amount: 0
+        _ID: 3
+      _Amount: 15
     - _AllowedItems: 
       _Item:
         _ItemName: 
-        _ID: -1
-      _Amount: 0
+        _ID: 1
+      _Amount: 9
     - _AllowedItems: 
       _Item:
         _ItemName: 
-        _ID: -1
-      _Amount: 0
+        _ID: 6
+      _Amount: 1
     - _AllowedItems: 
       _Item:
         _ItemName: 
-        _ID: -1
-      _Amount: 0
+        _ID: 1
+      _Amount: 5
+    - _AllowedItems: 
+      _Item:
+        _ItemName: 
+        _ID: 2
+      _Amount: 2
+    - _AllowedItems: 
+      _Item:
+        _ItemName: 
+        _ID: 5
+      _Amount: 1

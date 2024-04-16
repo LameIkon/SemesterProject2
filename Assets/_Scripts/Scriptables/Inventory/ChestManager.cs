@@ -7,9 +7,9 @@ using UnityEngine;
 [RequireComponent(typeof(BoxCollider2D))]
 public class ChestManager : MonoBehaviour
 {
-    [SerializeField] private static GameObject _chestCanvas;
-    
+    [SerializeField] private GameObject _chestCanvas;
 
+   
     [SerializeField] private InventoryObject _chestInventory;
     [SerializeField] private ChestFiller _chestFiller;
     [SerializeField] private ItemDatabaseObject _database;
@@ -22,45 +22,29 @@ public class ChestManager : MonoBehaviour
     private bool _chestIsfilled = false;
 
     private void Start()
-    { 
-        //_chestInventory = ScriptableObject.CreateInstance<InventoryObject>();
-        //_chestInterface = _chestCanvas.GetComponent<StaticInterface>();
-        //_chestInterface._Inventory = _chestInventory;
+    {
+
+        _chestInterface = _chestCanvas.GetComponent<StaticInterface>();
+        _chestInterface._Inventory = _chestInventory;
+        _chestCanvas.SetActive(false);
 
 
-       // _chestCanvas.SetActive(false);
-
-        //if (!_chestIsfilled)
-        //{
-        //    _chestIsfilled = true;
-        //    FillUpChest();
+        if (!_chestIsfilled)
+        {
+            _chestIsfilled = true;
+            FillUpChest();
+        }
 
     }
 
 
     private void Update()
     {
-        if (LanternDisabler._LoadedSTATIC) 
-        {
-            _chestCanvas = UnityEngine.GameObject.FindWithTag("Chest");
-            _chestInterface = _chestCanvas.GetComponent<StaticInterface>();
-            _chestInterface._Inventory = _chestInventory;
-            _chestCanvas.SetActive(false);
-
-            if (_chestCanvas != null)
-            {
-                Debug.Log("Found GameObject with tag 'Chest': " + _chestCanvas.name);
-            }
-            else
-            {
-                Debug.Log("Did not find GameObject with tag 'Chest'");
-            }
-                if (!_chestIsfilled)
-            {
-                _chestIsfilled = true;
-                FillUpChest();
-            }
-        }
+        //if (LanternDisabler._LoadedSTATIC) 
+        //{
+        //   //  _chestCanvas = UnityEngine.GameObject.FindWithTag("Chest");
+         
+        //}
     }
 
     void OnEnable()

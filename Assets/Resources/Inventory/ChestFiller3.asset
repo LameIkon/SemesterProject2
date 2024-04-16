@@ -10,34 +10,34 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5c94118720a77244dabd0916ba4d9b28, type: 3}
-  m_Name: ChestFiller2
+  m_Name: ChestFiller3
   m_EditorClassIdentifier: 
   _ChestSlots:
   - _AllowedItems: 
     _Item:
       _ItemName: 
-      _ID: 0
+      _ID: 3
     _Amount: 15
   - _AllowedItems: 
     _Item:
       _ItemName: 
-      _ID: 3
-    _Amount: 25
+      _ID: 1
+    _Amount: 4
   - _AllowedItems: 
     _Item:
       _ItemName: 
-      _ID: -1
-    _Amount: 0
+      _ID: 1
+    _Amount: 5
   - _AllowedItems: 
     _Item:
       _ItemName: 
-      _ID: -1
-    _Amount: 0
+      _ID: 6
+    _Amount: 1
   - _AllowedItems: 
     _Item:
       _ItemName: 
-      _ID: -1
-    _Amount: 0
+      _ID: 2
+    _Amount: 2
   - _AllowedItems: 
     _Item:
       _ItemName: 
