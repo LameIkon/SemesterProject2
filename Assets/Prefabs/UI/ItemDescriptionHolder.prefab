@@ -449,9 +449,6 @@ GameObject:
   - component: {fileID: 658956409778510375}
   - component: {fileID: 3824347673639418092}
   - component: {fileID: 5327766430680235500}
-  - component: {fileID: 7582942604723886796}
-  - component: {fileID: 4268675172140787365}
-  - component: {fileID: 7637762313031043026}
   m_Layer: 5
   m_Name: ItemImage
   m_TagString: Untagged
@@ -517,63 +514,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 0.19
---- !u!114 &7582942604723886796
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8491806593511702684}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dca1e4f2474a40a4a915f7e022d8a640, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _slot: {fileID: 0}
-  _itemDescription: {fileID: 0}
-  _description: This piece of bread will give you 20 hunger back
-  _itemDescriptionPrefab: {fileID: 0}
-  _canvas: {fileID: 0}
---- !u!114 &4268675172140787365
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8491806593511702684}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_HorizontalFit: 1
-  m_VerticalFit: 1
---- !u!114 &7637762313031043026
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8491806593511702684}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59f8146938fff824cb5fd77236b75775, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Padding:
-    m_Left: 86
-    m_Right: 84
-    m_Top: 102
-    m_Bottom: 25
-  m_ChildAlignment: 1
-  m_Spacing: 0
-  m_ChildForceExpandWidth: 0
-  m_ChildForceExpandHeight: 0
-  m_ChildControlWidth: 0
-  m_ChildControlHeight: 0
-  m_ChildScaleWidth: 0
-  m_ChildScaleHeight: 0
-  m_ReverseArrangement: 0
 --- !u!1 &9066205889519199002
 GameObject:
   m_ObjectHideFlags: 0
@@ -665,10 +605,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _slot: {fileID: 0}
-  _itemDescription: {fileID: 0}
   _description: This piece of bread will give you 20 hunger back
-  _itemDescriptionPrefab: {fileID: 0}
-  _canvas: {fileID: 0}
+  _itemDescriptionCanvas: {fileID: 0}
+  _ignoreImages: []
 --- !u!114 &7537418465874495888
 MonoBehaviour:
   m_ObjectHideFlags: 0
