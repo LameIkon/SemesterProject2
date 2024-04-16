@@ -10,39 +10,43 @@ public class ItemDescription : MonoBehaviour, IPointerEnterHandler, IPointerExit
     [SerializeField, Tooltip("Set images you want to ignore")] private Sprite[] _ignoreImages; // Ignore if its a image you dont want shown
 
     private Image _slot; // Slot image to check
-    private GameObject _itemDescriptionCanvas; // The description Canvas
+    static bool _hovering;
+    private bool _showDescription;
+    [SerializeField] private GameObject _itemDescriptionCanvas; // The description Canvas
     
 
 
     private void Awake()
     {
-        _itemDescriptionCanvas = GameObject.Find("ItemDescriptionHolder");
-        _itemDescriptionCanvas.SetActive(false);
     }
 
     public void OnPointerEnter(PointerEventData eventData) // When mouse is hovering over it
     {
         _slot = GetComponent<Image>();
+        
+        _showDescription = true;
 
         foreach (Sprite IgnoreImage in _ignoreImages)
         {
             // drumstick is equl to null
             if (_slot.sprite == IgnoreImage) // If the image is not ignored then show description
             {
+                _showDescription = false;
                 break;
             }
-            else
-            {
-                ShowDescription();
-                CancelInvoke("HideDescription"); // Stop the script from trying to close it when we want it to be open
-                Debug.Log("true");
-                break;
-            }
+        }
+        if (_showDescription)
+        {
+            ShowDescription();
+            _hovering = true;
+            CancelInvoke("HideDescription"); // Stop the script from trying to close it when we want it to be open
+            Debug.Log("true");
         }
     }
 
     public void OnPointerExit(PointerEventData eventData) // When mouse exit hovering over it
     {
+        _hovering = false;
         Invoke("HideDescription", 0.3f);
     }
 
@@ -58,6 +62,9 @@ public class ItemDescription : MonoBehaviour, IPointerEnterHandler, IPointerExit
 
     private void HideDescription()
     {
-        _itemDescriptionCanvas.SetActive(false);
+        if (!_hovering)
+        {
+            _itemDescriptionCanvas.SetActive(false);
+        }
     }
 }
