@@ -31,9 +31,9 @@ public class ItemDescriptionHandler : MonoBehaviour
     [SerializeField] private Sprite _firewoodSprite;
     [SerializeField] private Sprite _mapSprite;
     [SerializeField] private Sprite _lanternSprite;
-    [SerializeField] private Sprite _jørensjournalSprite;
-    [SerializeField] private Sprite _ludvigsjournalSprite;
-    [SerializeField] private Sprite _nielsjournalSprite;
+    [SerializeField] private Sprite _jørensJournalSprite;
+    [SerializeField] private Sprite _ludvigsJournalSprite;
+    [SerializeField] private Sprite _nielsJournalSprite;
 
 
     void Awake()
@@ -61,9 +61,9 @@ public class ItemDescriptionHandler : MonoBehaviour
             {_firewoodSprite, _firewoodDescription},
             {_mapSprite,_mapDescription},
             {_lanternSprite,_lanternDescription},
-            {_jørensjournalSprite, _jørgensJournalDescription},
-            {_ludvigsjournalSprite,_ludvigsJournalDescription},
-            {_nielsjournalSprite,_nielsJournalDescription}
+            {_jørensJournalSprite, _jørgensJournalDescription},
+            {_ludvigsJournalSprite,_ludvigsJournalDescription},
+            {_nielsJournalSprite,_nielsJournalDescription}
         };
 
         if (itemDictionary.ContainsKey(slot.sprite)) // Check if the slot.sprite matches one of the sprites in the dictionary
@@ -77,13 +77,13 @@ public class ItemDescriptionHandler : MonoBehaviour
         }
     }
 
-    public IEnumerator Disable()
+    public IEnumerator Disable() // used for the inventory slots to work
     {
         if (_once)
         {
             _once = false;
-            gameObject.GetComponent<CanvasGroup>().alpha = 0.0f;
-            this.gameObject.SetActive(true);
+            gameObject.GetComponent<CanvasGroup>().alpha = 0.0f; // so the canvas dont show up at random
+            this.gameObject.SetActive(true); // inventory slots now have oppotunity to find the canvas
             yield return null;
             gameObject.GetComponent<CanvasGroup>().alpha = 1.0f;
             this.gameObject.SetActive(false);
