@@ -211,7 +211,6 @@ public class GuidelineManager : MonoBehaviour
 
     void ShowHealth()
     {
-        Debug.Log("health");
         _healthAnimator.Play("SlideInLeft");
         _finishedHealth = true;
     }

@@ -1,23 +1,26 @@
+using System.Collections.Generic;
+using System.Drawing;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class ItemDescription : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    
-    [SerializeField, TextArea(2, 4)] private string _description; // The items description
     [SerializeField, Tooltip("Set images you want to ignore")] private Sprite[] _ignoreImages; // Ignore if its a image you dont want shown
 
     private Image _slot; // Slot image to check
-    static bool _hovering;
+    static bool _hovering; // Used to ensure hovingering over image
     private bool _showDescription;
-    [SerializeField] private GameObject _itemDescriptionCanvas; // The description Canvas
-    
+    private GameObject _itemDescriptionCanvas; // The description Canvas
+
+
 
 
     private void Awake()
     {
+        _itemDescriptionCanvas = GameObject.FindWithTag("ItemDescriptionHolder"); // Find the Canvas
     }
 
     public void OnPointerEnter(PointerEventData eventData) // When mouse is hovering over it
@@ -32,7 +35,7 @@ public class ItemDescription : MonoBehaviour, IPointerEnterHandler, IPointerExit
             if (_slot.sprite == IgnoreImage) // If the image is not ignored then show description
             {
                 _showDescription = false;
-                break;
+                break; // no need to continue looking when at least 1 is true
             }
         }
         if (_showDescription)
@@ -40,7 +43,6 @@ public class ItemDescription : MonoBehaviour, IPointerEnterHandler, IPointerExit
             ShowDescription();
             _hovering = true;
             CancelInvoke("HideDescription"); // Stop the script from trying to close it when we want it to be open
-            Debug.Log("true");
         }
     }
 
@@ -52,7 +54,9 @@ public class ItemDescription : MonoBehaviour, IPointerEnterHandler, IPointerExit
 
     private void ShowDescription()
     {
-        _itemDescriptionCanvas.GetComponentInChildren<TextMeshProUGUI>().text = _description; // Insert the description from the GameObject
+        ItemDescriptionHandler.instance.ItemType(_slot);
+
+        _itemDescriptionCanvas.GetComponentInChildren<TextMeshProUGUI>().text = ItemDescriptionHandler.instance._CurrentDescription; // Insert the description from the GameObject
 
         Image replaceImage = _itemDescriptionCanvas.transform.GetChild(1).GetChild(0).GetChild(0).GetComponent<Image>(); // Get the specific image from the ItemDescriptionCanvas
         replaceImage.sprite = _slot.sprite;

@@ -11,11 +11,11 @@ GameObject:
   - component: {fileID: 668341497265398691}
   m_Layer: 5
   m_Name: ItemDescriptionHolder
-  m_TagString: Untagged
+  m_TagString: ItemDescriptionHolder
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &668341497265398691
 RectTransform:
   m_ObjectHideFlags: 0
@@ -112,7 +112,6 @@ GameObject:
   - component: {fileID: 8001556958208548368}
   - component: {fileID: 5379383811457836332}
   - component: {fileID: 9133009722571998701}
-  - component: {fileID: 4974750865336665861}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -134,10 +133,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 938711496356455105}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 371.3832, y: 64.32}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 228, y: -57.16}
+  m_SizeDelta: {x: 406.7244, y: 64.32}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5379383811457836332
 CanvasRenderer:
@@ -167,9 +166,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '- Name
+  m_text: ' <size=20><b>Default Text</b> </size>
 
-    Item description name here'
+    No changes made. '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: bfea17042bc31c841b7eb63fb6362109, type: 2}
   m_sharedMaterial: {fileID: 5437978294661855311, guid: bfea17042bc31c841b7eb63fb6362109, type: 2}
@@ -208,7 +207,7 @@ MonoBehaviour:
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
-  m_lineSpacing: 0
+  m_lineSpacing: 31.04
   m_lineSpacingMax: 0
   m_paragraphSpacing: 145.59
   m_charWidthMaxAdj: 0
@@ -238,20 +237,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &4974750865336665861
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1023042253364065845}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_HorizontalFit: 0
-  m_VerticalFit: 2
 --- !u!1 &1958166769835263558
 GameObject:
   m_ObjectHideFlags: 0
@@ -471,9 +456,9 @@ RectTransform:
   - {fileID: 7158352995475456618}
   m_Father: {fileID: 4089872529733300837}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 78, y: -75}
   m_SizeDelta: {x: 156, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3824347673639418092
@@ -525,7 +510,6 @@ GameObject:
   - component: {fileID: 938711496356455105}
   - component: {fileID: 1645604174174514676}
   - component: {fileID: 2947414050428313153}
-  - component: {fileID: 6725564581129366217}
   - component: {fileID: 7537418465874495888}
   m_Layer: 5
   m_Name: ItemDiscription
@@ -549,9 +533,9 @@ RectTransform:
   - {fileID: 8001556958208548368}
   m_Father: {fileID: 4089872529733300837}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 384, y: -75}
   m_SizeDelta: {x: 456, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1645604174174514676
@@ -592,22 +576,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 0.19
---- !u!114 &6725564581129366217
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9066205889519199002}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dca1e4f2474a40a4a915f7e022d8a640, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _slot: {fileID: 0}
-  _description: This piece of bread will give you 20 hunger back
-  _itemDescriptionCanvas: {fileID: 0}
-  _ignoreImages: []
 --- !u!114 &7537418465874495888
 MonoBehaviour:
   m_ObjectHideFlags: 0

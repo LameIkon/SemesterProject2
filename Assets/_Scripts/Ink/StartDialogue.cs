@@ -94,7 +94,6 @@ public class StartDialogue : MonoBehaviour
     {
         if (collision.gameObject.name == "Player" && !GameManager._hideEInteractables && !DialogueManager.instance._Oneclick)
         {
-            Debug.Log("called");
             _startDialogue = true; // Set to true allowing start dialogue (Warning be sure there arent overlapping triggers, might cause problems)
 
             _showInteraction.SetActive(true); // Show Interaction
