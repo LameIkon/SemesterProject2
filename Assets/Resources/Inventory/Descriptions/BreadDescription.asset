@@ -12,5 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 985cf02980db40d479858dba3c78dc6a, type: 3}
   m_Name: BreadDescription
   m_EditorClassIdentifier: 
-  _itemName: Bread
-  _itemDescription: 
+  _itemDescription: '<size=20><b> Bread</b> </size>
+
+    This piece of bread gives
+    +10 food
+
+'

@@ -5926,6 +5926,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 357736697254798415, guid: ddec53f87b642644187d287d1bc0b173, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2593046206663061325}
+    - targetCorrespondingSourceObject: {fileID: 357736697254798415, guid: ddec53f87b642644187d287d1bc0b173, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4351749882819959996}
   m_SourcePrefab: {fileID: 100100000, guid: ddec53f87b642644187d287d1bc0b173, type: 3}
 --- !u!224 &5151368390142540603 stripped
 RectTransform:
@@ -5982,6 +5985,18 @@ MonoBehaviour:
   "_j\xF8rensjournalSprite": {fileID: 21300000, guid: 5b38a56982190dc45a443a2300f571fb, type: 3}
   _ludvigsjournalSprite: {fileID: 21300000, guid: 1b5103402d080884487ba3b75dd39210, type: 3}
   _nielsjournalSprite: {fileID: 21300000, guid: 73b8ca47fe00ed24d878c9a429134a8b, type: 3}
+--- !u!225 &4351749882819959996
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5390198441228467415}
+  m_Enabled: 1
+  m_Alpha: 0.74
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1001 &6007451527586005708
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7980,6 +7995,7 @@ MonoBehaviour:
   _ignoreImages:
   - {fileID: 10917, guid: 0000000000000000f000000000000000, type: 0}
   - {fileID: 0}
+  _itemDescriptionCanvas: {fileID: 0}
 --- !u!1 &306306267518299616 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7522777667968764942, guid: b9dfd3daabca6cd4794851981d7cf56f, type: 3}
@@ -8015,6 +8031,7 @@ MonoBehaviour:
   _ignoreImages:
   - {fileID: 10917, guid: 0000000000000000f000000000000000, type: 0}
   - {fileID: 0}
+  _itemDescriptionCanvas: {fileID: 0}
 --- !u!114 &2846900142233125888 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5450561831967057390, guid: b9dfd3daabca6cd4794851981d7cf56f, type: 3}
@@ -8051,6 +8068,7 @@ MonoBehaviour:
   _ignoreImages:
   - {fileID: 10917, guid: 0000000000000000f000000000000000, type: 0}
   - {fileID: 0}
+  _itemDescriptionCanvas: {fileID: 0}
 --- !u!1 &5303795788356291415 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2719241411690162873, guid: b9dfd3daabca6cd4794851981d7cf56f, type: 3}
@@ -8071,6 +8089,7 @@ MonoBehaviour:
   _ignoreImages:
   - {fileID: 10917, guid: 0000000000000000f000000000000000, type: 0}
   - {fileID: 0}
+  _itemDescriptionCanvas: {fileID: 0}
 --- !u!1 &8248229067678754453 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2184783625439496059, guid: b9dfd3daabca6cd4794851981d7cf56f, type: 3}
@@ -8096,6 +8115,7 @@ MonoBehaviour:
   _ignoreImages:
   - {fileID: 10917, guid: 0000000000000000f000000000000000, type: 0}
   - {fileID: 0}
+  _itemDescriptionCanvas: {fileID: 0}
 --- !u!1 &8570082698774330728 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1930211689136413830, guid: b9dfd3daabca6cd4794851981d7cf56f, type: 3}
@@ -8116,6 +8136,7 @@ MonoBehaviour:
   _ignoreImages:
   - {fileID: 10917, guid: 0000000000000000f000000000000000, type: 0}
   - {fileID: 0}
+  _itemDescriptionCanvas: {fileID: 0}
 --- !u!1 &8847272244634688858 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1648777851245034676, guid: b9dfd3daabca6cd4794851981d7cf56f, type: 3}

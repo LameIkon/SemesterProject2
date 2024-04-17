@@ -13,7 +13,7 @@ public class ItemDescription : MonoBehaviour, IPointerEnterHandler, IPointerExit
     private Image _slot; // Slot image to check
     static bool _hovering; // Used to ensure hovingering over image
     private bool _showDescription;
-    private GameObject _itemDescriptionCanvas; // The description Canvas
+    [SerializeField] private GameObject _itemDescriptionCanvas; // The description Canvas
 
 
 
@@ -21,6 +21,13 @@ public class ItemDescription : MonoBehaviour, IPointerEnterHandler, IPointerExit
     private void Awake()
     {
         _itemDescriptionCanvas = GameObject.FindWithTag("ItemDescriptionHolder"); // Find the Canvas
+
+        // Invenotory slots only gets instantiated when it gets open. thats why it might not find it first time
+        if (_itemDescriptionCanvas == null) // if for some reason it cant find the canvas try activate the canvas
+        {
+            StartCoroutine(ItemDescriptionHandler.instance.Disable()); // make the canvas true for a moment
+            _itemDescriptionCanvas = GameObject.FindWithTag("ItemDescriptionHolder"); // Find the Canvas
+        }
     }
 
     public void OnPointerEnter(PointerEventData eventData) // When mouse is hovering over it
@@ -48,8 +55,11 @@ public class ItemDescription : MonoBehaviour, IPointerEnterHandler, IPointerExit
 
     public void OnPointerExit(PointerEventData eventData) // When mouse exit hovering over it
     {
-        _hovering = false;
-        Invoke("HideDescription", 0.3f);
+        if (_hovering)
+        {
+            _hovering = false;
+            Invoke("HideDescription", 0.3f);
+        }
     }
 
     private void ShowDescription()

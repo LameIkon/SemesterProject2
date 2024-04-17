@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class ItemDescriptionHandler : MonoBehaviour
 {
     public static ItemDescriptionHandler instance;
+    private static bool _once = true;
 
     [TextArea (4,4)]public string _CurrentDescription; // The items description
 
@@ -74,6 +75,18 @@ public class ItemDescriptionHandler : MonoBehaviour
         {
             Debug.Log("something went wrong"); // This should never be called, unless a bug happens
         }
+    }
 
+    public IEnumerator Disable()
+    {
+        if (_once)
+        {
+            _once = false;
+            gameObject.GetComponent<CanvasGroup>().alpha = 0.0f;
+            this.gameObject.SetActive(true);
+            yield return null;
+            gameObject.GetComponent<CanvasGroup>().alpha = 1.0f;
+            this.gameObject.SetActive(false);
+        }
     }
 }
