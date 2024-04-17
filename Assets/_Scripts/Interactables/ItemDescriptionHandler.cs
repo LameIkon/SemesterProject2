@@ -47,6 +47,7 @@ public class ItemDescriptionHandler : MonoBehaviour
         {
             instance = this;
         }
+        gameObject.GetComponent<CanvasGroup>().alpha = 1.0f;
     }
 
     public void ItemType(Image slot)
