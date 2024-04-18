@@ -3,13 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-// Script not finished
+/// <summary>
+/// This script holds the tilemaps in the scenes. It gets them from events from other scripts, and updates which tilemaps are currently loaded.
+/// This is also were the sounds for the walking is played from.
+/// </summary>
 [RequireComponent(typeof(AudioSource))]
 public class TileMapManager : PersistentSingleton<TileMapManager>
 {
     [SerializeField] private List<Tilemap> _tilemaps; // This is a list because it will change during runtime
 
-    [SerializeField] TileData[] _tileDatas;
+    [SerializeField] private TileData[] _tileDatas; // An array of all the walking sounds that have been will bee used, this is constant
 
     private AudioSource _audioSource;
 
@@ -23,9 +26,9 @@ public class TileMapManager : PersistentSingleton<TileMapManager>
 
         _tileDictionary = new Dictionary<TileBase, TileData>();
 
-        foreach (var tileData in _tileDatas) 
+        foreach (var tileData in _tileDatas) // Here we loop over the array of the TileData put into _tileDatas
         {
-            foreach (var tile in tileData.GetTileBases()) 
+            foreach (var tile in tileData.GetTileBases())  // foreach TileData in _tileDatas we ad the data to the Dictionary such that we easily can get the AudioClips to the AudioSource
             {
                 _tileDictionary.Add(tile, tileData);
             }
@@ -37,9 +40,10 @@ public class TileMapManager : PersistentSingleton<TileMapManager>
 
     private void OnEnable()
     {
-        PlayerController.OnMovePositionEvent += PlayWalkingAudio;
+        PlayerController.OnMovePositionEvent += PlayWalkingAudio; // this event is sent from the PlayerController and plays the Walking audio
         SceneLoadTileManager.OnSceneLoadedEvent += AddTilemap;
         SceneLoadTileManager.OnSceneUnloadedEvent += RemoveTilemap;
+        SceneLoadTileManager.OnSceneSwapEvent += ClearTilemap;
     }
 
     private void OnDisable()
@@ -47,14 +51,15 @@ public class TileMapManager : PersistentSingleton<TileMapManager>
         PlayerController.OnMovePositionEvent -= PlayWalkingAudio;
         SceneLoadTileManager.OnSceneUnloadedEvent -= AddTilemap;
         SceneLoadTileManager.OnSceneUnloadedEvent -= RemoveTilemap;
+        SceneLoadTileManager.OnSceneSwapEvent -= ClearTilemap;
     }
 
 
 
-    public void PlayWalkingAudio(Vector2 worldPostion) 
+    public void PlayWalkingAudio(Vector2 worldPostion) // This method plays the sounds when walking
     {
-        Vector3Int gridposition;
-        TileBase tile = null;
+        Vector3Int gridposition; // Get a grid position only as and it as the tiles are 1x1 big in the grid
+        TileBase tile = null; // We assume that there is no tile underneath the player.
 
         foreach (var map in _tilemaps) 
         {
@@ -73,7 +78,7 @@ public class TileMapManager : PersistentSingleton<TileMapManager>
 
         AudioClip clip =  _tileDictionary[tile].GetClip();
 
-        if (_audioSource.isPlaying)
+        if (_audioSource.isPlaying || clip == null)
         {
             return;
         }
@@ -108,9 +113,9 @@ public class TileMapManager : PersistentSingleton<TileMapManager>
         }
     }
 
-    public void RemoveTilemap(List<Tilemap> tilemaps) 
+    public void RemoveTilemap(List<Tilemap> tilemaps)
     {
-        foreach (var map in tilemaps) 
+        foreach (var map in tilemaps)
         {
             _tilemaps.Remove(map);
         }
@@ -129,7 +134,7 @@ public class TileMapManager : PersistentSingleton<TileMapManager>
         foreach (var map in tilemaps)
         {
             _tilemaps.Remove(map);
-        }
+        }  
     }
 
     private void OnApplicationQuit()

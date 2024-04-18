@@ -9,6 +9,7 @@ public class SceneLoadTileManager : MonoBehaviour
 
     public static event Action<Tilemap[]> OnSceneLoadedEvent;
     public static event Action<Tilemap[]> OnSceneUnloadedEvent;
+    public static event Action OnSceneSwapEvent;
 
 
     private void OnSceneLoad() 
@@ -21,12 +22,17 @@ public class SceneLoadTileManager : MonoBehaviour
         OnSceneUnloadedEvent?.Invoke(GetComponentsInChildren<Tilemap>());
     }
 
+    private void OnSceneUnloadSwap() 
+    {
+        OnSceneSwapEvent?.Invoke();
+    }
+
     private void OnEnable() 
     {
         AsyncSceneLoader.OnSceneLoadedEvent += OnSceneLoad;
         AsyncSceneLoader.OnSceneUnloadedEvent += OnSceneUnload;
         SceneSwapManager.OnSceneLoadedEvent += OnSceneLoad;
-        SceneSwapManager.OnSceneUnloadedEvent += OnSceneUnload;
+        SceneSwapManager.OnSceneUnloadedEvent += OnSceneUnloadSwap;
     }
 
     private void OnDisable() 
@@ -34,7 +40,7 @@ public class SceneLoadTileManager : MonoBehaviour
         AsyncSceneLoader.OnSceneLoadedEvent -= OnSceneLoad;
         AsyncSceneLoader.OnSceneUnloadedEvent -= OnSceneUnload;
         SceneSwapManager.OnSceneLoadedEvent -= OnSceneLoad;
-        SceneSwapManager.OnSceneUnloadedEvent -= OnSceneUnload;
+        SceneSwapManager.OnSceneUnloadedEvent -= OnSceneUnloadSwap;
     }
 
 }
