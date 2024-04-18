@@ -10,10 +10,10 @@ public class EnvironmentManager : MonoBehaviour
     public static EnvironmentManager instance { get; private set; }
 
     [Header("Weather Types")] // By default they start being disabled since in unity editor the effects love to run constantly
-    [SerializeField] private UnityEngine.GameObject _blizzard;
-    [SerializeField] private UnityEngine.GameObject _snow;
-    [SerializeField] private UnityEngine.GameObject _fog;
-    public UnityEngine.GameObject _barrierBlizzard;
+    [SerializeField] private GameObject _blizzard;
+    [SerializeField] private GameObject _snow;
+    [SerializeField] private GameObject _fog;
+    public GameObject _barrierBlizzard;
 
     [Header("Weather Effects")]
     [SerializeField] private ParticleSystem _blizzardEffect;
@@ -79,6 +79,21 @@ public class EnvironmentManager : MonoBehaviour
     //    _playerMinSpeed.ApplyChange(_playerMinSpeed.GetValue() * debuff);
     //}
 
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        CheckScene();
+        Debug.Log("Check scene");
+    }
 
     void Awake()
     {
@@ -144,10 +159,10 @@ public class EnvironmentManager : MonoBehaviour
         }
     }
 
-    private void OnLevelWasLoaded(int level)
-    {
-        CheckScene();
-    }
+    //private void OnLevelWasLoaded(int level)
+    //{
+    //    CheckScene();
+    //}
 
     // Update is called once per frame
     void FixedUpdate()

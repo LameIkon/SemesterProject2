@@ -10,6 +10,34 @@ public class Initialize : MonoBehaviour
     private static bool _initialized = true; // Ensures only 1 instance of running some code once
     private bool _checkInstances; // Used to ensure that OnLevelWasLoaded only get run after it gets checked if there is more instances.
 
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        Debug.Log("called initilize Scene");
+        if (_checkInstances) // Retrict running before _checkInstances bool is checked.
+        {
+            switch (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("MainMenu")) // if MainMenu
+            {
+                case true: // Disable persistanceObjects when in MainMenu
+                    LoadMenu();
+                    break;
+                default: // Activate persistanceObjects when loaded game
+                    LoadGame();
+                    break;
+            }
+        }
+    }
+
+
     private void Awake()
     {
         if (instance != null)
@@ -39,21 +67,21 @@ public class Initialize : MonoBehaviour
         }
     }
 
-    private void OnLevelWasLoaded() //Called whenever a new scene is loaded
-    {
-        if (_checkInstances) // Retrict running before _checkInstances bool is checked.
-        {
-            switch (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("MainMenu")) // if MainMenu
-            {
-                case true: // Disable persistanceObjects when in MainMenu
-                    LoadMenu();
-                    break;
-                default: // Activate persistanceObjects when loaded game
-                    LoadGame();
-                    break;
-            }
-        }
-    }
+    //private void OnLevelWasLoaded() //Called whenever a new scene is loaded
+    //{
+    //    if (_checkInstances) // Retrict running before _checkInstances bool is checked.
+    //    {
+    //        switch (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("MainMenu")) // if MainMenu
+    //        {
+    //            case true: // Disable persistanceObjects when in MainMenu
+    //                LoadMenu();
+    //                break;
+    //            default: // Activate persistanceObjects when loaded game
+    //                LoadGame();
+    //                break;
+    //        }
+    //    }
+    //}
 
     void LoadGame()
     {

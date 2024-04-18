@@ -51,6 +51,10 @@ public class GameManager : PersistentSingleton<GameManager>
         InputReader.OnInventoryOpenEvent += HandleInventoryOpen;
         InputReader.OnInventoryCloseEvent += HandleInvertoryClose;
     }
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
 
     private void OnDisable() 
     {
@@ -58,12 +62,19 @@ public class GameManager : PersistentSingleton<GameManager>
         InputReader.OnResumeEvent -= HandleResume;
         InputReader.OnInventoryOpenEvent -= HandleInventoryOpen;
         InputReader.OnInventoryCloseEvent -= HandleInvertoryClose;
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
-    private void OnLevelWasLoaded(int level)
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         CheckScene();
+        Debug.Log("called GameManager Scene");
     }
+
+    //private void OnLevelWasLoaded(int level)
+    //{
+    //    CheckScene();
+    //}
 
     void CheckScene()
     {
