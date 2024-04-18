@@ -13,13 +13,7 @@ MonoBehaviour:
   m_Name: WoodTileData
   m_EditorClassIdentifier: 
   _tiles:
-  - {fileID: 11400000, guid: a73a7de07af5fca488815f681dc5be16, type: 2}
-  - {fileID: 11400000, guid: 29e0ad3772920a340899ed47f4a462d1, type: 2}
-  - {fileID: 11400000, guid: 58e4c38020a8b1544b4d807d1fbd8d98, type: 2}
-  - {fileID: 11400000, guid: 955fcb73602360547b28c305825853ef, type: 2}
-  - {fileID: 11400000, guid: 557578ffab1781d41b6cc110dd746c65, type: 2}
-  - {fileID: 11400000, guid: e07cc9876e8ad1349b2a52d00a209e06, type: 2}
-  - {fileID: 11400000, guid: c423c3b3d777e77439697883ac290a88, type: 2}
+  - {fileID: 11400000, guid: e6f7e15cb1caf744b98d8d1e4dde49d8, type: 2}
   _sounds:
   - {fileID: 8300000, guid: 6d90d9ddbee6ab947ae2e94f3c307266, type: 3}
   - {fileID: 8300000, guid: 8b9b0fc0b68addb40b25a782477fd929, type: 3}

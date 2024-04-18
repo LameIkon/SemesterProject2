@@ -7,7 +7,7 @@ using UnityEngine.Tilemaps;
 public class TileData : ScriptableObject
 {
 
-    [SerializeField] private TileBase[] _tiles;
+    [SerializeField] private RuleTile[] _tiles;
 
     [SerializeField] private AudioClip[] _sounds;
 

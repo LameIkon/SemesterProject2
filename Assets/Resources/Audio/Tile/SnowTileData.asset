@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: SnowTileData
   m_EditorClassIdentifier: 
   _tiles:
-  - {fileID: 11400000, guid: 7142b50b6370e7c4dbad0a6837fda45e, type: 2}
-  - {fileID: 11400000, guid: ce78e78879d4e7843a311cefe60148c3, type: 2}
-  _sounds: []
+  - {fileID: 11400000, guid: a33085009d82bee429d4c7e7ea046eab, type: 2}
+  _sounds:
+  - {fileID: 8300000, guid: 6d90d9ddbee6ab947ae2e94f3c307266, type: 3}
