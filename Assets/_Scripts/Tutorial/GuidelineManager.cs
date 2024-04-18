@@ -153,7 +153,7 @@ public class GuidelineManager : MonoBehaviour
         InputReader.OnRunStartEvent += StopRunning; // called whenever you run
         Invoke("ShowHealth", 0.5f);
         ResetAnimations(); // Cannot be used on disable since it cause conflict
-    }
+    } 
 
     private void OnDisable()
     {
@@ -211,8 +211,11 @@ public class GuidelineManager : MonoBehaviour
 
     void ShowHealth()
     {
-        _healthAnimator.Play("SlideInLeft");
-        _finishedHealth = true;
+        if (_healthAnimator.isActiveAndEnabled)
+        {
+            _healthAnimator.Play("SlideInLeft");
+            _finishedHealth = true;
+        }
     }
 
     public void ShowTemperature()

@@ -100,8 +100,8 @@ public class MovementController : MonoBehaviour
         return _movePoint.position + direction;
     }
 
-      
-    private void Update() // Animations
+
+    protected virtual void Update() // Animations
     {
         if (_animator != null)
         {
@@ -116,7 +116,7 @@ public class MovementController : MonoBehaviour
         }        
     }
 
-    public void StartAnimation()
+    protected virtual void StartAnimation()
     {
         if (_animator != null)
             {
@@ -135,7 +135,7 @@ public class MovementController : MonoBehaviour
         } 
     }
 
-    void IdleAnimation()
+    protected virtual void IdleAnimation()
     {
         switch (_lookingDirection)
         {
