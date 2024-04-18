@@ -15,10 +15,22 @@ public class Highlight : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.name == "Player" && DialogueManager.instance._OnlyOneInteractionActive) // Detect if the collision is the gameobject called Player
+        if (collision.gameObject.name == "Player" && DialogueManager.instance._OnlyOneInteractionActive && !GameManager._hideEInteractables) // Detect if the collision is the gameobject called Player
         {
             _showInteraction.SetActive(true);
             
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.name == "Player" && DialogueManager.instance._OnlyOneInteractionActive && GameManager._hideEInteractables)
+        {
+            _showInteraction.SetActive(false);
+        }
+        else if (collision.gameObject.name == "Player" && DialogueManager.instance._OnlyOneInteractionActive && !GameManager._hideEInteractables) 
+        {
+            _showInteraction.SetActive(true);
         }
     }
 
@@ -27,6 +39,7 @@ public class Highlight : MonoBehaviour
         if (collision.gameObject.name == "Player") // Detect if the collision is the gameobject called Player
         {
             _showInteraction.SetActive(false);
+            GameManager._hideEInteractables = false;
         }
     }
 }

@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class SkipGuide : MonoBehaviour
 {
-    [SerializeField] private UnityEngine.GameObject _guidelineManager;
+    [SerializeField] private GameObject _guidelineManager;
+    private bool _skipGuide;
 
     private void Start()
     {
         StartCoroutine(HideSkipButton()); // Start timer from start
+        Debug.Log("start countdown");
     }
 
     private IEnumerator HideSkipButton()
@@ -19,9 +21,12 @@ public class SkipGuide : MonoBehaviour
 
     public void SkipTutorialButton() // Called when the button is pressed
     {
-        GuidelineManager.instance.CompleteTutorial(); // Call the script that will show all survival bars
-        _guidelineManager.SetActive(false); // Deactiave the Guideline gameobject with its scripts
-        StartCoroutine(FadeOut(this.gameObject)); // Start coroutine to fade out this gameobject
+        if (!_skipGuide)
+        {
+            GuidelineManager.instance.CompleteTutorial(); // Call the script that will show all survival bars
+            _guidelineManager.SetActive(false); // Deactiave the Guideline gameobject with its scripts
+            StartCoroutine(FadeOut(this.gameObject)); // Start coroutine to fade out this gameobject
+        }
     }
 
 

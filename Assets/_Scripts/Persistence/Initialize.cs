@@ -32,7 +32,6 @@ public class Initialize : MonoBehaviour
 
             if (SceneManager.GetActiveScene() != SceneManager.GetSceneByName("MainMenu")) // If we start the game in another scene besides the MainMenu
             {
-                Debug.Log("Awake");
                 LoadGame();
             }
 
@@ -44,7 +43,6 @@ public class Initialize : MonoBehaviour
     {
         if (_checkInstances) // Retrict running before _checkInstances bool is checked.
         {
-            Debug.Log("load level");
             switch (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("MainMenu")) // if MainMenu
             {
                 case true: // Disable persistanceObjects when in MainMenu
@@ -59,7 +57,6 @@ public class Initialize : MonoBehaviour
 
     void LoadGame()
     {
-        Debug.Log("Game loaded");
         _persistanceObject.SetActive(true);
         if (!LanternDisabler._LanternSTATIC)
         {
@@ -69,7 +66,6 @@ public class Initialize : MonoBehaviour
 
     void LoadMenu()
     {
-        Debug.Log("Main Menu Loaded");
         _persistanceObject.SetActive(false);
     }
 

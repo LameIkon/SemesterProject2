@@ -18,6 +18,8 @@ public class GameManager : PersistentSingleton<GameManager>
 
     private bool _mainSceneBool;
 
+    public static bool _hideEInteractables; // used for scripts disable interactables such as chest and campfire
+
     protected override void Awake()
     {
         base.Awake();
@@ -41,6 +43,7 @@ public class GameManager : PersistentSingleton<GameManager>
             _inventoryMenu.SetActive(false);
         }
         CheckScene();
+        _hideEInteractables = false;
 
         // Here we subscribe the events to the handlers
         InputReader.OnPauseEvent += HandlePause;
@@ -98,11 +101,13 @@ public class GameManager : PersistentSingleton<GameManager>
     private void HandleInventoryOpen() 
     {
         _inventoryMenu.SetActive(true);
+        _hideEInteractables = true; // Hide E interactables
     }
 
     private void HandleInvertoryClose() 
     {
         _inventoryMenu.SetActive(false);
+        _hideEInteractables = false; // interactables can be seen again
     }
 
 }

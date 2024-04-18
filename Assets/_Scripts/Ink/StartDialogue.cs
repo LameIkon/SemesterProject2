@@ -2,6 +2,7 @@ using Ink.Parsed;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class StartDialogue : MonoBehaviour
@@ -78,12 +79,32 @@ public class StartDialogue : MonoBehaviour
             //Debug.Log("Enter");
             DialogueManager.instance._NPCName = _NPCName;
             UpdateDialogue();
+
+            if (!GameManager._hideEInteractables)
+            {
+                _startDialogue = true; // Set to true allowing start dialogue (Warning be sure there arent overlapping triggers, might cause problems)
+
+                _showInteraction.SetActive(true); // Show Interaction
+                _highlight.SetActive(false); // Hide highlight to not overlap with showInteraction
+            }           
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.name == "Player" && !GameManager._hideEInteractables && !DialogueManager.instance._Oneclick)
+        {
             _startDialogue = true; // Set to true allowing start dialogue (Warning be sure there arent overlapping triggers, might cause problems)
 
             _showInteraction.SetActive(true); // Show Interaction
             _highlight.SetActive(false); // Hide highlight to not overlap with showInteraction
         }
+        else if (collision.gameObject.name == "Player" && GameManager._hideEInteractables)
+        {
+            _showInteraction.SetActive(false); // Dont show interaction
+        }
     }
+   
 
     private void OnTriggerExit2D(Collider2D collision)
     {

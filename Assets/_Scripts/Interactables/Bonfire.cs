@@ -85,7 +85,7 @@ public class Bonfire : MonoBehaviour
             CampfireManager._bonfireCanvasSTATIC.SetActive(false);
             GameManager._inventoryMenuSTATIC.SetActive(false);
             _leftoverCoroutine = LeftoverTime(_burningTime);
-            
+            GameManager._hideEInteractables = false;
             
             if (_bonfireLit)
             {

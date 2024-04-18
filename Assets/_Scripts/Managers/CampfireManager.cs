@@ -9,7 +9,7 @@ public class CampfireManager : MonoBehaviour
     public static UnityEngine.GameObject _bonfireCanvasSTATIC; //we need a static variable so that we can acces it in Bonfire.Script
 
     //[SerializeField] private bool _useBonfire;
-    private bool _turn = false;
+    [SerializeField] private bool _turn = false;
 
 
     void Start()
@@ -54,6 +54,15 @@ public class CampfireManager : MonoBehaviour
         _turn = !_turn;
         _bonfireCanvas.SetActive(_turn);
         GameManager._inventoryMenuSTATIC.SetActive(_turn);
+
+        // check interactability 
+        Interactable();
+    }
+
+    void Interactable()
+    {
+        // Show or disable E highlight
+        GameManager._hideEInteractables = _turn;
     }
 
 

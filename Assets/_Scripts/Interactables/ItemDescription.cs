@@ -1,46 +1,84 @@
-using Ink.Parsed;
-using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
+using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class ItemDescription : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    [SerializeField] private UnityEngine.GameObject _slot;
-    [SerializeField] private UnityEngine.GameObject _itemDescription;
-    [SerializeField, TextArea(2, 4)] private string _description;
+    [SerializeField, Tooltip("Set images you want to ignore")] private Sprite[] _ignoreImages; // Ignore if its a image you dont want shown
 
-    [SerializeField] private UnityEngine.GameObject _itemDescriptionPrefab;
+    private Image _slot; // Slot image to check
+    static bool _hovering; // Used to ensure hovingering over image
+    private bool _showDescription;
+    [SerializeField] private GameObject _itemDescriptionCanvas; // The description Canvas
 
-    [SerializeField] private UnityEngine.GameObject _canvas;
 
-    private bool _hovering;
 
+
+    private void Awake()
+    {
+        _itemDescriptionCanvas = GameObject.FindWithTag("ItemDescriptionHolder"); // Find the Canvas
+
+        // Invenotory slots only gets instantiated when it gets open. thats why it might not find it first time
+        if (_itemDescriptionCanvas == null) // if for some reason it cant find the canvas try activate the canvas
+        {
+            StartCoroutine(ItemDescriptionHandler.instance.Disable()); // make the canvas true for a moment
+            _itemDescriptionCanvas = GameObject.FindWithTag("ItemDescriptionHolder"); // Find the Canvas
+        }
+    }
 
     public void OnPointerEnter(PointerEventData eventData) // When mouse is hovering over it
     {
-        _hovering = true;
+        _slot = GetComponent<Image>();
+        
+        _showDescription = true;
 
-        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        mousePos.z = 0f;
-
-        UnityEngine.GameObject description = Instantiate(_itemDescriptionPrefab);
-
-        description.transform.position = mousePos;
-        description.transform.SetParent(_canvas.transform, false);
-
+        foreach (Sprite IgnoreImage in _ignoreImages)
+        {
+            // drumstick is equl to null
+            if (_slot.sprite == IgnoreImage) // If the image is not ignored then show description
+            {
+                _showDescription = false;
+                break; // no need to continue looking when at least 1 is true
+            }
+        }
+        if (_showDescription)
+        {
+            ShowDescription();
+            _hovering = true;
+            CancelInvoke("HideDescription"); // Stop the script from trying to close it when we want it to be open
+        }
     }
 
     public void OnPointerExit(PointerEventData eventData) // When mouse exit hovering over it
     {
+        if (_hovering)
+        {
+            _hovering = false;
+            Invoke("HideDescription", 0.3f);
+        }
+    }
 
-        Invoke("HideDescription", 1f);
+    private void ShowDescription()
+    {
+        ItemDescriptionHandler.instance.ItemType(_slot);
+
+        _itemDescriptionCanvas.GetComponentInChildren<TextMeshProUGUI>().text = ItemDescriptionHandler.instance._CurrentDescription; // Insert the description from the GameObject
+
+        Image replaceImage = _itemDescriptionCanvas.transform.GetChild(1).GetChild(0).GetChild(0).GetComponent<Image>(); // Get the specific image from the ItemDescriptionCanvas
+        replaceImage.sprite = _slot.sprite;
+
+        _itemDescriptionCanvas.SetActive(true);
     }
 
     private void HideDescription()
     {
-        //_descriptionbox.SetActive(false);
+        if (!_hovering)
+        {
+            _itemDescriptionCanvas.SetActive(false);
+        }
     }
-
 }
