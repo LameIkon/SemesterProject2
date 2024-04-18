@@ -76,7 +76,7 @@ public class MovementController : MonoBehaviour
     private void OnDisable()
     {
         _lookingDirection = null;
-        _animator.Play("Idle_Front");
+        //_animator.Play("Idle_Front");
     }
 
 

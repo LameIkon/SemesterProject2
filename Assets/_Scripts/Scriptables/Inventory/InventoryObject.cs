@@ -41,21 +41,28 @@ public class InventoryObject : ScriptableObject
 
     public bool AddItem (Item item, int amount)
     {
-        InventorySlot slot = FindItemOnInventory(item);
+        try
+        {
+            InventorySlot slot = FindItemOnInventory(item);
 
-        if (EmptySlotCount <= 0)
+            if (EmptySlotCount <= 0)
+            {
+                return false;
+            }
+
+
+            if (!_ItemsDataBase._ItemObjects[item._ID]._Stackable || slot == null)
+            {
+                SetEmptySlot(item, amount);
+                return true;
+            }
+            slot.AddAmount(amount);
+            return true;
+        }
+        catch (System.IndexOutOfRangeException)
         {
             return false;
         }
-
-
-        if (!_ItemsDataBase._ItemObjects[item._ID]._Stackable || slot == null)
-        {
-            SetEmptySlot(item, amount);
-            return true;
-        }
-        slot.AddAmount(amount);
-        return true;
     }
 
     public int EmptySlotCount
