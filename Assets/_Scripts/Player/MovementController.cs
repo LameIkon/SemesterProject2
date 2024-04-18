@@ -1,7 +1,6 @@
 using System.Collections;
 using UnityEngine;
 
-[RequireComponent(typeof(AudioSource))]
 public class MovementController : MonoBehaviour
 {
 
@@ -15,14 +14,6 @@ public class MovementController : MonoBehaviour
 
     [SerializeField, Tooltip("Select what layers should block movement")]
     LayerMask[] _whatStopsMovement; // This is made into an array as the layers that stop Movement should not change during runtime, therefore it is redundat to make it a List
-    [SerializeField] LayerMask _snowLayer;
-    [SerializeField] LayerMask _woodLayer;
-
-    [Header("Audio Sounds"), SerializeField]
-    private AudioEvent _snowStepSound;
-    [SerializeField] private AudioEvent _woodStepSound;
-    [SerializeField] private AudioEvent _stopMoveSound;
-    private AudioSource _audioSource;
 
     [SerializeField] protected Animator _animator;
     public string _lookingDirection; // Used to check what direction is moving towards
@@ -31,7 +22,6 @@ public class MovementController : MonoBehaviour
 
     void Awake()
     {
-        _audioSource = GetComponent<AudioSource>();
         _movePoint.parent = null; //detachs the MovePoint as a child of player. Not acutally needed. 
         _moveSpeed = _speedReference.GetMinValue(); // Sets the walking speed 
         _walkingSpeed = _speedReference.GetMinValue(); // Used to check if _moveSpeed gets changed.
