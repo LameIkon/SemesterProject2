@@ -18,6 +18,7 @@ public class AsyncSceneLoader : MonoBehaviour
     public static event Action OnSceneLoadedEvent; 
     public static event Action OnSceneUnloadedEvent;
 
+
     private void Awake()
     {
         _sceneTrigger = GetComponent<BoxCollider2D>(); // Gets the collider on the gameObject
@@ -29,7 +30,7 @@ public class AsyncSceneLoader : MonoBehaviour
         if (collision.CompareTag("Player") && _unloadScenes.Length != 0) // We get the Player and ensure that the _unloadScenes array is not null
         {
             StartCoroutine(UnloadScene(_unloadScenes)); // The Coroutine to unload the scenes is started
-            
+   
         }
 
         if (collision.CompareTag("Player") && _loadScenes.Length != 0) // We get the Player and ensure that  the _loadScenes array is not null
