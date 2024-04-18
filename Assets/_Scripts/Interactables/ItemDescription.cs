@@ -15,19 +15,15 @@ public class ItemDescription : MonoBehaviour, IPointerEnterHandler, IPointerExit
     private bool _showDescription;
     [SerializeField] private GameObject _itemDescriptionCanvas; // The description Canvas
 
-
-
-
-    private void Awake()
+    private void Update()
     {
-        _itemDescriptionCanvas = GameObject.FindWithTag("ItemDescriptionHolder"); // Find the Canvas
-
         // Invenotory slots only gets instantiated when it gets open. thats why it might not find it first time
         if (_itemDescriptionCanvas == null) // if for some reason it cant find the canvas try activate the canvas
         {
             StartCoroutine(ItemDescriptionHandler.instance.Disable()); // make the canvas true for a moment
             _itemDescriptionCanvas = GameObject.FindWithTag("ItemDescriptionHolder"); // Find the Canvas
         }
+        
     }
 
     public void OnPointerEnter(PointerEventData eventData) // When mouse is hovering over it

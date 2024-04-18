@@ -82,7 +82,7 @@ public class ItemDescriptionHandler : MonoBehaviour
     {
         if (_once)
         {
-            _once = false;
+            //_once = false;
             gameObject.GetComponent<CanvasGroup>().alpha = 0.0f; // so the canvas dont show up at random
             this.gameObject.SetActive(true); // inventory slots now have oppotunity to find the canvas
             yield return null;
