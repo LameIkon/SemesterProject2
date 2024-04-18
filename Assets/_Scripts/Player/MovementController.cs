@@ -116,7 +116,7 @@ public class MovementController : MonoBehaviour
         }        
     }
 
-    void StartAnimation()
+    public void StartAnimation()
     {
         if (_animator != null)
             {
