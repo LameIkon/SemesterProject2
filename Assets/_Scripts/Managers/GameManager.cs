@@ -68,7 +68,6 @@ public class GameManager : PersistentSingleton<GameManager>
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         CheckScene();
-        Debug.Log("called GameManager Scene");
     }
 
     //private void OnLevelWasLoaded(int level)

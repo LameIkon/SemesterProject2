@@ -92,7 +92,6 @@ public class EnvironmentManager : MonoBehaviour
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         CheckScene();
-        Debug.Log("Check scene");
     }
 
     void Awake()

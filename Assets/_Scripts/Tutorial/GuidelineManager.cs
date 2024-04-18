@@ -6,6 +6,9 @@ public class GuidelineManager : MonoBehaviour
 {
     public static GuidelineManager instance { get; private set; }
 
+    // Pragma used to ignore the warnings
+    #pragma warning disable 0414
+
     [Header("Boolean Checkmarks")] // Used to check if an guideline can be activated
     [SerializeField] private bool _showMovement;
     public bool _showRunning;
@@ -30,6 +33,8 @@ public class GuidelineManager : MonoBehaviour
     [SerializeField] private bool _finishedHealth;
     [SerializeField] private bool _finishedFood;
     [SerializeField] private bool _finishedStamina;
+
+    #pragma warning restore 0414
 
     [Header("Canvases")]
     [SerializeField] private GameObject _movementCanvas;

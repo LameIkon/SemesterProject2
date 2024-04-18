@@ -26,11 +26,12 @@ public class SkipGuide : MonoBehaviour
             GuidelineManager.instance.CompleteTutorial(); // Call the script that will show all survival bars
             _guidelineManager.SetActive(false); // Deactiave the Guideline gameobject with its scripts
             StartCoroutine(FadeOut(this.gameObject)); // Start coroutine to fade out this gameobject
+            _skipGuide = true;
         }
     }
 
 
-    IEnumerator FadeOut(UnityEngine.GameObject canvas)
+    IEnumerator FadeOut(GameObject canvas)
     {
         yield return new WaitForSeconds(0.5f); // Small delay before fade starts
         float currentAlpha = 1.0f; // Initilize by creating a float with alpha on 1

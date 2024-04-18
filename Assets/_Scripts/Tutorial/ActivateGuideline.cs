@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ActivateGuideline : MonoBehaviour
@@ -53,12 +54,14 @@ public class ActivateGuideline : MonoBehaviour
         _activateFood = false;
         _activateStamina = false;
         _activateTemperature = false;
+        InputReader.OnInventoryOpenEvent -= ShowHunger;
     }
 
     private void OnEnable()
     {
         InputReader.OnInventoryOpenEvent += ShowHunger;
     }
+
 
     // Update is called once per frame
     void Update()

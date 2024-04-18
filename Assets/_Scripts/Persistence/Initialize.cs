@@ -22,7 +22,6 @@ public class Initialize : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        Debug.Log("called initilize Scene");
         if (_checkInstances) // Retrict running before _checkInstances bool is checked.
         {
             switch (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("MainMenu")) // if MainMenu
