@@ -6,7 +6,7 @@ public class SkipGuide : MonoBehaviour
 {
     [SerializeField] private GameObject _guidelineManager;
     public static bool _skipGuide;
-    public bool _ShowGuide = true;
+    public static bool _ShowGuide = true;
     private bool _once1;
     private bool _once2;
 
