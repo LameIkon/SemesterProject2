@@ -75,20 +75,8 @@ public class GameManager : PersistentSingleton<GameManager>
             {
                 _guideline.SetActive(true);
             }
-            if (_guideline.activeSelf)
-            {
-                //_guideline.GetComponent<ActivateGuideline>().ShowMovement(); // call the script
-                //Invoke (nameof(script.ShowMovement),0.5f);
-            }
         }
-
     }
-
-    //private void OnLevelWasLoaded(int level)
-    //{
-    //    CheckScene();
-    //}
-
     void CheckScene()
     {
         Scene currentScene = SceneManager.GetActiveScene();
