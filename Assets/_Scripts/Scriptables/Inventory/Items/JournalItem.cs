@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-[CreateAssetMenu(fileName = "New default Object", menuName = "Iventory System/Items/DefaultItem")]
-public class DefaultItem : ItemObject
+[CreateAssetMenu(fileName = "New journal Object", menuName = "Iventory System/Items/JournalItem")]
+public class JournalItem : ItemObject
 {
     public int _JournalIndex;
 
     public void Awake()
     {
-        _ItemType = ItemType.Default;
+        _ItemType = ItemType.Journal;
     }
 
     public override void Action()

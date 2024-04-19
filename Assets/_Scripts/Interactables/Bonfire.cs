@@ -7,7 +7,6 @@ using UnityEngine;
 
 public class Bonfire : MonoBehaviour
 {
-
     [SerializeField] private InventoryObject _bonfireInventory;
     [SerializeField] private GameObject _particles;
     [SerializeField] private GameObject _lights;
@@ -27,34 +26,23 @@ public class Bonfire : MonoBehaviour
     private bool _isTriggeredOnce = false;
     private bool _coroutineBurnActive = false; //tracks if coroutine is started
     private bool _coroutineLeftoverActive = false; //tracks if coroutine is started
+    private bool _playerIsClose = false; //tracks if player is close
 
 
     private IEnumerator _burnCoroutine;
     private IEnumerator _leftoverCoroutine;  
 
     
-
-
     private void Update()
     {
-
-        //after the persistantObject is loaded we get inventory from the canvas and set it to our scriptableObject "bonfire"(inventory).
-        //if (LanternDisabler._LoadedSTATIC)
-        //{
-        //    print("this happens alot");
-        //    _bonfireInterface = CampfireManager._bonfireCanvasSTATIC.GetComponent<StaticInterface>();
-        //    _bonfireInterface._Inventory = _bonfireInventory; //this is to make sure we get the right inventory
-        //}
-
         //This needs to be in update otherwise when u put wood on fire it wont apply right away.
-        if (_bonfireLit && !_isTriggeredOnce)
+        if (_bonfireLit && !_isTriggeredOnce && _playerIsClose)
         {
             _isTriggeredOnce = true; //makes sure we dont apply the closeToHeat value more then once.
             if(_systemFloat < _restoreValue)
             {
                 _systemFloat.ApplyChange(_restoreValue); //applies the heat value so that we get warmer as long as the fire burns.
-            }
-           
+            }           
         }
         //
         else if (!_coroutineBurnActive)
@@ -68,9 +56,9 @@ public class Bonfire : MonoBehaviour
     {
        
         if (collision.CompareTag("Player"))
-        {
-          
+        {          
             _canOpenBonfire = true;
+            _playerIsClose = true;
 
             _burnCoroutine = BurningTime(_burningTime);
         }       
@@ -79,9 +67,9 @@ public class Bonfire : MonoBehaviour
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
-        {
-      
+        {      
             _canOpenBonfire = false;
+            _playerIsClose = false;
             CampfireManager._bonfireCanvasSTATIC.SetActive(false);
             GameManager._inventoryMenuSTATIC.SetActive(false);
             _leftoverCoroutine = LeftoverTime(_burningTime);

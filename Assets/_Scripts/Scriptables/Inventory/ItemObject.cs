@@ -30,8 +30,7 @@ public enum ItemType
     Light,
     Food,    
     Fuel,
-    MainHand,
-    OffHand
+    Journal
 }
 
 [System.Serializable]
