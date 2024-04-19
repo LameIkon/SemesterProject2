@@ -4030,7 +4030,12 @@ MonoBehaviour:
   _mainMenu:
     m_SceneAsset: {fileID: 102900000, guid: ed664a99639841645ad53bd805b05881, type: 3}
     m_SceneName: MainMenu
+  _shipIn:
+    m_SceneAsset: {fileID: 102900000, guid: 705aa24cd08232546a65faae48da3e27, type: 3}
+    m_SceneName: ShipIn
   _guideline: {fileID: 432784352885748221}
+  _player: {fileID: 8991630676613270584}
+  _playerMovePoint: {fileID: 3562249831111092549}
   _mainSceneBool: 0
 --- !u!1 &8628404958196252046
 GameObject:
@@ -7959,6 +7964,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 95360179987185865}
   m_SourcePrefab: {fileID: 100100000, guid: e36a38a4dc77a644bbfbe397c4ca9e30, type: 3}
+--- !u!1 &3562249831111092549 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7997226962447312467, guid: e36a38a4dc77a644bbfbe397c4ca9e30, type: 3}
+  m_PrefabInstance: {fileID: 6887266980471721750}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4258235403361773495 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7245225677334882465, guid: e36a38a4dc77a644bbfbe397c4ca9e30, type: 3}
@@ -8019,6 +8029,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c497ab6ff96dea418cb25df7a69f136, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &8991630676613270584 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2548136485262017326, guid: e36a38a4dc77a644bbfbe397c4ca9e30, type: 3}
+  m_PrefabInstance: {fileID: 6887266980471721750}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7423352440761009372
 PrefabInstance:
   m_ObjectHideFlags: 0

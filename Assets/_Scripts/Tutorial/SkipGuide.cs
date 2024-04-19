@@ -7,8 +7,8 @@ public class SkipGuide : MonoBehaviour
     [SerializeField] private GameObject _guidelineManager;
     public static bool _skipGuide;
     public static bool _ShowGuide = true;
-    private bool _once1;
-    private bool _once2;
+    public static bool _hideGuide;
+    public static bool _showGuide;
 
     private void Start()
     {
@@ -20,27 +20,30 @@ public class SkipGuide : MonoBehaviour
         StartCoroutine(HideSkipButton()); // Start timer from start
         _skipGuide = false;
         gameObject.GetComponent<CanvasGroup>().alpha = 1f;
-        Debug.Log("start countdown");
-        _once1 = true;
+    }
+
+    private void OnDisable()
+    {
+        _hideGuide = true;
+        _showGuide = true;
     }
 
     private void Update()
     {
-        if (!_ShowGuide && _once1) // if set to false skip it
+        if (!_ShowGuide && _hideGuide) // if set to false skip it
         {
             GuidelineManager.instance.CompleteTutorial(); // Call the script that will show all survival bars
             _guidelineManager.SetActive(false); // Deactiave the Guideline gameobject with its scripts
            gameObject.GetComponent<CanvasGroup>().alpha = 0f; // Start coroutine to fade out this gameobject
             _skipGuide = true;
-
-            _once1 = false;
+            _hideGuide = false;
         }
-        else if (_ShowGuide && _once2) // if set to true
+        else if (_ShowGuide && _showGuide) // if set to true
         {
             StartCoroutine(HideSkipButton()); // Start timer from start
             _skipGuide = false;
             gameObject.GetComponent<CanvasGroup>().alpha = 1f;
-            _once2 = false;
+            _showGuide = false;
         }
     }
 

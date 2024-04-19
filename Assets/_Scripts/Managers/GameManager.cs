@@ -13,11 +13,15 @@ public class GameManager : PersistentSingleton<GameManager>
     [SerializeField] private GameObject _pauseMenu;
     [SerializeField] private GameObject _inventoryMenu;
     [SerializeField] private SceneField _mainMenu;
+    [SerializeField] private SceneField _shipIn;
     [SerializeField] private GameObject _guideline;
+    [SerializeField] private GameObject _player;
+    [SerializeField] private GameObject _playerMovePoint;
     public static GameObject _inventoryMenuSTATIC;
 
 
     public bool _mainSceneBool;
+    private bool _shipInBool;
 
     public static bool _hideEInteractables; // used for scripts disable interactables such as chest and campfire
 
@@ -46,14 +50,14 @@ public class GameManager : PersistentSingleton<GameManager>
         CheckScene();
         _hideEInteractables = false;
 
+    }
+    private void OnEnable()
+    {
         // Here we subscribe the events to the handlers
         InputReader.OnPauseEvent += HandlePause;
         InputReader.OnResumeEvent += HandleResume;
         InputReader.OnInventoryOpenEvent += HandleInventoryOpen;
         InputReader.OnInventoryCloseEvent += HandleInvertoryClose;
-    }
-    private void OnEnable()
-    {
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
@@ -69,9 +73,12 @@ public class GameManager : PersistentSingleton<GameManager>
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         CheckScene();
-        if (!_mainSceneBool)
+        if (!_mainSceneBool && _shipInBool)
         {
-            if (SkipGuide._skipGuide)
+            _player.transform.position = Vector3.zero;
+            _playerMovePoint.transform.position = Vector3.zero;
+
+            if (SkipGuide._skipGuide && SkipGuide._showGuide)
             {
                 _guideline.SetActive(true);
             }
@@ -88,6 +95,15 @@ public class GameManager : PersistentSingleton<GameManager>
         else
         {
             _mainSceneBool = false;
+        }
+
+        if (currentScene.name == _shipIn)
+        {
+            _shipInBool = true;
+        }
+        else
+        {
+            _shipInBool = false;
         }
     }
 
