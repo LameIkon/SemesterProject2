@@ -47,7 +47,6 @@ public class ActivateGuideline : MonoBehaviour
     private void OnEnable()
     {
         InputReader.OnInventoryOpenEvent += ShowHunger;
-        SceneManager.sceneLoaded += OnSceneLoaded;
 
         _finishedMovement = false;
         
@@ -65,20 +64,9 @@ public class ActivateGuideline : MonoBehaviour
         _activateStamina = false;
         _activateTemperature = false;
         InputReader.OnInventoryOpenEvent -= ShowHunger;
-        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
-    
-
-    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        Debug.Log("true");
-        if (!GameManager._Instance._mainSceneBool)
-        {
-             Debug.Log("false");
-             //Invoke("ShowMovement", 0.5f);
-        }
-    }
+   
 
 
     // Update is called once per frame
@@ -89,7 +77,6 @@ public class ActivateGuideline : MonoBehaviour
 
         if (!GameManager._Instance._mainSceneBool)
         {
-             Debug.Log("false");
              Invoke("ShowMovement", 0.5f);
         }
 
@@ -98,10 +85,8 @@ public class ActivateGuideline : MonoBehaviour
 
     public void ShowMovement() // Activated automatically at start of game
     {
-        Debug.Log("called");
         if (!_finishedMovement)
         {
-            Debug.Log("showMovement");
             StartCoroutine(GuidelineManager.instance.ShowMovement());
             _finishedMovement = true;
         }
