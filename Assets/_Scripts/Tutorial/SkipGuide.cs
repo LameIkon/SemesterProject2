@@ -5,12 +5,43 @@ using UnityEngine;
 public class SkipGuide : MonoBehaviour
 {
     [SerializeField] private GameObject _guidelineManager;
-    private bool _skipGuide;
+    public static bool _skipGuide;
+    public bool _ShowGuide = true;
+    private bool _once1;
+    private bool _once2;
 
     private void Start()
     {
+        
+    }
+
+    private void OnEnable()
+    {
         StartCoroutine(HideSkipButton()); // Start timer from start
+        _skipGuide = false;
+        gameObject.GetComponent<CanvasGroup>().alpha = 1f;
         Debug.Log("start countdown");
+        _once1 = true;
+    }
+
+    private void Update()
+    {
+        if (!_ShowGuide && _once1) // if set to false skip it
+        {
+            GuidelineManager.instance.CompleteTutorial(); // Call the script that will show all survival bars
+            _guidelineManager.SetActive(false); // Deactiave the Guideline gameobject with its scripts
+           gameObject.GetComponent<CanvasGroup>().alpha = 0f; // Start coroutine to fade out this gameobject
+            _skipGuide = true;
+
+            _once1 = false;
+        }
+        else if (_ShowGuide && _once2) // if set to true
+        {
+            StartCoroutine(HideSkipButton()); // Start timer from start
+            _skipGuide = false;
+            gameObject.GetComponent<CanvasGroup>().alpha = 1f;
+            _once2 = false;
+        }
     }
 
     private IEnumerator HideSkipButton()
@@ -30,6 +61,10 @@ public class SkipGuide : MonoBehaviour
         }
     }
 
+    public void ShowORHideTutorialButton() // Button
+    {
+        _ShowGuide = !_ShowGuide; // Change bool state
+    }
 
     IEnumerator FadeOut(GameObject canvas)
     {

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ActivateGuideline : MonoBehaviour
 {
@@ -35,12 +36,21 @@ public class ActivateGuideline : MonoBehaviour
 
     private void Start()
     {
-        Invoke("ShowMovement", 0.5f);
+        //Invoke("ShowMovement", 0.5f);
     }
 
     private void OnValidate()
     {
         StartGuideline(); // Only used in the editor to test
+    }
+
+    private void OnEnable()
+    {
+        InputReader.OnInventoryOpenEvent += ShowHunger;
+        SceneManager.sceneLoaded += OnSceneLoaded;
+
+        _finishedMovement = false;
+        
     }
 
     private void OnDisable()
@@ -55,11 +65,19 @@ public class ActivateGuideline : MonoBehaviour
         _activateStamina = false;
         _activateTemperature = false;
         InputReader.OnInventoryOpenEvent -= ShowHunger;
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
-    private void OnEnable()
+    
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        InputReader.OnInventoryOpenEvent += ShowHunger;
+        Debug.Log("true");
+        if (!GameManager._Instance._mainSceneBool)
+        {
+             Debug.Log("false");
+             //Invoke("ShowMovement", 0.5f);
+        }
     }
 
 
@@ -68,13 +86,22 @@ public class ActivateGuideline : MonoBehaviour
     {
         ShowTemperature();
         ShowInventory();
+
+        if (!GameManager._Instance._mainSceneBool)
+        {
+             Debug.Log("false");
+             Invoke("ShowMovement", 0.5f);
+        }
+
     }
 
 
-    void ShowMovement() // Activated automatically at start of game
+    public void ShowMovement() // Activated automatically at start of game
     {
+        Debug.Log("called");
         if (!_finishedMovement)
         {
+            Debug.Log("showMovement");
             StartCoroutine(GuidelineManager.instance.ShowMovement());
             _finishedMovement = true;
         }

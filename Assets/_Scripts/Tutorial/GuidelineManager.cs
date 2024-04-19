@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GuidelineManager : MonoBehaviour
 {
@@ -156,8 +157,9 @@ public class GuidelineManager : MonoBehaviour
     {
         InputReader.OnMoveEvent += StopMovement; // Called whenever you move
         InputReader.OnRunStartEvent += StopRunning; // called whenever you run
+        //Invoke("ResetAnimations", 0.1f); // Cannot be used on disable since it cause conflict
+        SceneManager.sceneLoaded += OnSceneLoaded;
         Invoke("ShowHealth", 0.5f);
-        ResetAnimations(); // Cannot be used on disable since it cause conflict
     } 
 
     private void OnDisable()
@@ -165,7 +167,17 @@ public class GuidelineManager : MonoBehaviour
         InputReader.OnMoveEvent -= StopMovement;
         InputReader.OnRunStartEvent -= StopRunning;
         InputReader.OnRunCancelEvent += ResetRunningBool; // called whenever you stop running
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+
         ResetGuideLine(); // reset all bools and canvases
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (SkipGuide._skipGuide) // Enable this GameObject
+        {
+            //gameObject.SetActive(true);
+        }
     }
 
     public void ResetMovingBool() // called from Player Controller to check when you stop moving

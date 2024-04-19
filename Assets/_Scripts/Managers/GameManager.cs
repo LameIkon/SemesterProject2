@@ -13,10 +13,11 @@ public class GameManager : PersistentSingleton<GameManager>
     [SerializeField] private GameObject _pauseMenu;
     [SerializeField] private GameObject _inventoryMenu;
     [SerializeField] private SceneField _mainMenu;
+    [SerializeField] private GameObject _guideline;
     public static GameObject _inventoryMenuSTATIC;
 
 
-    private bool _mainSceneBool;
+    public bool _mainSceneBool;
 
     public static bool _hideEInteractables; // used for scripts disable interactables such as chest and campfire
 
@@ -68,6 +69,19 @@ public class GameManager : PersistentSingleton<GameManager>
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         CheckScene();
+        if (!_mainSceneBool)
+        {
+            if (SkipGuide._skipGuide)
+            {
+                _guideline.SetActive(true);
+            }
+            if (_guideline.activeSelf)
+            {
+                //_guideline.GetComponent<ActivateGuideline>().ShowMovement(); // call the script
+                //Invoke (nameof(script.ShowMovement),0.5f);
+            }
+        }
+
     }
 
     //private void OnLevelWasLoaded(int level)
