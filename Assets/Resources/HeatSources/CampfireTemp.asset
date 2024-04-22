@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 440e8008cfe6fbe4e925b85b6dfd1223, type: 3}
   m_Name: CampfireTemp
   m_EditorClassIdentifier: 
-  DevDescription: 
-  _value: 0
+  DevDescription: The temp restore value for Campfire
+  _value: 50
   _onValueChanged: {fileID: 0}

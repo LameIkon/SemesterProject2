@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 440e8008cfe6fbe4e925b85b6dfd1223, type: 3}
   m_Name: FurnaceTemp
   m_EditorClassIdentifier: 
-  DevDescription: 
-  _value: 0
+  DevDescription: The Temp restore value for furnace
+  _value: 60
   _onValueChanged: {fileID: 0}
