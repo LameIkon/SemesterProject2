@@ -19,6 +19,7 @@ public class MovementController : MonoBehaviour
     public string _lookingDirection; // Used to check what direction is moving towards
     protected float _walkingSpeed; // Used to check if the player is running
     protected bool _isIdling;
+    protected bool _isDead;
 
     void Awake()
     {

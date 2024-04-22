@@ -6528,6 +6528,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 3563838114784374177}
     m_Modifications:
     - target: {fileID: 4251317389186133514, guid: 3f597885cafe1da4b8d04aa0c8fe3a19, type: 3}
+      propertyPath: _playerAnimator
+      value: 
+      objectReference: {fileID: 1177097097165489872}
+    - target: {fileID: 4251317389186133514, guid: 3f597885cafe1da4b8d04aa0c8fe3a19, type: 3}
+      propertyPath: _movementController
+      value: 
+      objectReference: {fileID: 8849036475905818418}
+    - target: {fileID: 4251317389186133514, guid: 3f597885cafe1da4b8d04aa0c8fe3a19, type: 3}
       propertyPath: _freezeDamage.ConstantValue
       value: 0.02
       objectReference: {fileID: 0}
@@ -8406,6 +8414,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9c497ab6ff96dea418cb25df7a69f136, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8849036475905818418 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2691581505823338532, guid: e36a38a4dc77a644bbfbe397c4ca9e30, type: 3}
+  m_PrefabInstance: {fileID: 6887266980471721750}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8991630676613270584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9b4209348165a440ac02dd9439773af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &8991630676613270584 stripped

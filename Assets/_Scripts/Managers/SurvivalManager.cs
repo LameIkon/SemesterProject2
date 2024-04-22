@@ -54,11 +54,16 @@ public class SurvivalManager : MonoBehaviour, IDamageable, IFreezeable, IStarvea
     [SerializeField] private FloatReferencer _staminaPoint;
     [SerializeField] private FloatReference _maxStamina;
 
-
+    [Header ("Player")]
+    [SerializeField] private Animator _playerAnimator;
+    [SerializeField] private MovementController _movementController;
 
     public void Die()
     {
         Debug.Log("Death comes for us all");
+        _movementController.enabled = false;
+        _playerAnimator.Play("Dying");
+
     }
 
     public void TakeDamage(float damageAmount)
