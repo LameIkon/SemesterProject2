@@ -37,14 +37,14 @@ public class BlizzardBarrerTrigger : MonoBehaviour
             }
         }
     }
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.gameObject.name == "Player")
-        {
-            Debug.Log("exit");
-            EnvironmentManager.instance.ExitBlizzardBarrier(); // Notify that you exited the weather condition
-            _container.transform.SetParent(_originalParent); // Set the "InsideBarrier" as child of the barrier gameobject
-            _container.transform.position = _originalParent.position; // Set the "InsideBarrier" back to its original position
-        }
-    }
+    //private void OnTriggerExit2D(Collider2D collision)
+    //{
+    //    if (collision.gameObject.name == "Player")
+    //    {
+    //        Debug.Log("exit");
+    //        EnvironmentManager.instance.ExitBlizzardBarrier(); // Notify that you exited the weather condition
+    //        _container.transform.SetParent(_originalParent); // Set the "InsideBarrier" as child of the barrier gameobject
+    //        _container.transform.position = _originalParent.position; // Set the "InsideBarrier" back to its original position
+    //    }
+    //}
 }
