@@ -28194,7 +28194,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 12
-      m_TileSpriteIndex: 11
+      m_TileSpriteIndex: 13
       m_TileMatrixIndex: 0
       m_TileColorIndex: 2
       m_TileObjectToInstantiateIndex: 65535
@@ -74534,7 +74534,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 12
-      m_TileSpriteIndex: 1
+      m_TileSpriteIndex: 11
       m_TileMatrixIndex: 0
       m_TileColorIndex: 2
       m_TileObjectToInstantiateIndex: 65535
@@ -83171,8 +83171,8 @@ Tilemap:
   m_TileSpriteArray:
   - m_RefCount: 2
     m_Data: {fileID: 21300000, guid: c0f27802f2e159947be499a59290a42f, type: 3}
-  - m_RefCount: 1
-    m_Data: {fileID: 21300000, guid: 64cf5139f16810f4bbceb94fbed73485, type: 3}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   - m_RefCount: 11
     m_Data: {fileID: 21300000, guid: 30006bcf7d4a81d4f9e3a6fda035dc2a, type: 3}
   - m_RefCount: 10
@@ -83192,11 +83192,11 @@ Tilemap:
   - m_RefCount: 58
     m_Data: {fileID: 21300000, guid: 19dd79b5c358ce34b883e55bf74cbc44, type: 3}
   - m_RefCount: 1
-    m_Data: {fileID: 21300000, guid: 643dde01c03ecb74ca4a0394d7d711f6, type: 3}
+    m_Data: {fileID: 21300000, guid: 64cf5139f16810f4bbceb94fbed73485, type: 3}
   - m_RefCount: 4732
     m_Data: {fileID: 21300000, guid: fcd89667e54ce4a48b204f9242d0c4c4, type: 3}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
+  - m_RefCount: 1
+    m_Data: {fileID: 21300000, guid: 643dde01c03ecb74ca4a0394d7d711f6, type: 3}
   m_TileMatrixArray:
   - m_RefCount: 5495
     m_Data:
@@ -83257,6 +83257,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2137355839}
   - component: {fileID: 2137355840}
+  - component: {fileID: 2137355841}
   m_Layer: 0
   m_Name: Grid
   m_TagString: Untagged
@@ -83301,6 +83302,18 @@ Grid:
   m_CellGap: {x: 0, y: 0, z: 0}
   m_CellLayout: 0
   m_CellSwizzle: 0
+--- !u!114 &2137355841
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2137355838}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce81999087a977f4a8fc4abb82fcfbf8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

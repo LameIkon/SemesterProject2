@@ -92,12 +92,15 @@ public class TileMapManager : PersistentSingleton<TileMapManager>
 
     public void AddTilemap(Tilemap tilemap) 
     {
-        _tilemaps.Add(tilemap);
+        if (!_tilemaps.Contains(tilemap))
+        {
+            _tilemaps.Add(tilemap);
+        }
     }
 
     public void RemoveTilemap(Tilemap tilemap) 
     {
-        _tilemaps.Remove(tilemap);
+         _tilemaps.Remove(tilemap);
     }
 
     public void ClearTilemap() 
@@ -109,7 +112,7 @@ public class TileMapManager : PersistentSingleton<TileMapManager>
     {
         foreach (var map in tilemaps) 
         {
-            _tilemaps.Add(map);
+            AddTilemap(map);
         }
     }
 
@@ -117,7 +120,7 @@ public class TileMapManager : PersistentSingleton<TileMapManager>
     {
         foreach (var map in tilemaps)
         {
-            _tilemaps.Remove(map);
+            RemoveTilemap(map);
         }
     }
 
@@ -125,7 +128,7 @@ public class TileMapManager : PersistentSingleton<TileMapManager>
     {
         foreach (var map in tilemaps)
         {
-            _tilemaps.Add(map);
+            AddTilemap(map);
         }
     }
 
@@ -133,7 +136,7 @@ public class TileMapManager : PersistentSingleton<TileMapManager>
     {
         foreach (var map in tilemaps)
         {
-            _tilemaps.Remove(map);
+            RemoveTilemap(map);
         }  
     }
 
