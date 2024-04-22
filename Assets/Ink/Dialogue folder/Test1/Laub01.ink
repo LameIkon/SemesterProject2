@@ -1,3 +1,5 @@
+INCLUDE globals.ink
+
 VAR firstTimeAsking = true
 -> main
 === main === 
