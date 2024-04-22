@@ -59,6 +59,7 @@ public class SurvivalManager : MonoBehaviour, IDamageable, IFreezeable, IStarvea
     [Header ("Player")]
     [SerializeField] private Animator _playerAnimator;
     [SerializeField] private MovementController _movementController;
+    [SerializeField] private GameObject _lantern;
 
     #region Unity Methods
     void Start()
@@ -82,6 +83,7 @@ public class SurvivalManager : MonoBehaviour, IDamageable, IFreezeable, IStarvea
     {
         Debug.Log("Death comes for us all");
         _movementController.enabled = false;
+        _lantern.SetActive(false);
         _playerAnimator.Play("Dying");
 
     }
