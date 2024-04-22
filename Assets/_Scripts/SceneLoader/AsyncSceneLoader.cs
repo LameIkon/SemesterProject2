@@ -47,7 +47,7 @@ public class AsyncSceneLoader : MonoBehaviour
         {
             if (!SceneManager.GetSceneByName(scene).isLoaded) // We check that the scene is not loaded such that it does not load already loaded scenes
             {
-                SceneManager.LoadSceneAsync(scene, LoadSceneMode.Additive); // This is how we load multiple scenes together
+                    SceneManager.LoadSceneAsync(scene, LoadSceneMode.Additive); // This is how we load multiple scenes together
                 OnSceneLoadedEvent?.Invoke();
             }
             while (!SceneManager.GetSceneByName(scene).isLoaded)

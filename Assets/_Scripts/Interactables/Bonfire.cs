@@ -16,8 +16,8 @@ public class Bonfire : MonoBehaviour
     [SerializeField] private Sprite _campfireUnlitSprite;
 
     [SerializeField] private FloatVariable _systemFloat; //closeToheatSource needs to go here.
-    [SerializeField] private float _restoreValue; //how warm we get when fire is burning.
-    [SerializeField] private float _burningTime; //How long the wood burns before its gone
+    [SerializeField] private FloatReference _restoreValue; //how warm we get when fire is burning.
+    [SerializeField] private FloatReference _burningTime; //How long the wood burns before its gone
 
 
     public static bool _canOpenBonfire = false;  //needs to be static for use in CampfireManager.script where we open the canvas
@@ -30,9 +30,14 @@ public class Bonfire : MonoBehaviour
 
 
     private IEnumerator _burnCoroutine;
-    private IEnumerator _leftoverCoroutine;  
+    private IEnumerator _leftoverCoroutine;
 
-    
+
+    private void Start() 
+    {
+        _systemFloat.SetValue(0f);
+    }
+
     private void Update()
     {
         //This needs to be in update otherwise when u put wood on fire it wont apply right away.

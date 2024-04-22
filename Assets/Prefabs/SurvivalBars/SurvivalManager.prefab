@@ -58,23 +58,27 @@ MonoBehaviour:
     Variable: {fileID: 11400000, guid: 373d26a8e454b6642a9be50ed6467ee6, type: 2}
   _freezeDamage:
     UseConstant: 1
-    ConstantValue: 0.3
+    ConstantValue: 0.03
     Variable: {fileID: 0}
   _freezeMinThreshold:
     UseConstant: 1
-    ConstantValue: 20
+    ConstantValue: 25
     Variable: {fileID: 0}
   _freezeMaxThreshold:
     UseConstant: 1
-    ConstantValue: 70
+    ConstantValue: 80
     Variable: {fileID: 0}
   _healthGainOnFreeze:
     UseConstant: 1
-    ConstantValue: 0.2
+    ConstantValue: 0.4
     Variable: {fileID: 0}
   _healthLossOnFreeze:
     UseConstant: 1
-    ConstantValue: 0.1
+    ConstantValue: 1.5
+    Variable: {fileID: 0}
+  _zeroTempAmount:
+    UseConstant: 1
+    ConstantValue: 2
     Variable: {fileID: 0}
   _outSideTemp:
     UseConstant: 0
@@ -95,26 +99,32 @@ MonoBehaviour:
     Variable: {fileID: 11400000, guid: 209b5461b8679d74988b06b3888df1db, type: 2}
   _starveDamage:
     UseConstant: 1
-    ConstantValue: 0.3
+    ConstantValue: 0.35
     Variable: {fileID: 0}
   _hungerMaxThreshold:
     UseConstant: 1
-    ConstantValue: 70
+    ConstantValue: 80
     Variable: {fileID: 0}
   _hungerMinThreshold:
     UseConstant: 1
-    ConstantValue: 50
+    ConstantValue: 25
     Variable: {fileID: 0}
   _healthGainOnHunger:
     UseConstant: 1
-    ConstantValue: 0.2
+    ConstantValue: 0.4
     Variable: {fileID: 0}
   _healthLossOnHunger:
     UseConstant: 1
-    ConstantValue: 0.1
+    ConstantValue: 1.5
+    Variable: {fileID: 0}
+  _zeroHungerAmount:
+    UseConstant: 1
+    ConstantValue: 2
     Variable: {fileID: 0}
   _staminaPoint: {fileID: 11400000, guid: f2a1028da41a5d04fbebeb90d7b43e9e, type: 2}
   _maxStamina:
     UseConstant: 0
     ConstantValue: 0
     Variable: {fileID: 11400000, guid: 80e4c72db125bab448d3ce635c113a3d, type: 2}
+  _playerAnimator: {fileID: 0}
+  _movementController: {fileID: 0}

@@ -5016,8 +5016,14 @@ MonoBehaviour:
   _campfireLitSprite: {fileID: 21300000, guid: 0d3375c57b76d37468e6ebd982306470, type: 3}
   _campfireUnlitSprite: {fileID: 21300000, guid: 84a559670be27a54793ca28187c13fb5, type: 3}
   _systemFloat: {fileID: 11400000, guid: 8382a9fb60e247d4b8eefb7b46bd55f3, type: 2}
-  _restoreValue: 40
-  _burningTime: 10
+  _restoreValue:
+    UseConstant: 0
+    ConstantValue: 0
+    Variable: {fileID: 11400000, guid: f1d67e8a4a0d90a4d904cee0e69a240a, type: 2}
+  _burningTime:
+    UseConstant: 0
+    ConstantValue: 0
+    Variable: {fileID: 11400000, guid: 4d24ebd31995b3b4985268fb5dff50db, type: 2}
 --- !u!114 &7168186141112383817
 MonoBehaviour:
   m_ObjectHideFlags: 0

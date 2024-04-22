@@ -15,5 +15,5 @@ MonoBehaviour:
   DevDescription: 'Stamina used on running
 
 '
-  _value: 0.075
+  _value: 0.12
   _onValueChanged: {fileID: 0}

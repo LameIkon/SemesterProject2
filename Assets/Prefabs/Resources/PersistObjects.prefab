@@ -1371,7 +1371,7 @@ MonoBehaviour:
   _tempValue: {fileID: 11400000, guid: dece9671aacff9f49a48fa2442bc41eb, type: 2}
   _TempGainOnRun:
     UseConstant: 1
-    ConstantValue: 0.015
+    ConstantValue: 0.002
     Variable: {fileID: 0}
 --- !u!1 &2629717339842938436
 GameObject:
@@ -5649,6 +5649,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8794226987472724107}
     - target: {fileID: 7071212026655611817, guid: 5f68667c624044144aaece0f732353f6, type: 3}
+      propertyPath: _defaultStaminaUse
+      value: 0.12
+      objectReference: {fileID: 0}
+    - target: {fileID: 7071212026655611817, guid: 5f68667c624044144aaece0f732353f6, type: 3}
+      propertyPath: _defaultStaminaRegen
+      value: 0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 7071212026655611817, guid: 5f68667c624044144aaece0f732353f6, type: 3}
       propertyPath: _insideScene.m_SceneName
       value: ShipInside
       objectReference: {fileID: 0}
@@ -6535,10 +6543,6 @@ PrefabInstance:
       propertyPath: _movementController
       value: 
       objectReference: {fileID: 8849036475905818418}
-    - target: {fileID: 4251317389186133514, guid: 3f597885cafe1da4b8d04aa0c8fe3a19, type: 3}
-      propertyPath: _freezeDamage.ConstantValue
-      value: 0.02
-      objectReference: {fileID: 0}
     - target: {fileID: 7501362769553029342, guid: 3f597885cafe1da4b8d04aa0c8fe3a19, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -6793,9 +6797,9 @@ MonoBehaviour:
   _firewoodDescription: {fileID: 11400000, guid: a9ed200cd6f0b3244953ebf4065b0722, type: 2}
   _mapDescription: {fileID: 11400000, guid: 0088dadd5e7e07648a7a75a508ac85ed, type: 2}
   _lanternDescription: {fileID: 11400000, guid: c672b6f8b2aebb14f9ab08fa9e7c3c3e, type: 2}
-  "_j\xF8rgensJournalDescription": {fileID: 11400000, guid: 296216b1db1dd794484946f46fcc197b, type: 2}
-  _ludvigsJournalDescription: {fileID: 11400000, guid: bad92311ec910c14d870d79e7492680d, type: 2}
-  _nielsJournalDescription: {fileID: 11400000, guid: 04828c1f9c1843645b4369421020f6bb, type: 2}
+  "_j\xF8rgensJournalDescription": {fileID: 0}
+  _ludvigsJournalDescription: {fileID: 0}
+  _nielsJournalDescription: {fileID: 0}
   _breadSprite: {fileID: 21300000, guid: 6281e69e11bff07478833b1790bc1b4a, type: 3}
   _drumstickSprite: {fileID: 21300000, guid: 04aaa4bfbc081414b92ae065bbf3ee0b, type: 3}
   _fishSprite: {fileID: 21300000, guid: 93bb9411b6898674ea4e1b5d190ae29b, type: 3}

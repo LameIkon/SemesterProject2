@@ -33,6 +33,7 @@ public class SurvivalManager : MonoBehaviour, IDamageable, IFreezeable, IStarvea
     [SerializeField] private FloatReference _freezeMaxThreshold;
     [SerializeField] private FloatReference _healthGainOnFreeze;
     [SerializeField] private FloatReference _healthLossOnFreeze;
+    [SerializeField] private FloatReference _zeroTempAmount;
     [Space(2f)]
     [SerializeField] private FloatReference _outSideTemp;
     [SerializeField] private FloatReference _heatSource;
@@ -47,6 +48,7 @@ public class SurvivalManager : MonoBehaviour, IDamageable, IFreezeable, IStarvea
     [SerializeField] private FloatReference _hungerMinThreshold;
     [SerializeField] private FloatReference _healthGainOnHunger;
     [SerializeField] private FloatReference _healthLossOnHunger;
+    [SerializeField] private FloatReference _zeroHungerAmount;
 
     [Space(4f)]
 
@@ -57,6 +59,24 @@ public class SurvivalManager : MonoBehaviour, IDamageable, IFreezeable, IStarvea
     [Header ("Player")]
     [SerializeField] private Animator _playerAnimator;
     [SerializeField] private MovementController _movementController;
+
+    #region Unity Methods
+    void Start()
+    {
+        _healthPoint.SetValue(100);
+        _hungerPoint.SetValue(100);
+        _freezePoint.SetValue(100);
+        _staminaPoint.SetValue(100);
+    }
+
+
+    void FixedUpdate()
+    {
+
+        Tiker();
+
+    }
+    #endregion
 
     public void Die()
     {
@@ -80,7 +100,12 @@ public class SurvivalManager : MonoBehaviour, IDamageable, IFreezeable, IStarvea
     {
         _freezePoint.ApplyChange(amount * TemperatureChecker());
 
-        if (_freezePoint.GetValue() > _freezeMaxThreshold)
+        if (_freezePoint.GetValue() <= 1) 
+        {
+            _isFreezing = true;
+            TakeDamage(_zeroTempAmount * _healthLossOnFreeze);
+        }
+        else if (_freezePoint.GetValue() > _freezeMaxThreshold)
         {
             _isWarm = true;
             if (_isFull)
@@ -104,7 +129,13 @@ public class SurvivalManager : MonoBehaviour, IDamageable, IFreezeable, IStarvea
     {
         _hungerPoint.ApplyChange(-amount);
 
-        if (_hungerPoint.GetValue() > _hungerMaxThreshold)
+        if (_hungerPoint.GetValue() < 1)
+        {
+            _isStarving = true;
+            _isFull = false;
+            TakeDamage(_zeroHungerAmount *  _healthLossOnHunger);
+        }
+        else if (_hungerPoint.GetValue() > _hungerMaxThreshold)
         {
             _isFull = true;
             _isStarving = false;
@@ -133,22 +164,6 @@ public class SurvivalManager : MonoBehaviour, IDamageable, IFreezeable, IStarvea
 
     }
 
-
-    void Start()
-    {
-        _healthPoint.SetValue(70);
-        _hungerPoint.SetValue(100);
-        _freezePoint.SetValue(100);
-        _staminaPoint.SetValue(100);
-    }
-
-
-    void FixedUpdate()
-    {
-
-        Tiker();
-
-    }
 
     private void Tiker()
     {

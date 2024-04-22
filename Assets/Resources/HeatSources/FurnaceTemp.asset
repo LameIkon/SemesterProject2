@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 440e8008cfe6fbe4e925b85b6dfd1223, type: 3}
-  m_Name: StaminaRegen
+  m_Name: FurnaceTemp
   m_EditorClassIdentifier: 
-  DevDescription: Amount of regeneration gained
-  _value: 0.02
+  DevDescription: 
+  _value: 0
   _onValueChanged: {fileID: 0}
