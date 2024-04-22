@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: ed664a99639841645ad53bd805b05881
   - enabled: 1
-    path: Assets/Scenes/Outside/ShipOut.unity
+    path: Assets/Scenes/Outside/ShipOutOld.unity
     guid: cd22cb3b6f4efe74a88d52c0c3a0e5ac
   - enabled: 1
     path: Assets/Scenes/Ship/ShipIn.unity
@@ -54,6 +54,6 @@ EditorBuildSettings:
     path: Assets/Scenes/AdamScenes/New2/aShipIn.unity
     guid: c96ca3f4028b3a64ca63745a0b52b93d
   - enabled: 1
-    path: Assets/Scenes/AdamScenes/New2/aShipOut.unity
+    path: Assets/Scenes/AdamScenes/New2/ShipOut.unity
     guid: 7314f0872e3e19141aa46b3e5a390d46
   m_configObjects: {}

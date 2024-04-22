@@ -254,19 +254,19 @@ public class DialogueManager : MonoBehaviour
         // Creating image for dialoguebox
        
 
-        if (_NPCName == "Scientist")
+        if (_NPCName == "Hans")
         {
             Debug.Log("Scientist");
             GameObject profile = Instantiate(_scientistProfile); // Takes a gameobject prefab
             profile.transform.SetParent(nameholder.transform, false); // Set Image to the parent but keep its own transform
         }
-        else if (_NPCName == "Captain")
+        else if (_NPCName == "Ejnar")
         {
             Debug.Log("Captain");
             GameObject profile = Instantiate(_captainProfile); // Takes a gameobject prefab
             profile.transform.SetParent(nameholder.transform, false); // Set Image to the parent but keep its own transform
         }
-        else if (_NPCName == "Spy")
+        else if (_NPCName == "Laub")
         {
             print("spy");
         }

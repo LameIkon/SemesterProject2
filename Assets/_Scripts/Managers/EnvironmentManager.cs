@@ -297,7 +297,7 @@ public class EnvironmentManager : MonoBehaviour
 
         switch (currentScene.name)
         {
-            case "ShipInside": // Change this to be equal to the ship interior scene
+            case "ShipIn": // Change this to be equal to the ship interior scene
                 _inside = true;
                 _outside = false;
                 break;

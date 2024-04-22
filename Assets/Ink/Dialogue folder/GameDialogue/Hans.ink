@@ -36,7 +36,7 @@ INCLUDE Globals.ink
     * [What do on the ship?]
         -> what_do_you_do
     
-    * [See you] 
+    * [See you]
         See you too.
         ~ HansMainReturn = true
         -> END

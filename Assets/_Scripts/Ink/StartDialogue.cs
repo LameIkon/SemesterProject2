@@ -8,9 +8,9 @@ using UnityEngine;
 public class StartDialogue : MonoBehaviour
 {
     private bool _startDialogue;
-    private UnityEngine.GameObject _highlight; // Used to get the GameObject named highligh
-    private UnityEngine.GameObject _textbox; // Used to get the GameObject named textbox
-    private UnityEngine.GameObject _showInteraction; // Used to get the GameObject named showInteraction
+    private GameObject _highlight; // Used to get the GameObject named highligh
+    private GameObject _textbox; // Used to get the GameObject named textbox
+    private GameObject _showInteraction; // Used to get the GameObject named showInteraction
     private bool _interactionChecker;
 
     [Header("NPC Name")]
