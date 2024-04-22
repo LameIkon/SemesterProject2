@@ -1,1 +1,1 @@
-﻿
+INCLUE Globals.ink
