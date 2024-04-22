@@ -7163,6 +7163,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 4382958607557508735, guid: 1adf7cd6806fb5b4aa8e3d810ab62c0c, type: 3}
     - target: {fileID: 6560139934568328296, guid: a2cb9d025f836b140aabfa0ffee3619f, type: 3}
+      propertyPath: _globalVariables
+      value: 
+      objectReference: {fileID: 4900000, guid: 92a1a0f8628e6e04b9b20f66f436567a, type: 3}
+    - target: {fileID: 6560139934568328296, guid: a2cb9d025f836b140aabfa0ffee3619f, type: 3}
       propertyPath: _scientistProfile
       value: 
       objectReference: {fileID: 4382958607557508735, guid: 086f139a93c791b4891d9d90ca1f2f9b, type: 3}

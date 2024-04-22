@@ -40,10 +40,16 @@ public class DialogueManager : MonoBehaviour
     [Header("Selected Dialogue")]
     public TextAsset DialogueData; // Used in other scripts to change the data. Other scripts will store their choosen dialogue data here
 
+    [Header("Global Ink Variables"), SerializeField]
+    private TextAsset _globalVariables;
+    
+
     public static event Action OnDialogueEndedEvent; // Event for when Dialogue is finnished
 
     private bool _hasInteracted = false;
 
+    private DialogueVariables _dialogueVariables;
+        
     void Awake()
     {
         // Ensure only 1 singleton of this script
@@ -56,6 +62,11 @@ public class DialogueManager : MonoBehaviour
             instance = this;
         }
         _OnlyOneInteractionActive = true;
+
+
+        Story globalVariables = new Story(_globalVariables.text);
+        _dialogueVariables = new DialogueVariables(globalVariables);
+
     }
 
     private void OnEnable()
@@ -76,6 +87,8 @@ public class DialogueManager : MonoBehaviour
         {
             //Debug.Log("InkJSON file inserted");
             _story = new Story(DialogueData.text); // Insert dialogue Data into the story data.
+
+            _dialogueVariables.StartListening(_story); // TROELS
         }
     }
 
@@ -212,6 +225,8 @@ public class DialogueManager : MonoBehaviour
     private void exitDialogue()
     {
         _story = new Story(DialogueData.text); // Change file to the same dialogueData. Must be done otherwise you cant repeat the same dialouge
+
+        _dialogueVariables.StopListening(_story);
         _Oneclick = false; // Ensures 1 instance
         _DialogueExited = true; // Announces that the exitDialogue was called (used to check if player exited dialogue)
         _StartedDialogue = false; // announces that the dialogue has ended
