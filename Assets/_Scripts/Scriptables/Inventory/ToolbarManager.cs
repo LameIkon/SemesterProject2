@@ -13,7 +13,7 @@ public class ToolbarManager : MonoBehaviour
     [SerializeField] private Color _selectedColor, _notSelectedColor;
     private UnityEngine.GameObject _lantern;
     private bool _lightIsActive = false;
-    private bool _defaultIsActive = false;
+    private bool _journalIsActive = false;
     private int _saveLightItemIndex;
 
     void OnEnable() 
@@ -40,7 +40,7 @@ public class ToolbarManager : MonoBehaviour
     void HandleEating() 
     {
         UseFoodInSlot();
-        UseDefaultInSlot();
+        UseJournalInSlot();
     }
 
     void HandleButtonPress(int i) 
@@ -91,7 +91,7 @@ public class ToolbarManager : MonoBehaviour
     }
 
 
-    public void UseDefaultInSlot ()
+    public void UseJournalInSlot ()
     {
         if (_selectedSlot < 0)
         {
@@ -100,16 +100,18 @@ public class ToolbarManager : MonoBehaviour
 
         var itemInSlot = _toolbarInventory.GetSlots[_selectedSlot];
 
-        if (itemInSlot.ItemObject != null && itemInSlot.ItemObject._ItemType == ItemType.Default && !_defaultIsActive)
+        if (itemInSlot.ItemObject != null && itemInSlot.ItemObject._ItemType == ItemType.Journal && !_journalIsActive)
         {
             itemInSlot.ItemObject.Action();
-            _defaultIsActive = true;
+            _journalIsActive = true;
+            Debug.Log("Toolbar Action");
         }
 
-        else if (_defaultIsActive)
+        else if (_journalIsActive)
         {
             itemInSlot.ItemObject.DisableAction();
-            _defaultIsActive = false;
+            _journalIsActive = false;
+            Debug.Log("Toolbar Disable");
         }
     }
 
@@ -165,11 +167,11 @@ public class ToolbarManager : MonoBehaviour
             }
         }
 
-        if (_defaultIsActive)
+        if (_journalIsActive)
         {
-            if (_toolbarInventory.GetSlots[_selectedSlot].ItemObject == null || _toolbarInventory.GetSlots[_selectedSlot].ItemObject._ItemType != ItemType.Default)
+            if (_toolbarInventory.GetSlots[_selectedSlot].ItemObject == null || _toolbarInventory.GetSlots[_selectedSlot].ItemObject._ItemType != ItemType.Journal)
             {
-                _defaultIsActive = false;
+                _journalIsActive = false;
                 ItemManager._JournalCanvasSTATIC.SetActive(false);
             }
         }
