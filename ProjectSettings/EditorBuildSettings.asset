@@ -50,10 +50,4 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Outside/11.unity
     guid: 1fda6261b2914f540aadbf8f79cc3e37
-  - enabled: 1
-    path: Assets/Scenes/AdamScenes/New2/aShipIn.unity
-    guid: c96ca3f4028b3a64ca63745a0b52b93d
-  - enabled: 1
-    path: Assets/Scenes/AdamScenes/New2/ShipOut.unity
-    guid: 7314f0872e3e19141aa46b3e5a390d46
   m_configObjects: {}
