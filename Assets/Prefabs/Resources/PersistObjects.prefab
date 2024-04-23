@@ -556,7 +556,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &4497016170568885714
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4654,7 +4654,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &399642723231012046
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7505,7 +7505,7 @@ MonoBehaviour:
   _breadSprite: {fileID: 21300000, guid: 6281e69e11bff07478833b1790bc1b4a, type: 3}
   _drumstickSprite: {fileID: 21300000, guid: 04aaa4bfbc081414b92ae065bbf3ee0b, type: 3}
   _fishSprite: {fileID: 21300000, guid: 93bb9411b6898674ea4e1b5d190ae29b, type: 3}
-  _vodkaSprite: {fileID: 0}
+  _vodkaSprite: {fileID: 21300000, guid: 6e8a0ed158e89aa4295a207e3e275331, type: 3}
   _firewoodSprite: {fileID: 21300000, guid: 925120c3f23d8184e88bff2764e9309f, type: 3}
   _mapSprite: {fileID: 21300000, guid: 1ba9894d2d740434abba7f7bf9dcc021, type: 3}
   _lanternSprite: {fileID: 21300000, guid: 6ce03429a37a72a41a74529c7e5b4055, type: 3}

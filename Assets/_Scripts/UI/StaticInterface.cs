@@ -43,9 +43,8 @@ public class StaticInterface : UserInterface
     //    }
     //}
 
-    //public void OnApplicationQuit()
-    //{
-    //   _Inventory._Container.Clear();
-    //   print("Cleared Chest's");       
-    //}
+    public void OnApplicationQuit()
+    {
+        _Inventory._Container.Clear();
+    }
 }
