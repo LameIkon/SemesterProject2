@@ -19,21 +19,6 @@ public abstract class UserInterface: MonoBehaviour
     public Dictionary<UnityEngine.GameObject, InventorySlot> _SlotsOnInterface = new Dictionary<UnityEngine.GameObject, InventorySlot>();
 
 
-    //void OnEnable() 
-    //{
-    //    InputReader.OnInventoryOpenEvent += HandleInventoryOpen;
-    //}
-
-    //void OnDisable() 
-    //{
-    //    InputReader.OnInventoryOpenEvent -= HandleInventoryOpen;
-    //}
-
-    //void HandleInventoryOpen() 
-    //{
-
-    //}
-
     void Start()
     {
        
@@ -50,14 +35,14 @@ public abstract class UserInterface: MonoBehaviour
 
     private void OnSlotUpdate(InventorySlot slot)
     {
-        if (slot._Item._ID >= 0)
+        if (slot._Item._ID >= 0 && slot != null)
         {
             slot._SlotDisplay.transform.GetChild(0).GetComponentInChildren<Image>().sprite = slot.ItemObject._ItemDisplayed;
             slot._SlotDisplay.transform.GetChild(0).GetComponentInChildren<Image>().color = new Color(1, 1, 1, 1);
             slot._SlotDisplay.GetComponentInChildren<TextMeshProUGUI>().text = slot._Amount == 1 ? "" : slot._Amount.ToString("n0");
         }
 
-        else
+        else if (slot == null)
         {
             slot._SlotDisplay.transform.GetChild(0).GetComponentInChildren<Image>().sprite = null;
             slot._SlotDisplay.transform.GetChild(0).GetComponentInChildren<Image>().color = new Color(1, 1, 1, 0);

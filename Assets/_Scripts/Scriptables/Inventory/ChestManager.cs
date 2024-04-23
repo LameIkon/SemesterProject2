@@ -18,8 +18,8 @@ public class ChestManager : MonoBehaviour
     private bool _turn = false;
     private InventorySlot[] _slots = new InventorySlot[6];
 
-    [SerializeField]private bool _canOpenChest = false;
-    private bool _chestIsfilled = false;
+    [SerializeField] private bool _canOpenChest = false;
+    [SerializeField] private bool _chestIsfilled = false;
 
     private void Start()
     {
@@ -31,20 +31,15 @@ public class ChestManager : MonoBehaviour
 
         if (!_chestIsfilled)
         {
-            _chestIsfilled = true;
+            _chestIsfilled = true;          
             FillUpChest();
         }
 
     }
 
-
     private void Update()
     {
-        //if (LanternDisabler._LoadedSTATIC) 
-        //{
-        //   //  _chestCanvas = UnityEngine.GameObject.FindWithTag("Chest");
-         
-        //}
+      
     }
 
     void OnEnable()
@@ -110,6 +105,12 @@ public class ChestManager : MonoBehaviour
     {
         // Show or disable E highlight
         GameManager._hideEInteractables = _turn;
+    }
+
+    private void OnApplicationQuit()
+    {
+        print("Chests Cleared");
+        _chestInventory._Container.Clear();       
     }
 
 }
