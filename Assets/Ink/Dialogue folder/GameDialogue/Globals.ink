@@ -48,3 +48,19 @@ VAR HansEatingTheory = false
     VAR EjnarCardHasFoundIt = false
 
 // Variables Laub
+
+
+    // main
+    VAR LaubMainFirstTime = true
+    VAR LaubMainReturn = false
+    VAR LaubMainAgreeWithLaub = false
+    VAR LaubMainFirstTimeMissionAsk = true
+    VAR LaubMainPersteringLaub = 0
+    VAR LaubMainFirstTimeNameAsk = false
+
+
+
+
+
+
+
