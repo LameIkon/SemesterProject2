@@ -189,7 +189,8 @@ public class GuidelineManager : MonoBehaviour
   
     public IEnumerator ShowRunning() // Called From ActivateGuideline
     {
-        yield return new WaitForSeconds(5);
+        Debug.Log("running");
+        yield return new WaitForSeconds(10);
         _runningCanvas.SetActive(true);
         ShowStamina();
         yield return new WaitForSeconds(_delayTimer);
@@ -229,6 +230,7 @@ public class GuidelineManager : MonoBehaviour
     {
         _temperatureAnimator.Play("SlideInLeft");
         _finishedTemperature = true;
+        StartCoroutine(ShowRunning());
     }
 
     public IEnumerator ShowFood()
@@ -301,7 +303,7 @@ public class GuidelineManager : MonoBehaviour
             _showCampfireInteraction = false;
             _finishedCampfireInteraction = true;
             StartCoroutine(FadeOut(_campfireCanvas));
-            StartCoroutine(ShowRunning());
+            //StartCoroutine(ShowRunning());
         }
     }
 
