@@ -37,30 +37,18 @@ INCLUDE Globals.ink
         -> END
 
 
-VAR firstWhoAreYouAsk = true
 === who_are_you ===
-    * {firstWhoAreYouAsk} [Is that your full name?]
+    * {LaubMainFirstTimeNameAsk} [Is that your full name?]
         No.
-        
-        * * [Do you want to tell me?]
-            Not really!
-            
-            * * * [Are you sure?]
-                Yes, now stop asking
-                -> pestering_laub_for_his_name
-                
-            * * * [Okay]
-                Thank you!
-                -> who_are_you
-            
-        * * [Okay]
-            Thank you
-            -> who_are_you
-            
+            -> asking_laub_for_his_name
+    
+    *{LaubMainFirstTimeNameAsk == false} [What is your full name?]
+        No it is not.
+            -> asking_laub_for_his_name
             
     * [What do you do on the ship?]
         I am here to ensure the safety of this mission, nothing must go wrong. 
-        ~ firstWhoAreYouAsk = false
+        ~ LaubMainFirstTimeNameAsk = false
         -> who_are_you
         
     * [Back to other questions]
@@ -68,23 +56,39 @@ VAR firstWhoAreYouAsk = true
         -> main
 
 
-VAR pesterings = 0
+=== asking_laub_for_his_name ===
+    * [Do you want to tell me?]
+        {LaubMainFirstTimeNameAsk: Not really!| My name is not of importance to you.}
+        
+        * * [Are you sure?]
+            Yes, now stop asking
+            -> pestering_laub_for_his_name
+            
+        * * [Okay]
+            Thank you!
+            -> who_are_you
+        
+    * [Okay]
+        Thank you
+        -> who_are_you
+
+
 === pestering_laub_for_his_name === 
     + [Please, I need your full name.]
-        {pesterings > 4:
+        {LaubMainPersteringLaub > 4:
             -> pissed_off_laub
          - else:
             No, you do not.
-            ~ pesterings++
+            ~ LaubMainPersteringLaub++
             -> pestering_laub_for_his_name
         }
         
     + [Ejnar told me he needed it.]
-        {pesterings > 4:
+        {LaubMainPersteringLaub > 4:
             -> pissed_off_laub
         - else:
             He knows it aleady, there is no need for me to tell him.
-            ~ pesterings++
+            ~ LaubMainPersteringLaub++
             -> pestering_laub_for_his_name
         }
         

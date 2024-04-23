@@ -55,6 +55,8 @@ VAR HansEatingTheory = false
     VAR LaubMainReturn = false
     VAR LaubMainAgreeWithLaub = false
     VAR LaubMainFirstTimeMissionAsk = true
+    VAR LaubMainPersteringLaub = 0
+    VAR LaubMainFirstTimeNameAsk = false
 
 
 
