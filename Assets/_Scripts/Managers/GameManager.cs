@@ -19,6 +19,8 @@ public class GameManager : PersistentSingleton<GameManager>
     [SerializeField] private GameObject _playerMovePoint;
     public static GameObject _inventoryMenuSTATIC;
 
+   
+
 
     public bool _mainSceneBool;
     private bool _shipInBool;
@@ -27,6 +29,8 @@ public class GameManager : PersistentSingleton<GameManager>
 
     protected override void Awake()
     {
+       
+
         base.Awake();
         if (_inputs == null) 
         {

@@ -14,6 +14,7 @@ public class ChestManager : MonoBehaviour
     [SerializeField] private ChestFiller _chestFiller;
     [SerializeField] private ItemDatabaseObject _database;
     private StaticInterface _chestInterface;
+    private GameManager _gameManager; 
     
     private bool _turn = false;
     private InventorySlot[] _slots = new InventorySlot[6];
@@ -31,10 +32,11 @@ public class ChestManager : MonoBehaviour
 
         if (!_chestIsfilled)
         {
-            _chestIsfilled = true;          
+            _chestIsfilled = true;
+            
             FillUpChest();
+           
         }
-
     }
 
     private void Update()
@@ -108,8 +110,7 @@ public class ChestManager : MonoBehaviour
     }
 
     private void OnApplicationQuit()
-    {
-        print("Chests Cleared");
+    {        
         _chestInventory._Container.Clear();       
     }
 
