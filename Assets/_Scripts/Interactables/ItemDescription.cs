@@ -20,14 +20,15 @@ public class ItemDescription : MonoBehaviour, IPointerEnterHandler, IPointerExit
         // Invenotory slots only gets instantiated when it gets open. thats why it might not find it first time
         if (_itemDescriptionCanvas == null) // if for some reason it cant find the canvas try activate the canvas
         {
-            StartCoroutine(ItemDescriptionHandler.instance.Disable()); // make the canvas true for a moment
-            _itemDescriptionCanvas = GameObject.FindWithTag("ItemDescriptionHolder"); // Find the Canvas
+            //StartCoroutine(ItemDescriptionHandler.instance.Disable()); // make the canvas true for a moment
+            _itemDescriptionCanvas = ItemDescriptionHandler.instance._handler;
+            //_itemDescriptionCanvas = GameObject.FindWithTag("ItemDescriptionHolder"); // Find the Canvas
         }
         
     }
 
     public void OnPointerEnter(PointerEventData eventData) // When mouse is hovering over it
-    {
+    {       
         _slot = GetComponent<Image>();
         
         _showDescription = true;
@@ -38,15 +39,18 @@ public class ItemDescription : MonoBehaviour, IPointerEnterHandler, IPointerExit
             if (_slot.sprite == IgnoreImage) // If the image is not ignored then show description
             {
                 _showDescription = false;
+
                 break; // no need to continue looking when at least 1 is true
             }
         }
         if (_showDescription)
-        {
+        {           
             ShowDescription();
             _hovering = true;
             CancelInvoke("HideDescription"); // Stop the script from trying to close it when we want it to be open
         }
+
+        
     }
 
     public void OnPointerExit(PointerEventData eventData) // When mouse exit hovering over it
@@ -60,7 +64,7 @@ public class ItemDescription : MonoBehaviour, IPointerEnterHandler, IPointerExit
 
     private void ShowDescription()
     {
-        ItemDescriptionHandler.instance.ItemType(_slot);
+        ItemDescriptionHandler.instance.ItemType(_slot); // Something happens here
 
         _itemDescriptionCanvas.GetComponentInChildren<TextMeshProUGUI>().text = ItemDescriptionHandler.instance._CurrentDescription; // Insert the description from the GameObject
 
