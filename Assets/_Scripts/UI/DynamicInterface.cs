@@ -43,5 +43,10 @@ public class DynamicInterface : UserInterface
 
     }
 
+    void Awake() 
+    {
+        _Inventory._Container.Clear();
+    }
+
 
 }

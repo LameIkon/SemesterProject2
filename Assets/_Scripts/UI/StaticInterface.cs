@@ -45,7 +45,7 @@ public class StaticInterface : UserInterface
 
 
 
-    public void OnApplicationQuit()
+    public void Awake()
     {
         _Inventory._Container.Clear();
     }
