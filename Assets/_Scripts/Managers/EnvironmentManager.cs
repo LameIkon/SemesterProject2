@@ -134,29 +134,29 @@ public class EnvironmentManager : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        // For testing purpose
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Blizzard();
-        }
+    //private void Update()
+    //{
+    //    For testing purpose
+    //    if (Input.GetKeyDown(KeyCode.Space))
+    //    {
+    //        Blizzard();
+    //    }
 
-        if (Input.GetKeyDown(KeyCode.B))
-        {
-            Snow();
-        }
+    //    if (Input.GetKeyDown(KeyCode.B))
+    //    {
+    //        Snow();
+    //    }
 
-        if (Input.GetKeyDown(KeyCode.N))
-        {
-            Fog();
-        }
+    //    if (Input.GetKeyDown(KeyCode.N))
+    //    {
+    //        Fog();
+    //    }
 
-        if (Input.GetKeyDown(KeyCode.M))
-        {
-            ResetWeather();
-        }
-    }
+    //    if (Input.GetKeyDown(KeyCode.M))
+    //    {
+    //        ResetWeather();
+    //    }
+    //}
 
     //private void OnLevelWasLoaded(int level)
     //{
