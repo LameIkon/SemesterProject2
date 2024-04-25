@@ -24,6 +24,8 @@ public class GameManager : PersistentSingleton<GameManager>
 
     public bool _mainSceneBool;
     private bool _shipInBool;
+    private bool _isInventoryOpen = false;
+    private bool _isPaused = false;
 
     public static bool _hideEInteractables; // used for scripts disable interactables such as chest and campfire
 
@@ -53,24 +55,22 @@ public class GameManager : PersistentSingleton<GameManager>
         }
         CheckScene();
         _hideEInteractables = false;
+        _isPaused = false;
+        _isInventoryOpen = false;
 
     }
     private void OnEnable()
     {
         // Here we subscribe the events to the handlers
         InputReader.OnPauseEvent += HandlePause;
-        InputReader.OnResumeEvent += HandleResume;
-        InputReader.OnInventoryOpenEvent += HandleInventoryOpen;
-        InputReader.OnInventoryCloseEvent += HandleInvertoryClose;
+        InputReader.OnInventoryEvent += HandleInventory;
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     private void OnDisable() 
     {
         InputReader.OnPauseEvent -= HandlePause;
-        InputReader.OnResumeEvent -= HandleResume;
-        InputReader.OnInventoryOpenEvent -= HandleInventoryOpen;
-        InputReader.OnInventoryCloseEvent -= HandleInvertoryClose;
+        InputReader.OnInventoryEvent -= HandleInventory;
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
@@ -113,35 +113,46 @@ public class GameManager : PersistentSingleton<GameManager>
         }
     }
 
-    private void HandlePause() 
+
+    public void HandlePause() 
     {
         if (!_mainSceneBool)
         {
-            _pauseMenu.SetActive(true);
-            Time.timeScale = 0f;
+            if (_isPaused) 
+            {
+                _pauseMenu.SetActive(false);
+                _inventoryMenu.SetActive(false); // Important we close both the inventory and the pause menus here. This will mean if you have the inventory open and the OnResumeEvent fires it will close the inventory 
+                Time.timeScale = 1.0f;
+                _isPaused = false;
+            }
+            else 
+            {
+                _isPaused = true;
+                _pauseMenu.SetActive(true);
+                Time.timeScale = 0f;
+            }
+
+            
         }
     }
 
-    public void HandleResume() 
+
+    private void HandleInventory() 
     {
-        if (!_mainSceneBool)
+
+        if (_isInventoryOpen)
         {
-            _pauseMenu.SetActive(false);
-            _inventoryMenu.SetActive(false); // Important we close both the inventory and the pause menus here. This will mean if you have the inventory open and the OnResumeEvent fires it will close the inventory 
-            Time.timeScale = 1.0f;
+            _inventoryMenu.SetActive(false);
+            _hideEInteractables = false; // interactables can be seen again
+            _isInventoryOpen = false;
+        }
+        else
+        {
+            _inventoryMenu.SetActive(true);
+            _hideEInteractables = true; // Hide E interactables
+            _isInventoryOpen=true;
         }
     }
 
-    private void HandleInventoryOpen() 
-    {
-        _inventoryMenu.SetActive(true);
-        _hideEInteractables = true; // Hide E interactables
-    }
-
-    private void HandleInvertoryClose() 
-    {
-        _inventoryMenu.SetActive(false);
-        _hideEInteractables = false; // interactables can be seen again
-    }
 
 }

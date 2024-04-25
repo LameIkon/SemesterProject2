@@ -57,8 +57,8 @@ public class PauseManager : MonoBehaviour
 
     public void ResumeButton()
     {
-        _gameManager.HandleResume(); // Call the gameManager to close the pause screen
-        InputReader.OnResumeButton(); // Call the InputReader to enable other UI again
+        _gameManager.HandlePause(); // Call the gameManager to close the pause screen
+        //InputReader.OnResumeButton(); // Call the InputReader to enable other UI again
     }
 
     // change page 
