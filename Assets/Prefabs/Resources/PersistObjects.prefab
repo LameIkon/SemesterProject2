@@ -6793,7 +6793,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab73c247cd08fa14f841fe11e90f83da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _handler: {fileID: 0}
+  _Handler: {fileID: 0}
   _CurrentDescription: 
   _breadDescription: {fileID: 11400000, guid: 431b2aab1e9267c49829a28468f0704e, type: 2}
   _drumstickDescription: {fileID: 11400000, guid: 06b0ead8e1aea5b4da797d26253c59e3, type: 2}
@@ -7551,9 +7551,17 @@ PrefabInstance:
       value: DialogueCanvasV2
       objectReference: {fileID: 0}
     - target: {fileID: 6560139934568328296, guid: a2cb9d025f836b140aabfa0ffee3619f, type: 3}
+      propertyPath: _spyProfile
+      value: 
+      objectReference: {fileID: 6559198030046953044, guid: 1b6f037146ed51b4fb9b68e1cb7ac0e3, type: 3}
+    - target: {fileID: 6560139934568328296, guid: a2cb9d025f836b140aabfa0ffee3619f, type: 3}
       propertyPath: _captainProfile
       value: 
       objectReference: {fileID: 4382958607557508735, guid: 1adf7cd6806fb5b4aa8e3d810ab62c0c, type: 3}
+    - target: {fileID: 6560139934568328296, guid: a2cb9d025f836b140aabfa0ffee3619f, type: 3}
+      propertyPath: _defaultProfile
+      value: 
+      objectReference: {fileID: 7375557849770731191, guid: cfe4f7e651e695d4583eca60813d2719, type: 3}
     - target: {fileID: 6560139934568328296, guid: a2cb9d025f836b140aabfa0ffee3619f, type: 3}
       propertyPath: _globalVariables
       value: 
