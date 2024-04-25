@@ -46,7 +46,7 @@ public class ActivateGuideline : MonoBehaviour
 
     private void OnEnable()
     {
-        InputReader.OnInventoryOpenEvent += ShowHunger;
+        InputReader.OnInventoryEvent += ShowHunger;
 
         _finishedMovement = false;
         
@@ -63,7 +63,7 @@ public class ActivateGuideline : MonoBehaviour
         _activateFood = false;
         _activateStamina = false;
         _activateTemperature = false;
-        InputReader.OnInventoryOpenEvent -= ShowHunger;
+        InputReader.OnInventoryEvent -= ShowHunger;
     }
 
    

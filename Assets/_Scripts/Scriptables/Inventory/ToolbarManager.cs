@@ -20,7 +20,6 @@ public class ToolbarManager : MonoBehaviour
     {
         InputReader.OnButtonPressEvent += HandleButtonPress;
         InputReader.OnEatEvent += HandleEating;
-        InputReader.OnPickEvent += HandleEating;
         InputReader.OnRightClickEvent += HandleRightClick;
     }
 
@@ -28,7 +27,6 @@ public class ToolbarManager : MonoBehaviour
     {
         InputReader.OnButtonPressEvent -= HandleButtonPress;
         InputReader.OnEatEvent -= HandleEating;
-        InputReader.OnPickEvent -= HandleEating;
         InputReader.OnRightClickEvent -= HandleRightClick;
     }
 

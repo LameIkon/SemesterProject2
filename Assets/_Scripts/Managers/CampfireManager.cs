@@ -30,13 +30,11 @@ public class CampfireManager : MonoBehaviour
     void OnEnable()
     {
         InputReader.OnInteractEvent += HandleInteract;
-        InputReader.OnPickEvent += HandleInteract;
     }
 
     private void OnDisable()
     {
         InputReader.OnInteractEvent -= HandleInteract;
-        InputReader.OnPickEvent -= HandleInteract;
     }
 
 

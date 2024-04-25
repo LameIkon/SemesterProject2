@@ -42,14 +42,12 @@ public class ChestManager : MonoBehaviour
     void OnEnable()
     {
         InputReader.OnInteractEvent += HandleInteract;
-        InputReader.OnPickEvent += HandleInteract;
         _chestCanvas.SetActive(false);
     }
 
     private void OnDisable()
     {
         InputReader.OnInteractEvent -= HandleInteract;
-        InputReader.OnPickEvent -= HandleInteract;
     }
 
 
