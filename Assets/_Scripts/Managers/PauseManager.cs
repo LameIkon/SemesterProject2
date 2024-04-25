@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System;
 
 public class PauseManager : MonoBehaviour
 {
@@ -75,4 +76,5 @@ public class PauseManager : MonoBehaviour
         ResumeButton();
         SceneManager.LoadScene("MainMenu");
     }
+
 }

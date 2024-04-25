@@ -1904,7 +1904,7 @@ Transform:
   m_GameObject: {fileID: 2387614818641749877}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -8, y: 7, z: 0}
+  m_LocalPosition: {x: 99, y: 4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2893,7 +2893,7 @@ Transform:
   m_GameObject: {fileID: 3312145102739056683}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2, y: 9, z: 0}
+  m_LocalPosition: {x: 102, y: 9, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -9815,7 +9815,7 @@ MonoBehaviour:
   _firewoodDescription: {fileID: 11400000, guid: a9ed200cd6f0b3244953ebf4065b0722, type: 2}
   _mapDescription: {fileID: 11400000, guid: 0088dadd5e7e07648a7a75a508ac85ed, type: 2}
   _lanternDescription: {fileID: 11400000, guid: c672b6f8b2aebb14f9ab08fa9e7c3c3e, type: 2}
-  "_j\xF8rgensJournalDescription": {fileID: 11400000, guid: ee9507eec34ac814ca5c0bd174c64d3c, type: 2}
+  _joergensJournalDescription: {fileID: 0}
   _ludvigsJournalDescription: {fileID: 11400000, guid: dc0ce4f471eca894392f5c7aba3d829b, type: 2}
   _nielsJournalDescription: {fileID: 11400000, guid: b5d45fb59e56690478e176f065e765cc, type: 2}
   _breadSprite: {fileID: 21300000, guid: 6281e69e11bff07478833b1790bc1b4a, type: 3}
@@ -12025,11 +12025,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5455131016030683094, guid: 5def9f13b1d6da24fbfe167a3a8da211, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 107
       objectReference: {fileID: 0}
     - target: {fileID: 5455131016030683094, guid: 5def9f13b1d6da24fbfe167a3a8da211, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5455131016030683094, guid: 5def9f13b1d6da24fbfe167a3a8da211, type: 3}
       propertyPath: m_LocalPosition.z

@@ -15,7 +15,7 @@ public class DynamicInterface : UserInterface
     public int NUMBER_OF_COLUMN;
     public int Y_SPACE_BETWEEN_ITEM;
 
-    
+
 
     public override void CreateSlots()
     {
@@ -43,8 +43,5 @@ public class DynamicInterface : UserInterface
 
     }
 
-    public void Awake()
-    {
-            _Inventory._Container.Clear();        
-    }
+
 }

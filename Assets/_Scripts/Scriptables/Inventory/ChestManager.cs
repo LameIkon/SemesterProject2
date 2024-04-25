@@ -33,25 +33,21 @@ public class ChestManager : MonoBehaviour
         if (!_chestIsfilled)
         {
             _chestIsfilled = true;
-            
+
             FillUpChest();
-           
+
         }
     }
 
-    private void Update()
-    {
-      
-    }
-
     void OnEnable()
-    {       
+    {
         InputReader.OnInteractEvent += HandleInteract;
         InputReader.OnPickEvent += HandleInteract;
+        _chestCanvas.SetActive(false);
     }
 
     private void OnDisable()
-    {     
+    {
         InputReader.OnInteractEvent -= HandleInteract;
         InputReader.OnPickEvent -= HandleInteract;
     }
@@ -113,5 +109,7 @@ public class ChestManager : MonoBehaviour
     {        
         _chestInventory._Container.Clear();       
     }
+
+
 
 }

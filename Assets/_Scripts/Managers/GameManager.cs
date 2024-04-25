@@ -76,11 +76,13 @@ public class GameManager : PersistentSingleton<GameManager>
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        Vector3 spawnPoint = new Vector3(107, 0, 0);
+
         CheckScene();
         if (!_mainSceneBool && _shipInBool)
         {
-            _player.transform.position = Vector3.zero;
-            _playerMovePoint.transform.position = Vector3.zero;
+            _player.transform.position = spawnPoint;
+            _playerMovePoint.transform.position = spawnPoint;
 
             if (SkipGuide._skipGuide && SkipGuide._showGuide)
             {
