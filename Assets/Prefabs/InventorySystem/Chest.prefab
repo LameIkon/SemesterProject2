@@ -99,6 +99,7 @@ MonoBehaviour:
   _chestFiller: {fileID: 11400000, guid: e74e3c51be8288c44b62073374ca6d1f, type: 2}
   _database: {fileID: 11400000, guid: 6aab6e98529b36a40aa4942653918f7e, type: 2}
   _canOpenChest: 0
+  _chestIsfilled: 0
 --- !u!114 &8701638052699608590
 MonoBehaviour:
   m_ObjectHideFlags: 0
