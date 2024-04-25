@@ -32,15 +32,19 @@ public class StaticInterface : UserInterface
 
 
 
-    public void Awake()
+    //public void Awake()
+    //{
+    //    if (GameManager._ClearInventorySTATIC)
+    //    {
+    //        for (int i = 0; i < _Inventory.GetSlots.Length; i++)
+    //        {
+    //            _Inventory.GetSlots[i].RemoveItem();
+    //        }
+    //    }
+    //}
+
+    public void OnApplicationQuit()
     {
-
-        for (int i = 0; i < _Inventory.GetSlots.Length; i++)
-        {
-            _Inventory.GetSlots[i].RemoveItem();
-           
-        }        
+        _Inventory._Container.Clear();
     }
-
-
 }

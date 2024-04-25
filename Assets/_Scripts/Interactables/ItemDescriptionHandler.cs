@@ -19,7 +19,7 @@ public class ItemDescriptionHandler : MonoBehaviour
     [SerializeField] private ScriptableItemDescription _firewoodDescription;
     [SerializeField] private ScriptableItemDescription _mapDescription;
     [SerializeField] private ScriptableItemDescription _lanternDescription;
-    [SerializeField] private ScriptableItemDescription _jørgensJournalDescription;
+    [SerializeField] private ScriptableItemDescription _joergensJournalDescription;
     [SerializeField] private ScriptableItemDescription _ludvigsJournalDescription;
     [SerializeField] private ScriptableItemDescription _nielsJournalDescription;
 
@@ -32,7 +32,7 @@ public class ItemDescriptionHandler : MonoBehaviour
     [SerializeField] private Sprite _firewoodSprite;
     [SerializeField] private Sprite _mapSprite;
     [SerializeField] private Sprite _lanternSprite;
-    [SerializeField] private Sprite _jørensJournalSprite;
+    [SerializeField] private Sprite _joerensJournalSprite;
     [SerializeField] private Sprite _ludvigsJournalSprite;
     [SerializeField] private Sprite _nielsJournalSprite;
 
@@ -65,7 +65,7 @@ public class ItemDescriptionHandler : MonoBehaviour
             {_firewoodSprite, _firewoodDescription},
             {_mapSprite,_mapDescription},
             {_lanternSprite,_lanternDescription},
-            {_jørensJournalSprite, _jørgensJournalDescription},
+            {_joerensJournalSprite, _joergensJournalDescription},
             {_ludvigsJournalSprite,_ludvigsJournalDescription},
             {_nielsJournalSprite,_nielsJournalDescription}
         };

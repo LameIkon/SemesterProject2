@@ -14,12 +14,13 @@ public class ChestManager : MonoBehaviour
     [SerializeField] private ChestFiller _chestFiller;
     [SerializeField] private ItemDatabaseObject _database;
     private StaticInterface _chestInterface;
+    private GameManager _gameManager; 
     
     private bool _turn = false;
     private InventorySlot[] _slots = new InventorySlot[6];
 
-    [SerializeField]private bool _canOpenChest = false;
-    private bool _chestIsfilled = false;
+    [SerializeField] private bool _canOpenChest = false;
+    [SerializeField] private bool _chestIsfilled = false;
 
     private void Start()
     {
@@ -32,19 +33,15 @@ public class ChestManager : MonoBehaviour
         if (!_chestIsfilled)
         {
             _chestIsfilled = true;
+            
             FillUpChest();
+           
         }
-
     }
-
 
     private void Update()
     {
-        //if (LanternDisabler._LoadedSTATIC) 
-        //{
-        //   //  _chestCanvas = UnityEngine.GameObject.FindWithTag("Chest");
-         
-        //}
+      
     }
 
     void OnEnable()
@@ -110,6 +107,11 @@ public class ChestManager : MonoBehaviour
     {
         // Show or disable E highlight
         GameManager._hideEInteractables = _turn;
+    }
+
+    private void OnApplicationQuit()
+    {        
+        _chestInventory._Container.Clear();       
     }
 
 }
