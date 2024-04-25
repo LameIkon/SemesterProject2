@@ -7,7 +7,7 @@ public class ItemDescriptionHandler : MonoBehaviour
 {
     public static ItemDescriptionHandler instance;
     private static bool _once = true;
-    public GameObject _handler;
+    public GameObject _Handler;
 
     [TextArea (4,4)]public string _CurrentDescription; // The items description
 
@@ -50,7 +50,7 @@ public class ItemDescriptionHandler : MonoBehaviour
         }
         gameObject.GetComponent<CanvasGroup>().alpha = 1.0f;
 
-        _handler = this.gameObject;
+        _Handler = this.gameObject;
     }
 
     public void ItemType(Image slot)
@@ -70,8 +70,6 @@ public class ItemDescriptionHandler : MonoBehaviour
             {_nielsJournalSprite,_nielsJournalDescription}
         };
 
-        GuidelineManager.instance.CompleteTutorial();
-
         if (itemDictionary.ContainsKey(slot.sprite)) // Check if the slot.sprite matches one of the sprites in the dictionary
         {
             ScriptableItemDescription description = itemDictionary[slot.sprite]; // Take that found sprites description
@@ -83,12 +81,13 @@ public class ItemDescriptionHandler : MonoBehaviour
         }
     }
 
+    // Not needed anymore
     public IEnumerator Disable() // used for the inventory slots to work
     {
         if (_once)
         {
             _once = false;
-            _handler = this.gameObject;
+            _Handler = this.gameObject;
             gameObject.GetComponent<CanvasGroup>().alpha = 0.0f; // so the canvas dont show up at random
             this.gameObject.SetActive(true); // inventory slots now have oppotunity to find the canvas
             yield return null;

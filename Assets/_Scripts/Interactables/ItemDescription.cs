@@ -21,7 +21,7 @@ public class ItemDescription : MonoBehaviour, IPointerEnterHandler, IPointerExit
         if (_itemDescriptionCanvas == null) // if for some reason it cant find the canvas try activate the canvas
         {
             //StartCoroutine(ItemDescriptionHandler.instance.Disable()); // make the canvas true for a moment
-            _itemDescriptionCanvas = ItemDescriptionHandler.instance._handler;
+            _itemDescriptionCanvas = ItemDescriptionHandler.instance._Handler; // Much easier solution to get the gameObject
             //_itemDescriptionCanvas = GameObject.FindWithTag("ItemDescriptionHolder"); // Find the Canvas
         }
         

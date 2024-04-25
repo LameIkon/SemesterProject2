@@ -25,6 +25,8 @@ public class DialogueManager : MonoBehaviour
     [Header("Animations Elements")]
     [SerializeField] private GameObject _captainProfile; // Child GameObject of _nameHolderPrefab
     [SerializeField] private GameObject _scientistProfile; // Child GameObject of _nameHolderPrefab
+    [SerializeField] private GameObject _spyProfile; // Child GameObject of _nameHolderPrefab
+    [SerializeField] private GameObject _defaultProfile; // Child GameObject of _nameHolderPrefab
 
     [Header("Stored data")]
     public bool _Oneclick; // Used to ensure that only 1 dialogue can happen at a time
@@ -268,12 +270,14 @@ public class DialogueManager : MonoBehaviour
         }
         else if (_NPCName == "Laub")
         {
-            print("spy");
+            Debug.Log("Spy");
+            GameObject profile = Instantiate(_spyProfile); // Takes a gameobject prefab
+            profile.transform.SetParent(nameholder.transform, false); // Set Image to the parent but keep its own transform
         }
         else
         {
             Debug.Log("default");
-            GameObject profile = Instantiate(_captainProfile); // Takes a gameobject prefab
+            GameObject profile = Instantiate(_defaultProfile); // Takes a gameobject prefab
             profile.transform.SetParent(nameholder.transform, false); // Set Image to the parent but keep its own transform
         }
     }
