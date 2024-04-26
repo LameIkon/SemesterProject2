@@ -15045,12 +15045,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 332476690}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.546915, y: -0.9305354, z: 0.23364851}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 471734396}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &454277351
 GameObject:
@@ -15081,6 +15081,70 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &471734394
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 471734396}
+  - component: {fileID: 471734395}
+  m_Layer: 0
+  m_Name: PolishManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &471734395
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 471734394}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6c3489ef4b07ad4db8bd789fdc2184e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _volume: {fileID: 332476691}
+  _currentTemperature:
+    UseConstant: 0
+    ConstantValue: 0
+    Variable: {fileID: 11400000, guid: dece9671aacff9f49a48fa2442bc41eb, type: 2}
+  _threshold: 97
+  _temperatureVolumeAboveThreshold: -50
+  _temperatureVolumeBelowThreshold: -100
+  _isCold: 0
+  _currentHealth:
+    UseConstant: 0
+    ConstantValue: 0
+    Variable: {fileID: 11400000, guid: 86a0bb363a0bb4a4bb2686902045b0fb, type: 2}
+  _healthThreshold: 0
+  _currentHunger:
+    UseConstant: 0
+    ConstantValue: 0
+    Variable: {fileID: 11400000, guid: b1920d0977b0f8543902afaa1aea131b, type: 2}
+  _hungerThreshold: 0
+--- !u!4 &471734396
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 471734394}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -7.546915, y: -0.9305354, z: 0.23364851}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 332476692}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &723118264
@@ -40401,4 +40465,4 @@ SceneRoots:
   - {fileID: 1411884419}
   - {fileID: 1562770567}
   - {fileID: 723118267}
-  - {fileID: 332476692}
+  - {fileID: 471734396}
