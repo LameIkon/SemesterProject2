@@ -15117,8 +15117,9 @@ MonoBehaviour:
     UseConstant: 0
     ConstantValue: 0
     Variable: {fileID: 11400000, guid: dece9671aacff9f49a48fa2442bc41eb, type: 2}
-  _threshold: 97
-  _temperatureVolumeAboveThreshold: -50
+  _threshold: 98
+  _changeRate: 1.5
+  _temperatureVolumeAboveThreshold: -40
   _temperatureVolumeBelowThreshold: -100
   _isCold: 0
   _currentHealth:

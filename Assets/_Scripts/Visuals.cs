@@ -74,7 +74,7 @@ public class Visuals : MonoBehaviour
     
         protected virtual void EnableFreezeVisual()
         {
-            _defaulter = false;
+            _defaulter = false; // Assures only one use of the if-statement in DisableFreezeVisual()
             _isCold = true;
             
             _temperatureVolumeBelowThreshold = _defaultTVBelowT; 
@@ -92,7 +92,7 @@ public class Visuals : MonoBehaviour
         {
             _isCold = false;
             
-            if (_defaulter)
+            if (_defaulter) // Will only be accessed at the start of the game
             {
                 _cfp = new ClampedFloatParameter(_temperatureVolumeAboveThreshold, _defaultTVBelowT, _defaultTVAboveT, true);
                 return;
