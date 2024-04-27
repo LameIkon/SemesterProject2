@@ -85,6 +85,7 @@ public class GuidelineManager : MonoBehaviour
     [SerializeField] private GameObject _captainDestinationWalk;
     [SerializeField] private GameObject _captainSprite;
     private Animator _captainAnimator;
+    private GameObject _captainChatBubble;
     //[Header("Dialogues")]
     //[SerializeField] private List<ChatBubble> _chatBubble = new List<ChatBubble>();
 
@@ -269,8 +270,9 @@ public class GuidelineManager : MonoBehaviour
             yield return null;
         }
         StartCoroutine(CaptainFadeIn(_captainSprite));
-        _captainAnimator.Play("point1");
         yield return new WaitForSeconds(1f);
+        _captainAnimator.Play("point1");
+        yield return new WaitForSeconds(0.75f);
         _captainAnimator.Play("point2");
 
 
