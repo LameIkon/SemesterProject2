@@ -274,10 +274,7 @@ public class GuidelineManager : MonoBehaviour
         _captainAnimator.Play("point1");
         yield return new WaitForSeconds(0.75f);
         _captainAnimator.Play("point2");
-
-
-
-
+        _captainSprite.transform.GetChild(2).gameObject.SetActive(true); // Get the specific gameobject and activate it
         yield return new WaitForSeconds(2f);
         _isOngoingEvent = false;
     }

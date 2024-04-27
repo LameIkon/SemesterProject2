@@ -8,6 +8,7 @@ public class ChatBubble : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _textComponent;
     [SerializeField, TextArea(2,4)] private string[] _lines;
     [SerializeField] private float _textSpeed;
+    [SerializeField] private float _nextLineShowUp = 1;
     private int _index;
 
     [Space (10), SerializeField] private bool _automaticStart; // Used to start a chat right away
@@ -51,7 +52,7 @@ public class ChatBubble : MonoBehaviour
             yield return new WaitForSeconds(_textSpeed); // wait before looking for next letter
         }
 
-        yield return new WaitForSeconds(2f); // When dialogue is finished start this
+        yield return new WaitForSeconds(_nextLineShowUp); // When dialogue is finished start this
 
         NextLine(); // Look for next line
     }
