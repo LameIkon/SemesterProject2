@@ -19,7 +19,7 @@ public class Furnace : MonoBehaviour
 
     public static bool _canOpenFurnace = false;  //needs to be static for use in CampfireManager.script where we open the canvas
 
-    private bool _bonfireLit = false; //tracks when the fire is burning
+    public bool _bonfireLit = false; //tracks when the fire is burning
     private bool _isTriggeredOnce = false;
     private bool _coroutineBurnActive = false; //tracks if coroutine is started
     private bool _coroutineLeftoverActive = false; //tracks if coroutine is started

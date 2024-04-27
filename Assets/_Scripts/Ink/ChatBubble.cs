@@ -45,7 +45,7 @@ public class ChatBubble : MonoBehaviour
 
     IEnumerator TypeLine()
     {
-        if (!_hideEOnEnteract)
+        if (_hideEOnEnteract)
         {
             GameManager._hideEInteractables = true;
         }
@@ -71,7 +71,7 @@ public class ChatBubble : MonoBehaviour
         else
         {
             gameObject.SetActive(false); // if there isnt any dialogue deactivate.
-            if (!_hideEOnEnteract)
+            if (_hideEOnEnteract)
             {
                 GameManager._hideEInteractables = false;
             }

@@ -12,18 +12,9 @@ public class GuidelineManager : MonoBehaviour
     #pragma warning disable 0414
 
     [Header("Boolean Checkmarks")] // Used to check if an guideline can be activated
-    [SerializeField] private bool _showMovement;
     public bool _isOngoingEvent;
     public bool _showRunning;
-    [SerializeField] private bool _showInventoryInteraction;
-    [SerializeField] private bool _showChestInteraction;
-    [SerializeField] private bool _showCampfireInteraction;
 
-    [SerializeField, Space(5)] private bool _showTemperature;
-    [SerializeField] private bool _showHealth;
-    [SerializeField] private bool _showFood;
-    [SerializeField] private bool _showStamina;
-    [SerializeField] private bool _showToolbar;
 
     [Header("Boolean Finish Checkmarks")] //  Used to check if an guideline was finished
     [SerializeField] private bool _finishedMovement;
@@ -82,17 +73,19 @@ public class GuidelineManager : MonoBehaviour
     [SerializeField] private GameObject _doorRestrictionHolder;
     [SerializeField] private List<Transform> _doors = new List<Transform>();
     [SerializeField] private List<Transform> _canvasBlocker = new List<Transform>();
+    [SerializeField] private GameObject _trigger4thRoom;
+    [SerializeField] private Furnace _furnace;
 
 
     [Header("Captain")]
     [SerializeField] private GameObject _captainDestinationWalk;
     [SerializeField] private GameObject _captainSprite;
     private Animator _captainAnimator;
-    private GameObject _captainChatBubble;
-    //[Header("Dialogues")]
-    //[SerializeField] private List<ChatBubble> _chatBubble = new List<ChatBubble>();
 
-    [SerializeField, Space(5)] private bool _isMoving;
+    [Header("Scientist")]
+    [SerializeField] private GameObject _scientistSprite;
+
+    [Header("checkers")]
     [SerializeField] private bool _isRunning;
     public bool _isfoodInToolBar;
     public bool _numberKeyPressed;
@@ -119,58 +112,20 @@ public class GuidelineManager : MonoBehaviour
         _cameraOriginalOrthoSize = _virtualCamera.GetComponent<CinemachineVirtualCamera>().m_Lens.OrthographicSize; // Store the original size
         _cameraCurrentOrthoSize = _virtualCamera.GetComponent<CinemachineVirtualCamera>(); // Set the current size
         
-
-
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        //FindChatBubble("NPC"); // Find the chatBubble on this specific npc
-        //s asd
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (_showInventoryInteraction && _inventoryScreen.activeSelf) // Activated when inventory is open
-        {
-            StopInventory();
-        }
-
-        if (_showChestInteraction && _chestScreen.activeSelf) // Activated when the Chest is open
-        {
-            StopChest();
-        }
-
-        if (_showCampfireInteraction && _campFireScreen.activeSelf) // Activated just after the campfire is open
-        {
-            StopCampFire();
-        }
-
-        if (_showFood && _isfoodInToolBar) // Activated when an image source got changed on the toolbar
-        {
-            //StopHunger();
-        }
-
-        if (_finishedFood && _numberKeyPressed && _showToolbar) // Activated just after image got changed
-        {
-            StartCoroutine(FadeOut(_ToolbarCanvas));
-            _showToolbar = false;
-        }
-
-        if (!_finishedCampfireInteraction && _campFireScreen.activeSelf) // Activated when the campfire is open
-        {
-            ShowCampfire();
-        }
         KeyChecker(); // Used to check movement booleans
     }
 
-    
+    #region Initilize
 
     private void OnEnable()
     {
-        InputReader.OnRunStartEvent += StopRunning; // called whenever you run
+        InputReader.OnRunStartEvent += ResetRunningBool; // called whenever you start running
+        InputReader.OnRunCancelEvent += ResetRunningBool; // called whenever you stop running
         SceneManager.sceneLoaded += OnSceneLoaded;
         Invoke("ShowHealth", 2f);
         StartCoroutine(Show1stRoom());
@@ -179,7 +134,7 @@ public class GuidelineManager : MonoBehaviour
 
     private void OnDisable()
     {
-        InputReader.OnRunStartEvent -= StopRunning;
+        InputReader.OnRunStartEvent -= ResetRunningBool; // called whenever you start running
         InputReader.OnRunCancelEvent += ResetRunningBool; // called whenever you stop running
         SceneManager.sceneLoaded -= OnSceneLoaded;
 
@@ -191,11 +146,13 @@ public class GuidelineManager : MonoBehaviour
         // Find the restrictive blockers on the scene. Does not work onEnable method since it dosent get the bool at the moment it gets changed
         if (GameManager._shipInBool && _canvasRestrictionHolder == null) // Only check when on the ship
         {
-            _canvasRestrictionHolder = GameObject.Find("CameraRestriction");
-            _doorRestrictionHolder = GameObject.Find("DoorRestriction");
-            _captainDestinationWalk = GameObject.FindWithTag("Destination");
-            _captainAnimator = _captainDestinationWalk.GetComponent<Animator>();
-            _captainSprite = GameObject.Find("NPC");
+            _canvasRestrictionHolder = GameObject.Find("CameraRestriction"); // Used to hide areas
+            _doorRestrictionHolder = GameObject.Find("DoorRestriction"); // restrict movement
+            _trigger4thRoom = GameObject.Find("Trigger4thRoom"); // The trigger to the 4th room
+            _captainDestinationWalk = GameObject.FindWithTag("Destination"); // The Captain move controller
+            _captainAnimator = _captainDestinationWalk.GetComponent<Animator>(); // The controller to move destination
+            _captainSprite = GameObject.Find("NPC"); // The captain. Used to get the chat bubbles
+            _scientistSprite = GameObject.Find("NPC (1)"); // The scientist. Used to get the chat bubbles
 
             // Find all the child gameobjects and delegate them to a list. gameobject order is important
             Transform canvasParent = _canvasRestrictionHolder.transform;
@@ -213,9 +170,17 @@ public class GuidelineManager : MonoBehaviour
             _canvasBlocker.Add(canvasParent.GetChild(2));
             _doors.Add(doorParent.GetChild(2));
 
+            // Get stair
+            _doors.Add(doorParent.GetChild(3));
+
+            // Deactivate trigger for later use
+            _trigger4thRoom.SetActive(false);
+
 
         }
     }
+
+    #endregion
 
     #region 1st Room
 
@@ -240,11 +205,7 @@ public class GuidelineManager : MonoBehaviour
         {
             _movementCanvas.SetActive(true); // Show movement
             yield return new WaitForSeconds(_delayTimer);
-            while (!PlayerController._isMoving) // Runs until you move
-            {
-                yield return null;
-            }
-            _finishedMovement = true;
+            yield return new WaitUntil(() => PlayerController._isMoving); // Wait until you move
             yield return new WaitForSeconds(_delayTimer);
             StartCoroutine(FadeOut(_movementCanvas)); // Fade out movement
 
@@ -321,22 +282,15 @@ public class GuidelineManager : MonoBehaviour
         _captainAnimator.Play("point6");
 
         // Introduce more survival bars
-        StartCoroutine(ShowItemUsage());
-    }
-
-    IEnumerator ShowItemUsage()
-    {
         yield return new WaitUntil(() => GameManager._inventoryMenuSTATIC.activeSelf); // wait until the ongoing event becomes true
-        Debug.Log("opened");
         _foodAnimator.Play("SlideInLeft");
         _dragCanvas.SetActive(true);
         yield return new WaitForSeconds(_delayTimer);
-        _showFood = true;
 
+        // Show Text
         yield return new WaitUntil(() => _isfoodInToolBar); // wait until the ongoing event becomes true
         StartCoroutine(FadeOut(_dragCanvas));
         yield return new WaitUntil(() => !_dragCanvas.activeInHierarchy); // wait until the ongoing event becomes false
-        Debug.Log("called");
         _toolbarCanvas.SetActive(true);
         yield return new WaitUntil(() => _numberKeyPressed); // wait until the ongoing event becomes true
         StartCoroutine(FadeOut(_toolbarCanvas));
@@ -344,6 +298,19 @@ public class GuidelineManager : MonoBehaviour
         _useItemCanvas.SetActive(true);
         yield return new WaitUntil(() => _usedItem); // wait until the ongoing event becomes true
         StartCoroutine(FadeOut(_useItemCanvas));
+        yield return new WaitUntil(() => !_useItemCanvas.activeInHierarchy); // wait until the ongoing event becomes false
+        _inventoryCanvas.SetActive(true);
+        yield return new WaitUntil(() => _inventoryScreen.activeSelf); // Wait until the inventory gets opened
+        StartCoroutine(FadeOut(_inventoryCanvas));
+        yield return new WaitForSeconds(1f);
+
+        // Captain moving again
+        _captainSprite.transform.GetChild(4).gameObject.SetActive(true); // Get the 3rd chatbubble and activate it
+        _captainAnimator.Play("point7");
+        yield return new WaitForSeconds(2f);
+        _captainAnimator.Play("point8");       
+        yield return new WaitUntil(() => !_captainSprite.transform.GetChild(4).gameObject.activeInHierarchy); // wait until he is finished speaking
+        StartCoroutine(Show4thRoom());
     }
 
     // Used to check for toolbar navigation and usage
@@ -368,149 +335,60 @@ public class GuidelineManager : MonoBehaviour
         }
     }
 
-    //void StopHunger()
-    //{
-    //    if (_showFood)
-    //    {
-    //        _showFood = false;
-    //        _finishedFood = true;
-    //        StartCoroutine(FadeOut(_foodCanvas));
-    //        _showToolbar = true;
-    //        StartCoroutine(ShowToolbars());
-    //    }
-    //}
-
-
     #endregion
 
-    #region 4nd Room
+    #region 4th Room
 
-    void Show4thRoom()
+    IEnumerator Show4thRoom()
     {
+        _trigger4thRoom.SetActive(true); // Can trigger isOngoingEvent
+        yield return new WaitUntil(() => _isOngoingEvent); // wait until the ongoing event trigger becomes true
+        _isOngoingEvent = false;
         StartCoroutine(ShowRoom(_canvasBlocker[2], _doors[2])); // Its expected that bot room is the first index
+        yield return new WaitForSeconds(1f);
+        _captainAnimator.Play("point9");
+        yield return new WaitForSeconds(1f);
+        _captainSprite.transform.GetChild(5).gameObject.SetActive(true); // Get the 4th chatbubble and activate it
+        _captainAnimator.Play("point10");
+        yield return new WaitForSeconds(1f);
+        _captainAnimator.Play("point11");
+        yield return new WaitUntil(() => _campFireScreen.activeInHierarchy); // wait until the ongoing event trigger becomes true
+        _temperatureAnimator.Play("SlideInLeft");
+        yield return new WaitUntil(() => _furnace._bonfireLit); // wait until fire is lit at furnace
+        _captainAnimator.Play("point12");
+        yield return new WaitForSeconds(1.5f);
+        _captainAnimator.Play("point13");
+
+        // Scientist gets its moment to shine
+        _scientistSprite.transform.GetChild(2).gameObject.SetActive(true); // Get the 1st chatbubble and activate it
+
+        // start outside tutorial
+        StartCoroutine(Outside());
+        
     }
-
-
     #endregion
 
-    public void ResetMovingBool() // called from Player Controller to check when you stop moving
-    {
-        _isMoving = false;
-    }
+    #region Outside
 
+    IEnumerator Outside()
+    {
+
+        StartCoroutine(ShowRoom(null, _doors[3]));
+        yield return new WaitUntil(() => EnvironmentManager.instance._outside); // wait until going outside
+        yield return new WaitForSeconds(10f); // wait before showing stamina
+        _staminaAnimator.Play("SlideInLeft");
+        _runningCanvas.SetActive(true);
+        yield return new WaitUntil(() => PlayerController._isMoving && _isRunning); // wait until you are running
+        StartCoroutine(FadeOut(_runningCanvas));
+        Debug.Log("tutorial completed!");
+    }
+    #endregion
+
+    #region Special Methods
     void ResetRunningBool() // called whenever you stop running
     {
-        _isRunning = false;
+        _isRunning = !_isRunning;
     }
-   
-  
-    public IEnumerator ShowRunning() // Called From ActivateGuideline
-    {
-        Debug.Log("running");
-        yield return new WaitForSeconds(10);
-        _runningCanvas.SetActive(true);
-        ShowStamina();
-        yield return new WaitForSeconds(_delayTimer);
-        _showRunning = true;
-        CompleteTutorial();
-    }
-
-    public IEnumerator ShowInventory()
-    {
-        _inventoryCanvas.SetActive(true);
-        yield return new WaitForSeconds(_delayTimer);
-        _showInventoryInteraction = true;
-    }
-
-    public void ShowChest()
-    {
-        _chestCanvas.SetActive(true);
-        _showChestInteraction= true;
-    }
-
-    public void ShowCampfire()
-    {
-        //_campfireCanvas.SetActive(true);
-        _showCampfireInteraction = true;
-    }
-
-    
-
-    public void ShowTemperature()
-    {
-        _temperatureAnimator.Play("SlideInLeft");
-        _finishedTemperature = true;
-        StartCoroutine(ShowRunning());
-    }
-
-    
-
-    public void ShowStamina()
-    {
-        _staminaAnimator.Play("SlideInLeft");
-        _showStamina = true;
-    }
-
-    private IEnumerator ShowToolbars()
-    {
-        yield return new WaitForSeconds(2);
-        _ToolbarCanvas.SetActive(true);
-    }
-
-    void StopRunning()
-    {
-        _isRunning = true;
-        if (_showRunning && _isMoving && _isRunning)
-        {
-            _showRunning = false;
-            _finishedRunning = true;
-            StartCoroutine(FadeOut(_runningCanvas));
-        }
-    }
-
-    void StopInventory()
-    {
-        if (_showInventoryInteraction)
-        {
-            _showInventoryInteraction = false;
-            _finishedInventoryInteraction = true;
-            StartCoroutine(FadeOut(_inventoryCanvas));
-        }
-    }
-
-    void StopChest()
-    {
-        if (_showChestInteraction)
-        {
-            _showChestInteraction = false;
-            _finishedChestInteraction = true;
-            StartCoroutine(FadeOut(_chestCanvas));
-        }
-    }
-
-    void StopCampFire()
-    {
-        if (_showCampfireInteraction)
-        {
-            _showCampfireInteraction = false;
-            _finishedCampfireInteraction = true;
-            StartCoroutine(FadeOut(_campfireCanvas));
-            //StartCoroutine(ShowRunning());
-        }
-    }
-
-    
-
-    void StopStamina()
-    {
-        if (_showStamina)
-        {
-            _showStamina = false;
-            _finishedStamina = true;
-            StartCoroutine(FadeOut(_staminaCanvas));
-        }
-    }
-
     public void CompleteTutorial()
     {
         _healthAnimator.Play("SlideInLeft");
@@ -550,28 +428,25 @@ public class GuidelineManager : MonoBehaviour
 
         float timer = 1.0f;
 
-
-        //door.gameObject.GetComponent<Animator>().enabled = true;
-        while (timer >= 0)
+        if (canvas != null)
         {
-            timer -= Time.deltaTime / 2f; // Change the currentAlpha.
-            canvas.GetComponent<CanvasGroup>().alpha = timer;
-            yield return null;
-        }
-        canvas.GetComponent<CanvasGroup>().alpha = 0f;
+            //door.gameObject.GetComponent<Animator>().enabled = true;
+            while (timer >= 0)
+            {
+                timer -= Time.deltaTime / 2f; // Change the currentAlpha.
+                canvas.GetComponent<CanvasGroup>().alpha = timer;
+                yield return null;
+            }
+            canvas.GetComponent<CanvasGroup>().alpha = 0f;
 
-        // Remove door and canvas
-        canvas.gameObject.SetActive(false);
+            // Remove door and canvas
+            canvas.gameObject.SetActive(false);
+        }       
         door.gameObject.SetActive(false);
-        //int doorToRemove = _doors.IndexOf(door); // Get the specific door in question
-        //Destroy(door); // Destroy that door
-
-
-
-
     }
+    #endregion
 
-
+    #region Reset
 
     void ResetAnimations()
     {
@@ -585,17 +460,7 @@ public class GuidelineManager : MonoBehaviour
     void ResetGuideLine()
     {
         // Reset boolean checkmarks
-        _showMovement = false;
         _showRunning = false;
-        _showInventoryInteraction = false;
-        _showChestInteraction = false;
-        _showCampfireInteraction = false;
-        _showTemperature = false;
-        _showHealth = false;
-        _showFood = false;
-        _showStamina = false;
-        _showToolbar = false;
-        _isMoving = false;
         _isRunning = false;
         _isfoodInToolBar = false;
         _numberKeyPressed = false;
@@ -641,6 +506,7 @@ public class GuidelineManager : MonoBehaviour
         _toolbarCanvas.SetActive(false);
         _useItemCanvas.SetActive(false);
     }
+    #endregion
 }
 
 

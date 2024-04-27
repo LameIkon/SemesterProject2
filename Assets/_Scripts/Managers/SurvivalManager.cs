@@ -11,8 +11,13 @@ public class SurvivalManager : MonoBehaviour, IDamageable, IFreezeable, IStarvea
 
     private bool _isFull;
     private bool _isWarm;
+    // Pragma used to ignore the warnings
+    #pragma warning disable 0414
+
     private bool _isStarving;
     private bool _isFreezing;
+
+    #pragma warning restore 0414
 
     // [SerializeField] private FloatVariable _healthPoints;
     // [SerializeField] private FloatVariable _hungerPoints;

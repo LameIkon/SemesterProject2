@@ -9,6 +9,9 @@ public class EnvironmentManager : MonoBehaviour
 {
     public static EnvironmentManager instance { get; private set; }
 
+    // Pragma used to ignore the warnings
+    #pragma warning disable 0414
+
     [Header("Weather Types")] // By default they start being disabled since in unity editor the effects love to run constantly
     [SerializeField] private GameObject _blizzard;
     [SerializeField] private GameObject _snow;
@@ -67,6 +70,7 @@ public class EnvironmentManager : MonoBehaviour
     public bool _inside;
     public bool _outside;
 
+    #pragma warning restore 0414
     //private int _timeBetweenMin = 100;
     //private int _timeBetweenMax = 200;
     //private bool _isChoosingWeather;

@@ -5613,6 +5613,7 @@ MonoBehaviour:
     UseConstant: 0
     ConstantValue: 0
     Variable: {fileID: 11400000, guid: df856eadb13fcb045b384be58e19ae35, type: 2}
+  _bonfireLit: 0
 --- !u!114 &7557744498299956360
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19363,6 +19364,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6319726986988341223, guid: 3bd13d619094d8544a258a73d50c1dee, type: 3}
+      propertyPath: _furnace
+      value: 
+      objectReference: {fileID: 3505105110144757093}
+    - target: {fileID: 6319726986988341223, guid: 3bd13d619094d8544a258a73d50c1dee, type: 3}
       propertyPath: _dragCanvas
       value: 
       objectReference: {fileID: 2516702856959062984}
@@ -19381,7 +19386,7 @@ PrefabInstance:
     - target: {fileID: 6319726986988341223, guid: 3bd13d619094d8544a258a73d50c1dee, type: 3}
       propertyPath: _campFireScreen
       value: 
-      objectReference: {fileID: 8847272244634688858}
+      objectReference: {fileID: 2665887907394615120}
     - target: {fileID: 6319726986988341223, guid: 3bd13d619094d8544a258a73d50c1dee, type: 3}
       propertyPath: _healthAnimator
       value: 
