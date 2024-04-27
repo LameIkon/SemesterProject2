@@ -129,7 +129,7 @@ public class ActivateGuideline : MonoBehaviour
     {
         if (DialogueManager.instance._DialogueExited && !_finishedInventory)
         {
-            StartCoroutine(GuidelineManager.instance.ShowInventory());
+            //StartCoroutine(GuidelineManager.instance.ShowInventory());
             _finishedInventory = true;
         }
     }

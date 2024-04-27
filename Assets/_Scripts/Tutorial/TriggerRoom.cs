@@ -9,7 +9,7 @@ public class TriggerRoom : MonoBehaviour
         if (collision.gameObject.name == "Player")
         {
             GuidelineManager.instance._isOngoingEvent = true;
-            this.enabled = false;
+            this.gameObject.SetActive(false);
         }
     }
 }
