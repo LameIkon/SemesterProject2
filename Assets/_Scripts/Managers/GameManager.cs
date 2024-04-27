@@ -23,7 +23,7 @@ public class GameManager : PersistentSingleton<GameManager>
 
 
     public bool _mainSceneBool;
-    private bool _shipInBool;
+    public static bool _shipInBool;
     private bool _isInventoryOpen = false;
     private bool _isPaused = false;
 
@@ -76,7 +76,7 @@ public class GameManager : PersistentSingleton<GameManager>
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        Vector3 spawnPoint = new Vector3(107, 0, 0);
+        Vector3 spawnPoint = new Vector3(107, -1, 0);
 
         CheckScene();
         if (!_mainSceneBool && _shipInBool)

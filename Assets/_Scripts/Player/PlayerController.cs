@@ -10,7 +10,7 @@ public class PlayerController : MovementController
     [SerializeField] private FloatVariable _stamina;
 
     private bool _inDialogue = false;
-    public bool _isMoving = false;
+    public static bool _isMoving = false;
     public static event Action<Vector2> OnMovePositionEvent;
 
     private void OnEnable()
@@ -40,7 +40,7 @@ public class PlayerController : MovementController
     {
         base.FixedUpdate();
 
-        if (!_inDialogue)
+        if (!_inDialogue && !GuidelineManager.instance._isOngoingEvent)
         {
             if (Vector3.Distance(transform.position, _movePoint.position) <= .05f) //makes sure you can't move if u have not reached ur new position yet.
             {
@@ -219,7 +219,7 @@ public class PlayerController : MovementController
         else
         {
             _isMoving = false;
-            GuidelineManager.instance.ResetMovingBool(); // Used to check off if the player is not moving
+            //GuidelineManager.instance.ResetMovingBool(); // Used to check off if the player is not moving
         }
         // Because the inputs are normalized we need to set the values to 1 for the move system to work properly
 

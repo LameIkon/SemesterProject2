@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,6 +13,7 @@ public class GuidelineManager : MonoBehaviour
 
     [Header("Boolean Checkmarks")] // Used to check if an guideline can be activated
     [SerializeField] private bool _showMovement;
+    public bool _isOngoingEvent;
     public bool _showRunning;
     [SerializeField] private bool _showInventoryInteraction;
     [SerializeField] private bool _showChestInteraction;
@@ -61,15 +63,38 @@ public class GuidelineManager : MonoBehaviour
     [SerializeField] private GameObject _chestScreen;
     [SerializeField] private GameObject _campFireScreen;
 
-    [Header("Dialogues")]
-    [SerializeField] private List<ChatBubble> _chatBubble = new List<ChatBubble>();
+    [Header("Camera")]
+    [SerializeField] private GameObject _virtualCamera;
+    [SerializeField] private CinemachineVirtualCamera _cameraCurrentOrthoSize; // used to acces the component after we find the virtual camera
+    [SerializeField] private float _cameraOriginalOrthoSize; // Store the default camera size
+
+    [SerializeField, Space (8f)] private float _cameraEnabledOrthoSize = 1; // the start value
+    [SerializeField] private float _cameraBeginningOrthoSize = 3; // the start value
+
+    [SerializeField, Space(8f)] private float _cameraMidEnabledOrthoSize = 3; // the start value
+    [SerializeField] private float _cameraMidOrthoSize = 5; // the start value
+
+    [Header("Rooms")]
+    [SerializeField] private GameObject _canvasRestrictionHolder;
+    [SerializeField] private GameObject _doorRestrictionHolder;
+    [SerializeField] private List<Transform> _doors = new List<Transform>();
+    [SerializeField] private List<Transform> _canvasBlocker = new List<Transform>();
+
+
+    [Header("Captain")]
+    [SerializeField] private GameObject _captainDestinationWalk;
+    [SerializeField] private GameObject _captainSprite;
+    private Animator _captainAnimator;
+    //[Header("Dialogues")]
+    //[SerializeField] private List<ChatBubble> _chatBubble = new List<ChatBubble>();
 
     [SerializeField, Space(5)] private bool _isMoving;
     [SerializeField] private bool _isRunning;
     public bool _isfoodInToolBar;
     public bool _numberKeyPressed;
 
-    private float _delayTimer = 0.8f;
+
+    private const float _delayTimer = 0.8f;
 
 
     private void Awake()
@@ -83,13 +108,21 @@ public class GuidelineManager : MonoBehaviour
         {
             instance = this;
         }
+
+        // Find the camera component
+        _virtualCamera = GameObject.FindWithTag("MainCamera");
+        _cameraOriginalOrthoSize = _virtualCamera.GetComponent<CinemachineVirtualCamera>().m_Lens.OrthographicSize; // Store the original size
+        _cameraCurrentOrthoSize = _virtualCamera.GetComponent<CinemachineVirtualCamera>(); // Set the current size
+        
+
+
     }
 
     // Start is called before the first frame update
     void Start()
     {
         //FindChatBubble("NPC"); // Find the chatBubble on this specific npc
-
+        //s asd
     }
 
     // Update is called once per frame
@@ -125,20 +158,8 @@ public class GuidelineManager : MonoBehaviour
         {
             ShowCampfire();
         }
-
         KeyChecker(); // Used to check movement booleans
     }
-
-    //void FindChatBubble(string name)
-    //{
-    //    if (GameObject.Find(name)){
-    //        Debug.Log("found");
-    //    }
-    //    GameObject gameobject = GameObject.Find(name);
-    //    ChatBubble chatbubble = gameobject.GetComponentInChildren<ChatBubble>();
-    //    _chatBubble.Add(chatbubble);
-
-    //}
 
     void KeyChecker()
     {
@@ -152,23 +173,160 @@ public class GuidelineManager : MonoBehaviour
         }
     }
 
-
     private void OnEnable()
     {
-        InputReader.OnMoveEvent += StopMovement; // Called whenever you move
         InputReader.OnRunStartEvent += StopRunning; // called whenever you run
-        Invoke("ShowHealth", 0.5f);
-    } 
+        SceneManager.sceneLoaded += OnSceneLoaded;
+        Invoke("ShowHealth", 2f);
+        StartCoroutine(Show1stRoom());
+        Invoke("CameraAnimation", 0f);
+    }
 
     private void OnDisable()
     {
-        InputReader.OnMoveEvent -= StopMovement;
         InputReader.OnRunStartEvent -= StopRunning;
         InputReader.OnRunCancelEvent += ResetRunningBool; // called whenever you stop running
+        SceneManager.sceneLoaded -= OnSceneLoaded;
 
         ResetGuideLine(); // reset all bools and canvases
     }
 
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        // Find the restrictive blockers on the scene. Does not work onEnable method since it dosent get the bool at the moment it gets changed
+        if (GameManager._shipInBool && _canvasRestrictionHolder == null) // Only check when on the ship
+        {
+            _canvasRestrictionHolder = GameObject.Find("CameraRestriction");
+            _doorRestrictionHolder = GameObject.Find("DoorRestriction");
+            _captainDestinationWalk = GameObject.FindWithTag("Destination");
+            _captainAnimator = _captainDestinationWalk.GetComponent<Animator>();
+            _captainSprite = GameObject.Find("NPC");
+
+            // Find all the child gameobjects and delegate them to a list. gameobject order is important
+            Transform canvasParent = _canvasRestrictionHolder.transform;
+            Transform doorParent = _doorRestrictionHolder.transform;
+
+            // Get mid
+            _canvasBlocker.Add(canvasParent.GetChild(0));
+            _doors.Add(doorParent.GetChild(0));
+
+            // Get top
+            _canvasBlocker.Add(canvasParent.GetChild(1));
+            _doors.Add(doorParent.GetChild(1));
+
+            // Get bot
+            _canvasBlocker.Add(canvasParent.GetChild(2));
+            _doors.Add(doorParent.GetChild(2));
+
+
+        }
+    }
+
+    #region 1st Room
+
+    void CameraAnimation()
+    {
+        _cameraCurrentOrthoSize.m_Lens.OrthographicSize = _cameraEnabledOrthoSize; // Set the camera size
+        StartCoroutine(FadeCameraIn(_cameraBeginningOrthoSize));
+    }
+
+    void ShowHealth()
+    {
+        if (_healthAnimator.isActiveAndEnabled)
+        {
+            _healthAnimator.Play("SlideInLeft");
+            _finishedHealth = true;
+        }
+    }
+
+    IEnumerator Show1stRoom() // Called from ActivateGuideline
+    {
+        if (!GameManager._Instance._mainSceneBool)
+        {
+            _movementCanvas.SetActive(true); // Show movement
+            yield return new WaitForSeconds(_delayTimer);
+            while (!PlayerController._isMoving) // Runs until you move
+            {
+                yield return null;
+            }
+            _finishedMovement = true;
+            yield return new WaitForSeconds(_delayTimer);
+            StartCoroutine(FadeOut(_movementCanvas)); // Fade out movement
+
+            StartCoroutine(Show2ndRoom()); // Show next guide
+        }
+    }
+    #endregion
+
+    #region 2nd Room
+
+    IEnumerator Show2ndRoom()
+    {
+        StartCoroutine(ShowRoom(_canvasBlocker[0], _doors[0])); // Its expected that midle room is the first index
+        StartCoroutine(FadeCameraIn(_cameraMidOrthoSize));
+        while (!_isOngoingEvent)
+        {
+            yield return null;
+        }
+        StartCoroutine(CaptainFadeIn(_captainSprite));
+        _captainAnimator.Play("point1");
+        yield return new WaitForSeconds(1f);
+        _captainAnimator.Play("point2");
+
+
+
+
+        yield return new WaitForSeconds(2f);
+        _isOngoingEvent = false;
+    }
+
+
+
+    IEnumerator CaptainFadeIn(GameObject gameObject)
+    {
+        SpriteRenderer spriteRenderer = gameObject.GetComponentInChildren<SpriteRenderer>();
+
+        float currentTime = 0f;
+        float fadeInDuration = 1.5f; // Duration of the fadein effect
+        Color targetColor = spriteRenderer.color; // Get the initial color of the sprite
+
+        while (currentTime < fadeInDuration)
+        {
+            currentTime += Time.deltaTime;
+            float alpha = Mathf.Lerp(0f, 1f, currentTime / fadeInDuration);
+            targetColor.a = alpha; // Set the alpha 
+            spriteRenderer.color = targetColor; // Apply the new color
+            yield return null;
+        }
+
+        // Ensure alpha is fully set to 1
+        targetColor.a = 1f;
+        spriteRenderer.color = targetColor;
+    }
+
+
+    #endregion
+
+    #region 3nd Room
+
+    void Show3rdRoom()
+    {
+        StartCoroutine(ShowRoom(_canvasBlocker[1], _doors[1])); // Its expected that midle room is the first index
+        StartCoroutine(FadeCameraIn(_cameraOriginalOrthoSize));
+    }
+
+
+    #endregion
+
+    #region 4nd Room
+
+    void Show4thRoom()
+    {
+        StartCoroutine(ShowRoom(_canvasBlocker[2], _doors[2])); // Its expected that midle room is the first index
+    }
+
+
+    #endregion
 
     public void ResetMovingBool() // called from Player Controller to check when you stop moving
     {
@@ -177,15 +335,9 @@ public class GuidelineManager : MonoBehaviour
 
     void ResetRunningBool() // called whenever you stop running
     {
-        _isRunning = false; 
+        _isRunning = false;
     }
-
-    public IEnumerator ShowMovement() // Called from ActivateGuideline
-    {
-        _movementCanvas.SetActive(true);
-        yield return new WaitForSeconds(_delayTimer);
-        _showMovement = true; // Checks that the movement guide has been shown
-    }
+   
   
     public IEnumerator ShowRunning() // Called From ActivateGuideline
     {
@@ -217,14 +369,7 @@ public class GuidelineManager : MonoBehaviour
         _showCampfireInteraction = true;
     }
 
-    void ShowHealth()
-    {
-        if (_healthAnimator.isActiveAndEnabled)
-        {
-            _healthAnimator.Play("SlideInLeft");
-            _finishedHealth = true;
-        }
-    }
+    
 
     public void ShowTemperature()
     {
@@ -251,18 +396,6 @@ public class GuidelineManager : MonoBehaviour
     {
         yield return new WaitForSeconds(2);
         _ToolbarCanvas.SetActive(true);
-    }
-
-    void StopMovement(Vector2 vector)
-    {
-        _isMoving = true;
-        if (_showMovement)
-        {
-            _showMovement = false;
-            _finishedMovement = true;
-            StartCoroutine(FadeOut(_movementCanvas));
-            //_chatBubble[1].StartChatBubble();
-        }
     }
 
     void StopRunning()
@@ -349,6 +482,46 @@ public class GuidelineManager : MonoBehaviour
             yield return null;           
         }
     }
+
+    IEnumerator FadeCameraIn(float wantedOrthoSize) // Fade camera slowly on
+    {
+        float currentSize = _cameraCurrentOrthoSize.m_Lens.OrthographicSize;
+        while (currentSize <= wantedOrthoSize)
+        {
+            currentSize += Time.deltaTime * 2; // for more faster and smooth transition
+            _cameraCurrentOrthoSize.m_Lens.OrthographicSize = currentSize;
+            yield return null;
+        }
+        _cameraCurrentOrthoSize.m_Lens.OrthographicSize = wantedOrthoSize; // Ensure it gets set to the correct size
+    }
+
+    IEnumerator ShowRoom(Transform canvas, Transform door)
+    {
+
+        float timer = 1.0f;
+
+
+        //door.gameObject.GetComponent<Animator>().enabled = true;
+        while (timer >= 0)
+        {
+            timer -= Time.deltaTime / 2f; // Change the currentAlpha.
+            canvas.GetComponent<CanvasGroup>().alpha = timer;
+            yield return null;
+        }
+        canvas.GetComponent<CanvasGroup>().alpha = 0f;
+
+        // Remove door and canvas
+        canvas.gameObject.SetActive(false);
+        door.gameObject.SetActive(false);
+        //int doorToRemove = _doors.IndexOf(door); // Get the specific door in question
+        //Destroy(door); // Destroy that door
+
+
+
+
+    }
+
+
 
     void ResetAnimations()
     {

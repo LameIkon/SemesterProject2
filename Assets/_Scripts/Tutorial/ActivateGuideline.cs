@@ -41,7 +41,7 @@ public class ActivateGuideline : MonoBehaviour
 
     private void OnValidate()
     {
-        StartGuideline(); // Only used in the editor to test
+        //StartGuideline(); // Only used in the editor to test
     }
 
     private void OnEnable()
@@ -75,10 +75,7 @@ public class ActivateGuideline : MonoBehaviour
         ShowTemperature();
         ShowInventory();
 
-        if (!GameManager._Instance._mainSceneBool)
-        {
-             Invoke("ShowMovement", 0.5f);
-        }
+        
 
     }
 
@@ -87,7 +84,7 @@ public class ActivateGuideline : MonoBehaviour
     {
         if (!_finishedMovement)
         {
-            StartCoroutine(GuidelineManager.instance.ShowMovement());
+            //StartCoroutine(GuidelineManager.instance.ShowMovement());
             _finishedMovement = true;
         }
     }
@@ -139,48 +136,48 @@ public class ActivateGuideline : MonoBehaviour
 
 
 
-    void StartGuideline()
-    {
-        if (_activateMovement)
-        {
-            GuidelineManager.instance.ShowMovement();
-            _activateMovement = false;
-        }
-        if (_activateRunning)
-        {
-            StartCoroutine(GuidelineManager.instance.ShowRunning());
-            _activateRunning = false;
-        }
-        if (_activateInventory)
-        {
-            GuidelineManager.instance.ShowInventory();
-            _activateInventory = false;
-        }
-        if (_activateChest)
-        {
-            GuidelineManager.instance.ShowChest();
-            _activateChest = false;
-        }
-        if (_activateCampFire)
-        {
-            GuidelineManager.instance.ShowCampfire();
-            _activateCampFire = false;
-        }
+    //void StartGuideline()
+    //{
+    //    if (_activateMovement)
+    //    {
+    //        GuidelineManager.instance.ShowMovement();
+    //        _activateMovement = false;
+    //    }
+    //    if (_activateRunning)
+    //    {
+    //        StartCoroutine(GuidelineManager.instance.ShowRunning());
+    //        _activateRunning = false;
+    //    }
+    //    if (_activateInventory)
+    //    {
+    //        GuidelineManager.instance.ShowInventory();
+    //        _activateInventory = false;
+    //    }
+    //    if (_activateChest)
+    //    {
+    //        GuidelineManager.instance.ShowChest();
+    //        _activateChest = false;
+    //    }
+    //    if (_activateCampFire)
+    //    {
+    //        GuidelineManager.instance.ShowCampfire();
+    //        _activateCampFire = false;
+    //    }
 
-        if (_activateFood)
-        {
-            GuidelineManager.instance.ShowFood();
-            _activateFood = false;
-        }
-        if (_activateStamina)
-        {
-            GuidelineManager.instance.ShowStamina();
-            _activateStamina = false;
-        }
-        if (_activateTemperature)
-        {
-            GuidelineManager.instance.ShowTemperature();
-            _activateTemperature = false;
-        }
-    }
+    //    if (_activateFood)
+    //    {
+    //        GuidelineManager.instance.ShowFood();
+    //        _activateFood = false;
+    //    }
+    //    if (_activateStamina)
+    //    {
+    //        GuidelineManager.instance.ShowStamina();
+    //        _activateStamina = false;
+    //    }
+    //    if (_activateTemperature)
+    //    {
+    //        GuidelineManager.instance.ShowTemperature();
+    //        _activateTemperature = false;
+    //    }
+    //}
 }

@@ -7,19 +7,6 @@ public class TriggerBarrierExit : MonoBehaviour
     [SerializeField] private Transform _insideBarrier; // Used to move choosen gameobject.
     [SerializeField] private Transform _originalParent; // Used to take the container back
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.name == "Player")
