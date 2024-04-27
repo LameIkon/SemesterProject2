@@ -93,7 +93,7 @@ public class ActivateGuideline : MonoBehaviour
     {
         if (!_finishedFood)
         {
-            StartCoroutine(GuidelineManager.instance.ShowFood());
+            //StartCoroutine(GuidelineManager.instance.ShowFood());
             _finishedFood = true;
         }        
     }

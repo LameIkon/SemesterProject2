@@ -232,7 +232,7 @@ public class DialogueManager : MonoBehaviour
         _Oneclick = false; // Ensures 1 instance
         _DialogueExited = true; // Announces that the exitDialogue was called (used to check if player exited dialogue)
         _StartedDialogue = false; // announces that the dialogue has ended
-        Invoke("SetDialogueExitFalse", 0f); // Used to give a small frame for the text to change to the alternative text
+        Invoke("SetDialogueExitFalse", 0.1f); // Used to give a small frame for the text to change to the alternative text
     }
 
     // Invoked almost next frame to make boolean false

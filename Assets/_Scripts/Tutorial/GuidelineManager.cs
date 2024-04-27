@@ -48,7 +48,10 @@ public class GuidelineManager : MonoBehaviour
     [SerializeField] private GameObject _ToolbarCanvas;
 
     [SerializeField, Space(5)] private GameObject _temperatureCanvas;
-    [SerializeField] private GameObject _foodCanvas;
+    //[SerializeField, Space(5)] private GameObject _foodCanvas;
+    [SerializeField] private GameObject _dragCanvas;
+    [SerializeField] private GameObject _toolbarCanvas;
+    [SerializeField] private GameObject _useItemCanvas;
     [SerializeField] private GameObject _staminaCanvas;
 
 
@@ -93,6 +96,7 @@ public class GuidelineManager : MonoBehaviour
     [SerializeField] private bool _isRunning;
     public bool _isfoodInToolBar;
     public bool _numberKeyPressed;
+    public bool _usedItem;
 
 
     private const float _delayTimer = 0.8f;
@@ -146,7 +150,7 @@ public class GuidelineManager : MonoBehaviour
 
         if (_showFood && _isfoodInToolBar) // Activated when an image source got changed on the toolbar
         {
-            StopHunger();
+            //StopHunger();
         }
 
         if (_finishedFood && _numberKeyPressed && _showToolbar) // Activated just after image got changed
@@ -162,17 +166,7 @@ public class GuidelineManager : MonoBehaviour
         KeyChecker(); // Used to check movement booleans
     }
 
-    void KeyChecker()
-    {
-        if (Input.GetKeyDown(KeyCode.Alpha1) || Input.GetKeyDown(KeyCode.Alpha2)) // When button pressed, boolean set to true
-        {
-            _numberKeyPressed = true;
-        }
-        else if (Input.GetKeyUp(KeyCode.Alpha1) || Input.GetKeyUp(KeyCode.Alpha2)) // When button released, boolean set to false
-        {
-            _numberKeyPressed = false;
-        }
-    }
+    
 
     private void OnEnable()
     {
@@ -265,18 +259,19 @@ public class GuidelineManager : MonoBehaviour
     {
         StartCoroutine(ShowRoom(_canvasBlocker[0], _doors[0])); // Its expected that midle room is the first index
         StartCoroutine(FadeCameraIn(_cameraMidOrthoSize));
-        while (!_isOngoingEvent)
-        {
-            yield return null;
-        }
+        yield return new WaitWhile(() => !_isOngoingEvent); // wait until the ongoing event trigger becomes true
         StartCoroutine(CaptainFadeIn(_captainSprite));
         yield return new WaitForSeconds(1f);
         _captainAnimator.Play("point1");
         yield return new WaitForSeconds(0.75f);
         _captainAnimator.Play("point2");
-        _captainSprite.transform.GetChild(2).gameObject.SetActive(true); // Get the specific gameobject and activate it
+        _captainSprite.transform.GetChild(2).gameObject.SetActive(true); // Get the 1st chatbubble and activate it
         yield return new WaitForSeconds(2f);
-        _isOngoingEvent = false;
+        _isOngoingEvent = false; // Enable movement
+        yield return new WaitUntil(() => DialogueManager.instance._DialogueExited); // wait until the ongoing event becomes true
+
+        // Start next part
+        StartCoroutine(Show3rdRoom());
     }
 
 
@@ -308,11 +303,82 @@ public class GuidelineManager : MonoBehaviour
 
     #region 3nd Room
 
-    void Show3rdRoom()
+    IEnumerator Show3rdRoom()
     {
-        StartCoroutine(ShowRoom(_canvasBlocker[1], _doors[1])); // Its expected that midle room is the first index
+        yield return new WaitForSeconds(1f);
+        StartCoroutine(ShowRoom(_canvasBlocker[1], _doors[1])); // Its expected that top room is the first index
         StartCoroutine(FadeCameraIn(_cameraOriginalOrthoSize));
+       
+        yield return new WaitUntil(() => _isOngoingEvent); // wait until the ongoing event becomes true
+        _isOngoingEvent = false; // Enable movement
+        _captainAnimator.Play("point3");
+        yield return new WaitForSeconds(1.5f); 
+        _captainAnimator.Play("point4");
+        _captainSprite.transform.GetChild(3).gameObject.SetActive(true); // Get the 2nd chatbubble and activate it
+        yield return new WaitForSeconds(2f);
+        _captainAnimator.Play("point5");
+        yield return new WaitForSeconds(1f);
+        _captainAnimator.Play("point6");
+
+        // Introduce more survival bars
+        StartCoroutine(ShowItemUsage());
     }
+
+    IEnumerator ShowItemUsage()
+    {
+        yield return new WaitUntil(() => GameManager._inventoryMenuSTATIC.activeSelf); // wait until the ongoing event becomes true
+        Debug.Log("opened");
+        _foodAnimator.Play("SlideInLeft");
+        _dragCanvas.SetActive(true);
+        yield return new WaitForSeconds(_delayTimer);
+        _showFood = true;
+
+        yield return new WaitUntil(() => _isfoodInToolBar); // wait until the ongoing event becomes true
+        StartCoroutine(FadeOut(_dragCanvas));
+        yield return new WaitUntil(() => !_dragCanvas.activeInHierarchy); // wait until the ongoing event becomes false
+        Debug.Log("called");
+        _toolbarCanvas.SetActive(true);
+        yield return new WaitUntil(() => _numberKeyPressed); // wait until the ongoing event becomes true
+        StartCoroutine(FadeOut(_toolbarCanvas));
+        yield return new WaitUntil(() => !_toolbarCanvas.activeInHierarchy); // wait until the ongoing event becomes false
+        _useItemCanvas.SetActive(true);
+        yield return new WaitUntil(() => _usedItem); // wait until the ongoing event becomes true
+        StartCoroutine(FadeOut(_useItemCanvas));
+    }
+
+    // Used to check for toolbar navigation and usage
+    void KeyChecker()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1) || Input.GetKeyDown(KeyCode.Alpha2)) // When button pressed, boolean set to true
+        {
+            _numberKeyPressed = true;
+        }
+        else if (Input.GetKeyUp(KeyCode.Alpha1) || Input.GetKeyUp(KeyCode.Alpha2)) // When button released, boolean set to false
+        {
+            _numberKeyPressed = false;
+        }
+
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            _usedItem = true;
+        }
+        else if (Input.GetKeyUp(KeyCode.F))
+        {
+            _usedItem = false;
+        }
+    }
+
+    //void StopHunger()
+    //{
+    //    if (_showFood)
+    //    {
+    //        _showFood = false;
+    //        _finishedFood = true;
+    //        StartCoroutine(FadeOut(_foodCanvas));
+    //        _showToolbar = true;
+    //        StartCoroutine(ShowToolbars());
+    //    }
+    //}
 
 
     #endregion
@@ -321,7 +387,7 @@ public class GuidelineManager : MonoBehaviour
 
     void Show4thRoom()
     {
-        StartCoroutine(ShowRoom(_canvasBlocker[2], _doors[2])); // Its expected that midle room is the first index
+        StartCoroutine(ShowRoom(_canvasBlocker[2], _doors[2])); // Its expected that bot room is the first index
     }
 
 
@@ -377,13 +443,7 @@ public class GuidelineManager : MonoBehaviour
         StartCoroutine(ShowRunning());
     }
 
-    public IEnumerator ShowFood()
-    {
-        _foodAnimator.Play("SlideInLeft");
-        _foodCanvas.SetActive(true);
-        yield return new WaitForSeconds(_delayTimer);
-        _showFood = true;
-    }
+    
 
     public void ShowStamina()
     {
@@ -439,17 +499,7 @@ public class GuidelineManager : MonoBehaviour
         }
     }
 
-    void StopHunger()
-    {
-        if (_showFood)
-        {
-            _showFood = false;
-            _finishedFood = true;
-            StartCoroutine(FadeOut(_foodCanvas));
-            _showToolbar = true;
-            StartCoroutine(ShowToolbars());
-        }
-    }
+    
 
     void StopStamina()
     {
@@ -480,6 +530,7 @@ public class GuidelineManager : MonoBehaviour
             canvas.GetComponent<CanvasGroup>().alpha = currentAlpha;
             yield return null;           
         }
+        canvas.SetActive(false);
     }
 
     IEnumerator FadeCameraIn(float wantedOrthoSize) // Fade camera slowly on
@@ -567,9 +618,13 @@ public class GuidelineManager : MonoBehaviour
         _chestCanvas.GetComponent<CanvasGroup>().alpha = 1.0f;
         _campfireCanvas.GetComponent<CanvasGroup>().alpha = 1.0f;
         _temperatureCanvas.GetComponent<CanvasGroup>().alpha = 1.0f;
-        _foodCanvas.GetComponent<CanvasGroup>().alpha = 1.0f;
+        //_foodCanvas.GetComponent<CanvasGroup>().alpha = 1.0f;
         _staminaCanvas.GetComponent<CanvasGroup>().alpha = 1.0f;
         _ToolbarCanvas.GetComponent<CanvasGroup>().alpha = 1.0f;
+
+        _toolbarCanvas.GetComponent<CanvasGroup>().alpha = 1.0f;
+        _toolbarCanvas.GetComponent <CanvasGroup>().alpha = 1.0f;
+        _useItemCanvas.GetComponent<CanvasGroup>().alpha = 1.0f;
 
         // Reset inventory screens
         _inventoryScreen.SetActive(false);
@@ -580,7 +635,11 @@ public class GuidelineManager : MonoBehaviour
         _ToolbarCanvas.SetActive(false);
         _temperatureCanvas.SetActive(false);
         _staminaCanvas.SetActive(false);
-        _foodCanvas.SetActive(false);
+        //_foodCanvas.SetActive(false);
+
+        _dragCanvas.SetActive(false);
+        _toolbarCanvas.SetActive(false);
+        _useItemCanvas.SetActive(false);
     }
 }
 

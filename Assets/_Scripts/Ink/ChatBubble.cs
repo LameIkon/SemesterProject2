@@ -12,7 +12,7 @@ public class ChatBubble : MonoBehaviour
     private int _index;
 
     [Space (10), SerializeField] private bool _automaticStart; // Used to start a chat right away
-
+    [SerializeField] private bool _hideEOnEnteract; // used to hide interact
 
     private void Awake()
     {
@@ -45,7 +45,10 @@ public class ChatBubble : MonoBehaviour
 
     IEnumerator TypeLine()
     {
-        GameManager._hideEInteractables = true;
+        if (!_hideEOnEnteract)
+        {
+            GameManager._hideEInteractables = true;
+        }
         foreach (char c in _lines[_index].ToCharArray()) // checks of many letters there is in the given line
         {
             _textComponent.text += c; // Input the letter in the dialogue
@@ -68,7 +71,10 @@ public class ChatBubble : MonoBehaviour
         else
         {
             gameObject.SetActive(false); // if there isnt any dialogue deactivate.
-            GameManager._hideEInteractables = false;
+            if (!_hideEOnEnteract)
+            {
+                GameManager._hideEInteractables = false;
+            }
         }
     }
 }

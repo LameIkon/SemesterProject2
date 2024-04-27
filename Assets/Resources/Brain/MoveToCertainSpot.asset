@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: MoveToCertainSpot
   m_EditorClassIdentifier: 
   _waitBetweenWalk:
-    MinValue: 0.1
+    MinValue: 0.2
     MaxValue: 0.2
   _rangeToPlayerStop: 1
   _destination: Destination

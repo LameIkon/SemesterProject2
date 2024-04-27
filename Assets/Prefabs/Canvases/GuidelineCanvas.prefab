@@ -1214,7 +1214,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1936155034107158785
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1501,9 +1501,9 @@ RectTransform:
   - {fileID: 8127558532227690734}
   m_Father: {fileID: 127844838669406263}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 960, y: -244.7725}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &5286506927784002346
@@ -1791,18 +1791,18 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5515166668798712895}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7787349877519418861}
-  m_Father: {fileID: 3402788156572480543}
+  m_Father: {fileID: 9094188554565617440}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -100}
-  m_SizeDelta: {x: 0, y: 289.545}
+  m_AnchoredPosition: {x: 0, y: -50}
+  m_SizeDelta: {x: 1820, y: 289.545}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &6554491108306298410
 MonoBehaviour:
@@ -2102,7 +2102,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6538348872811622545}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3312d7739989d2b4e91e6319e9a96d76, type: 3}
   m_Name: 
@@ -2174,9 +2174,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 2208591311121405318}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 494, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 494, y: -244.7725}
   m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7864415747982069308
@@ -2405,12 +2405,12 @@ GameObject:
   - component: {fileID: 2623655894411244352}
   - component: {fileID: 8638159889868636380}
   m_Layer: 5
-  m_Name: HungerGuide
+  m_Name: DragGuide
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &127844838669406263
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2418,18 +2418,18 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6820911294994214427}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5218337973875165260}
-  m_Father: {fileID: 3402788156572480543}
+  m_Father: {fileID: 9094188554565617440}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -100}
-  m_SizeDelta: {x: 0, y: 289.545}
+  m_AnchoredPosition: {x: 0, y: -50}
+  m_SizeDelta: {x: 1820, y: 289.545}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &614540371340167819
 MonoBehaviour:
@@ -2512,6 +2512,43 @@ CanvasGroup:
   m_Interactable: 0
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 1
+--- !u!1 &6832631042433593923
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9094188554565617440}
+  m_Layer: 5
+  m_Name: Hunger/HungerGuide
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &9094188554565617440
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6832631042433593923}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 127844838669406263}
+  - {fileID: 4655013592012945413}
+  m_Father: {fileID: 3402788156572480543}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 440}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &7153285454553189681
 GameObject:
   m_ObjectHideFlags: 0
@@ -2685,10 +2722,9 @@ RectTransform:
   - {fileID: 4156327767694967843}
   - {fileID: 4709230148608418477}
   - {fileID: 2208591311121405318}
-  - {fileID: 127844838669406263}
+  - {fileID: 9094188554565617440}
   - {fileID: 1574484204652553954}
   - {fileID: 3025070248726152075}
-  - {fileID: 4655013592012945413}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -2717,7 +2753,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 14
   m_TargetDisplay: 0
 --- !u!114 &936060499077241820
 MonoBehaviour:
@@ -2772,6 +2808,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _showMovement: 0
+  _isOngoingEvent: 0
   _showRunning: 0
   _showInventoryInteraction: 0
   _showChestInteraction: 0
@@ -2780,6 +2817,7 @@ MonoBehaviour:
   _showHealth: 0
   _showFood: 0
   _showStamina: 0
+  _showToolbar: 0
   _finishedMovement: 0
   _finishedRunning: 0
   _finishedInventoryInteraction: 0
@@ -2794,7 +2832,7 @@ MonoBehaviour:
   _inventoryCanvas: {fileID: 3849267755938205980}
   _chestCanvas: {fileID: 742158990728481300}
   _campfireCanvas: {fileID: 5487577167162574984}
-  _ToolbarCanvas: {fileID: 0}
+  _ToolbarCanvas: {fileID: 5515166668798712895}
   _temperatureCanvas: {fileID: 6538348872811622545}
   _foodCanvas: {fileID: 6820911294994214427}
   _staminaCanvas: {fileID: 39227360848881831}
@@ -2805,9 +2843,23 @@ MonoBehaviour:
   _inventoryScreen: {fileID: 0}
   _chestScreen: {fileID: 0}
   _campFireScreen: {fileID: 0}
+  _virtualCamera: {fileID: 0}
+  _cameraCurrentOrthoSize: {fileID: 0}
+  _cameraOriginalOrthoSize: 0
+  _cameraEnabledOrthoSize: 1
+  _cameraBeginningOrthoSize: 3
+  _cameraMidEnabledOrthoSize: 3
+  _cameraMidOrthoSize: 5
+  _canvasRestrictionHolder: {fileID: 0}
+  _doorRestrictionHolder: {fileID: 0}
+  _doors: []
+  _canvasBlocker: []
+  _captainDestinationWalk: {fileID: 0}
+  _captainSprite: {fileID: 0}
   _isMoving: 0
   _isRunning: 0
   _isfoodInToolBar: 0
+  _numberKeyPressed: 0
 --- !u!114 &1393042862867239259
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3226,7 +3278,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2390806152669474379, guid: 55c3c47cbe004ed488e793209c24ae0e, type: 3}
       propertyPath: m_text
-      value: E
+      value: F
       objectReference: {fileID: 0}
     - target: {fileID: 5565182285074688742, guid: 55c3c47cbe004ed488e793209c24ae0e, type: 3}
       propertyPath: m_Type

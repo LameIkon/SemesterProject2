@@ -66,7 +66,6 @@ public class StartDialogue : MonoBehaviour
            {
                 _showInteraction.SetActive(false); // Hide Interaction
                 _interactionChecker = true;
-                Debug.Log("called");
                 OnDialogueStartedEvent?.Invoke(); // This event is called such NPC do not move during dialogue
            }
         }

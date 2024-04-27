@@ -24,7 +24,7 @@ public class GameManager : PersistentSingleton<GameManager>
 
     public bool _mainSceneBool;
     public static bool _shipInBool;
-    private bool _isInventoryOpen = false;
+    public bool _isInventoryOpen = false;
     private bool _isPaused = false;
 
     public static bool _hideEInteractables; // used for scripts disable interactables such as chest and campfire
