@@ -17153,6 +17153,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 6559198030046953044, guid: 1b6f037146ed51b4fb9b68e1cb7ac0e3, type: 3}
     - target: {fileID: 6560139934568328296, guid: a2cb9d025f836b140aabfa0ffee3619f, type: 3}
+      propertyPath: _writingSpeed
+      value: 0.025
+      objectReference: {fileID: 0}
+    - target: {fileID: 6560139934568328296, guid: a2cb9d025f836b140aabfa0ffee3619f, type: 3}
       propertyPath: _captainProfile
       value: 
       objectReference: {fileID: 4382958607557508735, guid: 1adf7cd6806fb5b4aa8e3d810ab62c0c, type: 3}

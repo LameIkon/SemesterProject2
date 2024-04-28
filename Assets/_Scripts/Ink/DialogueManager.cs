@@ -1,5 +1,6 @@
 using Ink.Runtime;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Xml.Serialization;
 using TMPro;
@@ -44,7 +45,13 @@ public class DialogueManager : MonoBehaviour
 
     [Header("Global Ink Variables"), SerializeField]
     private TextAsset _globalVariables;
-    
+
+    [Header("TypeWriter Effect")]
+    [SerializeField] private TextMeshProUGUI _dialogueText;
+    [SerializeField] private TextMeshProUGUI _currentDialogue;
+    [SerializeField] private float _writingSpeed = 0.1f;
+    private string _storedText = "";
+    private GameObject _currentProile;
 
     public static event Action OnDialogueEndedEvent; // Event for when Dialogue is finnished
 
@@ -138,12 +145,18 @@ public class DialogueManager : MonoBehaviour
         TextMeshProUGUI nameHolderText = nameholder.GetComponentInChildren<TextMeshProUGUI>();
         nameHolderText.text = LoadNameOFNPC();
 
-        //Inser Image into profile
+        //Insert Image into profile
         LoadImageOFNPC(nameholder);
 
         // Insert dialogue data into dialogue and answer box
-        TextMeshProUGUI dialogueText = dialogueAnswerPrefab.GetComponentInChildren<TextMeshProUGUI>();
-        dialogueText.text = loadStoryChunk();
+        _currentDialogue = dialogueAnswerPrefab.GetComponentInChildren<TextMeshProUGUI>();
+        _currentDialogue.text = loadStoryChunk();
+
+
+        // Make typeWriter effect
+        _storedText = _currentDialogue.text;
+        _currentDialogue.text = "";
+        StartCoroutine(TypeWriterEffect(_currentDialogue, _storedText));
 
         if (_story.currentChoices.Count > 0) // If there is at least 1 choice button
         {
@@ -208,6 +221,7 @@ public class DialogueManager : MonoBehaviour
     }
     void chooseStoryChoice(Choice choice) // When button clicked 
     {
+        //StopCoroutine(nameof(TypeWriterEffect));
         _story.ChooseChoiceIndex(choice.index); // Show new dialogue from the choosen button path
         refreshUI();
     }
@@ -259,26 +273,26 @@ public class DialogueManager : MonoBehaviour
         if (_NPCName == "Hans")
         {
             Debug.Log("Scientist");
-            GameObject profile = Instantiate(_scientistProfile); // Takes a gameobject prefab
-            profile.transform.SetParent(nameholder.transform, false); // Set Image to the parent but keep its own transform
+            _currentProile = Instantiate(_scientistProfile); // Takes a gameobject prefab
+            _currentProile.transform.SetParent(nameholder.transform, false); // Set Image to the parent but keep its own transform
         }
         else if (_NPCName == "Ejnar")
         {
             Debug.Log("Captain");
-            GameObject profile = Instantiate(_captainProfile); // Takes a gameobject prefab
-            profile.transform.SetParent(nameholder.transform, false); // Set Image to the parent but keep its own transform
+            _currentProile = Instantiate(_captainProfile); // Takes a gameobject prefab
+            _currentProile.transform.SetParent(nameholder.transform, false); // Set Image to the parent but keep its own transform
         }
         else if (_NPCName == "Laub")
         {
             Debug.Log("Spy");
-            GameObject profile = Instantiate(_spyProfile); // Takes a gameobject prefab
-            profile.transform.SetParent(nameholder.transform, false); // Set Image to the parent but keep its own transform
+            _currentProile = Instantiate(_spyProfile); // Takes a gameobject prefab
+            _currentProile.transform.SetParent(nameholder.transform, false); // Set Image to the parent but keep its own transform
         }
         else
         {
             Debug.Log("default");
-            GameObject profile = Instantiate(_defaultProfile); // Takes a gameobject prefab
-            profile.transform.SetParent(nameholder.transform, false); // Set Image to the parent but keep its own transform
+            _currentProile = Instantiate(_defaultProfile); // Takes a gameobject prefab
+            _currentProile.transform.SetParent(nameholder.transform, false); // Set Image to the parent but keep its own transform
         }
     }
 
@@ -286,11 +300,34 @@ public class DialogueManager : MonoBehaviour
     void HandleInteract() 
     {
         _hasInteracted = true;
+
+        // Skip typeWriter effect
+        if (_StartedDialogue)
+        {
+            StopAllCoroutines();
+            _currentDialogue.text = _storedText;
+        }
+
     }
 
     void HandleInteractCancled() 
     {
         _hasInteracted = false;
+    }
+
+
+    IEnumerator TypeWriterEffect(TextMeshProUGUI dialogueText, string storedText)
+    {
+        Animator animator = _currentProile.GetComponentInChildren<Animator>();
+        animator.Play("Speak");
+        string currentText = "";
+        foreach (char c in storedText)
+        {
+            currentText += c;
+            dialogueText.text = currentText;
+            yield return new WaitForSeconds(_writingSpeed); // Adjust the typing speed as needed
+        }
+        animator.Play("Idle");
     }
 
 }
