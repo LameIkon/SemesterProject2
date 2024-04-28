@@ -11,6 +11,7 @@ TagManager:
   - Chest
   - Bonfire
   - ItemDescriptionHolder
+  - TemperatureImage
   layers:
   - Default
   - TransparentFX

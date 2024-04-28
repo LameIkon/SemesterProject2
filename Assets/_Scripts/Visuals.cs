@@ -4,31 +4,35 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 public class Visuals : MonoBehaviour
 {
     [Header("Objects")] 
     [SerializeField] private Volume _volume;
     [Space(5f)]
-    
-    [Header("Freeze")]
-    [SerializeField] private FloatReference _currentTemperature;
-    [SerializeField] private float _threshold;
-    [SerializeField] private float _changeRate;
-    [SerializeField] private float _temperatureVolumeAboveThreshold;
-    [SerializeField] private float _temperatureVolumeBelowThreshold;
-    [SerializeField] protected bool _isCold;
-    [CanBeNull] private ClampedFloatParameter _cfp;
-    private float _defaultTVAboveT;
-    private float _defaultTVBelowT;
-    private bool _defaulter;
-    private WhiteBalance _whiteBalance;
-    private Vignette _vignette;
-    [Space(5f)]
 
     [Header("Health")] 
     [SerializeField] private FloatReference _currentHealth;
     [SerializeField] private float _healthThreshold;
+    private Vignette _vignette;
+    [Space(5f)]
+    
+    [Header("Temperature")]
+    [SerializeField] private FloatReference _currentTemperature;
+    [SerializeField] private Color _colorAboveThreshold; 
+    [SerializeField] private Color _colorBelowThreshold;
+    [SerializeField] private float _temperatureThreshold;
+    [SerializeField] private float _changeRate;
+    [SerializeField] private float _temperatureVolumeAboveThreshold;
+    [SerializeField] private float _temperatureVolumeBelowThreshold;
+    [SerializeField] protected bool _isCold;
+    private float _defaultTVAboveT;
+    private float _defaultTVBelowT;
+    private bool _defaulter;
+    private Image _temperatureIcon;
+    private ClampedFloatParameter _cfp;
+    private WhiteBalance _whiteBalance;
     [Space(5f)]
     
     [Header("Hunger")] 
@@ -39,30 +43,38 @@ public class Visuals : MonoBehaviour
     
         private void Awake()
         {
-            #region Freeze Variables
+            #region Health Variables
             
-                _defaulter = true; // Assures that 
+                Vignette vig;   // Used to initialize Volume components
+            
+                switch (_volume.profile.TryGet<Vignette>(out vig)) { case true: _vignette = vig; break; }   // Initializes Volume components
+            
+            #endregion
+            
+            #region Temperature Variables
 
-                _defaultTVAboveT = _temperatureVolumeAboveThreshold; // For resetting _temperatureVolumeAboveThreshold
-                _defaultTVBelowT = _temperatureVolumeBelowThreshold; // For resetting _temperatureVolumeBelowThreshold
-                
-                _cfp = new ClampedFloatParameter(_defaultTVAboveT, _defaultTVBelowT, _defaultTVAboveT, true);
-                
-                WhiteBalance wb; 
-                Vignette vig;
+                _temperatureIcon = GameObject.FindWithTag("TemperatureImage").GetComponent<Image>();
+            
+                _defaulter = true;  // Assures only one use of the if-statement in DisableFreezeVisual() 
 
-                switch (_volume.profile.TryGet<WhiteBalance>(out wb)) { case true: _whiteBalance = wb; break; }
-                switch (_volume.profile.TryGet<Vignette>(out vig)) { case true: _vignette = vig; break; }
+                _defaultTVAboveT = _temperatureVolumeAboveThreshold; // To reset _temperatureVolumeAboveThreshold after being changed
+                _defaultTVBelowT = _temperatureVolumeBelowThreshold; // To reset _temperatureVolumeBelowThreshold after being changed
                 
+                _cfp = new ClampedFloatParameter(_defaultTVAboveT, _defaultTVBelowT, _defaultTVAboveT, true);   // Sets the Volume Temperature to the default 
+                
+                WhiteBalance wb;    // Used to initialize Volume components
+
+                switch (_volume.profile.TryGet<WhiteBalance>(out wb)) { case true: _whiteBalance = wb; break; } // Initializes Volume components
+
             #endregion
         }
 
         private void Update()
         {
-            // print(_currentTemperature.Value);
-            _whiteBalance.temperature.SetValue(_cfp);
             
-            switch (_currentTemperature < _threshold) {
+            _whiteBalance.temperature.SetValue(_cfp); // Avoids a NullReference
+            
+            switch (_currentTemperature < _temperatureThreshold) {
                 case true: EnableFreezeVisual(); break;
                 case false: DisableFreezeVisual(); break;
             }
@@ -70,10 +82,12 @@ public class Visuals : MonoBehaviour
         
     #endregion
     
-    #region Freeze Methods
+    #region Temperature Methods
     
         protected virtual void EnableFreezeVisual()
         {
+            _temperatureIcon.color = _colorBelowThreshold;
+            
             _defaulter = false; // Assures only one use of the if-statement in DisableFreezeVisual()
             _isCold = true;
             
@@ -90,6 +104,7 @@ public class Visuals : MonoBehaviour
 
         protected virtual void DisableFreezeVisual()
         {
+            _temperatureIcon.color = _colorAboveThreshold;
             _isCold = false;
             
             if (_defaulter) // Will only be accessed at the start of the game
@@ -126,6 +141,7 @@ public class Visuals : MonoBehaviour
     #endregion
     
     #region Hunger Methods
+    
         private void EnableHungerVisual()
         {
         
