@@ -33,7 +33,7 @@ public class SkipGuide : MonoBehaviour
         if (!_ShowGuide && _hideGuide) // if set to false skip it
         {
             GuidelineManager.instance.CompleteTutorial(); // Call the script that will show all survival bars
-            _guidelineManager.SetActive(false); // Deactiave the Guideline gameobject with its scripts
+            //_guidelineManager.SetActive(false); // Deactiave the Guideline gameobject with its scripts
            gameObject.GetComponent<CanvasGroup>().alpha = 0f; // Start coroutine to fade out this gameobject
             _skipGuide = true;
             _hideGuide = false;
@@ -58,7 +58,7 @@ public class SkipGuide : MonoBehaviour
         if (!_skipGuide)
         {
             GuidelineManager.instance.CompleteTutorial(); // Call the script that will show all survival bars
-            _guidelineManager.SetActive(false); // Deactiave the Guideline gameobject with its scripts
+            //_guidelineManager.SetActive(false); // Deactiave the Guideline gameobject with its scripts
             StartCoroutine(FadeOut(this.gameObject)); // Start coroutine to fade out this gameobject
             _skipGuide = true;
         }

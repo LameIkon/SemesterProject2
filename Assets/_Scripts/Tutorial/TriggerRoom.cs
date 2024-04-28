@@ -8,7 +8,12 @@ public class TriggerRoom : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.name == "Player")
+        if ( GuidelineManager.instance._finishedInsideTutorial) // Wont get triggered if tutorial finished
+        {
+            this.gameObject.SetActive(false);
+            return;
+        }
+        else if (collision.gameObject.name == "Player")
         {
             GuidelineManager.instance._isOngoingEvent = true;
             this.gameObject.SetActive(false);
