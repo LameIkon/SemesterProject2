@@ -1,48 +1,41 @@
-using Cinemachine;
 using Ink.Parsed;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(BoxCollider2D))]
-public class ChestManager : MonoBehaviour
+public class JournalChests : MonoBehaviour
 {
-    [SerializeField] private GameObject _chestCanvas;
 
-   
-    [SerializeField] private InventoryObject _chestInventory;
+    [SerializeField] private GameObject _journalChestCanvas;
     [SerializeField] private ChestFiller _chestFiller;
+    [SerializeField] private InventoryObject _chestInventory;
     [SerializeField] private ItemDatabaseObject _database;
     private StaticInterface _chestInterface;
-    
-    
-    private bool _turn = false;
-    private InventorySlot[] _slots = new InventorySlot[6];
 
-    [SerializeField] private bool _canOpenChest = false;
-    [SerializeField] private bool _chestIsfilled = false;
+    private InventorySlot[] _slots = new InventorySlot[1];
+
+
+    private bool _canOpenChest = false;
+    private bool _turn = false;
+    private bool _chestIsfilled = false;
+
 
     private void Start()
     {
-
-        _chestInterface = _chestCanvas.GetComponent<StaticInterface>();
+        _chestInterface = _journalChestCanvas.GetComponent<StaticInterface>();
         _chestInterface._Inventory = _chestInventory;
-        _chestCanvas.SetActive(false);
-
 
         if (!_chestIsfilled)
         {
             _chestIsfilled = true;
-
             FillUpChest();
-
         }
     }
 
     void OnEnable()
     {
         InputReader.OnInteractEvent += HandleInteract;
-        _chestCanvas.SetActive(false);
+        _journalChestCanvas.SetActive(false);
     }
 
     private void OnDisable()
@@ -50,51 +43,22 @@ public class ChestManager : MonoBehaviour
         InputReader.OnInteractEvent -= HandleInteract;
     }
 
-
     void HandleInteract()
     {
         if (_canOpenChest)
         {
+
             OpenChest();
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.name == "Player") 
-        {          
-            _canOpenChest = true;
-           
-        }        
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.gameObject.name == "Player")
-        {
-            _chestCanvas.SetActive(false);
-            GameManager._inventoryMenuSTATIC.SetActive(false);
-            _canOpenChest=false;
-            _turn = false;
-        }
-    }
-    private void FillUpChest()
-    {
-        if (_chestFiller != null)
-        {
-            _chestInventory.InitializeInventory(_chestFiller.ReturnSlots(), _database, new Inventory(_slots));
-        }
-    }
-
-
     private void OpenChest()
     {
         _turn = !_turn;
-        _chestCanvas.SetActive(_turn);
+        _journalChestCanvas.SetActive(_turn);
+        GameManager._inventoryMenuSTATIC.SetActive(_turn);
         // check interactability 
         Interactable();
-
-        GameManager._inventoryMenuSTATIC.SetActive(_turn);
     }
 
     void Interactable()
@@ -103,11 +67,31 @@ public class ChestManager : MonoBehaviour
         GameManager._hideEInteractables = _turn;
     }
 
-    private void OnApplicationQuit()
-    {        
-        _chestInventory._Container.Clear();       
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.name == "Player")
+        {
+            _canOpenChest = true;
+
+        }
     }
 
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.name == "Player")
+        {
+            _journalChestCanvas.SetActive(false);
+            GameManager._inventoryMenuSTATIC.SetActive(_turn);
+            _canOpenChest = false;
+            _turn = false;
+        }
+    }
 
-
+    private void FillUpChest()
+    {
+        if (_chestFiller != null)
+        {
+            _chestInventory.InitializeInventory(_chestFiller.ReturnSlots(), _database, new Inventory(_slots));
+        }
+    }
 }
