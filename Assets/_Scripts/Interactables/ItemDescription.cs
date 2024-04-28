@@ -13,18 +13,28 @@ public class ItemDescription : MonoBehaviour, IPointerEnterHandler, IPointerExit
     private Image _slot; // Slot image to check
     static bool _hovering; // Used to ensure hovingering over image
     private bool _showDescription;
+    private bool _itemDescriptionActive; // used to say that the description in this script is active
     [SerializeField] private GameObject _itemDescriptionCanvas; // The description Canvas
+
+    private void OnDisable()
+    {
+        // Run this only when the image is active
+        if (_itemDescriptionActive && _hovering)
+        {
+            _itemDescriptionActive = false;
+            _hovering = false;
+            Invoke("HideDescription", 0f);
+           
+        }
+    }
 
     private void Update()
     {
         // Invenotory slots only gets instantiated when it gets open. thats why it might not find it first time
         if (_itemDescriptionCanvas == null) // if for some reason it cant find the canvas try activate the canvas
         {
-            //StartCoroutine(ItemDescriptionHandler.instance.Disable()); // make the canvas true for a moment
             _itemDescriptionCanvas = ItemDescriptionHandler.instance._Handler; // Much easier solution to get the gameObject
-            //_itemDescriptionCanvas = GameObject.FindWithTag("ItemDescriptionHolder"); // Find the Canvas
-        }
-        
+        }              
     }
 
     public void OnPointerEnter(PointerEventData eventData) // When mouse is hovering over it
@@ -32,6 +42,7 @@ public class ItemDescription : MonoBehaviour, IPointerEnterHandler, IPointerExit
         _slot = GetComponent<Image>();
         
         _showDescription = true;
+        _itemDescriptionActive= true;
 
         foreach (Sprite IgnoreImage in _ignoreImages)
         {
@@ -58,6 +69,7 @@ public class ItemDescription : MonoBehaviour, IPointerEnterHandler, IPointerExit
         if (_hovering)
         {
             _hovering = false;
+            _itemDescriptionActive = false;
             Invoke("HideDescription", 0.3f);
         }
     }
@@ -78,7 +90,7 @@ public class ItemDescription : MonoBehaviour, IPointerEnterHandler, IPointerExit
     {
         if (!_hovering)
         {
-            _itemDescriptionCanvas.SetActive(false);
+            _itemDescriptionCanvas.SetActive(false);            
         }
     }
 }

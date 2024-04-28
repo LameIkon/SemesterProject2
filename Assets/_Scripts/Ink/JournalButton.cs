@@ -10,7 +10,7 @@ public class JournalButton : MonoBehaviour
 
     private void OnEnable()
     {
-        // Deactivate a page if its active
+        // Deactivate pages if active
         foreach (var page in _pages)
         {
             page.SetActive(false);

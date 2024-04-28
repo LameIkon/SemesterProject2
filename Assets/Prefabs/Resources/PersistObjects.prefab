@@ -229,10 +229,6 @@ MonoBehaviour:
   - {fileID: 1429598214449850619}
   - {fileID: 4394670027385217616}
   - {fileID: 2911141409073825561}
-  _currentPage: {fileID: 0}
-  _page1: {fileID: 1429598214449850619}
-  _page2: {fileID: 4394670027385217616}
-  _indexNumber: 0
 --- !u!1 &378013652987646904
 GameObject:
   m_ObjectHideFlags: 0
@@ -5865,10 +5861,6 @@ MonoBehaviour:
   _pages:
   - {fileID: 5976349754891345945}
   - {fileID: 8333413087345006597}
-  _currentPage: {fileID: 0}
-  _page1: {fileID: 5976349754891345945}
-  _page2: {fileID: 8333413087345006597}
-  _indexNumber: 0
 --- !u!1 &1062471926173514226
 GameObject:
   m_ObjectHideFlags: 0
@@ -11884,10 +11876,6 @@ MonoBehaviour:
   _pages:
   - {fileID: 1093729355639834709}
   - {fileID: 6821090300468415543}
-  _currentPage: {fileID: 0}
-  _page1: {fileID: 1093729355639834709}
-  _page2: {fileID: 6821090300468415543}
-  _indexNumber: 0
 --- !u!1 &8506810145093739970
 GameObject:
   m_ObjectHideFlags: 0
@@ -16202,6 +16190,7 @@ MonoBehaviour:
   _joerensJournalSprite: {fileID: 0}
   _ludvigsJournalSprite: {fileID: 21300000, guid: faf9566ea476ad743a582f11855a2071, type: 3}
   _nielsJournalSprite: {fileID: 1158446427, guid: 63a1069407649344d8c1c43f0302f97c, type: 3}
+  _InventoryCanvas: {fileID: 357719788478398293}
 --- !u!225 &4351749882819959996
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -20555,7 +20544,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: GuidelineCanvas
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1393042862867239259, guid: 3bd13d619094d8544a258a73d50c1dee, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 3402788156572480543, guid: 3bd13d619094d8544a258a73d50c1dee, type: 3}
