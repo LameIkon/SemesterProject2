@@ -30,7 +30,7 @@ public class GuidelineManager : MonoBehaviour
 
     #pragma warning restore 0414
 
-    [Header("Canvases")]
+    [Header("Guide Canvases")]
     [SerializeField] private GameObject _movementCanvas;
     [SerializeField] private GameObject _runningCanvas;
     [SerializeField] private GameObject _inventoryCanvas;
@@ -39,11 +39,12 @@ public class GuidelineManager : MonoBehaviour
     [SerializeField] private GameObject _ToolbarCanvas;
 
     [SerializeField, Space(5)] private GameObject _temperatureCanvas;
-    //[SerializeField, Space(5)] private GameObject _foodCanvas;
     [SerializeField] private GameObject _dragCanvas;
     [SerializeField] private GameObject _toolbarCanvas;
     [SerializeField] private GameObject _useItemCanvas;
     [SerializeField] private GameObject _staminaCanvas;
+    [SerializeField] private GameObject _lanternCanvas;
+
 
 
     [Header("Surivival Bars")]
@@ -75,6 +76,7 @@ public class GuidelineManager : MonoBehaviour
     [SerializeField] private List<Transform> _canvasBlocker = new List<Transform>();
     [SerializeField] private GameObject _trigger4thRoom;
     [SerializeField] private Furnace _furnace;
+    [SerializeField] private GameObject _guideInScene;
 
 
     [Header("Captain")]
@@ -86,10 +88,14 @@ public class GuidelineManager : MonoBehaviour
     [SerializeField] private GameObject _scientistSprite;
 
     [Header("checkers")]
+    [SerializeField] private GameObject _lantern;
     [SerializeField] private bool _isRunning;
+    [SerializeField] private bool _isInventoryOpen;
     public bool _isfoodInToolBar;
+    public bool _isLanterInToolBar;
     public bool _numberKeyPressed;
     public bool _usedItem;
+    [SerializeField] private bool _finishedInsideTutorial;
 
 
     private const float _delayTimer = 0.8f;
@@ -126,6 +132,7 @@ public class GuidelineManager : MonoBehaviour
     {
         InputReader.OnRunStartEvent += ResetRunningBool; // called whenever you start running
         InputReader.OnRunCancelEvent += ResetRunningBool; // called whenever you stop running
+        InputReader.OnInventoryEvent += HandleInventoryBool;
         SceneManager.sceneLoaded += OnSceneLoaded;
         Invoke("ShowHealth", 2f);
         StartCoroutine(Show1stRoom());
@@ -135,14 +142,22 @@ public class GuidelineManager : MonoBehaviour
     private void OnDisable()
     {
         InputReader.OnRunStartEvent -= ResetRunningBool; // called whenever you start running
-        InputReader.OnRunCancelEvent += ResetRunningBool; // called whenever you stop running
+        InputReader.OnRunCancelEvent -= ResetRunningBool; // called whenever you stop running
+        InputReader.OnInventoryEvent -= HandleInventoryBool;
         SceneManager.sceneLoaded -= OnSceneLoaded;
 
         ResetGuideLine(); // reset all bools and canvases
     }
 
+    // Maybe make it a coroutine
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        if (GameManager._Instance._mainSceneBool)
+        {
+            Debug.Log("destroy");
+            //RemoveRestriction();
+        }
+
         // Find the restrictive blockers on the scene. Does not work onEnable method since it dosent get the bool at the moment it gets changed
         if (GameManager._shipInBool && _canvasRestrictionHolder == null) // Only check when on the ship
         {
@@ -153,6 +168,8 @@ public class GuidelineManager : MonoBehaviour
             _captainAnimator = _captainDestinationWalk.GetComponent<Animator>(); // The controller to move destination
             _captainSprite = GameObject.Find("NPC"); // The captain. Used to get the chat bubbles
             _scientistSprite = GameObject.Find("NPC (1)"); // The scientist. Used to get the chat bubbles
+            _guideInScene = GameObject.Find("Guide");
+            DontDestroyOnLoad(_guideInScene); // We dont want to reset everytime we leave the ship and enter again
 
             // Find all the child gameobjects and delegate them to a list. gameobject order is important
             Transform canvasParent = _canvasRestrictionHolder.transform;
@@ -175,8 +192,12 @@ public class GuidelineManager : MonoBehaviour
 
             // Deactivate trigger for later use
             _trigger4thRoom.SetActive(false);
-
-
+            Debug.Log("loaded");
+        }
+        else if (_finishedInsideTutorial)
+        {
+            NoRestrictions();
+            Debug.Log("restrict");
         }
     }
 
@@ -221,7 +242,7 @@ public class GuidelineManager : MonoBehaviour
         StartCoroutine(ShowRoom(_canvasBlocker[0], _doors[0])); // Its expected that midle room is the first index
         StartCoroutine(FadeCameraIn(_cameraMidOrthoSize));
         yield return new WaitWhile(() => !_isOngoingEvent); // wait until the ongoing event trigger becomes true
-        StartCoroutine(CaptainFadeIn(_captainSprite));
+        StartCoroutine(CaptainFadeIn(_captainSprite, 1.5f));
         yield return new WaitForSeconds(1f);
         _captainAnimator.Play("point1");
         yield return new WaitForSeconds(0.75f);
@@ -237,12 +258,12 @@ public class GuidelineManager : MonoBehaviour
 
 
 
-    IEnumerator CaptainFadeIn(GameObject gameObject)
+    IEnumerator CaptainFadeIn(GameObject gameObject, float fadeInDuration)
     {
         SpriteRenderer spriteRenderer = gameObject.GetComponentInChildren<SpriteRenderer>();
 
         float currentTime = 0f;
-        float fadeInDuration = 1.5f; // Duration of the fadein effect
+        //float fadeInDuration = 1.5f; // Duration of the fadein effect
         Color targetColor = spriteRenderer.color; // Get the initial color of the sprite
 
         while (currentTime < fadeInDuration)
@@ -300,7 +321,7 @@ public class GuidelineManager : MonoBehaviour
         StartCoroutine(FadeOut(_useItemCanvas));
         yield return new WaitUntil(() => !_useItemCanvas.activeInHierarchy); // wait until the ongoing event becomes false
         _inventoryCanvas.SetActive(true);
-        yield return new WaitUntil(() => _inventoryScreen.activeSelf); // Wait until the inventory gets opened
+        yield return new WaitUntil(() => _isInventoryOpen); // Wait until the inventory gets opened
         StartCoroutine(FadeOut(_inventoryCanvas));
         yield return new WaitForSeconds(1f);
 
@@ -359,8 +380,18 @@ public class GuidelineManager : MonoBehaviour
         yield return new WaitForSeconds(1.5f);
         _captainAnimator.Play("point13");
 
-        // Scientist gets its moment to shine
+        // Scientist gets his moment to shine
         _scientistSprite.transform.GetChild(2).gameObject.SetActive(true); // Get the 1st chatbubble and activate it
+
+        // Back to the tutorial
+        yield return new WaitUntil(() => _isOngoingEvent); // wait until the ongoing event trigger becomes true
+        _isOngoingEvent = false;
+        _captainSprite.transform.GetChild(6).gameObject.SetActive(true); // Get the 5th chatbubble and activate it
+        yield return new WaitUntil(() => GameManager._inventoryMenuSTATIC.activeSelf); // wait until the ongoing event trigger becomes true
+        _lanternCanvas.SetActive(true);
+        yield return new WaitUntil(() => _lantern.activeInHierarchy); // wait until lantern is active
+        StartCoroutine(FadeOut(_lanternCanvas));
+        _finishedInsideTutorial = true; // Tutorial inside ship finished
 
         // start outside tutorial
         StartCoroutine(Outside());
@@ -388,6 +419,11 @@ public class GuidelineManager : MonoBehaviour
     void ResetRunningBool() // called whenever you stop running
     {
         _isRunning = !_isRunning;
+    }
+
+    void HandleInventoryBool()
+    {
+        _isInventoryOpen = !_isInventoryOpen;
     }
     public void CompleteTutorial()
     {
@@ -455,6 +491,27 @@ public class GuidelineManager : MonoBehaviour
         _temperatureAnimator.Play("IdleOutsideScreen");
         _foodAnimator.Play("IdleOutsideScreen");
         _staminaAnimator.Play("IdleOutsideScreen");
+    }
+
+    void NoRestrictions()
+    {
+        StartCoroutine(CaptainFadeIn(_captainSprite, 0.1f));
+        _captainAnimator.Play("point3");
+        //// Remove camera blockers
+        //foreach (Transform canvas in _canvasBlocker)
+        //{
+        //    canvas.gameObject.SetActive(false);
+        //}
+        //// Remove Doors
+        //foreach (Transform doors in _doors)
+        //{
+        //    doors.gameObject.SetActive(false);
+        //}
+    }
+    void RemoveRestriction()
+    {
+        _canvasRestrictionHolder = null; // reset
+        Destroy(_guideInScene);
     }
 
     void ResetGuideLine()
