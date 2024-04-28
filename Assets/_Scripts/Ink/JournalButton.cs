@@ -4,36 +4,46 @@ using UnityEngine;
 
 public class JournalButton : MonoBehaviour
 {
-    [SerializeField] private UnityEngine.GameObject _page1;
-    [SerializeField] private UnityEngine.GameObject _page2;
+    [SerializeField] private List<GameObject> _pages; // Put all pages in the inspecter here
+    private GameObject _currentPage;
+    private int _indexNumber;
 
     private void OnEnable()
     {
-        _page1.SetActive(true); // Activate current page
-
-        if (_page2 != null)
+        // Deactivate a page if its active
+        foreach (var page in _pages)
         {
-            _page2.SetActive(false); // Deactivate current page
+            page.SetActive(false);
         }
+
+        _indexNumber = 0; // initilize the index number
+        _currentPage = _pages[_indexNumber]; // Store the first page as the first
+        _currentPage.SetActive(true); // Set the page to active
     }
 
-    public void NextPage()
+    public void NextPage() // Button
     {
-        _page1.SetActive(false); // Deactivate current page
+        // Deactive the current page
+        _currentPage.SetActive(false);
 
-        if (_page2 != null )
-        {
-            _page2.SetActive(true); // Activate next page
-        }
+        // Get the new page
+        _indexNumber++; // increase index number
+        _currentPage = _pages[_indexNumber]; // Get the new page
+        _currentPage.SetActive(true); // activate the new page
     }
 
-    public void PreviousPage()
+    public void PreviousPage() // Button
     {
-        _page2.SetActive(false); // Deactivate current page
-        _page1.SetActive(true); // Activate prevoius page
+        // Deactive the current page
+        _currentPage.SetActive(false);
+
+        // Get the new page
+        _indexNumber--; // decrease the index number
+        _currentPage = _pages[_indexNumber]; // Get the new page
+        _currentPage.SetActive(true); // activate the new page
     }
 
-    public void ExitPage()
+    public void ExitPage() // Button
     {
        this.gameObject.SetActive(false); // Deactivate the journal
     }
