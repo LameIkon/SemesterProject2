@@ -49,6 +49,16 @@ public class FurnaceManager : MonoBehaviour
         Interactable();
     }
 
+    public void CloseFire()
+    {
+        _FurnaceCanvasSTATIC.SetActive(false);
+        if (_furnaceCanvas.activeInHierarchy)
+        {
+            GameManager._inventoryMenuSTATIC.SetActive(false);
+        }
+        _turn = false;
+    }
+
     void Interactable()
     {
         // Show or disable E highlight

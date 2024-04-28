@@ -19,12 +19,20 @@ public class GameManager : PersistentSingleton<GameManager>
     [SerializeField] private GameObject _playerMovePoint;
     public static GameObject _inventoryMenuSTATIC;
 
-   
+    [Header("chests")]
+    [SerializeField] private List<GameObject> _chestCanvases;
+    [SerializeField] private List<GameObject> _chests;
+
+    [Header("Fire")]
+    [SerializeField] private List<GameObject> _fireCanvases;
+    [SerializeField] private List<GameObject> _firePlaces;
+
 
 
     public bool _mainSceneBool;
     public static bool _shipInBool;
     public bool _isInventoryOpen = false;
+    public bool _isChestOpen;
     private bool _isPaused = false;
 
     public static bool _hideEInteractables; // used for scripts disable interactables such as chest and campfire
@@ -116,7 +124,7 @@ public class GameManager : PersistentSingleton<GameManager>
 
     public void HandlePause() 
     {
-        if (!_mainSceneBool)
+        if (!_mainSceneBool && !_inventoryMenu.activeInHierarchy)
         {
             if (_isPaused) 
             {
@@ -131,28 +139,68 @@ public class GameManager : PersistentSingleton<GameManager>
                 _pauseMenu.SetActive(true);
                 Time.timeScale = 0f;
             }
-
-            
+            return;
+        }
+        // handle inventory instead
+        else
+        {
+            HandleInventory();
         }
     }
 
 
     private void HandleInventory() 
     {
-
-        if (_isInventoryOpen)
+        // Inventory
+        if (_inventoryMenu.activeInHierarchy)
         {
             _inventoryMenu.SetActive(false);
             _hideEInteractables = false; // interactables can be seen again
             _isInventoryOpen = false;
+
+            // Check if any chests are active
+            foreach (var chest in _chestCanvases)
+            {
+                if (chest.activeInHierarchy)
+                {
+                    //chest.SetActive(false);
+
+                    Debug.Log("found active chest");
+
+                    // not the most effecient way but we will close all chests
+                    foreach (var chestManager in _chests)
+                    {
+                        chestManager.GetComponent<ChestManager>().CloseChest();
+                    }
+                }
+            }
+
+            // Check fire places
+            foreach (var firePlace in _fireCanvases)
+            {
+                if (firePlace.activeInHierarchy)
+                {
+                    Debug.Log("found active fire");
+
+                    // not the most effecient way but we will close all fires
+                    foreach (var fireManager in _firePlaces)
+                    {
+                        fireManager.GetComponent<FurnaceManager>().CloseFire();
+                    }
+                }
+            }
         }
-        else
+
+        else if (!_inventoryMenu.activeInHierarchy)
         {
             _inventoryMenu.SetActive(true);
             _hideEInteractables = true; // Hide E interactables
             _isInventoryOpen=true;
         }
+
+       
     }
+ 
 
 
 }

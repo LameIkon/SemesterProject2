@@ -72,10 +72,8 @@ public class ChestManager : MonoBehaviour
     {
         if (collision.gameObject.name == "Player")
         {
-            _chestCanvas.SetActive(false);
-            GameManager._inventoryMenuSTATIC.SetActive(false);
-            _canOpenChest=false;
-            _turn = false;
+            _canOpenChest = false;
+            CloseChest();
         }
     }
     private void FillUpChest()
@@ -95,6 +93,17 @@ public class ChestManager : MonoBehaviour
         Interactable();
 
         GameManager._inventoryMenuSTATIC.SetActive(_turn);
+    }
+
+    public void CloseChest()
+    {
+        _chestCanvas.SetActive(false);
+
+        if (_chestCanvas.activeInHierarchy)
+        {
+            GameManager._inventoryMenuSTATIC.SetActive(false);
+        }
+        _turn = false;
     }
 
     void Interactable()

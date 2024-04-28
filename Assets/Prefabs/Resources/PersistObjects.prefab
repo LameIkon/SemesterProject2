@@ -11931,8 +11931,22 @@ MonoBehaviour:
   _guideline: {fileID: 432784352885748221}
   _player: {fileID: 8991630676613270584}
   _playerMovePoint: {fileID: 3562249831111092549}
+  _chestCanvases:
+  - {fileID: 7882089827423626170}
+  - {fileID: 1062471926173514226}
+  - {fileID: 6953245557947432305}
+  _chests:
+  - {fileID: 8546132965809463307}
+  - {fileID: 3312145102739056683}
+  - {fileID: 2387614818641749877}
+  _fireCanvases:
+  - {fileID: 2665887907394615120}
+  - {fileID: 8847272244634688858}
+  _firePlaces:
+  - {fileID: 1087026547368166556}
   _mainSceneBool: 0
   _isInventoryOpen: 0
+  _isChestOpen: 0
 --- !u!1 &8628404958196252046
 GameObject:
   m_ObjectHideFlags: 0
@@ -14134,6 +14148,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3957924705540695626, guid: d92e65e013c17934c8d0344632014392, type: 3}
+      propertyPath: m_Color.a
+      value: 0.8
+      objectReference: {fileID: 0}
     - target: {fileID: 4072973153507781996, guid: d92e65e013c17934c8d0344632014392, type: 3}
       propertyPath: m_Name
       value: InkButtonV2 (1)
@@ -16190,7 +16208,6 @@ MonoBehaviour:
   _joerensJournalSprite: {fileID: 0}
   _ludvigsJournalSprite: {fileID: 21300000, guid: faf9566ea476ad743a582f11855a2071, type: 3}
   _nielsJournalSprite: {fileID: 1158446427, guid: 63a1069407649344d8c1c43f0302f97c, type: 3}
-  _InventoryCanvas: {fileID: 357719788478398293}
 --- !u!225 &4351749882819959996
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -18651,6 +18668,11 @@ PrefabInstance:
 --- !u!4 &3290451269145587683 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5455131016030683094, guid: 5def9f13b1d6da24fbfe167a3a8da211, type: 3}
+  m_PrefabInstance: {fileID: 7358463148944166965}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8546132965809463307 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1191049923966709822, guid: 5def9f13b1d6da24fbfe167a3a8da211, type: 3}
   m_PrefabInstance: {fileID: 7358463148944166965}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7367442593260126327
