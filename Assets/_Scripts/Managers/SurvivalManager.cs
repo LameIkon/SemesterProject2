@@ -66,14 +66,15 @@ public class SurvivalManager : MonoBehaviour, IDamageable, IFreezeable, IStarvea
     [SerializeField] private MovementController _movementController;
     [SerializeField] private GameObject _lantern;
 
+
+
     #region Unity Methods
-    void Start()
+
+    private void OnEnable()
     {
-        _healthPoint.SetValue(100);
-        _hungerPoint.SetValue(100);
-        _freezePoint.SetValue(100);
-        _staminaPoint.SetValue(100);
+        Invoke(nameof(SetSurvivalbars), 0.1f); // need a small delay
     }
+
 
 
     void FixedUpdate()
@@ -83,6 +84,14 @@ public class SurvivalManager : MonoBehaviour, IDamageable, IFreezeable, IStarvea
 
     }
     #endregion
+
+    void SetSurvivalbars()
+    {
+        _healthPoint.SetValue(100);
+        _hungerPoint.SetValue(100);
+        _freezePoint.SetValue(100);
+        _staminaPoint.SetValue(100);
+    }
 
     public void Die()
     {
