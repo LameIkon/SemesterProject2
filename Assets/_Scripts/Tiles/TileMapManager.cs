@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using Random = UnityEngine.Random;
 
 /// <summary>
 /// This script holds the tilemaps in the scenes. It gets them from events from other scripts, and updates which tilemaps are currently loaded.
@@ -10,9 +11,12 @@ using UnityEngine.Tilemaps;
 [RequireComponent(typeof(AudioSource))]
 public class TileMapManager : PersistentSingleton<TileMapManager>
 {
-    [SerializeField] private List<Tilemap> _tilemaps; // This is a list because it will change during runtime
+    [Header("TileMaps"),SerializeField] private List<Tilemap> _tilemaps; // This is a list because it will change during runtime
 
-    [SerializeField] private TileData[] _tileDatas; // An array of all the walking sounds that have been will bee used, this is constant
+    [Header("TileData"),Tooltip("This is what makes the walking have sounds"),SerializeField] private TileData[] _tileDatas; // An array of all the walking sounds that have been will bee used, this is constant
+
+    [Space(3f), Header("Variation in sounds"),SerializeField] private RangedFloat _pitchVariation;   // Used to make the walking sounds more varied
+    [SerializeField] private RangedFloat _volumeVariation;
 
     private AudioSource _audioSource;
 
@@ -72,7 +76,7 @@ public class TileMapManager : PersistentSingleton<TileMapManager>
             }
             else 
             {
-                return;
+                continue;
             }
         }
 
@@ -84,6 +88,8 @@ public class TileMapManager : PersistentSingleton<TileMapManager>
         }
         else 
         {
+            _audioSource.pitch = Random.Range(_pitchVariation.MinValue, _pitchVariation.MaxValue);
+            _audioSource.volume = Random.Range(_volumeVariation.MinValue, _volumeVariation.MaxValue);  
             _audioSource.clip = clip;
             _audioSource.Play();
         }

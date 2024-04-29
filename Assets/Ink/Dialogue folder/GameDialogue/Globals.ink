@@ -1,18 +1,18 @@
-
+// These are the variables that switch between the different dialogues
 // Variables Overall
-VAR joergenDiaryFound = false
-VAR nielsDiaryFound = false
-VAR ludvigDiaryFound = false
-VAR theCardFound = false
+VAR joergenDiaryFound = false   //false
+VAR nielsDiaryFound = false     //false
+VAR ludvigDiaryFound = false    //false
+VAR theCardFound = false        //false
 
 // Variables Hans
-VAR HansTemperaturFeeling = ""
-VAR HansTemperaturAmountOfChanges = 0
-VAR HansWeatherTheory = false
-VAR HansNewTheory = false
-VAR HansNameTheory = false
-VAR HansBecomeInsane = false
-VAR HansEatingTheory = false
+VAR HansTemperaturFeeling = ""          // ""
+VAR HansTemperaturAmountOfChanges = 0   //0
+VAR HansWeatherTheory = false           //false
+VAR HansNewTheory = false               //false
+VAR HansNameTheory = false              //false
+VAR HansBecomeInsane = false            //false
+VAR HansEatingTheory = false            //false
 
     // main
     VAR HansMainReturn = true
@@ -41,6 +41,18 @@ VAR HansEatingTheory = false
     VAR EjnarJoergenMainWhereToGoNext = 0
     VAR EjnarJoergenMainDiaryFound = false
     VAR EjnarJoergenMainReturn = true 
+    
+    // Ejnar Niels
+    VAR EjnarNielsMainFirstTime = true
+    VAR EjnarNielsMainReturn = false
+    VAR EjnarNielsMainToldAboutDiary = false
+    VAR EjnarNielsDiaryFirstAsk = true
+    VAR EjnarNielsDiaryReturn = false
+    VAR EjnarNielsSledFirstAsk = true
+    
+    // Ejnar Ludvig
+    VAR EjnarLudvigMainFirstTime = true
+    VAR EjnarLudvigMainReturn = false
     
     
     

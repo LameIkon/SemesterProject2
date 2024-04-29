@@ -2,7 +2,7 @@ INCLUDE Globals.ink
 {
     - theCardFound: -> card_main
     - ludvigDiaryFound: -> ludvig_main
-    - nielsDiaryFound: -> niels_main
+    - nielsDiaryFound: -> ludvig_main
     - joergenDiaryFound: -> joergen_main
     - else: -> main
 
@@ -108,7 +108,7 @@ Noted, please report back if this ever changes.
 ~HansTemperaturFeeling = var
 {
     - ludvigDiaryFound: -> ludvig_main
-    - nielsDiaryFound: -> niels_main
+    - nielsDiaryFound: -> ludvig_main
     - joergenDiaryFound: -> joergen_main
     - else: -> main
 
@@ -246,10 +246,26 @@ Something strange happens here on Greenland. It seems that one can eat and eat a
         Stange, how long does one have to be here to get to this level? 
         -> joergen_main
 
-=== niels_main ===
--> END
 
 === ludvig_main ===
+{HansBecomeInsane: -> hans_becomes_insane}
+    
+
+
+-> END
+
+
+=== hans_becomes_insane ===
+Ahoy Iver, what could a humble servant like Hans do for you?
+
+    * [Got any new theories?]
+        Theories, yes. But they are of no intrest for you, now are they? You did not want them before, so you shall not have them now!
+            -> END
+    
+    * [Nothing]
+        No, of course not. What would I Hans have to theorise that the great Iver would ever like to hear, nothing. Of course nothing.
+            -> END
+
 -> END
 
 

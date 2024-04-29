@@ -199,11 +199,83 @@ Yes goodbye
     --> END
 
 === niels_main ===
--> END
+{
+    - EjnarNielsMainFirstTime: You return, have you found anything new?
+        ~ EjnarNielsMainFirstTime = false
+    - EjnarNielsMainReturn: Was there anything else?
+        ~ EjnarNielsMainReturn = false
+}
+
+
+    * [{EjnarNielsMainToldAboutDiary == false: Yes, another diary | Questions about diary}]
+        -> niels_diary
+        
+        
+    * {EjnarNielsSledFirstAsk}[I have found a sled]
+        Did it have anything on it?
+            -> niels_sled
+    
+    + [See you]
+        ~ EjnarNielsMainReturn = true
+        {EjnarNielsMainToldAboutDiary: Yes, now go find that map! | See you too} 
+            -> END
+
+
+
+=== niels_diary ===
+    ~EjnarNielsMainToldAboutDiary = true
+    {
+        - EjnarNielsDiaryFirstAsk: Let me see it. Yes they did it. The Peary Channel does not exist! But they left the map in a stone cairn it seems.
+        - EjnarNielsDiaryReturn: You have other questions?
+    
+    }
+    ~ EjnarNielsDiaryFirstAsk = false
+    ~ EjnarNielsDiaryReturn = false
+        * [Peary Channel?]
+            The American Robert Peary, drew a map where Greenland is connected to the North America. This map Niels drew can disprove this. Rightfully Greenland is a Danish colony.
+                -> niels_diary
+            
+        
+        * [Stone cairn?]
+            There are almost no landmarks on Greenland so we use stacked stones to navigate sometimes. Sometimes they also contain provisions.
+                -> niels_diary
+        
+        + [What now?]
+        ~ EjnarNielsDiaryReturn = true
+            Go to the Cairn, it must be North of where you found this diary. And get that map back.
+                -> niels_main
+                
+    
+
+=== niels_sled ===
+    * [{EjnarNielsSledFirstAsk: Yes, a diary | Also a diary}]
+        ~ EjnarNielsSledFirstAsk = false
+            -> niels_diary
+    
+    * [The sled was broken]
+        ~ EjnarNielsSledFirstAsk = false
+        That cannot be good. Nothing good comes from a broken sled, was there anything else?
+            -> niels_sled
 
 === ludvig_main ===
--> END
+{
 
+    - EjnarLudvigMainFirstTime: Welcome back, do you have anything to report?
+        ~ EjnarLudvigMainFirstTime = false
+
+    - EjnarLudvigMainReturn: The last thing we need now is the map
+        ~ EjnarLudvigMainReturn = false
+}
+
+    * [I found Ludvig]
+        And by account of him not being here. Must mean he is with God now. The risk is big when you come to Greenland.
+            -> ludvig_main
+        
+    + [See you]
+        See you, now go find that map!
+            -> END
+        
+        
 
 === card_main ===
 You return what have you found?
