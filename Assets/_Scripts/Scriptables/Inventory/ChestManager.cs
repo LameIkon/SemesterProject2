@@ -14,7 +14,7 @@ public class ChestManager : MonoBehaviour
     [SerializeField] private ChestFiller _chestFiller;
     [SerializeField] private ItemDatabaseObject _database;
     private StaticInterface _chestInterface;
-    private GameManager _gameManager; 
+    
     
     private bool _turn = false;
     private InventorySlot[] _slots = new InventorySlot[6];

@@ -10,28 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f6dbd26130aaeeb469d02b103ecbc445, type: 3}
-  m_Name: ToolBar
+  m_Name: LudvigsBody
   m_EditorClassIdentifier: 
   _ItemsDataBase: {fileID: 11400000, guid: 6aab6e98529b36a40aa4942653918f7e, type: 2}
   _SavePath: 
   _Container:
     _Slots:
-    - _AllowedItems: 
-      _Item:
-        _ItemName: 
-        _ID: -1
-      _Amount: 0
-    - _AllowedItems: 
-      _Item:
-        _ItemName: 
-        _ID: -1
-      _Amount: 0
-    - _AllowedItems: 
-      _Item:
-        _ItemName: 
-        _ID: -1
-      _Amount: 0
-    - _AllowedItems: 
+    - _AllowedItems: 04000000
       _Item:
         _ItemName: 
         _ID: -1
