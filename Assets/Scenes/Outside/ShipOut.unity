@@ -15117,17 +15117,20 @@ MonoBehaviour:
     UseConstant: 0
     ConstantValue: 0
     Variable: {fileID: 11400000, guid: 86a0bb363a0bb4a4bb2686902045b0fb, type: 2}
-  _healthThreshold: 0
+  _thresholdHealth: 0
+  _changeRateHealth: 0
+  _maximumRangeHealth: 0
+  _minimumRangeHealth: 0
   _currentTemperature:
     UseConstant: 0
     ConstantValue: 0
     Variable: {fileID: 11400000, guid: dece9671aacff9f49a48fa2442bc41eb, type: 2}
   _colorAboveThreshold: {r: 0.7924528, g: 0, b: 0, a: 1}
   _colorBelowThreshold: {r: 0, g: 0.7754618, b: 0.9433962, a: 1}
-  _temperatureThreshold: 98
-  _changeRate: 1.5
-  _temperatureVolumeAboveThreshold: -40
-  _temperatureVolumeBelowThreshold: -100
+  _thresholdTemperature: 98
+  _changeRateTemperature: 100
+  _volumeAboveThresholdTemperature: -40
+  _volumeBelowThresholdTemperature: -100
   _isCold: 0
   _currentHunger:
     UseConstant: 0
