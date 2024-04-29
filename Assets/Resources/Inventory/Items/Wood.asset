@@ -18,4 +18,5 @@ MonoBehaviour:
   _Data:
     _ItemName: 
     _ID: 5
+  _Consumable: 0
   ItemDescription: 

@@ -77,7 +77,7 @@ public class ToolbarManager : MonoBehaviour
         {
             itemInSlot.ItemObject.Action(); //calls the action function on that object
        
-            if(itemInSlot.ItemObject._Stackable) //checks if the item is stackable, otherwise no need to change the amount
+            if(itemInSlot.ItemObject._Consumable) //checks if the item is stackable, otherwise no need to change the amount
             {
                 itemInSlot.AddAmount(-1); //substract 1 from the amount
                 if (itemInSlot._Amount <= 0) //Checks if the amount of the item is 0

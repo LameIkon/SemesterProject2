@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: CampfireTemp
   m_EditorClassIdentifier: 
   DevDescription: The temp restore value for Campfire
-  _value: 100
+  _value: 212
   _onValueChanged: {fileID: 0}

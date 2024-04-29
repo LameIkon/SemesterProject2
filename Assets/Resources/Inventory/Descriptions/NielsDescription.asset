@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 985cf02980db40d479858dba3c78dc6a, type: 3}
   m_Name: NielsDescription
   m_EditorClassIdentifier: 
-  _itemDescription: <size=20><b> Niel's Journal</b> </size>
+  _itemDescription: <size=20><b> Niels' Journal</b> </size>

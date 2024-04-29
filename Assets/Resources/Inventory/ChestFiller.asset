@@ -17,12 +17,12 @@ MonoBehaviour:
     _Item:
       _ItemName: 
       _ID: 0
-    _Amount: 10
+    _Amount: 1
   - _AllowedItems: 
     _Item:
       _ItemName: 
       _ID: 1
-    _Amount: 5
+    _Amount: 1
   - _AllowedItems: 
     _Item:
       _ItemName: 

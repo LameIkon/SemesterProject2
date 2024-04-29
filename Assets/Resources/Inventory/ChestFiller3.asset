@@ -17,26 +17,26 @@ MonoBehaviour:
     _Item:
       _ItemName: 
       _ID: 3
-    _Amount: 15
+    _Amount: 1
   - _AllowedItems: 
     _Item:
       _ItemName: 
       _ID: 1
-    _Amount: 4
+    _Amount: 1
   - _AllowedItems: 
     _Item:
       _ItemName: 
       _ID: 1
-    _Amount: 5
+    _Amount: 1
   - _AllowedItems: 
     _Item:
       _ItemName: 
       _ID: 1
-    _Amount: 5
+    _Amount: 1
   - _AllowedItems: 
     _Item:
       _ItemName: 
-      _ID: 2
+      _ID: 4
     _Amount: 1
   - _AllowedItems: 
     _Item:

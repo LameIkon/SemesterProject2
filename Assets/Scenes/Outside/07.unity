@@ -168,7 +168,6 @@ GameObject:
   - component: {fileID: 118518886}
   - component: {fileID: 118518885}
   - component: {fileID: 118518884}
-  - component: {fileID: 118518889}
   m_Layer: 6
   m_Name: 07Mountain
   m_TagString: Untagged
@@ -446,18 +445,6 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
---- !u!114 &118518889
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 118518882}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &222878126
 GameObject:
   m_ObjectHideFlags: 0

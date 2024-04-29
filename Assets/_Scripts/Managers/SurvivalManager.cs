@@ -88,8 +88,8 @@ public class SurvivalManager : MonoBehaviour, IDamageable, IFreezeable, IStarvea
     void SetSurvivalbars()
     {
         _healthPoint.SetValue(100);
-        _hungerPoint.SetValue(100);
-        _freezePoint.SetValue(100);
+        _hungerPoint.SetValue(70);
+        _freezePoint.SetValue(70);
         _staminaPoint.SetValue(100);
     }
 

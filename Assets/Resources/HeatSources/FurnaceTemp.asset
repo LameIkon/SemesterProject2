@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: FurnaceTemp
   m_EditorClassIdentifier: 
   DevDescription: The Temp restore value for furnace
-  _value: 120
+  _value: 250
   _onValueChanged: {fileID: 0}

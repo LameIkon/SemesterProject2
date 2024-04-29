@@ -24,6 +24,7 @@ public class JournalChests : MonoBehaviour
     {
         _chestInterface = _journalChestCanvas.GetComponent<StaticInterface>();
         _chestInterface._Inventory = _chestInventory;
+        _journalChestCanvas.SetActive(false);
 
         if (!_chestIsfilled)
         {
@@ -55,6 +56,8 @@ public class JournalChests : MonoBehaviour
     private void OpenChest()
     {
         _turn = !_turn;
+
+
         _journalChestCanvas.SetActive(_turn);
         GameManager._inventoryMenuSTATIC.SetActive(_turn);
         // check interactability 

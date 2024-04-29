@@ -6,10 +6,11 @@ using UnityEngine.AI;
 public abstract class ItemObject : ScriptableObject
 {
 
-     public Sprite _ItemDisplayed;
-     public bool _Stackable;
-     public ItemType _ItemType;
-     public Item _Data = new Item();
+    public Sprite _ItemDisplayed;
+    public bool _Stackable;
+    public ItemType _ItemType;
+    public Item _Data = new Item();
+    public bool _Consumable;
 
     
     

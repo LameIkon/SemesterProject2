@@ -80,7 +80,16 @@ public class TileMapManager : PersistentSingleton<TileMapManager>
             }
         }
 
-        AudioClip clip =  _tileDictionary[tile].GetClip();
+        AudioClip clip;
+
+        if (_tileDictionary.ContainsKey(tile))
+        {
+            clip = _tileDictionary[tile].GetClip();
+        }
+        else
+        {
+            clip = null;
+        }
 
         if (_audioSource.isPlaying || clip == null)
         {

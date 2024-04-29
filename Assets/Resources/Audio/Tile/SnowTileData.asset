@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _tiles:
   - {fileID: 11400000, guid: a33085009d82bee429d4c7e7ea046eab, type: 2}
+  - {fileID: 11400000, guid: 41c0f89bac68bbf48b3ac9026a8f661f, type: 2}
   _sounds:
   - {fileID: 8300000, guid: 7d52cd6960083f642beffc2e3c97804f, type: 3}
   - {fileID: 8300000, guid: 492109ce90420f741b2a450eb0f6a47c, type: 3}
