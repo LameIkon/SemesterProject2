@@ -96,6 +96,24 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "Button4",
+                    "type": "Button",
+                    "id": "181b25a3-f741-4525-b486-0c155ffe7038",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Button3",
+                    "type": "Button",
+                    "id": "cda5f888-d6fe-43b7-b9c2-228e2986546a",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Eat",
                     "type": "Button",
                     "id": "18280935-f0d7-4d97-8f2b-f712bab6e271",
@@ -345,6 +363,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "Eat",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f2298dae-f88e-4817-aef0-1fbce805e777",
+                    "path": "<Keyboard>/3",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Button3",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a47ad78c-22e5-4493-9647-ecfbd7af0e18",
+                    "path": "<Keyboard>/4",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Button4",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

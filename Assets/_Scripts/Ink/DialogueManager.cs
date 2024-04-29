@@ -318,8 +318,14 @@ public class DialogueManager : MonoBehaviour
 
     IEnumerator TypeWriterEffect(TextMeshProUGUI dialogueText, string storedText)
     {
+       
         Animator animator = _currentProile.GetComponentInChildren<Animator>();
+        try
+        { 
         animator.Play("Speak");
+        }
+        catch (MissingReferenceException e) { }
+
         string currentText = "";
         foreach (char c in storedText)
         {
@@ -327,7 +333,11 @@ public class DialogueManager : MonoBehaviour
             dialogueText.text = currentText;
             yield return new WaitForSeconds(_writingSpeed); // Adjust the typing speed as needed
         }
-        animator.Play("Idle");
+        try
+        {
+            animator.Play("Idle");
+        }
+        catch (MissingReferenceException e) { }
     }
 
 }

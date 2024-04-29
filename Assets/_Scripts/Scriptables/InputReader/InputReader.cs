@@ -163,4 +163,20 @@ public class InputReader : ScriptableObject, GameInput.IGameplayActions
             OnButtonPressEvent?.Invoke(1);
         }
     }
+
+    public void OnButton3(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+        {
+            OnButtonPressEvent?.Invoke(2);
+        }
+    }
+
+    public void OnButton4(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+        {
+            OnButtonPressEvent?.Invoke(3);
+        }
+    }
 }
