@@ -301,10 +301,10 @@ public class DialogueManager : MonoBehaviour
     {
         _hasInteracted = true;
 
-        Animator animator = _currentProile.GetComponentInChildren<Animator>();
         // Skip typeWriter effect
         if (_StartedDialogue)
         {
+            Animator animator = _currentProile.GetComponentInChildren<Animator>();
             animator.Play("Idle");
             StopAllCoroutines();
             _currentDialogue.text = _storedText;
