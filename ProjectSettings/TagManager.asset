@@ -12,6 +12,7 @@ TagManager:
   - Bonfire
   - ItemDescriptionHolder
   - Destination
+  - TemperatureImage
   layers:
   - Default
   - TransparentFX
