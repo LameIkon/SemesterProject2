@@ -14152,7 +14152,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3957924705540695626, guid: d92e65e013c17934c8d0344632014392, type: 3}
       propertyPath: m_Color.a
-      value: 0.8
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4072973153507781996, guid: d92e65e013c17934c8d0344632014392, type: 3}
       propertyPath: m_Name
@@ -14353,7 +14353,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7071212026655611817, guid: 5f68667c624044144aaece0f732353f6, type: 3}
       propertyPath: _defaultStaminaRegen
-      value: 0.02
+      value: 0.08
       objectReference: {fileID: 0}
     - target: {fileID: 7071212026655611817, guid: 5f68667c624044144aaece0f732353f6, type: 3}
       propertyPath: _insideScene.m_SceneName
@@ -15816,6 +15816,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 6082120575325401151}
     - target: {fileID: 4251317389186133514, guid: 3f597885cafe1da4b8d04aa0c8fe3a19, type: 3}
+      propertyPath: _tikBetweenMax
+      value: 130
+      objectReference: {fileID: 0}
+    - target: {fileID: 4251317389186133514, guid: 3f597885cafe1da4b8d04aa0c8fe3a19, type: 3}
+      propertyPath: _tikBetweenMin
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 4251317389186133514, guid: 3f597885cafe1da4b8d04aa0c8fe3a19, type: 3}
       propertyPath: _playerAnimator
       value: 
       objectReference: {fileID: 1177097097165489872}
@@ -16331,7 +16339,7 @@ MonoBehaviour:
   _firewoodDescription: {fileID: 11400000, guid: a9ed200cd6f0b3244953ebf4065b0722, type: 2}
   _mapDescription: {fileID: 11400000, guid: 0088dadd5e7e07648a7a75a508ac85ed, type: 2}
   _lanternDescription: {fileID: 11400000, guid: c672b6f8b2aebb14f9ab08fa9e7c3c3e, type: 2}
-  _joergensJournalDescription: {fileID: 0}
+  _joergensJournalDescription: {fileID: 11400000, guid: ee9507eec34ac814ca5c0bd174c64d3c, type: 2}
   _ludvigsJournalDescription: {fileID: 11400000, guid: dc0ce4f471eca894392f5c7aba3d829b, type: 2}
   _nielsJournalDescription: {fileID: 11400000, guid: b5d45fb59e56690478e176f065e765cc, type: 2}
   _breadSprite: {fileID: 21300000, guid: 6281e69e11bff07478833b1790bc1b4a, type: 3}
@@ -16341,9 +16349,9 @@ MonoBehaviour:
   _firewoodSprite: {fileID: 21300000, guid: 925120c3f23d8184e88bff2764e9309f, type: 3}
   _mapSprite: {fileID: 21300000, guid: 1ba9894d2d740434abba7f7bf9dcc021, type: 3}
   _lanternSprite: {fileID: 21300000, guid: 6ce03429a37a72a41a74529c7e5b4055, type: 3}
-  _joerensJournalSprite: {fileID: 0}
-  _ludvigsJournalSprite: {fileID: 21300000, guid: faf9566ea476ad743a582f11855a2071, type: 3}
-  _nielsJournalSprite: {fileID: 1158446427, guid: 63a1069407649344d8c1c43f0302f97c, type: 3}
+  _joerensJournalSprite: {fileID: 21300000, guid: 09ba201813557534abcd8115ed821e1a, type: 3}
+  _ludvigsJournalSprite: {fileID: 21300000, guid: ac2cdb2024755d24594c27d768a7f9bf, type: 3}
+  _nielsJournalSprite: {fileID: 21300000, guid: 4523d4ebf0df9d2438a9135aeef08fc8, type: 3}
 --- !u!225 &4351749882819959996
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -17815,6 +17823,10 @@ PrefabInstance:
     - target: {fileID: 222730324600549117, guid: d92e65e013c17934c8d0344632014392, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3957924705540695626, guid: d92e65e013c17934c8d0344632014392, type: 3}
+      propertyPath: m_Color.a
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 4072973153507781996, guid: d92e65e013c17934c8d0344632014392, type: 3}
       propertyPath: m_Name
