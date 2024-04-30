@@ -16862,7 +16862,7 @@ MonoBehaviour:
     Variable: {fileID: 11400000, guid: dece9671aacff9f49a48fa2442bc41eb, type: 2}
   _colorAboveThreshold: {r: 0.7924528, g: 0, b: 0, a: 1}
   _colorBelowThreshold: {r: 0, g: 0.7754618, b: 0.9433962, a: 1}
-  _thresholdTemperature: 101
+  _thresholdTemperature: 25
   _changeRateTemperature: 100
   _volumeAboveThresholdTemperature: -40
   _volumeBelowThresholdTemperature: -100

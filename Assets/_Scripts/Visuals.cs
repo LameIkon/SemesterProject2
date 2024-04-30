@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
@@ -17,15 +18,15 @@ public class Visuals : MonoBehaviour
     [SerializeField] private ColorParameter _vignetteColor;
     [SerializeField] private float _highThresholdHealth;    // 25 
     [SerializeField] private float _lowThresholdHealth;     // 10
-    [SerializeField] private float _changeRateHealth;       // 0.32
+    [SerializeField] private float _changeRateHealth;       // 0.24
     [SerializeField] private float _changeRateMultiplier;   // 1.5
-    [SerializeField] private float _maximumIntensityRange;  // 0.32
+    [SerializeField] private float _maximumIntensityRange;  // 0.4
     [SerializeField] private float _minimumIntensityRange;  // 0.1
+    private ClampedFloatParameter _cfpHealth;
+    private Vignette _vignette;
     private float _currentIntensity;
     private float _defaultIntensity;
     private bool _healthDefaulter;
-    private ClampedFloatParameter _cfpHealth;
-    private Vignette _vignette;
     [Space(5f)]
 
     // ------------------------------------------------------------------------------------------------ \\
@@ -34,18 +35,18 @@ public class Visuals : MonoBehaviour
     [SerializeField] private FloatReference _currentTemperature;
     [SerializeField] private Color _colorAboveThreshold;
     [SerializeField] private Color _colorBelowThreshold;
-    [SerializeField] private float _thresholdTemperature;               // ??
+    [SerializeField] private float _thresholdTemperature;               // 25
     [SerializeField] private float _changeRateTemperature;              // 100
     [SerializeField] private float _volumeAboveThresholdTemperature;    // -40
     [SerializeField] private float _volumeBelowThresholdTemperature;    // -100
     [SerializeField] protected bool _isCold;
+    private Image _temperatureIcon;
+    private ClampedFloatParameter _cfpTemperature;
+    private WhiteBalance _whiteBalance;
     private bool _aboveThreshold;
     private float _defaultAbove;
     private float _defaultBelow;
     private bool _temperatureDefaulter;
-    private Image _temperatureIcon;
-    private ClampedFloatParameter _cfpTemperature;
-    private WhiteBalance _whiteBalance;
     [Space(5f)]
 
     // ------------------------------------------------------------------------------------------------ \\
@@ -53,8 +54,6 @@ public class Visuals : MonoBehaviour
     [Header("Hunger")]
     [SerializeField] private FloatReference _currentHunger;
     [SerializeField] private float _hungerThreshold;
-
-    // ------------------------------------------------------------------------------------------------ \\
 
     #region Unity Methods
     
@@ -83,6 +82,13 @@ public class Visuals : MonoBehaviour
                 switch (_volume.profile.TryGet<WhiteBalance>(out wb)) { case true: _whiteBalance = wb; break; }     // Initializes Volume components
 
             #endregion
+            
+            #region Hunger Variables 
+            
+            
+            
+            
+            #endregion
         }
 
         private void Update()
@@ -108,6 +114,13 @@ public class Visuals : MonoBehaviour
                     case false: DisableFreezeVisual(); break;
                 }
                 
+            #endregion
+
+            #region Hunger Variables
+            
+            
+            
+            
             #endregion
         }
         
@@ -209,27 +222,64 @@ public class Visuals : MonoBehaviour
     #endregion
 }
 
+
 public sealed class HeatAbsorption : Visuals
 {
-    // [Header("Heat")] 
-    [SerializeField] private FloatReference _currentTemperature;
+    [Header("Objects")]
+    [SerializeField] private Volume _volume;
+    [Space(5f)]
     
+    // ------------------------------------------------------------------------------------------------ \\
+    
+    [Header("Heat")] 
+    [SerializeField] private FloatReference _currentTemperature;
+    [SerializeField] private Color _colorAboveThreshold;
+    [SerializeField] private Color _colorBelowThreshold;
+    [SerializeField] private float _thresholdTemperature;               // 25
+    [SerializeField] private float _changeRateTemperature;              // 100
+    [SerializeField] private float _volumeAboveThresholdTemperature;    // -40
+    [SerializeField] private float _volumeBelowThresholdTemperature;    // -100
+    private Image _temperatureIcon;
+    private ClampedFloatParameter _cfpTemperature;
+    private WhiteBalance _whiteBalance;
+    private bool _aboveThreshold;
+    private float _defaultAbove;
+    private float _defaultBelow;
+    private bool _temperatureDefaulter;
     
     #region Unity Methods
     
         private void Awake()
         {
-        
+            _volume = GetComponent<Volume>(); // Initializes _volume
+            
         }
     
         private void Update()
         {
+            
+        }
+
+        private void OnTriggerStay2D(Collider2D col)
+        {
+            //
+            // Code that applies effect
+            //
+            
             switch (_isCold)
             {
                 case true: this.EnableFreezeVisual(); break;
                 case false: this.DisableFreezeVisual(); break;
             }   
         }
+
+        private void OnTriggerExit(Collider col)
+        {
+            //
+            // Code that deapplies effect
+            // 
+        }
+        
         
     #endregion
     
