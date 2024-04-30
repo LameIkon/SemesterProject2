@@ -17,7 +17,7 @@ public class Furnace : MonoBehaviour
     [SerializeField] private FloatReference _burningTime; //How long the wood burns before its gone
 
 
-    public static bool _canOpenFurnace = false;  //needs to be static for use in CampfireManager.script where we open the canvas
+    // public static bool _canOpenFurnace = false;  //needs to be static for use in CampfireManager.script where we open the canvas
 
     public bool _bonfireLit = false; //tracks when the fire is burning
     private bool _isTriggeredOnce = false;
@@ -59,7 +59,7 @@ public class Furnace : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             _playerIsClose = true;
-            _canOpenFurnace = true;
+            // _canOpenFurnace = true;
 
             _burnCoroutine = BurningTime(_burningTime);
         }
@@ -69,12 +69,12 @@ public class Furnace : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            _canOpenFurnace = false;
+            // _canOpenFurnace = false;
             _playerIsClose = false;
             _leftoverCoroutine = LeftoverTime(_burningTime);
-            GameManager._hideEInteractables = false;
-            FurnaceManager._FurnaceCanvasSTATIC.SetActive(false);
-            GameManager._inventoryMenuSTATIC.SetActive(false);
+            //GameManager._hideEInteractables = false;
+            //FurnaceManager._FurnaceCanvasSTATIC.SetActive(false);
+            //GameManager._inventoryMenuSTATIC.SetActive(false);
 
             if (_bonfireLit)
             {

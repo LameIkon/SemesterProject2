@@ -32,14 +32,14 @@ public class FurnaceManager : MonoBehaviour
 
     void HandleInteract()
     {
-        if (Furnace._canOpenFurnace)
+        if (OpenFurnace._canOpenFurnace)
         {
 
-            OpenFurnace();
+            OpenFurnaceMethod();
         }
     }
 
-    private void OpenFurnace()
+    private void OpenFurnaceMethod()
     {
         _turn = !_turn;
         _furnaceCanvas.SetActive(_turn);
