@@ -8,6 +8,7 @@ public class DynamicInterface : UserInterface
 
     public GameObject _InventoryPrefab;
     [SerializeField] private GameObject _Container;
+  
 
     public int X_START;
     public int Y_START;
@@ -24,10 +25,12 @@ public class DynamicInterface : UserInterface
         for (int i = 0; i < _Inventory.GetSlots.Length; i++)
         {
             var obj = Instantiate(_InventoryPrefab, _Container.transform.position, _Container.transform.rotation, _Container.transform);
+            
             obj.GetComponent<RectTransform>().localPosition = GetPosition(i);
 
             AddEvent(obj, EventTriggerType.PointerEnter, delegate { OnEnter(obj); });
             AddEvent(obj, EventTriggerType.PointerExit, delegate { OnExit(obj); });
+            AddEvent(obj, EventTriggerType.PointerClick, delegate { OnClick(obj); });
             AddEvent(obj, EventTriggerType.BeginDrag, delegate { OnDragStart(obj); });
             AddEvent(obj, EventTriggerType.EndDrag, delegate { OnDragEnd(obj); });
             AddEvent(obj, EventTriggerType.Drag, delegate { OnDrag(obj); });
@@ -43,10 +46,27 @@ public class DynamicInterface : UserInterface
 
     }
 
-    void Awake() 
+    public virtual void OnPointerDoubleClick(PointerEventData eventData, GameObject obj)
     {
-        _Inventory._Container.Clear();
+        if (eventData.clickCount == 2 && OnClick(obj))
+        {
+
+        }
+    }
+
+    private void Update()
+    {
+        
+       
     }
 
 
+    void Awake() 
+    {
+        
+        _Inventory._Container.Clear();
+        
+    }
+
+    
 }

@@ -97,12 +97,8 @@ public class ChestManager : MonoBehaviour
 
     public void CloseChest()
     {
-        _chestCanvas.SetActive(false);
-
-        if (_chestCanvas.activeInHierarchy)
-        {
-            GameManager._inventoryMenuSTATIC.SetActive(false);
-        }
+        _chestCanvas.SetActive(false);      
+        GameManager._inventoryMenuSTATIC.SetActive(false);
         _turn = false;
     }
 

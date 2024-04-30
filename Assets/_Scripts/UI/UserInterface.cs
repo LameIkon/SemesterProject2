@@ -9,11 +9,13 @@ using UnityEngine.EventSystems;
 using UnityEngine.Events;
 using Image = UnityEngine.UI.Image;
 using System;
+using Unity.VisualScripting;
 
 public abstract class UserInterface: MonoBehaviour
 {
     
     public InventoryObject _Inventory;
+    public InventoryObject _toolbarInventory;
 
 
     public Dictionary<UnityEngine.GameObject, InventorySlot> _SlotsOnInterface = new Dictionary<UnityEngine.GameObject, InventorySlot>();
@@ -79,6 +81,18 @@ public abstract class UserInterface: MonoBehaviour
 
     }
 
+    public bool OnClick (GameObject obj)
+    {
+
+        if (obj != null)
+        {
+            Debug.Log("Slot clicked");
+            return true;           
+        }
+        
+        return false;
+    }
+
     public void OnEnterInterface(UnityEngine.GameObject obj)
     {
        MouseData._InterfaceMouseIsOver = obj.GetComponent<UserInterface>();
@@ -103,11 +117,12 @@ public abstract class UserInterface: MonoBehaviour
         {
             tempItem = new UnityEngine.GameObject();
             var rt = tempItem.AddComponent<RectTransform>();
-            rt.sizeDelta = new Vector2(50, 50);
+            rt.sizeDelta = new Vector2(100, 100);
             tempItem.transform.SetParent(transform.parent);
             var img = tempItem.AddComponent<Image>();
             img.sprite = _SlotsOnInterface[obj].ItemObject._ItemDisplayed;
-            img.raycastTarget = false;
+            img.raycastTarget = false;           
+           
         } 
         return tempItem;
     }
@@ -135,6 +150,16 @@ public abstract class UserInterface: MonoBehaviour
             MouseData._TempItemBeingDragged.GetComponent<RectTransform>().position = Input.mousePosition;
         }
     }
+
+    //public virtual void OnPointerDoubleClick(PointerEventData eventData, GameObject obj)
+    //{
+        
+
+    //    if (eventData.clickCount == 2 && OnClick(obj))
+    //    {
+
+    //    }
+    //}
 
 }
 

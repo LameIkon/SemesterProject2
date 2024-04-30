@@ -121,6 +121,7 @@ public class InventoryObject : ScriptableObject
 
     }
 
+
     public void RemoveItem(Item item)
     {
         for (int i = 0; i < GetSlots.Length;i++)
