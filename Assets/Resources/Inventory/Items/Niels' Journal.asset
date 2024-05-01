@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c703643309311e488dd06871e083e44, type: 3}
   m_Name: Niels' Journal
   m_EditorClassIdentifier: 
-  _ItemDisplayed: {fileID: 21300000, guid: 4523d4ebf0df9d2438a9135aeef08fc8, type: 3}
+  _ItemDisplayed: {fileID: 21300000, guid: 12f24c2ae8f7b3f4994c3fd1e7171373, type: 3}
   _Stackable: 0
   _ItemType: 4
   _Data:
     _ItemName: 
     _ID: 8
+  _Consumable: 0
   ItemDescription: 
   _JournalIndex: 2
