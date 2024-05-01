@@ -242,7 +242,6 @@ public class DialogueManager : MonoBehaviour
         _story = new Story(DialogueData.text); // Change file to the same dialogueData. Must be done otherwise you cant repeat the same dialouge
 
         _dialogueVariables.StopListening(_story);
-        PriorityManager._PriorityInteractable = true;
         _Oneclick = false; // Ensures 1 instance
         _DialogueExited = true; // Announces that the exitDialogue was called (used to check if player exited dialogue)
         _StartedDialogue = false; // announces that the dialogue has ended

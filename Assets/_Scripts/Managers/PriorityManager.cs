@@ -8,7 +8,7 @@ public class PriorityManager : MonoBehaviour
 
     public PriorityManager _PriorityManager; // used for other scripts to get it
     public static bool _PriorityInteractable;
-    public bool _PriorityThis;
+    //public bool _PriorityThis;
 
     private void OnEnable()
     {
@@ -17,20 +17,14 @@ public class PriorityManager : MonoBehaviour
             _PriorityManager = GetComponent<PriorityManager>();
         }
         _PriorityInteractable = true;
-        _PriorityThis = true;
     }
 
-    public void ChangeBool()
-    {
-        _PriorityThis = true;
-    }
 
     public virtual void TriggerEnter() // On Trigger enter call this
     {
-        if (_PriorityInteractable && !_PriorityThis)
+        if (_PriorityInteractable)
         {
             _PriorityInteractable = false;
-            _PriorityThis = true;
 
             AdditionalTriggerEnterImplementation(); 
         }
@@ -43,10 +37,9 @@ public class PriorityManager : MonoBehaviour
 
     public virtual void TriggerExit() // On trigger exit call this
     {
-        if (!_PriorityInteractable && _PriorityThis)
+        if (!_PriorityInteractable)
         {
             _PriorityInteractable = true;
-            _PriorityThis = false;
             Debug.Log("exit");
         }
     }

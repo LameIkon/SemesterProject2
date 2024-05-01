@@ -94,8 +94,6 @@ public class ChestManager : MonoBehaviour
         _turn = !_turn;
         _chestCanvas.SetActive(_turn);
         _highlightScript.TriggerUse(_turn);
-        // check interactability 
-        Interactable();
 
         GameManager._inventoryMenuSTATIC.SetActive(_turn);
     }
@@ -109,12 +107,6 @@ public class ChestManager : MonoBehaviour
             GameManager._inventoryMenuSTATIC.SetActive(false);
         }
         _turn = false;
-    }
-
-    void Interactable()
-    {
-        // Show or disable E highlight
-        GameManager._hideEInteractables = _turn;
     }
 
     private void OnApplicationQuit()
