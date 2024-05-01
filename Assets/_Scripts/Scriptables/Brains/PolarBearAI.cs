@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Brain/PolarBear")]
@@ -16,6 +17,7 @@ public class PolarBearAI : BrainAI
 
 
 
+
     private const string _playerTag = "Player";
 
     private const string _stateTimeout = "stateTimeout";
@@ -23,17 +25,19 @@ public class PolarBearAI : BrainAI
     private const string _target = "target";
     // private const string _state = "state";
 
+
+
     public override void Initialize(AIThinker brain)
     {
         brain.Remember(_walkState, Directions.W);
         brain.Remember(_stateTimeout, Random.Range(_waitBetweenWalk.MinValue, _waitBetweenWalk.MaxValue));
     }
 
-    private MovementController _move;
+    private PolarBearController _move;
 
     public override void Think(AIThinker brain)
     {
-        UnityEngine.GameObject target = brain.Remember<UnityEngine.GameObject>(_target);
+        GameObject target = brain.Remember<GameObject>(_target);
         float stateTimeout = brain.Remember<float>(_stateTimeout);
         stateTimeout -= Time.deltaTime;
         brain.Remember(_stateTimeout, stateTimeout);
@@ -43,7 +47,7 @@ public class PolarBearAI : BrainAI
 
         if (_move == null)
         {
-            _move = brain.GetComponent<MovementController>();
+            _move = brain.GetComponent<PolarBearController>();
         }
 
         if (!target)
@@ -53,7 +57,7 @@ public class PolarBearAI : BrainAI
             //            .OrderBy(go => Vector3.Distance(go.transform.position, brain.transform.position))
             //            .FirstOrDefault(go => go != brain.gameObject);
 
-            target = UnityEngine.GameObject.FindGameObjectWithTag(_playerTag);
+            target = GameObject.FindGameObjectWithTag(_playerTag);
 
             brain.Remember(_target, target);
         }
@@ -105,8 +109,8 @@ public class PolarBearAI : BrainAI
             {
                 SetTimeoutWalk(brain);
                 
-                Walk(GiveDirectionTowardsPlayer(unitVectorBetween), brain);
-                
+                //Walk(GiveDirectionTowardsPlayer(unitVectorBetween), brain);
+                WalkRandom();
             }
 
 

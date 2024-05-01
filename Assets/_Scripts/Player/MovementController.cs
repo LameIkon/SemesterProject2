@@ -41,7 +41,7 @@ public class MovementController : MonoBehaviour
     }
 
 
-    public void Move(Vector3 direction)
+    public virtual void Move(Vector3 direction)
     {
         if (CanMove(direction)) // if we DON't overlap with any colliders on nonwalkable layers, we CAN move.
         {
@@ -82,7 +82,7 @@ public class MovementController : MonoBehaviour
 
 
     // This method is made such that you do not need to hard code in the layers that stop movement
-    private bool CanMove(Vector3 direction)
+    protected bool CanMove(Vector3 direction)
     {
         bool canMove = true; // We asume you can move 
 
@@ -96,7 +96,7 @@ public class MovementController : MonoBehaviour
     }
 
     // A method that gets the new position of the _movePoint
-    private Vector3 MovePosition(Vector3 direction) 
+    protected Vector3 MovePosition(Vector3 direction) 
     {
         return _movePoint.position + direction;
     }
@@ -158,7 +158,7 @@ public class MovementController : MonoBehaviour
         }
     }
 
-    void MoveAnimation()
+    protected virtual void MoveAnimation()
     {
         switch (_lookingDirection)
         {
@@ -180,7 +180,7 @@ public class MovementController : MonoBehaviour
         }
     }
 
-    void RunningAnimation()
+    protected virtual void RunningAnimation()
     {
         switch (_lookingDirection)
         {
@@ -198,6 +198,50 @@ public class MovementController : MonoBehaviour
                 return;
             default: 
                 _animator.Play("Running_Front");
+                break;
+        }
+    }
+
+    void DieAnimation()
+    {
+        switch (_lookingDirection)
+        {
+            case "Right":
+                _animator.Play("Die_Right");
+                return;
+            case "Left":
+                _animator.Play("Die_Left");
+                return;
+            case "Back":
+                _animator.Play("Die_Left");
+                return;
+            case "Front":
+                _animator.Play("Die_Left");
+                return;
+            default:
+                _animator.Play("Die_Left");
+                break;
+        }
+    }
+
+    void AttackAnimation()
+    {
+        switch (_lookingDirection)
+        {
+            case "Right":
+                _animator.Play("Attack_Right");
+                return;
+            case "Left":
+                _animator.Play("Attack_Left");
+                return;
+            case "Back":
+                _animator.Play("Attack_Left");
+                return;
+            case "Front":
+                _animator.Play("Attack_Left");
+                return;
+            default:
+                _animator.Play("Attack_Left");
                 break;
         }
     }
