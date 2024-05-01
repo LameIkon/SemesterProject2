@@ -57,6 +57,7 @@ public class ChestManager : MonoBehaviour
     {
         if (_canOpenChest)
         {
+            
             OpenChest();
         }
     }
@@ -64,9 +65,15 @@ public class ChestManager : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.name == "Player") 
-        {          
+        {
+            _highlightScript.TriggerEnter(gameObject);
+            if (!_highlightScript.TriggerEnter(gameObject))
+            {
+                Debug.Log("cannot continue");
+                return;
+            }
+
             _canOpenChest = true;
-            _highlightScript.TriggerEnter();
            
         }        
     }
@@ -76,7 +83,7 @@ public class ChestManager : MonoBehaviour
         if (collision.gameObject.name == "Player")
         {
             _canOpenChest = false;
-            _highlightScript.TriggerExit();
+            _highlightScript.TriggerExit(gameObject);
             CloseChest();
         }
     }
@@ -92,8 +99,8 @@ public class ChestManager : MonoBehaviour
     private void OpenChest()
     {
         _turn = !_turn;
-        _chestCanvas.SetActive(_turn);
         _highlightScript.TriggerUse(_turn);
+        _chestCanvas.SetActive(_turn);       
 
         GameManager._inventoryMenuSTATIC.SetActive(_turn);
     }

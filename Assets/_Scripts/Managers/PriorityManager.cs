@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PriorityManager : MonoBehaviour 
@@ -20,14 +21,16 @@ public class PriorityManager : MonoBehaviour
     }
 
 
-    public virtual void TriggerEnter() // On Trigger enter call this
+    public virtual bool TriggerEnter(GameObject gameObject) // On Trigger enter call this
     {
         if (_PriorityInteractable)
         {
             _PriorityInteractable = false;
 
-            AdditionalTriggerEnterImplementation(); 
+            AdditionalTriggerEnterImplementation();
+            return true;
         }
+        return false;
     }
 
     protected virtual void AdditionalTriggerEnterImplementation()
@@ -35,12 +38,16 @@ public class PriorityManager : MonoBehaviour
         // Here all new code will come as overriding
     }
 
-    public virtual void TriggerExit() // On trigger exit call this
+    public virtual void TriggerExit(GameObject gameObject) // On trigger exit call this
     {
         if (!_PriorityInteractable)
         {
             _PriorityInteractable = true;
             Debug.Log("exit");
+        }
+        else
+        {
+            return;
         }
     }
 

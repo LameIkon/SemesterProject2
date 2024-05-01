@@ -5,30 +5,43 @@ using UnityEngine;
 public class Highlight : PriorityManager
 {
     [SerializeField] private GameObject _showInteraction; // Used to get the GameObject named showInteraction
+    public static GameObject _gameObject;
     //public static bool _HasBeenEntered;
 
 
     private void Start()
     {
         _showInteraction.SetActive(false); // Set false if by chance its active
-        Debug.Log("loaded");
     }
 
 
  
 
-    public override void TriggerEnter()
+    public override bool TriggerEnter(GameObject gameobject)
     {
-        AdditionalTriggerEnterImplementation();
-        base.TriggerEnter();
-        Debug.Log("entered");
+        if (_gameObject == null)
+        {
+            _gameObject = gameobject;
+        }
+
+        if (_gameObject == gameobject)
+        {
+            AdditionalTriggerEnterImplementation();
+            base.TriggerEnter(gameobject);
+            return true;
+        }
+        return false;
     }
 
-    public override void TriggerExit()
+    public override void TriggerExit(GameObject gameobject)
     {
-        AdditionalTriggerExitImplementation();
-        base.TriggerExit();
-        Debug.Log("exited");
+        if (_gameObject == gameobject)
+        {
+            AdditionalTriggerExitImplementation();
+            base.TriggerExit(gameobject);
+            Debug.Log("exited");
+            _gameObject = null;
+        }
     }
 
     public override void TriggerUse(bool state)
@@ -36,12 +49,10 @@ public class Highlight : PriorityManager
         if (state)
         {
             _showInteraction.SetActive(false);
-            Debug.Log("Use");
         }
         else if (!state)
         {
             _showInteraction.SetActive(true);
-            Debug.Log("closed");
         }
     }
 

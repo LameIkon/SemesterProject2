@@ -68,13 +68,19 @@ public class StartDialogue : MonoBehaviour
             DialogueManager.instance._NPCName = _NPCName;
             UpdateDialogue();
 
+            _highlightScript.TriggerEnter(gameObject);
+            if (!_highlightScript.TriggerEnter(gameObject))
+            {
+                Debug.Log("cannot continue");
+                return;
+            }
 
             _startDialogue = true; // Set to true allowing start dialogue (Warning be sure there arent overlapping triggers, might cause problems)
-            _highlightScript.TriggerEnter();
+            _highlightScript.TriggerEnter(gameObject);
             if (!GameManager._hideEInteractables)
             {
                 _startDialogue = true; // Set to true allowing start dialogue (Warning be sure there arent overlapping triggers, might cause problems)
-                _highlightScript.TriggerEnter();
+                //_highlightScript.TriggerEnter(gameObject);
                 Debug.Log("Hide E");
             }           
         }
@@ -102,7 +108,7 @@ public class StartDialogue : MonoBehaviour
         if (collision.gameObject.name == "Player") // Detect if the collision is the gameobject called Player
         {
             _startDialogue = false; // Set to false to disable dialogue options
-            _highlightScript.TriggerExit();
+            _highlightScript.TriggerExit(gameObject);
         }
     }
 
