@@ -12,12 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e4d3505e4a1ddc4d8d111a1465a2613, type: 3}
   m_Name: PolarBear
   m_EditorClassIdentifier: 
+  _idleTime:
+    MinValue: 2
+    MaxValue: 6
   _waitBetweenWalk:
-    MinValue: 0.2
-    MaxValue: 0.2
+    MinValue: 0.4
+    MaxValue: 0.4
+  _waitBetweenRunning:
+    MinValue: 0.1
+    MaxValue: 0.1
   _waitBetweenAttack:
-    MinValue: 1
-    MaxValue: 2
+    MinValue: 2
+    MaxValue: 4
   _aggroRange: 4
   _damage: 10
-  _attackRange: 0.5
+  _attackRange: 1

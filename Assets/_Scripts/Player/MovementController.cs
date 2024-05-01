@@ -224,25 +224,5 @@ public class MovementController : MonoBehaviour
         }
     }
 
-    void AttackAnimation()
-    {
-        switch (_lookingDirection)
-        {
-            case "Right":
-                _animator.Play("Attack_Right");
-                return;
-            case "Left":
-                _animator.Play("Attack_Left");
-                return;
-            case "Back":
-                _animator.Play("Attack_Left");
-                return;
-            case "Front":
-                _animator.Play("Attack_Left");
-                return;
-            default:
-                _animator.Play("Attack_Left");
-                break;
-        }
-    }
+    
 }

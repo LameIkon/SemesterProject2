@@ -5,22 +5,77 @@ using UnityEngine;
 public class PolarBearController : MovementController
 {
 
-    [SerializeField] private GameObject _attackColliderRange;
     [SerializeField] private CircleCollider2D _aggroColliderRange;
+    [SerializeField] private CircleCollider2D _attackColliderRange;
+    [SerializeField] private PolarBearAI _polarBearAIScript;
+
+    private bool _isAttacking;
+
     private void Start()
     {
         //_moveSpeed = _speedReference.GetMaxValue();
+        //_polarBearAIScript = GetComponentInChildren<PolarBearAI>();
+        _polarBearAIScript.SetPolarBearController(this);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    protected override void Update()
     {
-        
+        if (!_isAttacking)
+        {
+            base.Update();
+        }
+
+        //if (_isAttacking)
+        //{
+        //    if (!_animator.GetCurrentAnimatorStateInfo(0).IsName("Attack_Right") &&
+        //        !_animator.GetCurrentAnimatorStateInfo(0).IsName("Attack_Left"))
+        //    {
+        //        Debug.Log("finished attacking");
+        //        _isAttacking = false;
+        //    }
+        //}
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
+    public void RunSpeed()
     {
-        
+        _moveSpeed = _speedReference.GetMaxValue();
     }
+
+    public void WalkSpeed()
+    {
+        _moveSpeed = _speedReference.GetMinValue();
+    }
+
+    public void Attack(Vector3 ownPosition, float attackRange)
+    {
+        if (!_isAttacking)
+        {
+            StartCoroutine(AttackConsecutive(ownPosition, attackRange));
+        }
+    }
+
+    IEnumerator AttackConsecutive(Vector3 ownPosition, float attackRange)
+    {
+        _isAttacking = true;
+        _movePoint.position = transform.position;
+        AttackAnimation();
+        yield return new WaitForSeconds (1f);
+        Collider2D[] hits = Physics2D.OverlapCircleAll(ownPosition, 1.8f * attackRange);
+        foreach (var hit in hits)
+        {
+            if (hit.gameObject.name == "Player")
+            {
+                Debug.Log("Hit!");
+            }
+            else
+            {
+                //Debug.Log("missed");
+            }
+            yield return null;
+            _isAttacking = false;
+        }
+    }
+
 
     public override void Move(Vector3 direction)
     {
@@ -42,7 +97,7 @@ public class PolarBearController : MovementController
             StartAnimation();
         }
     }
-
+    #region Animations
     protected override void IdleAnimation()
     {
         switch (_lookingDirection)
@@ -90,4 +145,21 @@ public class PolarBearController : MovementController
                 break;
         }
     }
+
+    public void AttackAnimation()
+    {
+        switch (_lookingDirection)
+        {
+            case "Right":
+                _animator.Play("Attack_Right");
+                return;
+            case "Left":
+                _animator.Play("Attack_Left");
+                return;
+            default:
+                _animator.Play("Attack_Left");
+                break;
+        }
+    }
+    #endregion
 }
