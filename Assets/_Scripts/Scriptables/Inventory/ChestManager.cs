@@ -14,6 +14,7 @@ public class ChestManager : MonoBehaviour
     [SerializeField] private ChestFiller _chestFiller;
     [SerializeField] private ItemDatabaseObject _database;
     private StaticInterface _chestInterface;
+    [SerializeField] private Highlight _highlightScript;
     
     
     private bool _turn = false;
@@ -28,6 +29,7 @@ public class ChestManager : MonoBehaviour
         _chestInterface = _chestCanvas.GetComponent<StaticInterface>();
         _chestInterface._Inventory = _chestInventory;
         _chestCanvas.SetActive(false);
+        _highlightScript = GetComponentInChildren<Highlight>();
 
 
         if (!_chestIsfilled)
@@ -64,6 +66,7 @@ public class ChestManager : MonoBehaviour
         if (collision.gameObject.name == "Player") 
         {          
             _canOpenChest = true;
+            _highlightScript.TriggerEnter();
            
         }        
     }
@@ -73,6 +76,7 @@ public class ChestManager : MonoBehaviour
         if (collision.gameObject.name == "Player")
         {
             _canOpenChest = false;
+            _highlightScript.TriggerExit();
             CloseChest();
         }
     }
@@ -89,6 +93,7 @@ public class ChestManager : MonoBehaviour
     {
         _turn = !_turn;
         _chestCanvas.SetActive(_turn);
+        _highlightScript.TriggerUse(_turn);
         // check interactability 
         Interactable();
 
@@ -99,7 +104,7 @@ public class ChestManager : MonoBehaviour
     {
         _chestCanvas.SetActive(false);
 
-        if (_chestCanvas.activeInHierarchy)
+        if (GameManager._inventoryMenuSTATIC.activeInHierarchy)
         {
             GameManager._inventoryMenuSTATIC.SetActive(false);
         }

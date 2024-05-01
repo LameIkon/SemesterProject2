@@ -73,9 +73,11 @@ public class StartDialogue : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.name == "Player" && !DialogueManager.instance._Oneclick) // Detect if the collision is the gameobject called Player
+        if (collision.gameObject.name == "Player" && !DialogueManager.instance._Oneclick && PriorityManager._PriorityInteractable) // Detect if the collision is the gameobject called Player
         {
             //Debug.Log("Enter");
+            PriorityManager._PriorityInteractable = false;
+
             DialogueManager.instance._NPCName = _NPCName;
             UpdateDialogue();
 
@@ -89,30 +91,35 @@ public class StartDialogue : MonoBehaviour
         }
     }
 
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        if (collision.gameObject.name == "Player" && !GameManager._hideEInteractables && !DialogueManager.instance._Oneclick)
-        {
-            _startDialogue = true; // Set to true allowing start dialogue (Warning be sure there arent overlapping triggers, might cause problems)
+    //private void OnTriggerStay2D(Collider2D collision)
+    //{
+    //    if (collision.gameObject.name == "Player" && !GameManager._hideEInteractables && !DialogueManager.instance._Oneclick && PriorityManager._PriorityInteractable)
+    //    {
+    //        PriorityManager._PriorityInteractable = false;
+    //        _startDialogue = true; // Set to true allowing start dialogue (Warning be sure there arent overlapping triggers, might cause problems)
 
-            _showInteraction.SetActive(true); // Show Interaction
-            _highlight.SetActive(false); // Hide highlight to not overlap with showInteraction
-        }
-        else if (collision.gameObject.name == "Player" && GameManager._hideEInteractables)
-        {
-            _showInteraction.SetActive(false); // Dont show interaction
-        }
-    }
+    //        _showInteraction.SetActive(true); // Show Interaction
+    //        _highlight.SetActive(false); // Hide highlight to not overlap with showInteraction
+    //    }
+    //    else if (collision.gameObject.name == "Player" && GameManager._hideEInteractables)
+    //    {
+    //        _showInteraction.SetActive(false); // Dont show interaction
+    //    }
+    //}
    
 
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.name == "Player") // Detect if the collision is the gameobject called Player
         {
-            //Debug.Log("Exit");
+
             _startDialogue = false; // Set to false to disable dialogue options
 
             _showInteraction.SetActive(false); // Dont show interaction
+
+
+            PriorityManager._PriorityInteractable = true;
+
         }
     }
 
