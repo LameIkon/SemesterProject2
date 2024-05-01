@@ -5978,8 +5978,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2fe38be947f3ac468bf723f4374f758, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _PriorityManager: {fileID: 0}
-  _PriorityThis: 0
   _showInteraction: {fileID: 2448501596766039822}
 --- !u!1 &1036061553700894505
 GameObject:
@@ -6232,6 +6230,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bonfireCanvas: {fileID: 8847272244634688858}
+  _highlightScript: {fileID: 0}
   _turn: 0
 --- !u!114 &8220272727581785056
 MonoBehaviour:
@@ -6246,6 +6245,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _furnaceCanvas: {fileID: 2665887907394615120}
+  _highlightScript: {fileID: 7557744498299956360}
   _turn: 0
 --- !u!1 &1093729355639834709
 GameObject:
@@ -7766,8 +7766,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2fe38be947f3ac468bf723f4374f758, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _PriorityManager: {fileID: 0}
-  _PriorityThis: 0
   _showInteraction: {fileID: 6669496024538562919}
 --- !u!1 &2377152512935653865
 GameObject:
@@ -7934,8 +7932,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2fe38be947f3ac468bf723f4374f758, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _PriorityManager: {fileID: 0}
-  _PriorityThis: 0
   _showInteraction: {fileID: 2701883907188831762}
 --- !u!1 &2394668229258124865
 GameObject:
@@ -8687,8 +8683,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2fe38be947f3ac468bf723f4374f758, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _PriorityManager: {fileID: 0}
-  _PriorityThis: 0
   _showInteraction: {fileID: 5594831027246480413}
 --- !u!1 &3244675476687785349
 GameObject:
@@ -9188,8 +9182,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2fe38be947f3ac468bf723f4374f758, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _PriorityManager: {fileID: 0}
-  _PriorityThis: 0
   _showInteraction: {fileID: 4537076058050888057}
 --- !u!1 &3330594665004756552
 GameObject:
@@ -13744,8 +13736,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c119ec5b9af78f74386d36c0794845c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _PriorityManager: {fileID: 0}
-  _PriorityThis: 0
 --- !u!1 &8816630747947657004
 GameObject:
   m_ObjectHideFlags: 0

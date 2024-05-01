@@ -6,6 +6,7 @@ public class FurnaceManager : MonoBehaviour
 {
     [SerializeField] private UnityEngine.GameObject _furnaceCanvas; //we cant have this static or we cant see it in inspector and drag canvas into slot
     public static UnityEngine.GameObject _FurnaceCanvasSTATIC; //we need a static variable so that we can acces it in Bonfire.Script
+    [SerializeField] private Highlight _highlightScript;
 
     [SerializeField] private bool _turn = false;
 
@@ -42,6 +43,7 @@ public class FurnaceManager : MonoBehaviour
     private void OpenFurnace()
     {
         _turn = !_turn;
+        _highlightScript.TriggerUse(_turn);
         _furnaceCanvas.SetActive(_turn);
         GameManager._inventoryMenuSTATIC.SetActive(_turn);
 

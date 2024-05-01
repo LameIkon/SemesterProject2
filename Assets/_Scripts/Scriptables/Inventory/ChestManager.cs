@@ -82,13 +82,11 @@ public class ChestManager : MonoBehaviour
     {
         if (collision.gameObject.name == "Player")
         {
-            _highlightScript.TriggerEnter(gameObject);
             if (!_highlightScript.TriggerEnter(gameObject))
             {
                 Debug.Log("cannot continue");
                 return;
             }
-            Debug.Log("can open");
             _canOpenChest = true;
         }
     }

@@ -47,7 +47,7 @@ public class ChatBubble : MonoBehaviour
     {
         if (_hideEOnEnteract)
         {
-            GameManager._hideEInteractables = true;
+            PriorityManager._canInteractDialogue = false;
         }
         foreach (char c in _lines[_index].ToCharArray()) // checks of many letters there is in the given line
         {
@@ -73,7 +73,7 @@ public class ChatBubble : MonoBehaviour
             gameObject.SetActive(false); // if there isnt any dialogue deactivate.
             if (_hideEOnEnteract)
             {
-                GameManager._hideEInteractables = false;
+                PriorityManager._canInteractDialogue = true;  
             }
         }
     }

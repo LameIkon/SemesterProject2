@@ -5,10 +5,13 @@ using UnityEngine;
 
 public class PriorityManager : MonoBehaviour 
 {
+    //public static PriorityManager _Instance;
 
-
-    public PriorityManager _PriorityManager; // used for other scripts to get it
+    private PriorityManager _PriorityManager; // used for other scripts to get it
     public static bool _PriorityInteractable;
+    public static bool _canInteractChest = true; // call from other scripts to say that this should be called
+    public static bool _canInteractDialogue = true; // call from other scripts to say that this should be called
+    public static GameObject _CompareGameObject;
     //public bool _PriorityThis;
 
     private void OnEnable()
@@ -18,6 +21,8 @@ public class PriorityManager : MonoBehaviour
             _PriorityManager = GetComponent<PriorityManager>();
         }
         _PriorityInteractable = true;
+        _canInteractChest = true;
+        _canInteractDialogue = true;
     }
 
 
@@ -26,8 +31,9 @@ public class PriorityManager : MonoBehaviour
         if (_PriorityInteractable)
         {
             _PriorityInteractable = false;
+            Debug.Log("enter");
 
-            AdditionalTriggerEnterImplementation();
+            //AdditionalTriggerEnterImplementation(); should be added here
             return true;
         }
         return false;
@@ -42,6 +48,7 @@ public class PriorityManager : MonoBehaviour
     {
         if (!_PriorityInteractable)
         {
+            AdditionalTriggerExitImplementation();
             _PriorityInteractable = true;
             Debug.Log("exit");
         }

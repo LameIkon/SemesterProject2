@@ -12,7 +12,7 @@ public class StartDialogue : MonoBehaviour
     //private GameObject _textbox; // Used to get the GameObject named textbox
     //private GameObject _showInteraction; // Used to get the GameObject named showInteraction
     private bool _interactionChecker;
-    [SerializeField] private Highlight _highlightScript;
+    [SerializeField] private HighlightDialogue _highlightScript;
 
     [Header("NPC Name")]
     public string _NPCName; // Insert the name of the NPC in the inspector
@@ -37,7 +37,7 @@ public class StartDialogue : MonoBehaviour
         //_highlight = transform.GetChild(0).GetChild(0).gameObject; // Get the child of child attached to the parent.
         //_textbox = transform.GetChild(0).GetChild(1).gameObject; // Get the child of child attached to the parent.
         //_showInteraction = transform.GetChild(0).GetChild(2).gameObject; // Get the child of child attached to the parent.
-        _highlightScript = GetComponentInChildren<Highlight>();
+        _highlightScript = GetComponentInChildren<HighlightDialogue>();
 
     }
 
@@ -68,24 +68,24 @@ public class StartDialogue : MonoBehaviour
         if (collision.gameObject.name == "Player" && !DialogueManager.instance._Oneclick) // Detect if the collision is the gameobject called Player
         {
 
-            _highlightScript.TriggerEnter(gameObject);
-            if (!_highlightScript.TriggerEnter(gameObject) && PriorityManager._PriorityInteractable)
-            {
-                Debug.Log("cannot continue");
-                return;
-            }
+            //_highlightScript.TriggerEnter(gameObject);
+            //if (!_highlightScript.TriggerEnter(gameObject))
+            //{
+            //    Debug.Log("cannot continue");
+            //    return;
+            //}
 
-            DialogueManager.instance._NPCName = _NPCName;
-            UpdateDialogue();      
+            //DialogueManager.instance._NPCName = _NPCName;
+            //UpdateDialogue();      
 
-            _startDialogue = true; // Set to true allowing start dialogue (Warning be sure there arent overlapping triggers, might cause problems)
-            _highlightScript.TriggerEnter(gameObject);
-            if (!GameManager._hideEInteractables)
-            {
-                _startDialogue = true; // Set to true allowing start dialogue (Warning be sure there arent overlapping triggers, might cause problems)
-                //_highlightScript.TriggerEnter(gameObject);
-                Debug.Log("Hide E");
-            }           
+            //_startDialogue = true; // Set to true allowing start dialogue (Warning be sure there arent overlapping triggers, might cause problems)
+            //_highlightScript.TriggerEnter(gameObject);
+            //if (!GameManager._hideEInteractables)
+            //{
+            //    _startDialogue = true; // Set to true allowing start dialogue (Warning be sure there arent overlapping triggers, might cause problems)
+            //    //_highlightScript.TriggerEnter(gameObject);
+            //    Debug.Log("Hide E");
+            //}           
         }
     }
 
@@ -93,7 +93,6 @@ public class StartDialogue : MonoBehaviour
     {
         if(collision.gameObject.name == "Player" && !DialogueManager.instance._Oneclick)
         {
-            _highlightScript.TriggerEnter(gameObject);
             if (!_highlightScript.TriggerEnter(gameObject))
             {
                 Debug.Log("cannot continue");
@@ -101,15 +100,13 @@ public class StartDialogue : MonoBehaviour
             }
             DialogueManager.instance._NPCName = _NPCName;
             UpdateDialogue();
-
-            _startDialogue = true; // Set to true allowing start dialogue (Warning be sure there arent overlapping triggers, might cause problems)
-            _highlightScript.TriggerEnter(gameObject);
-            if (!GameManager._hideEInteractables)
-            {
-                _startDialogue = true; // Set to true allowing start dialogue (Warning be sure there arent overlapping triggers, might cause problems)
-                //_highlightScript.TriggerEnter(gameObject);
-                Debug.Log("Hide E");
-            }
+            _startDialogue = true; // Set to true allowing start dialogue (Warning be sure there arent overlapping triggers, might cause problems)          
+            //if (!GameManager._hideEInteractables)
+            //{
+            //    _startDialogue = true; // Set to true allowing start dialogue (Warning be sure there arent overlapping triggers, might cause problems)
+            //    //_highlightScript.TriggerEnter(gameObject);
+            //    Debug.Log("Hide E");
+            //}
 
         }
     }

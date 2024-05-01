@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Highlight : PriorityManager
+public class HighlightDialogue : PriorityManager
 {
     [SerializeField] private GameObject _showInteraction; // Used to get the GameObject named showInteraction
     private bool _triggerOnce;
@@ -23,7 +23,7 @@ public class Highlight : PriorityManager
             _CompareGameObject = gameobject;
         }
 
-        if (_CompareGameObject == gameobject && _PriorityInteractable && _canInteractChest)
+        if (_CompareGameObject == gameobject && _PriorityInteractable && _canInteractDialogue)
         {         
             base.TriggerEnter(gameobject);
             AdditionalTriggerEnterImplementation();
