@@ -46,26 +46,28 @@ public class PolarBearController : MovementController
         _moveSpeed = _speedReference.GetMinValue();
     }
 
-    public void Attack(Vector3 ownPosition, float attackRange)
+    public void Attack(Vector3 ownPosition, float attackRange, float damage)
     {
         if (!_isAttacking)
         {
-            StartCoroutine(AttackConsecutive(ownPosition, attackRange));
+            StartCoroutine(AttackConsecutive(ownPosition, attackRange, damage));
         }
     }
 
-    IEnumerator AttackConsecutive(Vector3 ownPosition, float attackRange)
+    IEnumerator AttackConsecutive(Vector3 ownPosition, float attackRange, float damage)
     {
         _isAttacking = true;
         _movePoint.position = transform.position;
         AttackAnimation();
-        yield return new WaitForSeconds (1f);
+        yield return new WaitForSeconds (0.70f);
         Collider2D[] hits = Physics2D.OverlapCircleAll(ownPosition, 1.8f * attackRange);
         foreach (var hit in hits)
         {
             if (hit.gameObject.name == "Player")
             {
                 Debug.Log("Hit!");
+                hit.GetComponent<IDamageable>()?.TakeDamage(damage);
+
             }
             else
             {

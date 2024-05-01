@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _idleTime:
     MinValue: 2
-    MaxValue: 6
+    MaxValue: 3
   _waitBetweenWalk:
     MinValue: 0.4
     MaxValue: 0.4
@@ -22,8 +22,8 @@ MonoBehaviour:
     MinValue: 0.1
     MaxValue: 0.1
   _waitBetweenAttack:
-    MinValue: 2
-    MaxValue: 4
+    MinValue: 1
+    MaxValue: 1
   _aggroRange: 4
   _damage: 10
   _attackRange: 1

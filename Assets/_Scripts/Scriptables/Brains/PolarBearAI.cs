@@ -86,8 +86,8 @@ public class PolarBearAI : BrainAI
                 
                 //Debug.Log("attack");
                 //Collider2D[] hits = Physics2D.OverlapCircleAll(ownPosition, 1.8f * _attackRange);
-                _polarBearController.Attack(ownPosition, _attackRange);
-
+                _polarBearController.Attack(ownPosition, _attackRange, _damage);
+                SetTimeoutAttack(brain);
 
                 //foreach (var hit in hits)
                 //{
@@ -108,7 +108,7 @@ public class PolarBearAI : BrainAI
                 //    //hit.GetComponent<IDamageable>()?.TakeDamage(_damage);
 
                 //}
-                SetTimeoutAttack(brain);
+                //SetTimeoutAttack(brain);
             }
 
             else if (AggroRange(vectorBetween, _aggroRange * unitVectorBetween, _aggroRange))
