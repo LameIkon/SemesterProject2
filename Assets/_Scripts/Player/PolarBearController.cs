@@ -13,8 +13,6 @@ public class PolarBearController : MovementController
 
     private void Start()
     {
-        //_moveSpeed = _speedReference.GetMaxValue();
-        //_polarBearAIScript = GetComponentInChildren<PolarBearAI>();
         _polarBearAIScript.SetPolarBearController(this);
     }
 
@@ -24,16 +22,6 @@ public class PolarBearController : MovementController
         {
             base.Update();
         }
-
-        //if (_isAttacking)
-        //{
-        //    if (!_animator.GetCurrentAnimatorStateInfo(0).IsName("Attack_Right") &&
-        //        !_animator.GetCurrentAnimatorStateInfo(0).IsName("Attack_Left"))
-        //    {
-        //        Debug.Log("finished attacking");
-        //        _isAttacking = false;
-        //    }
-        //}
     }
 
     public void RunSpeed()

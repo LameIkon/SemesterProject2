@@ -65,50 +65,12 @@ public class PolarBearAI : BrainAI
             Vector3 vectorBetween = targetPosition - ownPosition; // The distance between
             Vector3 unitVectorBetween = (vectorBetween).normalized; // Normalized
 
-           
-
-            //if (AttackRange(vectorBetween, _attackRange * unitVectorBetween, _attackRange))
-            //{
-            //    SetTimeoutAttack(brain);
-            //    Debug.Log((ownPosition + _attackRange * unitVectorBetween));
-            //    Collider2D[] hits = Physics2D.OverlapBoxAll((ownPosition + _attackRange * unitVectorBetween), _attackRange * Vector2.one, 0f);
-
-
-            //    foreach (var hit in hits)
-            //    {
-            //        hit.GetComponent<IDamageable>()?.TakeDamage(_damage);
-
-            //    }
-            //}
 
             if (AttackRange(vectorBetween, _attackRange * unitVectorBetween, _attackRange))
             {
                 
-                //Debug.Log("attack");
-                //Collider2D[] hits = Physics2D.OverlapCircleAll(ownPosition, 1.8f * _attackRange);
                 _polarBearController.Attack(ownPosition, _attackRange, _damage);
                 SetTimeoutAttack(brain);
-
-                //foreach (var hit in hits)
-                //{
-                //    if (hit.gameObject.name == "Player")
-                //    {
-                //        Debug.Log("Hit!");
-                //    }
-                //    else
-                //    {
-                //        Debug.Log("missed");
-                //    }
-
-                //    //if (hit.GetComponent<AIThinker>() != null)
-                //    //{
-                //    //    continue;
-                //    //}
-
-                //    //hit.GetComponent<IDamageable>()?.TakeDamage(_damage);
-
-                //}
-                //SetTimeoutAttack(brain);
             }
 
             else if (AggroRange(vectorBetween, _aggroRange * unitVectorBetween, _aggroRange))
