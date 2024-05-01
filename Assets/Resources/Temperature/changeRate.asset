@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 440e8008cfe6fbe4e925b85b6dfd1223, type: 3}
-  m_Name: Temp
+  m_Name: changeRate
   m_EditorClassIdentifier: 
   DevDescription: 
-  _value: 99.55
-  _onValueChanged: {fileID: 11400000, guid: 726189a91b7e98d41872abde56508ceb, type: 2}
+  _value: 100
+  _onValueChanged: {fileID: 0}

@@ -16860,8 +16860,14 @@ MonoBehaviour:
     UseConstant: 0
     ConstantValue: 0
     Variable: {fileID: 11400000, guid: dece9671aacff9f49a48fa2442bc41eb, type: 2}
-  _colorAboveThreshold: {r: 0.7924528, g: 0, b: 0, a: 1}
-  _colorBelowThreshold: {r: 0, g: 0.7754618, b: 0.9433962, a: 1}
+  _colorAboveThreshold:
+    UseConstant: 0
+    ConstantColor: {r: 0, g: 0, b: 0, a: 0}
+    Variable: {fileID: 11400000, guid: 854d46b7906407049a7145eb55a71e14, type: 2}
+  _colorBelowThreshold:
+    UseConstant: 0
+    ConstantColor: {r: 0, g: 0, b: 0, a: 0}
+    Variable: {fileID: 11400000, guid: cdbbd58fe36827b4caa18e2d6235dd44, type: 2}
   _thresholdTemperature: 25
   _changeRateTemperature: 100
   _volumeAboveThresholdTemperature: -40

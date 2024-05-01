@@ -1,8 +1,6 @@
-using System;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class Visuals : MonoBehaviour
@@ -33,20 +31,21 @@ public class Visuals : MonoBehaviour
 
     [Header("Temperature")]
     [SerializeField] private FloatReference _currentTemperature;
-    [SerializeField] private Color _colorAboveThreshold;
-    [SerializeField] private Color _colorBelowThreshold;
+    [SerializeField] private ColorReference _colorAboveThreshold;
+    [SerializeField] private ColorReference _colorBelowThreshold;
     [SerializeField] private float _thresholdTemperature;               // 25
     [SerializeField] private float _changeRateTemperature;              // 100
     [SerializeField] private float _volumeAboveThresholdTemperature;    // -40
     [SerializeField] private float _volumeBelowThresholdTemperature;    // -100
-    [SerializeField] protected bool _isCold;
+    [SerializeField] private bool _isCold;
     private Image _temperatureIcon;
     private ClampedFloatParameter _cfpTemperature;
     private WhiteBalance _whiteBalance;
-    private bool _aboveThreshold;
+    private float _currentVolumeTemperature;
     private float _defaultAbove;
     private float _defaultBelow;
     private bool _temperatureDefaulter;
+    private bool _aboveThreshold;
     [Space(5f)]
 
     // ------------------------------------------------------------------------------------------------ \\
@@ -168,7 +167,7 @@ public class Visuals : MonoBehaviour
     
     #region Temperature Methods
     
-        protected virtual void EnableFreezeVisual()
+        private float EnableFreezeVisual()
         {
             _temperatureDefaulter = false;                              // Ensures only one use of the if-statement in DisableFreezeVisual()
             _isCold = true;                                             // Is used in HeatAbsorption.cs to help the script to know which method to override
@@ -182,9 +181,12 @@ public class Visuals : MonoBehaviour
             {
                 case true: _volumeAboveThresholdTemperature -= _changeRateTemperature * Time.deltaTime; break;
             }
+
+            _currentVolumeTemperature = _volumeAboveThresholdTemperature;
+            return _currentVolumeTemperature;
         }
 
-        protected virtual void DisableFreezeVisual()
+        private float DisableFreezeVisual()
         {
             _temperatureIcon.color = _colorAboveThreshold;      // Changes the color of the icon when the method is called
             _isCold = false;                                    // Is used in HeatAbsorption.cs to help the script to know which method to override
@@ -192,7 +194,7 @@ public class Visuals : MonoBehaviour
             if (_temperatureDefaulter)                          // Will only be accessed at the start of the game
             {
                 _cfpTemperature = new ClampedFloatParameter(_volumeAboveThresholdTemperature, _defaultBelow, _defaultAbove, true);
-                return;
+                return _currentVolumeTemperature;
             }
             
             _volumeAboveThresholdTemperature = _defaultAbove;   // Resets _volumeAboveThresholdTemperature to default 
@@ -202,6 +204,9 @@ public class Visuals : MonoBehaviour
             {
                 case true: _volumeBelowThresholdTemperature += _changeRateTemperature * Time.deltaTime; break;
             }
+
+            _currentVolumeTemperature = _volumeBelowThresholdTemperature;
+            return _currentVolumeTemperature;
         }
         
     #endregion
@@ -220,90 +225,4 @@ public class Visuals : MonoBehaviour
         }
         
     #endregion
-}
-
-
-public sealed class HeatAbsorption : Visuals
-{
-    [Header("Objects")]
-    [SerializeField] private Volume _volume;
-    [Space(5f)]
-    
-    // ------------------------------------------------------------------------------------------------ \\
-    
-    [Header("Heat")] 
-    [SerializeField] private FloatReference _currentTemperature;
-    [SerializeField] private Color _colorAboveThreshold;
-    [SerializeField] private Color _colorBelowThreshold;
-    [SerializeField] private float _thresholdTemperature;               // 25
-    [SerializeField] private float _changeRateTemperature;              // 100
-    [SerializeField] private float _volumeAboveThresholdTemperature;    // -40
-    [SerializeField] private float _volumeBelowThresholdTemperature;    // -100
-    private Image _temperatureIcon;
-    private ClampedFloatParameter _cfpTemperature;
-    private WhiteBalance _whiteBalance;
-    private bool _aboveThreshold;
-    private float _defaultAbove;
-    private float _defaultBelow;
-    private bool _temperatureDefaulter;
-    
-    #region Unity Methods
-    
-        private void Awake()
-        {
-            _volume = GetComponent<Volume>(); // Initializes _volume
-            
-        }
-    
-        private void Update()
-        {
-            
-        }
-
-        private void OnTriggerStay2D(Collider2D col)
-        {
-            //
-            // Code that applies effect
-            //
-            
-            switch (_isCold)
-            {
-                case true: this.EnableFreezeVisual(); break;
-                case false: this.DisableFreezeVisual(); break;
-            }   
-        }
-
-        private void OnTriggerExit(Collider col)
-        {
-            //
-            // Code that deapplies effect
-            // 
-        }
-        
-        
-    #endregion
-    
-    #region Heat Absorption Methods
-    
-        private void EnableAbsorptionVisual()
-        {
-            
-        }
-    
-        private void DisableAbsorptionVisual()
-        {
-        
-        }
-    
-    #endregion
-    
-    protected override void EnableFreezeVisual()
-    {
-        
-    }
-
-    protected override void DisableFreezeVisual() 
-    {
-        
-    }
 }

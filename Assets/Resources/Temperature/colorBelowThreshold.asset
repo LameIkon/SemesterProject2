@@ -9,9 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 440e8008cfe6fbe4e925b85b6dfd1223, type: 3}
-  m_Name: Temp
+  m_Script: {fileID: 11500000, guid: a756a3da25314de4a8f894e6f0c385eb, type: 3}
+  m_Name: colorBelowThreshold
   m_EditorClassIdentifier: 
-  DevDescription: 
-  _value: 99.55
-  _onValueChanged: {fileID: 11400000, guid: 726189a91b7e98d41872abde56508ceb, type: 2}
+  _value: {r: 0, g: 0.7764706, b: 0.94509804, a: 1}
