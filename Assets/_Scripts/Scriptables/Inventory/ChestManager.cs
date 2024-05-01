@@ -62,9 +62,25 @@ public class ChestManager : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    //private void OnTriggerEnter2D(Collider2D collision)
+    //{
+    //    if (collision.gameObject.name == "Player") 
+    //    {
+    //        _highlightScript.TriggerEnter(gameObject);
+    //        if (!_highlightScript.TriggerEnter(gameObject))
+    //        {
+    //            Debug.Log("cannot continue");
+    //            return;
+    //        }
+
+    //        _canOpenChest = true;
+           
+    //    }        
+    //}
+
+    private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.gameObject.name == "Player") 
+        if (collision.gameObject.name == "Player")
         {
             _highlightScript.TriggerEnter(gameObject);
             if (!_highlightScript.TriggerEnter(gameObject))
@@ -72,10 +88,9 @@ public class ChestManager : MonoBehaviour
                 Debug.Log("cannot continue");
                 return;
             }
-
+            Debug.Log("can open");
             _canOpenChest = true;
-           
-        }        
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)

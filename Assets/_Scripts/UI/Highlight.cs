@@ -35,6 +35,7 @@ public class Highlight : PriorityManager
 
     public override void TriggerExit(GameObject gameobject)
     {
+        Debug.Log("analysing");
         if (_gameObject == gameobject)
         {
             AdditionalTriggerExitImplementation();
@@ -65,7 +66,6 @@ public class Highlight : PriorityManager
     protected override void AdditionalTriggerExitImplementation()
     {
         _showInteraction.SetActive(false);
-        _PriorityInteractable = true;
         GameManager._hideEInteractables = true;
     }
 }

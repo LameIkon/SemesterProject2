@@ -46,16 +46,18 @@ public class StartDialogue : MonoBehaviour
     void Update()
     {
        if (_startDialogue) // Only run this if you are inside the area collider
-       {
+       {         
            IfDialogue();
            if (DialogueManager.instance._DialogueExited) // Only run this when _dialogueExited bool from the singleton is true. used to check when you exit the dialogue
            {
                 UpdateDialogue();
                 _interactionChecker = false; // you can now show interaction again
+                _highlightScript.TriggerUse(false);
             }
            if (DialogueManager.instance._StartedDialogue && !_interactionChecker) // Only run this when you start a dialogue
            {
                 _interactionChecker = true;
+                _highlightScript.TriggerUse(true);
                 OnDialogueStartedEvent?.Invoke(); // This event is called such NPC do not move during dialogue
            }
         }
@@ -65,15 +67,16 @@ public class StartDialogue : MonoBehaviour
     {
         if (collision.gameObject.name == "Player" && !DialogueManager.instance._Oneclick) // Detect if the collision is the gameobject called Player
         {
-            DialogueManager.instance._NPCName = _NPCName;
-            UpdateDialogue();
 
             _highlightScript.TriggerEnter(gameObject);
-            if (!_highlightScript.TriggerEnter(gameObject))
+            if (!_highlightScript.TriggerEnter(gameObject) && PriorityManager._PriorityInteractable)
             {
                 Debug.Log("cannot continue");
                 return;
             }
+
+            DialogueManager.instance._NPCName = _NPCName;
+            UpdateDialogue();      
 
             _startDialogue = true; // Set to true allowing start dialogue (Warning be sure there arent overlapping triggers, might cause problems)
             _highlightScript.TriggerEnter(gameObject);
@@ -86,22 +89,31 @@ public class StartDialogue : MonoBehaviour
         }
     }
 
-    //private void OnTriggerStay2D(Collider2D collision)
-    //{
-    //    if (collision.gameObject.name == "Player" && !GameManager._hideEInteractables && !DialogueManager.instance._Oneclick && PriorityManager._PriorityInteractable)
-    //    {
-    //        PriorityManager._PriorityInteractable = false;
-    //        _startDialogue = true; // Set to true allowing start dialogue (Warning be sure there arent overlapping triggers, might cause problems)
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if(collision.gameObject.name == "Player" && !DialogueManager.instance._Oneclick)
+        {
+            _highlightScript.TriggerEnter(gameObject);
+            if (!_highlightScript.TriggerEnter(gameObject))
+            {
+                Debug.Log("cannot continue");
+                return;
+            }
+            DialogueManager.instance._NPCName = _NPCName;
+            UpdateDialogue();
 
-    //        _showInteraction.SetActive(true); // Show Interaction
-    //        _highlight.SetActive(false); // Hide highlight to not overlap with showInteraction
-    //    }
-    //    else if (collision.gameObject.name == "Player" && GameManager._hideEInteractables)
-    //    {
-    //        _showInteraction.SetActive(false); // Dont show interaction
-    //    }
-    //}
-   
+            _startDialogue = true; // Set to true allowing start dialogue (Warning be sure there arent overlapping triggers, might cause problems)
+            _highlightScript.TriggerEnter(gameObject);
+            if (!GameManager._hideEInteractables)
+            {
+                _startDialogue = true; // Set to true allowing start dialogue (Warning be sure there arent overlapping triggers, might cause problems)
+                //_highlightScript.TriggerEnter(gameObject);
+                Debug.Log("Hide E");
+            }
+
+        }
+    }
+
 
     private void OnTriggerExit2D(Collider2D collision)
     {
@@ -115,7 +127,7 @@ public class StartDialogue : MonoBehaviour
     void IfDialogue()
     {
         if (!DialogueManager.instance._Oneclick) // Ensures only 1 UI can be open at a time
-        {
+        {           
             DialogueManager.instance.OpenUI(); // Open UI
         }       
     }
