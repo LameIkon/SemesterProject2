@@ -4363,11 +4363,6 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
---- !u!1 &1018172875 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6289178074522413936, guid: c86bc54ac953c5d47965d2ff1e85ff31, type: 3}
-  m_PrefabInstance: {fileID: 2134791077}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1508882767
 GameObject:
   m_ObjectHideFlags: 0
@@ -4575,59 +4570,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8439986373081254643, guid: c86bc54ac953c5d47965d2ff1e85ff31, type: 3}
   m_PrefabInstance: {fileID: 2134791077}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1620608734
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1018172875}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bf70802c5d8df1f47876647c5ed9a146, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _volume: {fileID: 0}
-  _currentHealth:
-    UseConstant: 0
-    ConstantValue: 0
-    Variable: {fileID: 0}
-  _vignetteColor:
-    m_OverrideState: 0
-    m_Value: {r: 0, g: 0, b: 0, a: 0}
-  _highThresholdHealth: 0
-  _lowThresholdHealth: 0
-  _changeRateHealth: 0
-  _changeRateMultiplier: 0
-  _maximumIntensityRange: 0
-  _minimumIntensityRange: 0
-  _currentTemperature:
-    UseConstant: 0
-    ConstantValue: 0
-    Variable: {fileID: 0}
-  _colorAboveThreshold: {r: 0, g: 0, b: 0, a: 0}
-  _colorBelowThreshold: {r: 0, g: 0, b: 0, a: 0}
-  _thresholdTemperature: 0
-  _changeRateTemperature: 0
-  _volumeAboveThresholdTemperature: 0
-  _volumeBelowThresholdTemperature: 0
-  _isCold: 0
-  _currentHunger:
-    UseConstant: 0
-    ConstantValue: 0
-    Variable: {fileID: 0}
-  _hungerThreshold: 0
-  _volume: {fileID: 0}
-  _currentTemperature:
-    UseConstant: 0
-    ConstantValue: 0
-    Variable: {fileID: 0}
-  _colorDefault: {r: 0, g: 0, b: 0, a: 0}
-  _colorWhenHeated: {r: 0, g: 0, b: 0, a: 0}
-  _thresholdTemperature: 0
-  _changeRate: 0
-  _maximumVolume: 0
-  _minimumVolume: 0
 --- !u!1 &1793136392
 GameObject:
   m_ObjectHideFlags: 0
@@ -73595,10 +73537,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8439986373081254643, guid: c86bc54ac953c5d47965d2ff1e85ff31, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2028486032}
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6289178074522413936, guid: c86bc54ac953c5d47965d2ff1e85ff31, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1620608734}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c86bc54ac953c5d47965d2ff1e85ff31, type: 3}
 --- !u!1 &2137355838
 GameObject:

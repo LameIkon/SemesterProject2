@@ -39,11 +39,11 @@ public class Visuals : MonoBehaviour
     [SerializeField] private float _changeRateTemperature;              // 100
     [SerializeField] private float _volumeAboveThresholdTemperature;    // -40
     [SerializeField] private float _volumeBelowThresholdTemperature;    // -100
-    [SerializeField] private bool _isCold;
+    [SerializeField] protected bool _isCold;
     private Image _temperatureIcon;
     private ClampedFloatParameter _cfpTemperature;
     private WhiteBalance _whiteBalance;
-    private float _currentVolumeTemperature;
+    protected float _currentVolumeTemperature;
     private float _defaultAbove;
     private float _defaultBelow;
     private bool _temperatureDefaulter;
@@ -120,7 +120,6 @@ public class Visuals : MonoBehaviour
             
                 EnableHungerVisual();
             
-            
             #endregion
         }
         
@@ -128,9 +127,9 @@ public class Visuals : MonoBehaviour
     
     #region Health Methods
     
-        private void AboveThresholdIsTrue() { _aboveThreshold = true; } 
+        private void AboveThresholdIsTrue() => _aboveThreshold = true;  
         
-        private void AboveThresholdIsFalse() { _aboveThreshold = false; }
+        private void AboveThresholdIsFalse() => _aboveThreshold = false; 
     
         private void EnableLowHealthVisual()
         {
@@ -168,8 +167,10 @@ public class Visuals : MonoBehaviour
     
     #region Temperature Methods
     
-        private float EnableFreezeVisual()
+        protected virtual void EnableFreezeVisual()
         {
+            switch (Bonfire._IsHeatingUp) { case true: /* Method call */ ; return; }
+            
             _temperatureDefaulter = false;                              // Ensures only one use of the if-statement in DisableFreezeVisual()
             _isCold = true;                                             // Is used in HeatAbsorption.cs to help the script to know which method to override
             
@@ -182,20 +183,19 @@ public class Visuals : MonoBehaviour
             {
                 case true: _volumeAboveThresholdTemperature -= _changeRateTemperature * Time.deltaTime; break;
             }
-
-            _currentVolumeTemperature = _volumeAboveThresholdTemperature;
-            return _currentVolumeTemperature;
         }
 
-        private float DisableFreezeVisual()
+        protected virtual void DisableFreezeVisual()
         {
+            switch (Bonfire._IsHeatingUp) { case true: /* Method call*/; break; }
+            
             _temperatureIcon.color = _colorAboveThreshold;      // Changes the color of the icon when the method is called
             _isCold = false;                                    // Is used in HeatAbsorption.cs to help the script to know which method to override
             
             if (_temperatureDefaulter)                          // Will only be accessed at the start of the game
             {
                 _cfpTemperature = new ClampedFloatParameter(_volumeAboveThresholdTemperature, _defaultBelow, _defaultAbove, true);
-                return _currentVolumeTemperature;
+                return;
             }
             
             _volumeAboveThresholdTemperature = _defaultAbove;   // Resets _volumeAboveThresholdTemperature to default 
@@ -205,9 +205,6 @@ public class Visuals : MonoBehaviour
             {
                 case true: _volumeBelowThresholdTemperature += _changeRateTemperature * Time.deltaTime; break;
             }
-
-            _currentVolumeTemperature = _volumeBelowThresholdTemperature;
-            return _currentVolumeTemperature;
         }
         
     #endregion
@@ -227,9 +224,71 @@ public class Visuals : MonoBehaviour
         
     #endregion
 
-
     private void CameraShake()
     {
         CameraShakeManager._Instance.CameraShake(_impulseSource);
     }
 }
+
+public sealed class Heating : Visuals
+{
+    [SerializeField] private Volume _volume;
+    [SerializeField] private FloatReference _currentTemperature;
+    [SerializeField] private Color _colorAboveThreshold;
+    [SerializeField] private Color _colorBelowThreshold;
+    [SerializeField] private float _thresholdTemperature; // 25
+    [SerializeField] private float _changeRateTemperature; // 100
+    [SerializeField] private float _volumeAboveThresholdTemperature; // -40
+    [SerializeField] private float _volumeBelowThresholdTemperature; // -100
+    private Image _temperatureIcon;
+    private ClampedFloatParameter _cfpTemperature;
+    private WhiteBalance _whiteBalance;
+    private bool _aboveThreshold;
+    private float _defaultAbove;
+    private float _defaultBelow;
+    private bool _temperatureDefaulter;
+
+    #region Unity Methods
+
+        private void Awake()
+        {
+            print("Helloooooo");
+            _volume = GetComponent<Volume>();       // Initializes _volume
+        }
+
+        private void Update()
+        {
+            if (Bonfire._IsHeatingUp)
+            {
+                print("Yes this workS!!");
+            }
+
+            switch (_isCold)
+            {
+               case true: this.EnableFreezeVisual(); break; 
+               case false: this.DisableFreezeVisual(); break;
+            }
+    }
+    
+    #endregion
+    
+    #region Heat Absorption Methods
+    
+        private void EnableAbsorptionVisual()
+        {
+            
+        }
+    
+        private void DisableAbsorptionVisual()
+        {
+            
+        }
+    
+    #endregion
+    
+    protected override void EnableFreezeVisual() { return; }
+
+    protected override void DisableFreezeVisual() { return; }
+}
+
+

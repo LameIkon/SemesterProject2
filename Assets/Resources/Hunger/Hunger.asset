@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Hunger
   m_EditorClassIdentifier: 
   DevDescription: 
-  _value: 69.99089
+  _value: 51.685593
   _onValueChanged: {fileID: 11400000, guid: ad04073451febc34d9e04528351926dc, type: 2}
