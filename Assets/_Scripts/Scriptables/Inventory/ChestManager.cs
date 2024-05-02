@@ -86,7 +86,6 @@ public class ChestManager : MonoBehaviour
         {
             if (!_highlightScript.TriggerEnter(gameObject))
             {
-                Debug.Log("cannot continue");
                 return;
             }
             _canOpenChest = true;

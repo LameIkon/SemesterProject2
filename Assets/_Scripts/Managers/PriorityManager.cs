@@ -31,7 +31,6 @@ public class PriorityManager : MonoBehaviour
         if (_PriorityInteractable)
         {
             _PriorityInteractable = false;
-            Debug.Log("enter");
 
             //AdditionalTriggerEnterImplementation(); should be added here
             return true;
@@ -50,7 +49,6 @@ public class PriorityManager : MonoBehaviour
         {
             AdditionalTriggerExitImplementation();
             _PriorityInteractable = true;
-            Debug.Log("exit");
         }
         else
         {
@@ -67,11 +65,11 @@ public class PriorityManager : MonoBehaviour
     {
         if (state) // if bool is true use
         {
-            Debug.Log("Use");
+            
         }
         else // else set to false
         {
-            Debug.Log("closed");
+            
         }
     }
 

@@ -272,25 +272,25 @@ public class DialogueManager : MonoBehaviour
 
         if (_NPCName == "Hans")
         {
-            Debug.Log("Scientist");
+            
             _currentProile = Instantiate(_scientistProfile); // Takes a gameobject prefab
             _currentProile.transform.SetParent(nameholder.transform, false); // Set Image to the parent but keep its own transform
         }
         else if (_NPCName == "Ejnar")
         {
-            Debug.Log("Captain");
+            
             _currentProile = Instantiate(_captainProfile); // Takes a gameobject prefab
             _currentProile.transform.SetParent(nameholder.transform, false); // Set Image to the parent but keep its own transform
         }
         else if (_NPCName == "Laub")
         {
-            Debug.Log("Spy");
+            
             _currentProile = Instantiate(_spyProfile); // Takes a gameobject prefab
             _currentProile.transform.SetParent(nameholder.transform, false); // Set Image to the parent but keep its own transform
         }
         else
         {
-            Debug.Log("default");
+            
             _currentProile = Instantiate(_defaultProfile); // Takes a gameobject prefab
             _currentProile.transform.SetParent(nameholder.transform, false); // Set Image to the parent but keep its own transform
         }
