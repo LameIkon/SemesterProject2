@@ -13,6 +13,7 @@ TagManager:
   - ItemDescriptionHolder
   - Destination
   - TemperatureImage
+  - CameraShaker
   layers:
   - Default
   - TransparentFX

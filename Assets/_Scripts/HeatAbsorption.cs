@@ -31,7 +31,7 @@ public class HeatAbsorption : MonoBehaviour
     
         private void Start()
         {
-            _volume = GetComponent<Volume>();                  // Initializes _volume
+            _volume = GameObject.FindWithTag("Volume).GetComponent<Volume>();                  // Initializes _volume
             _temperatureIcon = GameObject.FindWithTag("TemperatureImage").GetComponent<Image>();                // Initializes the temperature icon
             _defaultAbove = _maximumVolume;                                                                     // To reset _temperatureVolumeAboveThreshold after being changed
             _defaultBelow = _minimumVolume;                                                                     // To reset _temperatureVolumeBelowThreshold after being changed

@@ -1,3 +1,4 @@
+using Cinemachine;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
@@ -7,6 +8,7 @@ public class Visuals : MonoBehaviour
 {
     [Header("Objects")]
     [SerializeField] private Volume _volume;
+    private CinemachineImpulseSource _impulseSource;
     [Space(5f)]
 
     // ------------------------------------------------------------------------------------------------ \\
@@ -82,11 +84,10 @@ public class Visuals : MonoBehaviour
 
             #endregion
             
-            #region Hunger Variables 
-            
-            
-            
-            
+            #region Hunger Variables
+
+                _impulseSource = GameObject.FindWithTag("CameraShaker").GetComponent<CinemachineImpulseSource>();
+
             #endregion
         }
 
@@ -117,7 +118,7 @@ public class Visuals : MonoBehaviour
 
             #region Hunger Variables
             
-            
+                EnableHungerVisual();
             
             
             #endregion
@@ -216,7 +217,7 @@ public class Visuals : MonoBehaviour
     
         private void EnableHungerVisual()
         {
-            
+            // CameraShake();
         }
 
         private void DisableHungerVisual()
@@ -225,4 +226,10 @@ public class Visuals : MonoBehaviour
         }
         
     #endregion
+
+
+    private void CameraShake()
+    {
+        CameraShakeManager._Instance.CameraShake(_impulseSource);
+    }
 }
