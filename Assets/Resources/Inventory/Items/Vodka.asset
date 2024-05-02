@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22fdcaa0f0ea09241a60324cad78b02f, type: 3}
   m_Name: Vodka
   m_EditorClassIdentifier: 
-  _ItemDisplayed: {fileID: 21300000, guid: 6e8a0ed158e89aa4295a207e3e275331, type: 3}
+  _ItemDisplayed: {fileID: 21300000, guid: 5d69f497d24c6694a87229408eb6581f, type: 3}
   _Stackable: 0
   _ItemType: 2
   _Data:

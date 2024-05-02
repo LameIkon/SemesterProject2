@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Temp
   m_EditorClassIdentifier: 
   DevDescription: 
-  _value: 62.350037
+  _value: 0
   _onValueChanged: {fileID: 11400000, guid: 726189a91b7e98d41872abde56508ceb, type: 2}
