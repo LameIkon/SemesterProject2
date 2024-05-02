@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class QuestManager : PersistentSingleton<QuestManager>
 {
     [SerializeField] private GameObject _playerChatBubble;
+    [SerializeField] private SceneField Scene03;
 
 
     private bool _oneInstance;
@@ -31,6 +33,16 @@ public class QuestManager : PersistentSingleton<QuestManager>
             yield return new WaitUntil(() => !ItemManager._Journal1STATIC.activeInHierarchy); // Then wait until you close it
             yield return new WaitForSeconds(1); // Small delay before showing own text
             _playerChatBubble.transform.GetChild(4).gameObject.SetActive(true);
+            yield return new WaitUntil(() => GameManager._shipInBool); // wait until you get back to the ship
+            yield return new WaitUntil(() => SceneManager.GetSceneByName(Scene03).isLoaded); // wait until the scene is loaded
+
+            // Remove the hazzard barrier
+            GameObject hazzard = GameObject.Find("HazzardBarrier");
+            hazzard.GetComponentInChildren<ChildToParent>().SetToOwnParent();
+            hazzard.SetActive(false);
+
+
+
         }
         if (2 == journal && !_journal2)
         {
