@@ -9,6 +9,7 @@ public class SurvivalManager : MonoBehaviour, IDamageable, IFreezeable, IStarvea
     [SerializeField] private int _tikBetweenMin = 0;
     private int counter = 0;
 
+    private bool _inDialogue = false;
     private bool _isFull;
     private bool _isWarm;
     // Pragma used to ignore the warnings
@@ -67,23 +68,46 @@ public class SurvivalManager : MonoBehaviour, IDamageable, IFreezeable, IStarvea
     [SerializeField] private GameObject _lantern;
 
 
-
     #region Unity Methods
+    private void Awake() 
+    {
+        _inDialogue = false;
+    }
 
     private void OnEnable()
     {
         Invoke(nameof(SetSurvivalbars), 0.1f); // need a small delay
+        StartDialogue.OnDialogueStartedEvent += HandleDialogueStart;
+        DialogueManager.OnDialogueEndedEvent += HandleDialogueEnd;
     }
 
+    private void OnDisable()
+    {
+        StartDialogue.OnDialogueStartedEvent -= HandleDialogueStart;
+        DialogueManager.OnDialogueEndedEvent -= HandleDialogueEnd;
+    }
 
 
     void FixedUpdate()
     {
-
-        Tiker();
-
+        if (!_inDialogue)
+        {
+            Tiker();
+        }
     }
+
+
     #endregion
+
+    void HandleDialogueStart() 
+    {
+        _inDialogue = true;
+    }
+
+    void HandleDialogueEnd() 
+    {
+        _inDialogue = false;
+    }
 
     void SetSurvivalbars()
     {

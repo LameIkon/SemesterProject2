@@ -19,6 +19,8 @@ public class JournalChests : MonoBehaviour
     private bool _turn = false;
     private bool _chestIsfilled = false;
 
+    [Header("Story Setter"), SerializeField]
+    private StoryStates stateToChange = StoryStates.none; // this is what will change the dialogue story state.
 
     private void Start()
     {
@@ -56,7 +58,7 @@ public class JournalChests : MonoBehaviour
     private void OpenChest()
     {
         _turn = !_turn;
-
+        DialogueManager.instance._DialogueVariables.ChangeMainStoryState(stateToChange);
 
         _journalChestCanvas.SetActive(_turn);
         GameManager._inventoryMenuSTATIC.SetActive(_turn);

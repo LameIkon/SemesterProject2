@@ -7738,6 +7738,7 @@ MonoBehaviour:
   _database: {fileID: 11400000, guid: 6aab6e98529b36a40aa4942653918f7e, type: 2}
   _canOpenChest: 0
   _chestIsfilled: 0
+  stateToChange: 4
 --- !u!114 &1707595387310686950
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7903,6 +7904,7 @@ MonoBehaviour:
   _database: {fileID: 11400000, guid: 6aab6e98529b36a40aa4942653918f7e, type: 2}
   _canOpenChest: 0
   _chestIsfilled: 0
+  stateToChange: 4
 --- !u!114 &689240724334169086
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8653,6 +8655,7 @@ MonoBehaviour:
   _database: {fileID: 11400000, guid: 6aab6e98529b36a40aa4942653918f7e, type: 2}
   _canOpenChest: 0
   _chestIsfilled: 0
+  stateToChange: 3
 --- !u!114 &3838756866331062412
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9151,6 +9154,7 @@ MonoBehaviour:
   _database: {fileID: 11400000, guid: 6aab6e98529b36a40aa4942653918f7e, type: 2}
   _canOpenChest: 0
   _chestIsfilled: 0
+  stateToChange: 4
 --- !u!114 &7762364231242949262
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19523,6 +19527,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: dc9a9a192ffee034987980ba8e01e1c7, type: 2}
     - target: {fileID: 7254489864093466902, guid: df40f786c22ac7b45b4a0812c1fd4bd6, type: 3}
+      propertyPath: stateToChange
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7254489864093466902, guid: df40f786c22ac7b45b4a0812c1fd4bd6, type: 3}
       propertyPath: _chestInventory
       value: 
       objectReference: {fileID: 11400000, guid: d390a677f2d188843b4631d793093aaf, type: 2}
@@ -19633,6 +19641,7 @@ MonoBehaviour:
   _database: {fileID: 11400000, guid: 6aab6e98529b36a40aa4942653918f7e, type: 2}
   _canOpenChest: 0
   _chestIsfilled: 0
+  stateToChange: 4
 --- !u!1001 &5637164560561936536
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20029,6 +20038,10 @@ PrefabInstance:
     - target: {fileID: 8388118823166680320, guid: 5198bbd34b74834488457d84f3bed0c5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8900949954351724406, guid: 5198bbd34b74834488457d84f3bed0c5, type: 3}
+      propertyPath: stateToChange
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8900949954351724406, guid: 5198bbd34b74834488457d84f3bed0c5, type: 3}
       propertyPath: _journalChestCanvas
@@ -21625,7 +21638,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3957924705540695626, guid: d92e65e013c17934c8d0344632014392, type: 3}
       propertyPath: m_Color.a
-      value: 0.8
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4072973153507781996, guid: d92e65e013c17934c8d0344632014392, type: 3}
       propertyPath: m_Name
@@ -22603,6 +22616,10 @@ PrefabInstance:
       propertyPath: _chestCanvas
       value: 
       objectReference: {fileID: 7882089827423626170}
+    - target: {fileID: 6319085400892662878, guid: 5def9f13b1d6da24fbfe167a3a8da211, type: 3}
+      propertyPath: stateToChange
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 6593681579949499002, guid: 5def9f13b1d6da24fbfe167a3a8da211, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0

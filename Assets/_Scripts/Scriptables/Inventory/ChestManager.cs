@@ -22,6 +22,9 @@ public class ChestManager : MonoBehaviour
     [SerializeField] private bool _canOpenChest = false;
     [SerializeField] private bool _chestIsfilled = false;
 
+    [Header("Story Setter"), SerializeField]
+    private StoryStates stateToChange = StoryStates.none; // this is what will change the dialogue story state.
+
     private void Start()
     {
 
@@ -88,6 +91,8 @@ public class ChestManager : MonoBehaviour
     private void OpenChest()
     {
         _turn = !_turn;
+        DialogueManager.instance._DialogueVariables.ChangeMainStoryState(stateToChange);
+
         _chestCanvas.SetActive(_turn);
         // check interactability 
         Interactable();
