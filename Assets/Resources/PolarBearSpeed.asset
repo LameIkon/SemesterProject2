@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52d99a298e6a794428b2df6960d25690, type: 3}
+  m_Name: PolarBearSpeed
+  m_EditorClassIdentifier: 
+  _maniputatedValue: {fileID: 0}
+  _maxValue:
+    UseConstant: 0
+    ConstantValue: 6.5
+    Variable: {fileID: 11400000, guid: a5915666abf60904291a94381aa6383e, type: 2}
+  _minValue:
+    UseConstant: 0
+    ConstantValue: 4
+    Variable: {fileID: 11400000, guid: 764d6644b23f91e4e9ce97aceafe11a1, type: 2}

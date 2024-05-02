@@ -181,6 +181,7 @@ public class GuidelineManager : MonoBehaviour
 
             // Deactivate trigger for later use
             _roomTriggers[2].gameObject.SetActive(false);
+            _roomTriggers[3].gameObject.SetActive(false);
 
             // Start first part of tutorial
             Invoke("ShowHealth", 2f);
@@ -318,6 +319,7 @@ public class GuidelineManager : MonoBehaviour
         yield return new WaitForSeconds(1f);
 
         // Captain moving again
+         PriorityManager._canInteractDialogue = false; // You are not allowed to talk to the captain
         _captainSprite.transform.GetChild(4).gameObject.SetActive(true); // Get the 3rd chatbubble and activate it
         _captainAnimator.Play("point7");
         yield return new WaitForSeconds(2f);
@@ -373,9 +375,12 @@ public class GuidelineManager : MonoBehaviour
         _captainAnimator.Play("point13");
 
         // Scientist gets his moment to shine
+        PriorityManager._canInteractDialogue = true;
         _scientistSprite.transform.GetChild(2).gameObject.SetActive(true); // Get the 1st chatbubble and activate it
+        
 
         // Back to the tutorial
+        _roomTriggers[3].gameObject.SetActive(true); // trigger for the next onging event
         yield return new WaitUntil(() => _isOngoingEvent); // wait until the ongoing event trigger becomes true
         _isOngoingEvent = false;
         _captainSprite.transform.GetChild(6).gameObject.SetActive(true); // Get the 5th chatbubble and activate it

@@ -14,6 +14,7 @@ public class ChestManager : MonoBehaviour
     [SerializeField] private ChestFiller _chestFiller;
     [SerializeField] private ItemDatabaseObject _database;
     private StaticInterface _chestInterface;
+    [SerializeField] private Highlight _highlightScript;
     
     
     private bool _turn = false;
@@ -31,6 +32,7 @@ public class ChestManager : MonoBehaviour
         _chestInterface = _chestCanvas.GetComponent<StaticInterface>();
         _chestInterface._Inventory = _chestInventory;
         _chestCanvas.SetActive(false);
+        _highlightScript = GetComponentInChildren<Highlight>();
 
 
         if (!_chestIsfilled)
@@ -58,17 +60,38 @@ public class ChestManager : MonoBehaviour
     {
         if (_canOpenChest)
         {
+            
             OpenChest();
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.name == "Player") 
-        {          
-            _canOpenChest = true;
+    //private void OnTriggerEnter2D(Collider2D collision)
+    //{
+    //    if (collision.gameObject.name == "Player") 
+    //    {
+    //        _highlightScript.TriggerEnter(gameObject);
+    //        if (!_highlightScript.TriggerEnter(gameObject))
+    //        {
+    //            Debug.Log("cannot continue");
+    //            return;
+    //        }
+
+    //        _canOpenChest = true;
            
-        }        
+    //    }        
+    //}
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.name == "Player")
+        {
+            if (!_highlightScript.TriggerEnter(gameObject))
+            {
+                Debug.Log("cannot continue");
+                return;
+            }
+            _canOpenChest = true;
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -76,6 +99,7 @@ public class ChestManager : MonoBehaviour
         if (collision.gameObject.name == "Player")
         {
             _canOpenChest = false;
+            _highlightScript.TriggerExit(gameObject);
             CloseChest();
         }
     }
@@ -91,26 +115,20 @@ public class ChestManager : MonoBehaviour
     private void OpenChest()
     {
         _turn = !_turn;
+        _highlightScript.TriggerUse(_turn);
         DialogueManager.instance._DialogueVariables.ChangeMainStoryState(stateToChange);
-
-        _chestCanvas.SetActive(_turn);
-        // check interactability 
-        Interactable();
 
         GameManager._inventoryMenuSTATIC.SetActive(_turn);
     }
 
     public void CloseChest()
     {
-        _chestCanvas.SetActive(false);      
-        GameManager._inventoryMenuSTATIC.SetActive(false);
+        if (GameManager._inventoryMenuSTATIC.activeInHierarchy)
+        {
+            GameManager._inventoryMenuSTATIC.SetActive(false);
+        }
+        _chestCanvas.SetActive(false);
         _turn = false;
-    }
-
-    void Interactable()
-    {
-        // Show or disable E highlight
-        GameManager._hideEInteractables = _turn;
     }
 
     private void OnApplicationQuit()

@@ -1,27 +1,38 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Brain/PolarBear")]
 public class PolarBearAI : BrainAI
 {
-    // [SerializeField] private RangedFloat _idleTime;
-    // [SerializeField] private RangedFloat _moveTime;  
+    [SerializeField] private RangedFloat _idleTime;
+    //[SerializeField] private RangedFloat _moveTime;  
     // [SerializeField] private RangedFloat _fireTime;
     [SerializeField] private RangedFloat _waitBetweenWalk;
+    [SerializeField] private RangedFloat _waitBetweenRunning;
     [SerializeField] private RangedFloat _waitBetweenAttack;
     [SerializeField] private int _aggroRange;
     [SerializeField] private float _damage;
     [SerializeField] private float _attackRange;
 
-
+    private PolarBearController _polarBearController;
 
     private const string _playerTag = "Player";
-
     private const string _stateTimeout = "stateTimeout";
     private const string _walkState = "walkState";
     private const string _target = "target";
+    private const string _hasAggro = "hasAggro";
+    private const string _idle = "idleNotMoving";
+
     // private const string _state = "state";
+
+    //private bool _hasAggro;
+
+    public void SetPolarBearController(PolarBearController polarBearController)
+    {
+        _polarBearController = polarBearController;
+    }
 
     public override void Initialize(AIThinker brain)
     {
@@ -29,255 +40,199 @@ public class PolarBearAI : BrainAI
         brain.Remember(_stateTimeout, Random.Range(_waitBetweenWalk.MinValue, _waitBetweenWalk.MaxValue));
     }
 
-    private MovementController _move;
+    private PolarBearController _move;
 
     public override void Think(AIThinker brain)
     {
-        UnityEngine.GameObject target = brain.Remember<UnityEngine.GameObject>(_target);
+        GameObject target = brain.Remember<GameObject>(_target);
         float stateTimeout = brain.Remember<float>(_stateTimeout);
         stateTimeout -= Time.deltaTime;
+        bool hasAggro = brain.Remember<bool>(_hasAggro);
+        bool isNotMoving = brain.Remember<bool>(_idle);
+
+        if (isNotMoving) // if standing still and you move close to it
+        {
+            Vector3 targetPosition = target.transform.position; // Find the targets location
+            Vector3 ownPosition = brain.transform.position; // Own Location
+            Vector3 vectorBetween = targetPosition - ownPosition; // The distance between
+            Vector3 unitVectorBetween = (vectorBetween).normalized; // Normalized
+
+            if (AggroRange(vectorBetween, _aggroRange * unitVectorBetween, _aggroRange)) // if getting into its zone, cancel its idle time
+            {
+                Debug.Log("aggro");
+                stateTimeout = 0f;
+            }
+
+        }
+
+        brain.Remember("idle", false);
         brain.Remember(_stateTimeout, stateTimeout);
-
-
-        var state = brain.Remember<Directions>(_walkState);
 
         if (_move == null)
         {
-            _move = brain.GetComponent<MovementController>();
+            _move = brain.GetComponent<PolarBearController>();
         }
 
         if (!target)
         {
-            //target = GameObject
-            //            .FindGameObjectsWithTag("Player")
-            //            .OrderBy(go => Vector3.Distance(go.transform.position, brain.transform.position))
-            //            .FirstOrDefault(go => go != brain.gameObject);
-
-            target = UnityEngine.GameObject.FindGameObjectWithTag(_playerTag);
+            target = GameObject.FindGameObjectWithTag(_playerTag);
 
             brain.Remember(_target, target);
         }
 
-        Vector3 _aggroVector = new Vector3(_aggroRange, _aggroRange, 0);
-
-        if (stateTimeout < 0)
+        if (stateTimeout <= 0)
         {
-            
 
-            Vector3 targetPosition = target.transform.position;
-            Vector3 ownPosition = brain.transform.position;
-            Vector3 vectorBetween = targetPosition - ownPosition;
-            Vector3 unitVectorBetween = (vectorBetween).normalized;
+            Vector3 targetPosition = target.transform.position; // Find the targets location
+            Vector3 ownPosition = brain.transform.position; // Own Location
+            Vector3 vectorBetween = targetPosition - ownPosition; // The distance between
+            Vector3 unitVectorBetween = (vectorBetween).normalized; // Normalized
 
-
-            //if (AttackRange(vectorBetween, _attackRange * unitVectorBetween, _attackRange))
-            //{
-            //    SetTimeoutAttack(brain);
-            //    Debug.Log((ownPosition + _attackRange * unitVectorBetween));
-            //    Collider2D[] hits = Physics2D.OverlapBoxAll((ownPosition + _attackRange * unitVectorBetween), _attackRange * Vector2.one, 0f);
-
-
-            //    foreach (var hit in hits)
-            //    {
-            //        hit.GetComponent<IDamageable>()?.TakeDamage(_damage);
-
-            //    }
-            //}
-
-        if (AttackRange(vectorBetween, _attackRange * unitVectorBetween, _attackRange))
-        {
-            SetTimeoutAttack(brain);
-            Collider2D[] hits = Physics2D.OverlapCircleAll(ownPosition, 1.8f*_attackRange);
-
-
-            foreach (var hit in hits)
+            if (hasAggro) // Even if you escape its zone it will still have aggro on you for a moment
             {
-                if (hit.GetComponent<AIThinker>() != null) 
+                _polarBearController.RunSpeed();
+                Walk(GiveDirectionTowardsPlayer(unitVectorBetween));
+                SetTimeoutAggro(brain);
+            }
+
+
+            // if inside its attack range stop up and attack
+            else if (AttackRange(vectorBetween, _attackRange * unitVectorBetween, _attackRange)) 
+            {         
+                // Calls the controller for the attack animations
+                _polarBearController.Attack(ownPosition, _attackRange, _damage);
+                SetTimeoutAttack(brain);
+            }
+
+            // Start running
+            else if (AggroRange(vectorBetween, _aggroRange * unitVectorBetween, _aggroRange))
+            {
+                _polarBearController.RunSpeed();
+                Walk(GiveDirectionTowardsPlayer(unitVectorBetween));
+                SetTimeoutAggro(brain);
+            }
+            else // Else just walking around at random or standing still
+            {
+                _polarBearController.WalkSpeed();
+                if (Random.value < 0.05f) // 5% chance of idle
                 {
-                    continue;
+                    Debug.Log("idle");
+                    SetTimeIdle(brain);
                 }
-
-                hit.GetComponent<IDamageable>()?.TakeDamage(_damage);
-
+                else
+                {
+                    WalkRandom();
+                    SetTimeoutWalk(brain);
+                }
             }
-        }
-        else
-            {
-                SetTimeoutWalk(brain);
-                
-                Walk(GiveDirectionTowardsPlayer(unitVectorBetween), brain);
-                
-            }
-
-
-            //if (vectorBetween.x > _aggroVector.x || vectorBetween.x < -_aggroVector.x && vectorBetween.y > _aggroVector.y || vectorBetween.y < -_aggroVector.y)
-            //{
-            //    WalkRandom();
-            //}
-            //else
-            //{
-            //}
-        }
-
+        }    
     }
-    
 
-    private void WalkRandom()
+   
+    private void WalkRandom() // Random
     {
         _move.Move(new Vector3(Random.Range(-1, 2), Random.Range(-1, 2), 0));
     }
 
-    private void Walk(Directions direction, AIThinker brain)
+    private void Walk(Directions direction) // Get the direction the moving point is at
     {
         switch (direction)
         {
             case Directions.N:
-
-                SetTimeoutWalk(brain);
-
                 _move.Move(Vector3.up);
                 break;
 
             case Directions.S:
-
-                SetTimeoutWalk(brain);
-
                 _move.Move(Vector3.down);
                 break;
 
             case Directions.E:
-                SetTimeoutWalk(brain);
-
                 _move.Move(Vector3.right);
                 break;
 
             case Directions.W:
-                SetTimeoutWalk(brain);
-
                 _move.Move(Vector3.left);
                 break;
 
             case Directions.NE:
-                SetTimeoutWalk(brain);
-
                 _move.Move(Vector3.up + Vector3.right);
                 break;
 
             case Directions.NW:
-                SetTimeoutWalk(brain);
-
                 _move.Move(Vector3.up + Vector3.left);
                 break;
 
             case Directions.SE:
-                SetTimeoutWalk(brain);
-
                 _move.Move(Vector3.down + Vector3.right);
                 break;
 
             case Directions.SW:
-                SetTimeoutWalk(brain);
-
                 _move.Move(Vector3.down + Vector3.left);
                 break;
 
             default:
-
                 break;
 
         }
     }
 
-
-    private Directions GiveDirectionTowardsPlayer(Vector3 dir)
+    private Directions GiveDirectionTowardsPlayer(Vector3 dir) // Try to get its smooth location towards the player
     {
+        // Go the direction the player is as accurate as possible
+        if (dir == Vector3.up) return Directions.N;
+        if (dir == Vector3.right) return Directions.E;
+        if (dir == Vector3.down) return Directions.S;
+        if (dir == Vector3.left) return Directions.W;
 
-        int i = Random.Range(0, 2);
 
-        if (dir == Vector3.up)
+        bool isMovingUp = dir.y > 0;
+        bool isMovingRight = dir.x > 0;
+        if (isMovingUp) // Introduce a little randomness/smoothness to its pathfinding
         {
-            return Directions.N;
-        }
-        else if (dir == Vector3.right)
-        {
-            return Directions.E;
-        }
-        else if (dir == Vector3.down)
-        {
-            return Directions.S;
-        }
-        else if (dir == Vector3.left)
-        {
-            return Directions.W;
-        }
-        else if (dir == new Vector3())
-        {
-            return Directions.NW;
-        }
-        else if (dir.y > 0 && dir.x > 0)
-        {
-            if (i == 0)
-            {
-                return Directions.N;
-            }
-            else
-            {
-                return Directions.NE;
-            }
-        }
-        else if (dir.y > 0 && dir.x < 0)
-        {
-            if (i == 0)
-            {
-                return Directions.N;
-            }
-            else
-            {
-                return Directions.NW;
-            }
-        }
-        else if (dir.y < 0 && dir.x > 0)
-        {
-            if (i == 0)
-            {
-                return Directions.S;
-            }
-            else
-            {
-                return Directions.SE;
-            }
-        }
-        else if (dir.y < 0 && dir.x < 0)
-        {
-            if (i == 0)
-            {
-                return Directions.S;
-            }
-            else
-            {
-                return Directions.SW;
-            }
+            // 80% chance to running straight instead of diagonal
+            if (isMovingRight) return (Random.value > 0.8f) ? Directions.N : Directions.NE; // go up 
+            else return (Random.value > 0.8f) ? Directions.N : Directions.NW;
         }
         else
         {
-            return Directions.None;
+            // 80% chance to running straight instead of diagonal
+            if (isMovingRight) return (Random.value > 0.8f) ? Directions.S : Directions.SE; // go down
+            else return (Random.value > 0.8f) ? Directions.S : Directions.SW;
         }
-
-
     }
+    #region TimeOut
 
     private void SetTimeoutWalk(AIThinker brain)
     {
         brain.Remember(_stateTimeout, Random.Range(_waitBetweenWalk.MinValue, _waitBetweenWalk.MaxValue));
+        brain.Remember(_hasAggro, false);
+        brain.Remember(_idle, false);
     }
     private void SetTimeoutAttack(AIThinker brain)
     {
         brain.Remember(_stateTimeout, Random.Range(_waitBetweenAttack.MinValue, _waitBetweenAttack.MaxValue));
+        brain.Remember(_hasAggro, true);
+        brain.Remember(_idle, false);
     }
 
+    private void SetTimeoutAggro(AIThinker brain)
+    {
+        brain.Remember(_stateTimeout, Random.Range(_waitBetweenRunning.MinValue, _waitBetweenRunning.MaxValue));
+        brain.Remember(_hasAggro, false);
+        brain.Remember(_idle, false);
 
-    //Look at this, this is coursing bugs
+    }
 
+    private void SetTimeIdle(AIThinker brain)
+    {
+        brain.Remember(_stateTimeout, Random.Range(_idleTime.MinValue, _idleTime.MaxValue));
+        brain.Remember(_hasAggro, false);
+        brain.Remember(_idle, true);
+        brain.Remember("idle", true);
+    }
+    #endregion
+
+    #region Bool Returns
     public bool AttackRange(Vector3 v1, Vector3 v2, float range)
     {
         if (Vector3.Distance(v1, v2) < range)
@@ -285,8 +240,23 @@ public class PolarBearAI : BrainAI
             return true;
         }
         else
-            return false; 
+        {
+            return false;
+        }           
     }
+
+    public bool AggroRange(Vector3 itself, Vector3 target, float range)
+    {
+        if (Vector3.Distance(itself, target) < range)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
 
     public bool V3GreaterThanEqual(Vector3 v1, Vector3 v2) 
     {
@@ -298,65 +268,5 @@ public class PolarBearAI : BrainAI
             return false;
     }
 
-    /*
-                switch (GiveDirection(dir))
-        {
-            case Directions.N:
-
-                SetTimeout(brain);
-
-                _move.Move(Vector3.up);
-                break;
-
-            case Directions.S:
-
-                SetTimeout(brain);
-
-                _move.Move(Vector3.down);
-                break;
-
-            case Directions.E:
-                SetTimeout(brain);
-
-                _move.Move(Vector3.right);
-                break;
-
-            case Directions.W:
-                SetTimeout(brain);
-
-                _move.Move(Vector3.left);
-                break;
-
-            case Directions.NE:
-                SetTimeout(brain);
-
-                _move.Move(Vector3.up + Vector3.right);
-                break;
-
-            case Directions.NW:
-                SetTimeout(brain);
-
-                _move.Move(Vector3.up + Vector3.left);
-                break;
-
-            case Directions.SE:
-                SetTimeout(brain);
-
-                _move.Move(Vector3.down + Vector3.right);
-                break;
-
-            case Directions.SW:
-                SetTimeout(brain);
-
-                _move.Move(Vector3.down + Vector3.left);
-                break;
-
-            default:
-
-                break;
-
-        }
-     */
-
-
+    #endregion
 }

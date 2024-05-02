@@ -2,44 +2,67 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Highlight : MonoBehaviour
+public class Highlight : PriorityManager
 {
-    [SerializeField] private UnityEngine.GameObject _showInteraction; // Used to get the GameObject named showInteraction
+    [SerializeField] private GameObject _showInteraction; // Used to get the GameObject named showInteraction
+    private bool _triggerOnce;
+   
+    //public static bool _HasBeenEntered;
+
 
     private void Start()
     {
-        // Fist child is canvas and the next is the child of the canvas
-        //_showInteraction = transform.GetChild(1).GetChild(0).gameObject; // Get the child of child attached to the parent.
         _showInteraction.SetActive(false); // Set false if by chance its active
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+
+    public override bool TriggerEnter(GameObject gameobject)
     {
-        if (collision.gameObject.name == "Player" && DialogueManager.instance._OnlyOneInteractionActive && !GameManager._hideEInteractables) // Detect if the collision is the gameobject called Player
+        if (_CompareGameObject == null)
         {
-            _showInteraction.SetActive(true);
-            
+            _CompareGameObject = gameobject;
+        }
+
+        if (_CompareGameObject == gameobject && _PriorityInteractable && _canInteractChest)
+        {         
+            base.TriggerEnter(gameobject);
+            AdditionalTriggerEnterImplementation();
+            return true;
+        }
+        return false;
+    }
+
+    public override void TriggerExit(GameObject gameobject)
+    {
+        if (_CompareGameObject == gameobject)
+        {
+            AdditionalTriggerExitImplementation();
+            base.TriggerExit(gameobject);
+            _CompareGameObject = null;
         }
     }
 
-    private void OnTriggerStay2D(Collider2D collision)
+    public override void TriggerUse(bool state)
     {
-        if (collision.gameObject.name == "Player" && DialogueManager.instance._OnlyOneInteractionActive && GameManager._hideEInteractables)
+        if (state)
         {
             _showInteraction.SetActive(false);
         }
-        else if (collision.gameObject.name == "Player" && DialogueManager.instance._OnlyOneInteractionActive && !GameManager._hideEInteractables) 
+        else if (!state)
         {
             _showInteraction.SetActive(true);
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
+    // changed
+    protected override void AdditionalTriggerEnterImplementation()
     {
-        if (collision.gameObject.name == "Player") // Detect if the collision is the gameobject called Player
-        {
-            _showInteraction.SetActive(false);
-            GameManager._hideEInteractables = false;
-        }
+        _showInteraction.SetActive(true);
+    }
+
+    protected override void AdditionalTriggerExitImplementation()
+    {
+        _showInteraction.SetActive(false);
+        GameManager._hideEInteractables = true;
     }
 }

@@ -7,6 +7,7 @@ public class CampfireManager : MonoBehaviour
 {
     [SerializeField] public UnityEngine.GameObject _bonfireCanvas; //we cant have this static or we cant see it in inspector and drag canvas into slot
     public static UnityEngine.GameObject _bonfireCanvasSTATIC; //we need a static variable so that we can acces it in Bonfire.Script
+    [SerializeField] private Highlight _highlightScript;
 
     //[SerializeField] private bool _useBonfire;
     [SerializeField] private bool _turn = false;
@@ -50,6 +51,7 @@ public class CampfireManager : MonoBehaviour
     private void OpenBonfire()
     {
         _turn = !_turn;
+        _highlightScript.TriggerUse(_turn);
         _bonfireCanvas.SetActive(_turn);
         GameManager._inventoryMenuSTATIC.SetActive(_turn);
 

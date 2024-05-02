@@ -6217,6 +6217,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bonfireCanvas: {fileID: 8847272244634688858}
+  _highlightScript: {fileID: 0}
   _turn: 0
 --- !u!114 &8220272727581785056
 MonoBehaviour:
@@ -6231,6 +6232,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _furnaceCanvas: {fileID: 2665887907394615120}
+  _highlightScript: {fileID: 7557744498299956360}
   _turn: 0
 --- !u!1 &1093729355639834709
 GameObject:
@@ -7736,6 +7738,7 @@ MonoBehaviour:
   _chestInventory: {fileID: 11400000, guid: 938c0599686756f4da803fc943cf8e0c, type: 2}
   _chestFiller: {fileID: 11400000, guid: 04974406d7042a34e97f6e2c4e4554a6, type: 2}
   _database: {fileID: 11400000, guid: 6aab6e98529b36a40aa4942653918f7e, type: 2}
+  _highlightScript: {fileID: 0}
   _canOpenChest: 0
   _chestIsfilled: 0
   stateToChange: 4
@@ -7902,6 +7905,7 @@ MonoBehaviour:
   _chestInventory: {fileID: 11400000, guid: ccb8b2c1174bd374a90670686253406d, type: 2}
   _chestFiller: {fileID: 11400000, guid: 32690bca204dceb4fa4ae4392d4f5f59, type: 2}
   _database: {fileID: 11400000, guid: 6aab6e98529b36a40aa4942653918f7e, type: 2}
+  _highlightScript: {fileID: 0}
   _canOpenChest: 0
   _chestIsfilled: 0
   stateToChange: 4
@@ -8653,6 +8657,7 @@ MonoBehaviour:
   _chestInventory: {fileID: 11400000, guid: 8bb45326eec33354a926f02296aa4984, type: 2}
   _chestFiller: {fileID: 11400000, guid: 9defcd95875370a4e95098d2a3cc76e5, type: 2}
   _database: {fileID: 11400000, guid: 6aab6e98529b36a40aa4942653918f7e, type: 2}
+  _highlightScript: {fileID: 0}
   _canOpenChest: 0
   _chestIsfilled: 0
   stateToChange: 3
@@ -9152,6 +9157,7 @@ MonoBehaviour:
   _chestInventory: {fileID: 11400000, guid: 49326652cc2a612498bbcd1f224385ab, type: 2}
   _chestFiller: {fileID: 11400000, guid: 57dbfa4848642e845b1ea4ce858f2f60, type: 2}
   _database: {fileID: 11400000, guid: 6aab6e98529b36a40aa4942653918f7e, type: 2}
+  _highlightScript: {fileID: 0}
   _canOpenChest: 0
   _chestIsfilled: 0
   stateToChange: 4
@@ -11182,6 +11188,7 @@ Transform:
   - {fileID: 460959783313588343}
   - {fileID: 22874291470174953}
   - {fileID: 4018842681856625543}
+  - {fileID: 2013026314310885215}
   m_Father: {fileID: 749328558714079078}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5504083848443026907
@@ -13780,6 +13787,50 @@ Transform:
   m_Children: []
   m_Father: {fileID: 749328558714079078}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8794355059839923218
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2013026314310885215}
+  - component: {fileID: 844840137512280738}
+  m_Layer: 0
+  m_Name: PriorityManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &2013026314310885215
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8794355059839923218}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3563838114784374177}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &844840137512280738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8794355059839923218}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c119ec5b9af78f74386d36c0794845c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8816630747947657004
 GameObject:
   m_ObjectHideFlags: 0
@@ -19639,6 +19690,7 @@ MonoBehaviour:
   _chestInventory: {fileID: 11400000, guid: b6a11e2c004e4044bada08b370861a3b, type: 2}
   _chestFiller: {fileID: 11400000, guid: c2fc3dfbe1078cd4283a48dacc7a433c, type: 2}
   _database: {fileID: 11400000, guid: 6aab6e98529b36a40aa4942653918f7e, type: 2}
+  _highlightScript: {fileID: 0}
   _canOpenChest: 0
   _chestIsfilled: 0
   stateToChange: 4
