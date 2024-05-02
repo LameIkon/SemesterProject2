@@ -9,6 +9,8 @@ public class DialogueVariables
 
     private Dictionary<string, Ink.Runtime.Object> _variables;
 
+    private Ink.Runtime.Object trueStatement; 
+
     public DialogueVariables(Story globalVariables) 
     {
         _variables = new Dictionary<string, Ink.Runtime.Object>();
@@ -16,6 +18,13 @@ public class DialogueVariables
         {
             Ink.Runtime.Object value = globalVariables.variablesState.GetVariableWithName(name);
             _variables.Add(name, value);
+
+            if (name == "True") 
+            {
+                trueStatement = value;
+                Debug.Log($"{name} has the value: {value}");
+            }
+
         }
     }
     
@@ -47,5 +56,52 @@ public class DialogueVariables
             story.variablesState.SetGlobal(variable.Key, variable.Value);
         }
     }
+
+    public void ChangeMainStoryState(StoryStates state)
+    {
+        string variableName;
+
+        switch (state) 
+        {
+            case StoryStates.joergen:
+                variableName = "joergenDiaryFound";
+                break;
+            case StoryStates.niels:
+                variableName = "nielsDiaryFound";
+                break;
+            case StoryStates.ludvig:
+                variableName = "ludvigDiaryFound";
+                break;
+            case StoryStates.map:
+                variableName = "theCardFound";
+                break;
+
+            case StoryStates.none:
+                variableName = ""; 
+                break;
+            default:
+                variableName = "";
+                break;
+
+        }
+
+
+
+        if (_variables.ContainsKey(variableName) && variableName != "")
+        {
+            _variables[variableName] = trueStatement; 
+        }
+    }
+
+}
+
+
+public enum StoryStates 
+{
+    joergen,
+    niels,
+    ludvig,
+    map,
+    none
 
 }

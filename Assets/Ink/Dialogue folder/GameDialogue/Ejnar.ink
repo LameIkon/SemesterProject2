@@ -46,7 +46,7 @@ Yes, some food. You could also take a lantern. This time of the year the sun no 
     *[Continue]
         Just don't take to much, the provisions are low and geting more food here is not an easy task. Maby we can go hunting for meat while you are searching.
             * * [Continue]
-                You can grab some wood to put on the stove
+                You can grab some wood to put in the furnace
                 -> main
             
             
@@ -68,13 +68,13 @@ Denmark's Harbour is north of here hopefully they reached there. They have build
     - EjnarMainReturnToAsking: Would you like to hear about the others.
         ~EjnarMainReturnToAsking = false
     
-    - EjnarMainReturnToAsking == false && EjnarMainAskAboutJoergen == false && EjnarMainAskAboutNiels == false && EjnarMainAskAboutLudvig == false:  We are looking for Jørgen the Greenlander, Niels the Cartographer and your brother Ludvig.
+    - EjnarMainReturnToAsking == false && EjnarMainAskAboutJoergen == false && EjnarMainAskAboutNiels == false && EjnarMainAskAboutLudvig == false:  We are looking for Joergen the Greenlander, Niels the Cartographer and your brother Ludvig.
         ~EjnarMainReturnToAsking = false
 
 }
 
-    * {EjnarMainAskAboutJoergen == false}[Jørgen]
-        Jørgen, born and raised in Greenland if anyone of them shall have survived. He would be my first pick, I travelled together with him on an earlier trip to Greenland.
+    * {EjnarMainAskAboutJoergen == false}[Joergen]
+        Joergen, born and raised in Greenland if anyone of them shall have survived. He would be my first pick, I travelled together with him on an earlier trip to Greenland.
             ~EjnarMainAskAboutJoergen = true
         -> the_men_you_look_for
     
@@ -120,17 +120,17 @@ Denmark's Harbour is north of here hopefully they reached there. They have build
 === joergen_main ===
 {
     - EjnarJoergenMainFirstTime: Welcome back, have you found anything? 
-    
+        ~ EjnarJoergenMainFirstTime = false
+        
     - EjnarJoergenMainReturn: Is there anything else? 
         ~ EjnarJoergenMainReturn = false
 }
-~ EjnarJoergenMainFirstTime = false
 
     * {EjnarJoergenMainDiaryTalk == false} [Yes, this diary]
         ~ EjnarJoergenMainDiaryTalk = true
         -> found_diary
         
-    * [I have not found the card]
+    * [I have not found the map]
         -> card_not_yet_found
         
     + [Where should I go next?]
@@ -160,7 +160,7 @@ Denmark's Harbour is north of here hopefully they reached there. They have build
 
 === found_diary === 
 ~EjnarJoergenMainDiaryFound = true
-Let me see it! ... Yes, or shall I say no. Jørgen always wrote in Greenlandic, so the fact he used time to make it readable for us tells me, he knew his time was comming. Where did you find this?
+Let me see it! Joergen always wrote in Greenlandic, so the fact he used time to make it readable for us tells me, he knew his time was comming. Where did you find this?
     
     * [In a cave, together with him]
         -> joergens_fate(true)
@@ -188,7 +188,7 @@ VAR joergenFound = false
             
 
 === card_not_yet_found ===
-{EjnarJoergenMainDiaryFound: With Jørgen's diary found,| Good question } I think you should continue searching north for the card.
+{EjnarJoergenMainDiaryFound: With Joergen's diary found,| Good question } I think you should continue searching north for the map.
 
     -> joergen_main
 
@@ -280,16 +280,21 @@ Yes goodbye
 === card_main ===
 You return what have you found?
 
-    * {EjnarCardHasFoundIt == false} [I have found the card]
-        ~EjnarCardHasFoundIt = true
-        How splendid, we shall start our return trip home to Copenhagen. Are you ready to return?
+    * {HansBecomeInsane && HansGotTheMap == false}[I have the map]
+        Normally I would have Hans look at it, but he seems to have lost his mind, the cold does stange things to men. Are you ready to return?
+            -> to_return
+            
+    * {HansDidNotGetTheMap} [I have the map]
+        And you did not want to give it to Hans? I cannot fathom why but, the most important is we have it. Are you ready to return?
+            -> to_return
+
+    * {HansGotTheMap == false && HansBecomeInsane == false} [I have the map]
+        How splendid, give it to Hans.
+            -> END
         
-            * * [Yes, let us return]
-                -> end_the_game
-                
-            * * [No, not yet]
-                Be quick, we do not have long before the ice will lock us in here
-                    -> END
+    * {HansGotTheMap} [Hans has the map]
+        Then we shall start our return trip home to Copenhagen. Are you ready to return?
+            -> to_return
     
     * [Nothing to report]
         That is fine, let me hear when you have found something
@@ -297,6 +302,16 @@ You return what have you found?
 
     * {EjnarCardHasFoundIt} [Let us return]
         ->end_the_game
+        
+        
+=== to_return ===
+    ~EjnarCardHasFoundIt = true
+    * [Yes, let us return]
+        -> end_the_game
+        
+    * [No, not yet]
+        Be quick, we do not have long before the ice will lock us in here
+            -> END
 
 === end_the_game ===
 So we shall. #EndGame

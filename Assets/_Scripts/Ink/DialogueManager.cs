@@ -57,7 +57,7 @@ public class DialogueManager : MonoBehaviour
 
     private bool _hasInteracted = false;
 
-    private DialogueVariables _dialogueVariables;
+    public DialogueVariables _DialogueVariables; // this is public, but it is not the best way to access it. But it works!
         
     void Awake()
     {
@@ -74,7 +74,7 @@ public class DialogueManager : MonoBehaviour
 
 
         Story globalVariables = new Story(_globalVariables.text);
-        _dialogueVariables = new DialogueVariables(globalVariables);
+        _DialogueVariables = new DialogueVariables(globalVariables);
 
     }
 
@@ -97,7 +97,7 @@ public class DialogueManager : MonoBehaviour
             //Debug.Log("InkJSON file inserted");
             _story = new Story(DialogueData.text); // Insert dialogue Data into the story data.
 
-            _dialogueVariables.StartListening(_story); // TROELS
+            _DialogueVariables.StartListening(_story); // TROELS
         }
     }
 
@@ -242,7 +242,7 @@ public class DialogueManager : MonoBehaviour
     {
         _story = new Story(DialogueData.text); // Change file to the same dialogueData. Must be done otherwise you cant repeat the same dialouge
 
-        _dialogueVariables.StopListening(_story);
+        _DialogueVariables.StopListening(_story);
         _Oneclick = false; // Ensures 1 instance
         _DialogueExited = true; // Announces that the exitDialogue was called (used to check if player exited dialogue)
         _StartedDialogue = false; // announces that the dialogue has ended

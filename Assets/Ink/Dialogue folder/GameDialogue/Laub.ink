@@ -99,7 +99,6 @@ INCLUDE Globals.ink
 
 === pissed_off_laub ===
     BE QUIET AND STOP PESTERING ME!
-    #pissedOffLaub
     -> END
 
 === mission ===
@@ -124,7 +123,7 @@ INCLUDE Globals.ink
         ~ LaubMainFirstTimeMissionAsk  = false
         -> mission
         
-    * [Back to other questions]
+    * [Back to questions]
         What do you want to know?
         -> main 
 
@@ -132,17 +131,67 @@ INCLUDE Globals.ink
 
 
 
-
-
 === joergen_main ===
--> END
+What do you want?
+
+    * [I found Joergen]
+        Do I look like the captian of the expedition? Go talk to Ejnar about it, not me!
+            -> END
+
+    * [Nothing]
+        Great, then leave me alone! I am busy.
+            -> END
+
+    * [See you]
+        Goodbye
+            -> END
+
 
 === niels_main ===
--> END
+Can I help you with anything?
+
+    * [I found Niels]
+        Do I look like the captian of the expedition? Go talk to Ejnar about it, not me!
+            -> END
+            
+    * [Yes]
+        Go and talk to Ejnar then!
+            -> END
+
+    * [No]
+        Great, then I have no more to say to you.
+            -> END
+
+    * [See you]
+        Goodbye
+            -> END
 
 === ludvig_main ===
--> END
+What now?
+
+    * [I found Ludvig]
+        Dead persumably? Such is the rules of the land.
+            -> END
+
+    * [Nothing]
+        Great, go talk with Hans then.
+            -> END
+
+    * [See you]
+        Goodbye
+            -> END
 
 
 === card_main === 
--> END
+What do you want now?
+    * [I found the map]
+        Finally, then we can get away from this horrible and cold place. You made my day Iver. Talk with Ejnar about it.
+            -> END
+
+    * [Nothing]
+        Then bother someone else!
+            -> END
+
+    * [See you]
+        Goodbye
+            -> END

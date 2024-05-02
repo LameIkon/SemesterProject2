@@ -248,12 +248,144 @@ Something strange happens here on Greenland. It seems that one can eat and eat a
 
 
 === ludvig_main ===
-{HansBecomeInsane: -> hans_becomes_insane}
+{
+    - HansBecomeInsane: -> hans_becomes_insane
+    - HansNameTheory: -> name_theory_end
+    - HansEatingTheory: -> eating_theory_end
+    - HansWeatherTheory: -> weather_theory_end
+    - else: -> main
+}
     
 
 
 -> END
 
+=== eating_theory_end ===
+{
+    - HansNielsFirstEatingTheory: Iver welcome back, have you tried out my new theory?
+        ~ HansNielsFirstEatingTheory = false
+    - HansNielsEatingTheoryReturn: Iver you return, have you tried the theory?
+        ~ HansNielsEatingTheoryReturn = false
+}
+    * {HansNielsEatingTheoryPicked == false}[Yes]
+        ~ HansNielsEatingTheoryPicked = true
+        -> eating_theory_tried(true)
+    
+    * {HansNielsEatingTheoryPicked == false} [No]
+        ~ HansNielsEatingTheoryPicked = true
+        -> eating_theory_tried(false)
+    
+    * {HansNielsEatingTheoryPicked == false} [What theory?]
+        My theory about you being able eat without stopping. Like you are never full.
+        -> eating_theory_end
+    
+    * [See you]
+        ~ HansNielsEatingTheoryReturn = true
+        Yes yes, see you.
+        -> END
+    
+
+
+
+=== eating_theory_tried(response) ===
+{response: Ohh yes, can you explain your findings?| What a shame it would have proved invaluable data?}
+
+
+    * {response} [My stomach hurts]
+        -> eating_theory_yes
+    
+    * {response} [Nothing to say]
+        -> eating_theory_yes
+    
+    * {response == false} [So what!]
+        -> eating_theory_no
+    
+    * {response == false} [Does it matter?]
+        -> eating_theory_no
+        
+
+=== eating_theory_yes ===
+Yes, a most logical explantion. You do not feel full, but yet you are. Interesting, most interesting. I will note this down.
+    -> eating_theory_end
+    
+    
+=== eating_theory_no ===
+Iver, you are no man of science. You do not seem to comprehend the complexity of the world around you. A shame, but no matter.
+    -> eating_theory_end
+
+=== weather_theory_end ===
+{
+    - HansNielsFirstWeatherTheory: Ahoy Iver, have you come to report how you are feeling?
+        ~ HansNielsFirstWeatherTheory = false
+    - HansNielsWeatherTheoryReturn: You come back
+        ~ HansNielsWeatherTheoryReturn = false
+
+}
+
+    * {HansNielsWeatherTheoryPicked == false} [Yes]
+        ~ HansNielsWeatherTheoryPicked = true
+        -> weather_theory(true)
+        
+    * {HansNielsWeatherTheoryPicked == false} [No]
+        ~ HansNielsWeatherTheoryPicked = true
+        -> weather_theory(false)
+        
+    + {HansNielsWeatherTheoryPicked} [It has changed]
+        -> weather_feelings
+    
+    * [See you]
+        ~ HansNielsWeatherTheoryReturn = true
+        Yes, yes see you Iver
+            -> END
+
+
+=== weather_theory(response) ===
+{ 
+    - response == false: Oohh, that is alright. I have gathed enough on Ejnar alone to answer my questions.
+        -> END
+    - HansTemperaturAmountOfChanges < 5: -> weather_feelings
+    - HansTemperaturAmountOfChanges < 10 : With the amount of times you have reported I do not think you are needed more for my report. Thank you Iver.
+        -> END
+    - HansTemperaturAmountOfChanges < 100 : I do not need any more reports please.
+        -> END
+    - HansTemperaturAmountOfChanges < 10000 : By my accounts you are way to interested in the weather to be unbiased. Please leave me alone Iver.
+        -> END
+    
+   
+}
+
+
+=== name_theory_end ===
+{
+    - HansNielsFirstNameTheory: Ahoy Christian, how are you doing?
+        ~ HansNielsFirstNameTheory = false
+    - HansNielsNameTheoryReturn && HansNielsNameTheoryPicked == false: Ahoy Marcus, what do you want.
+    - HansNielsNameTheoryReturn: He returns, but I have nothing to say to him I will just smile and wait until he leaves.
+}
+    * {HansNielsNameTheoryPicked == false} [I am Iver]
+        -> name_theory("Iver")
+    
+    * {HansNielsNameTheoryPicked == false}[Just fine]
+        -> name_theory("Fine")
+        
+    * {HansNielsNameTheoryPicked == false}[Not good]
+        -> name_theory("Not good")
+    
+    * [See you]
+        ~ HansNielsNameTheoryReturn = true
+        See you 
+        -> END
+
+
+=== name_theory(response) ===
+~ HansNielsNameTheoryPicked = true
+~ HansNielsEatingTheoryReturn = true
+{
+    - response == "Iver": Subject says his own name, must be somthing in the subconscious, telling him something. The cold is getting to him.
+        
+    - else: {response}, how curious. Subject does not react to me giving the wrong name. He must be affected more that I thought. Interesting, most interesting.
+}
+        -> END   
 
 === hans_becomes_insane ===
 Ahoy Iver, what could a humble servant like Hans do for you?
@@ -266,8 +398,32 @@ Ahoy Iver, what could a humble servant like Hans do for you?
         No, of course not. What would I Hans have to theorise that the great Iver would ever like to hear, nothing. Of course nothing.
             -> END
 
--> END
 
 
 === card_main === 
--> END
+{
+    - HansBecomeInsane: -> hans_becomes_insane
+    - HansGotTheMap: I have everything I need, go talk to Ejnar. -> END
+    - HansDidNotGetTheMap: Please leave, I do not need that map anyways -> END
+    - else: You have the map? Please give it here, then I can compare it to the old ones.
+}
+
+    * [Here is the map]
+        ~ HansGotTheMap = true
+        Thank you Iver I will get to work immediately.
+        -> END
+        
+    * [No]
+        What! You must give it to me, it is what I am here for Iver!
+        
+        * * [Just joking]
+            ~ HansGotTheMap = true
+            I did not find that funny. Why did I not? Hhhmmm, I can feel a new theory brewing.
+                -> END
+                
+        * * [Not giving it]
+            ~ HansDidNotGetTheMap = true
+            Oohh, then leave me be. And do not come back!
+                -> END
+
+
