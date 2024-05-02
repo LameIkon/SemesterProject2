@@ -28,7 +28,7 @@ public class GuidelineManager : MonoBehaviour
     [SerializeField] private GameObject _toolbarCanvas;
     [SerializeField] private GameObject _useItemCanvas;
     [SerializeField] private GameObject _staminaCanvas;
-    [SerializeField] private GameObject _lanternCanvas;
+    //[SerializeField] private GameObject _lanternCanvas;
 
     [Header("Surivival Bars")]
     [SerializeField] private Animator _healthAnimator;
@@ -59,6 +59,7 @@ public class GuidelineManager : MonoBehaviour
     [SerializeField] private List<Transform> _doors = new List<Transform>();
     [SerializeField] private List<Transform> _canvasBlocker = new List<Transform>();
     [SerializeField] private List<Transform> _roomTriggers = new List<Transform>();
+    [SerializeField] private GameObject _doorToOutside;
 
     [Header("Captain")]
     [SerializeField] private GameObject _captainDestinationWalk;
@@ -151,7 +152,7 @@ public class GuidelineManager : MonoBehaviour
             _captainSprite = GameObject.Find("NPC"); // The captain. Used to get the chat bubbles
             _scientistSprite = GameObject.Find("NPC (1)"); // The scientist. Used to get the chat bubbles
             _guideInScene = GameObject.Find("Guide");
-            
+            _doorToOutside = GameObject.Find("Door");
 
             // Find all the child gameobjects and delegate them to a list. gameobject order is important
             Transform canvasParent = _canvasRestrictionHolder.transform;
@@ -182,6 +183,7 @@ public class GuidelineManager : MonoBehaviour
             // Deactivate trigger for later use
             _roomTriggers[2].gameObject.SetActive(false);
             _roomTriggers[3].gameObject.SetActive(false);
+            _doorToOutside.gameObject.SetActive(false);
 
             // Start first part of tutorial
             Invoke("ShowHealth", 2f);
@@ -385,10 +387,16 @@ public class GuidelineManager : MonoBehaviour
         _isOngoingEvent = false;
         _captainSprite.transform.GetChild(6).gameObject.SetActive(true); // Get the 5th chatbubble and activate it
         yield return new WaitUntil(() => GameManager._inventoryMenuSTATIC.activeSelf); // wait until the ongoing event trigger becomes true
-        _lanternCanvas.SetActive(true);
-        yield return new WaitUntil(() => _lantern.activeInHierarchy); // wait until lantern is active
-        StartCoroutine(FadeOut(_lanternCanvas));
+        yield return new WaitUntil(() => !GameManager._inventoryMenuSTATIC.activeSelf); // wait until the ongoing event trigger becomes false
+        _captainSprite.transform.GetChild(7).gameObject.SetActive(true); // Get the 6th chatbubble and activate it
         _finishedInsideTutorial = true; // Tutorial inside ship finished
+        yield return new WaitForSeconds(2f);
+        
+
+        //_lanternCanvas.SetActive(true);
+        //yield return new WaitUntil(() => _lantern.activeInHierarchy); // wait until lantern is active
+        //StartCoroutine(FadeOut(_lanternCanvas));
+
 
         // start outside tutorial
         StartCoroutine(Outside());
@@ -401,7 +409,8 @@ public class GuidelineManager : MonoBehaviour
     IEnumerator Outside()
     {
 
-        StartCoroutine(ShowRoom(null, _doors[3]));
+        StartCoroutine(ShowRoom(null, _doors[3])); // remove the door
+        _doorToOutside.SetActive(true); // Stairs can now be used
         yield return new WaitUntil(() => EnvironmentManager.instance._outside); // wait until going outside
         yield return new WaitForSeconds(10f); // wait before showing stamina
         _staminaAnimator.Play("SlideInLeft");
@@ -448,6 +457,7 @@ public class GuidelineManager : MonoBehaviour
 
         _finishedInsideTutorial = true; // Tutorial inside ship finished
         _isOngoingEvent = false; // you will be able to walk
+        _doorToOutside.SetActive(true); // you can now exit
 
         // Reset inventory screens
         _inventoryScreen.SetActive(false);
