@@ -48,9 +48,10 @@ public class DynamicInterface : UserInterface
 
     public virtual void OnPointerDoubleClick(PointerEventData eventData, GameObject obj)
     {
+
         if (eventData.clickCount == 2 && OnClick(obj))
         {
-
+            
         }
     }
 
@@ -60,7 +61,6 @@ public class DynamicInterface : UserInterface
        
     }
 
-
     void Awake() 
     {
         
@@ -68,5 +68,4 @@ public class DynamicInterface : UserInterface
         
     }
 
-    
 }

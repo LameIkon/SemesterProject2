@@ -185,8 +185,9 @@ public class Inventory
 
     public Inventory() 
     {
-        _Slots = new InventorySlot[4];
+        _Slots = new InventorySlot[6];
     }
+
     public void Clear()
     {
         for (int i = 0; i < _Slots.Length; i++)
