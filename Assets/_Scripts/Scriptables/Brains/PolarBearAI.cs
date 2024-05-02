@@ -64,6 +64,8 @@ public class PolarBearAI : BrainAI
             }
 
         }
+
+        brain.Remember("idle", false);
         brain.Remember(_stateTimeout, stateTimeout);
 
         if (_move == null)
@@ -218,6 +220,7 @@ public class PolarBearAI : BrainAI
         brain.Remember(_stateTimeout, Random.Range(_waitBetweenRunning.MinValue, _waitBetweenRunning.MaxValue));
         brain.Remember(_hasAggro, false);
         brain.Remember(_idle, false);
+
     }
 
     private void SetTimeIdle(AIThinker brain)
@@ -225,6 +228,7 @@ public class PolarBearAI : BrainAI
         brain.Remember(_stateTimeout, Random.Range(_idleTime.MinValue, _idleTime.MaxValue));
         brain.Remember(_hasAggro, false);
         brain.Remember(_idle, true);
+        brain.Remember("idle", true);
     }
     #endregion
 

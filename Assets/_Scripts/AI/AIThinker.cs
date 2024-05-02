@@ -55,6 +55,19 @@ public class AIThinker : MonoBehaviour
         {
             _brain.Think(this);
         }
+
+
+        // Testing
+        bool isRememberedTrue = Remember<bool>("idle");
+
+        if (isRememberedTrue)
+        {
+            Debug.Log("The remembered bool is true!");
+
+            // reset
+            Remember("isTrue", false);
+        }
+
     }
 
     public void SetBrain(BrainAI brain) 
