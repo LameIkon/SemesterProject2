@@ -149,7 +149,7 @@ What do you want?
 
 === niels_main ===
 Can I help you with anything?
-
+0
     * [I found Niels]
         Do I look like the captian of the expedition? Go talk to Ejnar about it, not me!
             -> END

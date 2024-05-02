@@ -14,6 +14,7 @@ public class JournalChests : MonoBehaviour
 
     private InventorySlot[] _slots = new InventorySlot[1];
 
+    [SerializeField] private Highlight _highlightScript;
 
     private bool _canOpenChest = false;
     private bool _turn = false;
@@ -50,7 +51,7 @@ public class JournalChests : MonoBehaviour
     {
         if (_canOpenChest)
         {
-
+            
             OpenChest();
         }
     }
@@ -58,26 +59,24 @@ public class JournalChests : MonoBehaviour
     private void OpenChest()
     {
         _turn = !_turn;
+        _highlightScript.TriggerUse(_turn);
         DialogueManager.instance._DialogueVariables.ChangeMainStoryState(stateToChange);
 
         _journalChestCanvas.SetActive(_turn);
         GameManager._inventoryMenuSTATIC.SetActive(_turn);
         // check interactability 
-        Interactable();
     }
 
-    void Interactable()
-    {
-        // Show or disable E highlight
-        GameManager._hideEInteractables = _turn;
-    }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.gameObject.name == "Player")
         {
+            if (!_highlightScript.TriggerEnter(gameObject)) 
+            {
+                return;
+            }
             _canOpenChest = true;
-
         }
     }
 
@@ -89,6 +88,7 @@ public class JournalChests : MonoBehaviour
             GameManager._inventoryMenuSTATIC.SetActive(_turn);
             _canOpenChest = false;
             _turn = false;
+            _highlightScript.TriggerExit(gameObject);
         }
     }
 

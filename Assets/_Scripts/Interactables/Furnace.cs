@@ -16,7 +16,6 @@ public class Furnace : MonoBehaviour
     [SerializeField] private FloatReference _restoreValue; //how warm we get when fire is burning.
     [SerializeField] private FloatReference _burningTime; //How long the wood burns before its gone
 
-    private Highlight _highlightScript;
 
     // public static bool _canOpenFurnace = false;  //needs to be static for use in CampfireManager.script where we open the canvas
 
@@ -32,8 +31,7 @@ public class Furnace : MonoBehaviour
 
     private void Start()
     {
-         _highlightScript = GetComponentInChildren<Highlight>();
-        _systemFloat.SetValue(0f);
+         _systemFloat.SetValue(0f);
     }
 
     private void Update()
@@ -54,27 +52,22 @@ public class Furnace : MonoBehaviour
         }
     }
 
-    private void OnTriggerStay2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
          if (collision.CompareTag("Player"))
-        {
-            if (!_highlightScript.TriggerEnter(gameObject))
-            {
-                return;
-            }
+         {
 
             _playerIsClose = true;
             // _canOpenFurnace = true;
 
             _burnCoroutine = BurningTime(_burningTime);
-        }
+         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
-            _highlightScript.TriggerExit(gameObject);
             _playerIsClose = false;
             _leftoverCoroutine = LeftoverTime(_burningTime);
             //GameManager._hideEInteractables = false;

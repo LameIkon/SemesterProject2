@@ -22,7 +22,6 @@ public class DialogueVariables
             if (name == "True") 
             {
                 trueStatement = value;
-                Debug.Log($"{name} has the value: {value}");
             }
 
         }

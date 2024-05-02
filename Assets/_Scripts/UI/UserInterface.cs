@@ -9,13 +9,12 @@ using UnityEngine.EventSystems;
 using UnityEngine.Events;
 using Image = UnityEngine.UI.Image;
 using System;
-using Unity.VisualScripting;
 
 public abstract class UserInterface: MonoBehaviour
 {
     
     public InventoryObject _Inventory;
-    public InventoryObject _toolbarInventory;
+    //public InventoryObject _toolbarInventory;
 
 
     public Dictionary<UnityEngine.GameObject, InventorySlot> _SlotsOnInterface = new Dictionary<UnityEngine.GameObject, InventorySlot>();
@@ -81,17 +80,17 @@ public abstract class UserInterface: MonoBehaviour
 
     }
 
-    public bool OnClick (GameObject obj)
-    {
+    //public bool OnClick (GameObject obj)
+    //{
 
-        if (obj != null)
-        {
-            Debug.Log("Slot clicked");
-            return true;           
-        }
+    //    if (obj != null)
+    //    {
+    //        Debug.Log("Slot clicked");
+    //        return true;           
+    //    }
         
-        return false;
-    }
+    //    return false;
+    //}
 
     public void OnEnterInterface(UnityEngine.GameObject obj)
     {

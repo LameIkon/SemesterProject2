@@ -95,7 +95,6 @@ public class StartDialogue : MonoBehaviour
         {
             if (!_highlightScript.TriggerEnter(gameObject))
             {
-                Debug.Log("cannot continue");
                 return;
             }
             DialogueManager.instance._NPCName = _NPCName;

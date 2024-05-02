@@ -30,7 +30,7 @@ public class DynamicInterface : UserInterface
 
             AddEvent(obj, EventTriggerType.PointerEnter, delegate { OnEnter(obj); });
             AddEvent(obj, EventTriggerType.PointerExit, delegate { OnExit(obj); });
-            AddEvent(obj, EventTriggerType.PointerClick, delegate { OnClick(obj); });
+            //AddEvent(obj, EventTriggerType.PointerClick, delegate { OnClick(obj); });
             AddEvent(obj, EventTriggerType.BeginDrag, delegate { OnDragStart(obj); });
             AddEvent(obj, EventTriggerType.EndDrag, delegate { OnDragEnd(obj); });
             AddEvent(obj, EventTriggerType.Drag, delegate { OnDrag(obj); });
@@ -46,20 +46,15 @@ public class DynamicInterface : UserInterface
 
     }
 
-    public virtual void OnPointerDoubleClick(PointerEventData eventData, GameObject obj)
-    {
+    //public virtual void OnPointerDoubleClick(PointerEventData eventData, GameObject obj)
+    //{
 
-        if (eventData.clickCount == 2 && OnClick(obj))
-        {
+    //    if (eventData.clickCount == 2 && OnClick(obj))
+    //    {
             
-        }
-    }
+    //    }
+    //}
 
-    private void Update()
-    {
-        
-       
-    }
 
     void Awake() 
     {

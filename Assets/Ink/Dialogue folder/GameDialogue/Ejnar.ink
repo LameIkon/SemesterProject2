@@ -178,7 +178,7 @@ VAR joergenFound = false
     
     {joergenFound: -> joergen_main}
 
-    * [I found him to in cave] 
+    * [I found him to in cave]
         If we have the time we shall build a grave for him. A grave that shall stand the test of time.
             -> joergen_main
     

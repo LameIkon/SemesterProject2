@@ -8,7 +8,7 @@ public class FurnaceManager : MonoBehaviour
     public static UnityEngine.GameObject _FurnaceCanvasSTATIC; //we need a static variable so that we can acces it in Bonfire.Script
     [SerializeField] private Highlight _highlightScript;
 
-    [SerializeField] private bool _turn = false;
+    [SerializeField] public bool _Turn = false;
 
 
     void Start()
@@ -42,13 +42,11 @@ public class FurnaceManager : MonoBehaviour
 
     private void OpenFurnaceMethod()
     {
-        _turn = !_turn;
-        _highlightScript.TriggerUse(_turn);
-        _furnaceCanvas.SetActive(_turn);
-        GameManager._inventoryMenuSTATIC.SetActive(_turn);
+        _Turn = !_Turn;
+        _highlightScript.TriggerUse(_Turn);
+        _furnaceCanvas.SetActive(_Turn);
+        GameManager._inventoryMenuSTATIC.SetActive(_Turn);
 
-        // check interactability 
-        Interactable();
     }
 
     public void CloseFire()
@@ -58,12 +56,7 @@ public class FurnaceManager : MonoBehaviour
         {
             GameManager._inventoryMenuSTATIC.SetActive(false);
         }
-        _turn = false;
+        _Turn = false;
     }
 
-    void Interactable()
-    {
-        // Show or disable E highlight
-        GameManager._hideEInteractables = _turn;
-    }
 }

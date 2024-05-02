@@ -60,7 +60,6 @@ public class ChestManager : MonoBehaviour
     {
         if (_canOpenChest)
         {
-            
             OpenChest();
         }
     }
@@ -116,6 +115,7 @@ public class ChestManager : MonoBehaviour
     {
         _turn = !_turn;
         _highlightScript.TriggerUse(_turn);
+        _chestCanvas.SetActive(_turn);
         DialogueManager.instance._DialogueVariables.ChangeMainStoryState(stateToChange);
 
         GameManager._inventoryMenuSTATIC.SetActive(_turn);
@@ -131,10 +131,6 @@ public class ChestManager : MonoBehaviour
         _turn = false;
     }
 
-    private void OnApplicationQuit()
-    {        
-        _chestInventory._Container.Clear();       
-    }
 
 
 

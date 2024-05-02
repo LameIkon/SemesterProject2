@@ -241,7 +241,7 @@ public class GuidelineManager : MonoBehaviour
         yield return new WaitForSeconds(0.75f);
         _captainAnimator.Play("point2");
         _captainSprite.transform.GetChild(2).gameObject.SetActive(true); // Get the 1st chatbubble and activate it
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(4f);
         _isOngoingEvent = false; // Enable movement
         yield return new WaitUntil(() => DialogueManager.instance._DialogueExited); // wait until the ongoing event becomes true
 
