@@ -85,10 +85,10 @@ public class JournalChests : MonoBehaviour
         if (collision.gameObject.name == "Player")
         {
             _journalChestCanvas.SetActive(false);
+            _highlightScript.TriggerExit(gameObject);
             GameManager._inventoryMenuSTATIC.SetActive(_turn);
             _canOpenChest = false;
             _turn = false;
-            _highlightScript.TriggerExit(gameObject);
         }
     }
 

@@ -55,15 +55,8 @@ public class CampfireManager : MonoBehaviour
         _bonfireCanvas.SetActive(_turn);
         GameManager._inventoryMenuSTATIC.SetActive(_turn);
 
-        // check interactability 
-        Interactable();
     }
 
-    void Interactable()
-    {
-        // Show or disable E highlight
-        GameManager._hideEInteractables = _turn;
-    }
 
 
 }

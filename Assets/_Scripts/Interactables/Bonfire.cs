@@ -20,6 +20,7 @@ public class Bonfire : MonoBehaviour
     [SerializeField] private FloatReference _burningTime; //How long the wood burns before its gone
     public static bool _IsHeatingUp;
 
+    [SerializeField] private Highlight _highlightScript;
 
     public static bool _canOpenBonfire = false;  //needs to be static for use in CampfireManager.script where we open the canvas
 
@@ -58,11 +59,16 @@ public class Bonfire : MonoBehaviour
     }
 
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
        
         if (collision.CompareTag("Player"))
-        {          
+        {
+            if (!_highlightScript.TriggerEnter(gameObject)) 
+            {
+                return;
+            }
+
             _canOpenBonfire = true;
             _playerIsClose = true;
 
@@ -76,10 +82,10 @@ public class Bonfire : MonoBehaviour
         {      
             _canOpenBonfire = false;
             _playerIsClose = false;
+            _highlightScript.TriggerExit(gameObject);
             CampfireManager._bonfireCanvasSTATIC.SetActive(false);
             GameManager._inventoryMenuSTATIC.SetActive(false);
             _leftoverCoroutine = LeftoverTime(_burningTime);
-            GameManager._hideEInteractables = false;
             
             if (_bonfireLit)
             {

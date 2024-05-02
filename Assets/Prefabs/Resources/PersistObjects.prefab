@@ -294,13 +294,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'We will have to return and retrieve the map in the future.  We have only
-    a single sledge and few dogs left, supplies are nearly empty. We hope this will
-    be enough for the return trip. We might not make it back, but our spirits are
-    high.
-
-
-    - Niels'
+  m_text: "Therefore we have decided to leave the drawn map und-er a stack of stones
+    we piled together, to pro-tect it. We will have to return and retrieve the map
+    in the future.  \n\nWe have only a single sledge and few dogs left, supplies
+    are near-ly empty. We hope this will be eno-ugh for the return trip. We might
+    not make it back, but our spirits are high.\n\n- Niels"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: bfea17042bc31c841b7eb63fb6362109, type: 2}
   m_sharedMaterial: {fileID: 5437978294661855311, guid: bfea17042bc31c841b7eb63fb6362109, type: 2}
@@ -6639,7 +6637,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &3848383503271739522
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6726,11 +6724,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'But you should not be here in Greenland with family. They say you remember
-    best when your time is nigh. God have mercy upon me.
-
-
-    - Ludvig'
+  m_text: "I miss home and my brother. Iver, I am sorry about the last time you and
+    I spoke. We could have used you here, you would have kept your cool. \n\nBut
+    you should not be here in Greenland with family. They say you remember best when
+    your time is nigh. God have mercy upon me.\n\n- Ludvig"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: bfea17042bc31c841b7eb63fb6362109, type: 2}
   m_sharedMaterial: {fileID: 5437978294661855311, guid: bfea17042bc31c841b7eb63fb6362109, type: 2}
@@ -8617,7 +8614,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7845675130610406227
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10347,13 +10344,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Date unbeknownst to me.
-
-    Cold so cold. I think I hear sounds of the
-    bear. It must be out there somewhere. I can feel it. Everything turned upside
+  m_text: "Date unbeknownst to me.\n\nCold so cold. I think I hear sounds of the
+    bear. It must be out there some-where. I can feel it. \n\nEverything turned upside
     down when it showed up.  Niels and all the dogs are dead. They saved my life,
-    but now I am probably unable to make it back. I still have some food left, though
-    I am freezing in this blizzard. '
+    but now I am probably unable to make it back. "
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: bfea17042bc31c841b7eb63fb6362109, type: 2}
   m_sharedMaterial: {fileID: 5437978294661855311, guid: bfea17042bc31c841b7eb63fb6362109, type: 2}
@@ -10842,13 +10836,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Joergen ran when it all happened, traitor. I tried to shoot the darn bear,
-    but I was blinded by the blizzard, and I could not aim properly. If only I had
-    more bullets, I might have been able to take it out before it killed Niels.
-
-    I
-    miss home and my brother. Iver, I am sorry about the last time you and I spoke.
-    We could have used you here, you would have kept your cool. '
+  m_text: "I still have some food left, though I am freezing in this blizzard. Joergen
+    ran when it all happened, traitor. I tried to shoot the darn bear, but I was
+    blinded by the blizzard, and I could not aim properly. \n\nIf only I had more
+    bullets, I might have been able to take it out before it killed Niels.\n\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: bfea17042bc31c841b7eb63fb6362109, type: 2}
   m_sharedMaterial: {fileID: 5437978294661855311, guid: bfea17042bc31c841b7eb63fb6362109, type: 2}
@@ -11067,11 +11058,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'I can feel that I do not have long left. Ludvig, Niels, I am sorry. God
-    almighty, please forgive me.
-
-
-    - Joergen'
+  m_text: "I got lost in the blizzard and I have run out of food. I have no idea
+    how far away I am from the ship or the others. \n\nI can feel that I do not have
+    long left. Ludvig, Niels, I am sorry. \n\nGod almighty, please forgive me.\n\n-
+    Joergen"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: bfea17042bc31c841b7eb63fb6362109, type: 2}
   m_sharedMaterial: {fileID: 5437978294661855311, guid: bfea17042bc31c841b7eb63fb6362109, type: 2}
@@ -13090,11 +13080,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "16th of September, 1907\nIncredible news, the Peary Channel does not exist!
-    Greenland is it\u2019s own and I have fully drawn a map of the area. We have
-    started our return trip South. The blizzards have become more frequent and the
-    days are becoming shorter. Therefore have we decided to leave the drawn map under
-    a stack of stones we piled together, to protect it. "
+  m_text: "16th of September, 1907\n\nIncredible news, the Peary Channel does not
+    exist! Greenland is it\u2019s own and I have fully drawn a map of the area. \n\nWe
+    have started our return trip South. The blizzards have become more frequent and
+    the days are becoming shorter. "
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: bfea17042bc31c841b7eb63fb6362109, type: 2}
   m_sharedMaterial: {fileID: 5437978294661855311, guid: bfea17042bc31c841b7eb63fb6362109, type: 2}
@@ -13784,14 +13773,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'End of November, I have lost count.
-
-    I have taken shelter in a cave
-    for protection against the blizzard. Unable to continue because of frostbite
-    in my feet and the darkness. I regret fleeing, I should not have done so. I am
-    unsure if the others are still alive, but I suspect they may be dead. I got lost
-    in the blizzard and I have run out of food. I have no idea how far away I am
-    from the ship or the others.'
+  m_text: "End of November, I have lost count.\n\nI have taken shel-ter in a cave
+    for protection against the blizzard. Un-able to continue because of frost-bite
+    in my feet and the darkness. \n\nI regret fleeing, I should not have done so.
+    I am unsure if the others are still alive, but I suspect they may be dead. "
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: bfea17042bc31c841b7eb63fb6362109, type: 2}
   m_sharedMaterial: {fileID: 5437978294661855311, guid: bfea17042bc31c841b7eb63fb6362109, type: 2}
@@ -15144,6 +15129,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2781318481826526339, guid: c86bc54ac953c5d47965d2ff1e85ff31, type: 3}
+      propertyPath: _highlightScript
+      value: 
+      objectReference: {fileID: 8069684791562757487}
     - target: {fileID: 3362203924102397197, guid: c86bc54ac953c5d47965d2ff1e85ff31, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -17149,7 +17138,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 222730324600549117, guid: d92e65e013c17934c8d0344632014392, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 222730324600549117, guid: d92e65e013c17934c8d0344632014392, type: 3}
       propertyPath: m_AnchorMin.x
@@ -17157,7 +17146,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 222730324600549117, guid: d92e65e013c17934c8d0344632014392, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 222730324600549117, guid: d92e65e013c17934c8d0344632014392, type: 3}
       propertyPath: m_SizeDelta.x
@@ -17197,11 +17186,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 222730324600549117, guid: d92e65e013c17934c8d0344632014392, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 486.375
       objectReference: {fileID: 0}
     - target: {fileID: 222730324600549117, guid: d92e65e013c17934c8d0344632014392, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -740
       objectReference: {fileID: 0}
     - target: {fileID: 222730324600549117, guid: d92e65e013c17934c8d0344632014392, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -20198,8 +20187,8 @@ MonoBehaviour:
   _mapSprite: {fileID: 21300000, guid: c0f9a45a7baba0743acd3d4ae1a9efdf, type: 3}
   _lanternSprite: {fileID: 21300000, guid: 6ce03429a37a72a41a74529c7e5b4055, type: 3}
   _joerensJournalSprite: {fileID: 21300000, guid: 09ba201813557534abcd8115ed821e1a, type: 3}
-  _ludvigsJournalSprite: {fileID: 21300000, guid: ac2cdb2024755d24594c27d768a7f9bf, type: 3}
-  _nielsJournalSprite: {fileID: 21300000, guid: 4523d4ebf0df9d2438a9135aeef08fc8, type: 3}
+  _ludvigsJournalSprite: {fileID: 21300000, guid: 12f24c2ae8f7b3f4994c3fd1e7171373, type: 3}
+  _nielsJournalSprite: {fileID: 21300000, guid: e83b4516fdcf21a4a88b7ae8ce310fe5, type: 3}
 --- !u!225 &4351749882819959996
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -20631,7 +20620,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 222730324600549117, guid: d92e65e013c17934c8d0344632014392, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 222730324600549117, guid: d92e65e013c17934c8d0344632014392, type: 3}
       propertyPath: m_AnchorMin.x
@@ -20639,7 +20628,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 222730324600549117, guid: d92e65e013c17934c8d0344632014392, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 222730324600549117, guid: d92e65e013c17934c8d0344632014392, type: 3}
       propertyPath: m_SizeDelta.x
@@ -20679,11 +20668,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 222730324600549117, guid: d92e65e013c17934c8d0344632014392, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 486.375
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 222730324600549117, guid: d92e65e013c17934c8d0344632014392, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -740
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 222730324600549117, guid: d92e65e013c17934c8d0344632014392, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -21748,7 +21737,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 222730324600549117, guid: d92e65e013c17934c8d0344632014392, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 222730324600549117, guid: d92e65e013c17934c8d0344632014392, type: 3}
       propertyPath: m_AnchorMin.x
@@ -21756,7 +21745,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 222730324600549117, guid: d92e65e013c17934c8d0344632014392, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 222730324600549117, guid: d92e65e013c17934c8d0344632014392, type: 3}
       propertyPath: m_SizeDelta.x
@@ -21796,11 +21785,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 222730324600549117, guid: d92e65e013c17934c8d0344632014392, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 183.625
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 222730324600549117, guid: d92e65e013c17934c8d0344632014392, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -740
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 222730324600549117, guid: d92e65e013c17934c8d0344632014392, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -21953,7 +21942,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 222730324600549117, guid: d92e65e013c17934c8d0344632014392, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 222730324600549117, guid: d92e65e013c17934c8d0344632014392, type: 3}
       propertyPath: m_AnchorMin.x
@@ -21961,7 +21950,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 222730324600549117, guid: d92e65e013c17934c8d0344632014392, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 222730324600549117, guid: d92e65e013c17934c8d0344632014392, type: 3}
       propertyPath: m_SizeDelta.x
@@ -22001,11 +21990,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 222730324600549117, guid: d92e65e013c17934c8d0344632014392, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 183.625
       objectReference: {fileID: 0}
     - target: {fileID: 222730324600549117, guid: d92e65e013c17934c8d0344632014392, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -740
       objectReference: {fileID: 0}
     - target: {fileID: 222730324600549117, guid: d92e65e013c17934c8d0344632014392, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
