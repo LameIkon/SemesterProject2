@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class PolarBearController : MovementController
 {
-
-    [SerializeField] private CircleCollider2D _aggroColliderRange;
-    [SerializeField] private CircleCollider2D _attackColliderRange;
     [SerializeField] private PolarBearAI _polarBearAIScript;
 
     private bool _isAttacking;
@@ -61,7 +58,7 @@ public class PolarBearController : MovementController
             {
                 //Debug.Log("missed");
             }
-            yield return null;
+            yield return new WaitForSeconds(0.30f);
             _isAttacking = false;
         }
     }

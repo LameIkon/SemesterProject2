@@ -22,7 +22,12 @@ public class PolarBearAI : BrainAI
     private const string _stateTimeout = "stateTimeout";
     private const string _walkState = "walkState";
     private const string _target = "target";
+    private const string _hasAggro = "hasAggro";
+    private const string _idle = "idleNotMoving";
+
     // private const string _state = "state";
+
+    //private bool _hasAggro;
 
     public void SetPolarBearController(PolarBearController polarBearController)
     {
@@ -42,9 +47,25 @@ public class PolarBearAI : BrainAI
         GameObject target = brain.Remember<GameObject>(_target);
         float stateTimeout = brain.Remember<float>(_stateTimeout);
         stateTimeout -= Time.deltaTime;
+        bool hasAggro = brain.Remember<bool>(_hasAggro);
+        bool isNotMoving = brain.Remember<bool>(_idle);
+
+        if (isNotMoving) // if standing still and you move close to it
+        {
+            Vector3 targetPosition = target.transform.position; // Find the targets location
+            Vector3 ownPosition = brain.transform.position; // Own Location
+            Vector3 vectorBetween = targetPosition - ownPosition; // The distance between
+            Vector3 unitVectorBetween = (vectorBetween).normalized; // Normalized
+
+            if (AggroRange(vectorBetween, _aggroRange * unitVectorBetween, _aggroRange)) // if getting into its zone, cancel its idle time
+            {
+                Debug.Log("aggro");
+                stateTimeout = 0f;
+            }
+
+        }
         brain.Remember(_stateTimeout, stateTimeout);
 
-        //var state = brain.Remember<Directions>(_walkState);
         if (_move == null)
         {
             _move = brain.GetComponent<PolarBearController>();
@@ -57,7 +78,7 @@ public class PolarBearAI : BrainAI
             brain.Remember(_target, target);
         }
 
-        if (stateTimeout < 0)
+        if (stateTimeout <= 0)
         {
 
             Vector3 targetPosition = target.transform.position; // Find the targets location
@@ -65,25 +86,35 @@ public class PolarBearAI : BrainAI
             Vector3 vectorBetween = targetPosition - ownPosition; // The distance between
             Vector3 unitVectorBetween = (vectorBetween).normalized; // Normalized
 
-
-            if (AttackRange(vectorBetween, _attackRange * unitVectorBetween, _attackRange))
+            if (hasAggro) // Even if you escape its zone it will still have aggro on you for a moment
             {
-                
+                _polarBearController.RunSpeed();
+                Walk(GiveDirectionTowardsPlayer(unitVectorBetween));
+                SetTimeoutAggro(brain);
+            }
+
+
+            // if inside its attack range stop up and attack
+            else if (AttackRange(vectorBetween, _attackRange * unitVectorBetween, _attackRange)) 
+            {         
+                // Calls the controller for the attack animations
                 _polarBearController.Attack(ownPosition, _attackRange, _damage);
                 SetTimeoutAttack(brain);
             }
 
+            // Start running
             else if (AggroRange(vectorBetween, _aggroRange * unitVectorBetween, _aggroRange))
             {
                 _polarBearController.RunSpeed();
                 Walk(GiveDirectionTowardsPlayer(unitVectorBetween));
                 SetTimeoutAggro(brain);
             }
-            else
+            else // Else just walking around at random or standing still
             {
                 _polarBearController.WalkSpeed();
                 if (Random.value < 0.05f) // 5% chance of idle
                 {
+                    Debug.Log("idle");
                     SetTimeIdle(brain);
                 }
                 else
@@ -95,18 +126,13 @@ public class PolarBearAI : BrainAI
         }    
     }
 
-    private IEnumerator Attack(Vector3 ownPosition, Vector3 unitVectorBetween)
-    {
-        yield return null;
-    }
-    
-
-    private void WalkRandom()
+   
+    private void WalkRandom() // Random
     {
         _move.Move(new Vector3(Random.Range(-1, 2), Random.Range(-1, 2), 0));
     }
 
-    private void Walk(Directions direction)
+    private void Walk(Directions direction) // Get the direction the moving point is at
     {
         switch (direction)
         {
@@ -148,8 +174,9 @@ public class PolarBearAI : BrainAI
         }
     }
 
-    private Directions GiveDirectionTowardsPlayer(Vector3 dir)
+    private Directions GiveDirectionTowardsPlayer(Vector3 dir) // Try to get its smooth location towards the player
     {
+        // Go the direction the player is as accurate as possible
         if (dir == Vector3.up) return Directions.N;
         if (dir == Vector3.right) return Directions.E;
         if (dir == Vector3.down) return Directions.S;
@@ -158,14 +185,16 @@ public class PolarBearAI : BrainAI
 
         bool isMovingUp = dir.y > 0;
         bool isMovingRight = dir.x > 0;
-        if (isMovingUp)
+        if (isMovingUp) // Introduce a little randomness/smoothness to its pathfinding
         {
-            if (isMovingRight) return (Random.value > 0.8f) ? Directions.N : Directions.NE;
+            // 80% chance to running straight instead of diagonal
+            if (isMovingRight) return (Random.value > 0.8f) ? Directions.N : Directions.NE; // go up 
             else return (Random.value > 0.8f) ? Directions.N : Directions.NW;
         }
         else
         {
-            if (isMovingRight) return (Random.value > 0.8f) ? Directions.S : Directions.SE;
+            // 80% chance to running straight instead of diagonal
+            if (isMovingRight) return (Random.value > 0.8f) ? Directions.S : Directions.SE; // go down
             else return (Random.value > 0.8f) ? Directions.S : Directions.SW;
         }
     }
@@ -174,20 +203,28 @@ public class PolarBearAI : BrainAI
     private void SetTimeoutWalk(AIThinker brain)
     {
         brain.Remember(_stateTimeout, Random.Range(_waitBetweenWalk.MinValue, _waitBetweenWalk.MaxValue));
+        brain.Remember(_hasAggro, false);
+        brain.Remember(_idle, false);
     }
     private void SetTimeoutAttack(AIThinker brain)
     {
         brain.Remember(_stateTimeout, Random.Range(_waitBetweenAttack.MinValue, _waitBetweenAttack.MaxValue));
+        brain.Remember(_hasAggro, true);
+        brain.Remember(_idle, false);
     }
 
     private void SetTimeoutAggro(AIThinker brain)
     {
         brain.Remember(_stateTimeout, Random.Range(_waitBetweenRunning.MinValue, _waitBetweenRunning.MaxValue));
+        brain.Remember(_hasAggro, false);
+        brain.Remember(_idle, false);
     }
 
     private void SetTimeIdle(AIThinker brain)
     {
         brain.Remember(_stateTimeout, Random.Range(_idleTime.MinValue, _idleTime.MaxValue));
+        brain.Remember(_hasAggro, false);
+        brain.Remember(_idle, true);
     }
     #endregion
 

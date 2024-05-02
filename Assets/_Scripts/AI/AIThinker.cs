@@ -11,7 +11,6 @@ public class AIThinker : MonoBehaviour
     private Dictionary<string, object> _memory;
 
 
-
     private bool inDialogue = false;
 
     public T Remember<T>(string key)
