@@ -14,7 +14,8 @@ public class ChatBubble : MonoBehaviour
     [Space (10), SerializeField] private bool _automaticStart; // Used to start a chat right away
     [SerializeField] private bool _hideEOnEnteract; // used to hide interact
     [SerializeField] private bool _randomLine; // used to get a random line
-    private bool _showOnce = true;
+    [SerializeField] private bool _triggerOnce; // Used to trigger a dialogue only once
+    private bool _canRun = true;
     private bool _coroutineRunning;
 
 
@@ -25,6 +26,11 @@ public class ChatBubble : MonoBehaviour
             gameObject.SetActive(false); // if there isnt any dialogue deactivate.
         }
 
+        if (!_canRun)
+        {
+            gameObject.SetActive(false); // needed to be called if we by chance call it, even when the triggerOnce has been executed
+        }
+
         if (_automaticStart) // Used if you want to start the chat right away
         {
             StartChatBubble();
@@ -33,9 +39,16 @@ public class ChatBubble : MonoBehaviour
 
     public void StartChatBubble()
     {
-        gameObject.SetActive(true); // Show dialogue chat bubble
-        _textComponent.text = string.Empty; // removes text if there is any
-        StartDialogue();
+        if (_canRun)
+        {
+            if (_triggerOnce)
+            {
+                _canRun = false;
+            }
+            gameObject.SetActive(true); // Show dialogue chat bubble
+            _textComponent.text = string.Empty; // removes text if there is any
+            StartDialogue();
+        }
     }
 
     void StartDialogue()
