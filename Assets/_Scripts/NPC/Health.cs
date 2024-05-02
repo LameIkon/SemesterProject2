@@ -18,22 +18,12 @@ public class Health : MonoBehaviour, IDamageable
     }
 
     public void Die()
-    {
-        Destroy(gameObject);        
+    {       
     }
 
     public void TakeDamage(float damageAmount)
     {
         _health.ApplyChange(-damageAmount);
-
-        if (_health.GetValue() <= 0) 
-        {
-            Die();
-        }
     }
 
-    public float GetHealthValue()
-    { 
-        return _health.GetValue(); 
-    }
 }
