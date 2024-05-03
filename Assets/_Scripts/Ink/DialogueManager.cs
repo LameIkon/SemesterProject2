@@ -54,6 +54,7 @@ public class DialogueManager : MonoBehaviour
     private GameObject _currentProile;
 
     public static event Action OnDialogueEndedEvent; // Event for when Dialogue is finnished
+    public static event Action OnGameEndEvent;
 
     private bool _hasInteracted = false;
 
@@ -206,8 +207,14 @@ public class DialogueManager : MonoBehaviour
         List<string> tags = _story.currentTags; // Store the tag of the text that correlate to the button
         if (tags.Count > 0) // If there is more than 0 tags it will search
         {
+            
             string tagToAdd = tags[0]; // Store the tag temporarily here
             {
+                if (tagToAdd == "EndGame") 
+                {
+                    OnGameEndEvent?.Invoke();
+                }
+
                 if (!_SavedTags.Contains(tagToAdd)) // Checks if there is a tag already with that name. If its isnt, it gets stored
                 {
                     _SavedTags.Add(tagToAdd); // Store the tag in a list to be used for alternative texts

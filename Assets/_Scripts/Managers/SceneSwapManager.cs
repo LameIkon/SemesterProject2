@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SceneSwapManager : Singleton<SceneSwapManager>
+public class SceneSwapManager : PersistentSingleton<SceneSwapManager>
 {
     private static bool _loadFromDoor;
     private UnityEngine.GameObject _player;

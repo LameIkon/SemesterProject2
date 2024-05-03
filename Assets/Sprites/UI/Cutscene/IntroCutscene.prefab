@@ -405,7 +405,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4105403926212043879, guid: 5a7665881a1d80e49937792e96500f9a, type: 3}
       propertyPath: _textSpeed
-      value: 0
+      value: 0.02
       objectReference: {fileID: 0}
     - target: {fileID: 4105403926212043879, guid: 5a7665881a1d80e49937792e96500f9a, type: 3}
       propertyPath: _textComponent
@@ -417,7 +417,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4105403926212043879, guid: 5a7665881a1d80e49937792e96500f9a, type: 3}
       propertyPath: _nextLineShowUp
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4105403926212043879, guid: 5a7665881a1d80e49937792e96500f9a, type: 3}
       propertyPath: _lines.Array.size
@@ -527,10 +527,10 @@ PrefabInstance:
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 1598349609630180848, guid: 5a7665881a1d80e49937792e96500f9a, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 673382678994217161}
+      addedObject: {fileID: 846390978686111360}
     - targetCorrespondingSourceObject: {fileID: 1598349609630180848, guid: 5a7665881a1d80e49937792e96500f9a, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 846390978686111360}
+      addedObject: {fileID: 673382678994217161}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5a7665881a1d80e49937792e96500f9a, type: 3}
 --- !u!224 &5856742123152253916 stripped

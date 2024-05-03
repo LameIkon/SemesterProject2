@@ -1,5 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
+using System;
 using TMPro;
 using UnityEngine;
 
@@ -13,6 +13,11 @@ public class ChatBubble : MonoBehaviour
 
     [Space (10), SerializeField] private bool _automaticStart; // Used to start a chat right away
     [SerializeField] private bool _hideEOnEnteract; // used to hide interact
+
+    [Space(5), Header("Do not touch!"), SerializeField, Tooltip("Used to call the ShipIn scene set to false!!!!! except on StoryManager")] private bool _shipInLoad = false;
+    [SerializeField, Tooltip("Used to call the MainMenu scene set to false!!!!! except on StoryManager")] private bool _mainMenuLoad = false;
+    public static event Action OnChatEndEvent;
+    public static event Action OnGameEndEvent;
 
     private void Awake()
     {
@@ -70,6 +75,14 @@ public class ChatBubble : MonoBehaviour
         }
         else
         {
+            if (_shipInLoad)
+            {
+                OnChatEndEvent?.Invoke();
+            }
+            else if (_mainMenuLoad) 
+            {
+                OnGameEndEvent?.Invoke();
+            }
             gameObject.SetActive(false); // if there isnt any dialogue deactivate.
             if (_hideEOnEnteract)
             {

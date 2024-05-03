@@ -6,9 +6,14 @@ public class Initialize : MonoBehaviour
     
     public static Initialize instance;
 
-    private UnityEngine.GameObject _persistanceObject; // Store the value. used to activate and disable the GameObject
+    private GameObject _persistanceObject; // Store the value. used to activate and disable the GameObject
     private static bool _initialized = true; // Ensures only 1 instance of running some code once
     private bool _checkInstances; // Used to ensure that OnLevelWasLoaded only get run after it gets checked if there is more instances.
+
+    private const string _mainMenu = "MainMenu";
+    private const string _introScene = "Intro";
+    private const string _ending1 = "Ending1";
+    private const string _ending2 = "Ending2";
 
     private void OnEnable()
     {
@@ -24,15 +29,30 @@ public class Initialize : MonoBehaviour
     {
         if (_checkInstances) // Retrict running before _checkInstances bool is checked.
         {
-            switch (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("MainMenu")) // if MainMenu
+
+            switch (scene.name)
             {
-                case true: // Disable persistanceObjects when in MainMenu
+                case _mainMenu:
+                case _introScene:
+                case _ending1:
+                case _ending2:
                     LoadMenu();
                     break;
-                default: // Activate persistanceObjects when loaded game
+
+                default:
                     LoadGame();
                     break;
             }
+
+            //switch (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("MainMenu")) // if MainMenu
+            //{
+            //    case true: // Disable persistanceObjects when in MainMenu
+            //        LoadMenu();
+            //        break;
+            //    default: // Activate persistanceObjects when loaded game
+            //        LoadGame();
+            //        break;
+            //}
         }
     }
 
