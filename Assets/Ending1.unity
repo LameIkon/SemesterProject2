@@ -172,7 +172,7 @@ MonoBehaviour:
     UseConstant: 0
     ConstantValue: 0
     Variable: {fileID: 11400000, guid: 86a0bb363a0bb4a4bb2686902045b0fb, type: 2}
-  _hideSceneChange: {fileID: 0}
+  _endWait: 5
 --- !u!4 &339751423
 Transform:
   m_ObjectHideFlags: 0
@@ -417,6 +417,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1127987309600625894, guid: 092d1207c2a569b48a373a494eeab3e9, type: 3}
+      propertyPath: m_enableWordWrapping
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1127987309600625894, guid: 092d1207c2a569b48a373a494eeab3e9, type: 3}
+      propertyPath: m_HorizontalAlignment
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2281682900595814014, guid: 092d1207c2a569b48a373a494eeab3e9, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -575,7 +583,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9191981464176452171, guid: 092d1207c2a569b48a373a494eeab3e9, type: 3}
       propertyPath: _lines.Array.data[6]
-      value: BASED ON A TRUE STORY
+      value: INSPIRED BY A TRUE STORY
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

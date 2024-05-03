@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SurvivalManager : MonoBehaviour, IDamageable, IFreezeable, IStarveable, ITireable
+public class SurvivalManager : Singleton<SurvivalManager>, IDamageable, IFreezeable, IStarveable, ITireable
 {
 
     [SerializeField] private int _tikBetweenMax = 10;
@@ -75,8 +75,9 @@ public class SurvivalManager : MonoBehaviour, IDamageable, IFreezeable, IStarvea
 
 
     #region Unity Methods
-    private void Awake() 
+    protected override void Awake() 
     {
+        base.Awake();
         _inDialogue = false;
     }
 
@@ -96,11 +97,10 @@ public class SurvivalManager : MonoBehaviour, IDamageable, IFreezeable, IStarvea
 
     void FixedUpdate()
     {
-        if (!_inDialogue)
+        if (_inDialogue)
         {
             Tiker();
         }
-
     }
 
 
@@ -119,8 +119,8 @@ public class SurvivalManager : MonoBehaviour, IDamageable, IFreezeable, IStarvea
     void SetSurvivalbars()
     {
         _healthPoint.SetValue(100);
-        _hungerPoint.SetValue(70);
-        _freezePoint.SetValue(70);
+        _hungerPoint.SetValue(100);
+        _freezePoint.SetValue(100);
         _staminaPoint.SetValue(100);
     }
 
@@ -130,7 +130,6 @@ public class SurvivalManager : MonoBehaviour, IDamageable, IFreezeable, IStarvea
         _movementController.enabled = false;
         _lantern.SetActive(false);
         _playerAnimator.Play("Dying");
-
     }
 
     public void TakeDamage(float damageAmount)
@@ -145,8 +144,9 @@ public class SurvivalManager : MonoBehaviour, IDamageable, IFreezeable, IStarvea
 
     public void Freeze(float amount)
     {
-        _freezePoint.ApplyChange(amount * TemperatureChecker());
 
+        _freezePoint.ApplyChange(amount * TemperatureChecker());
+        
         if (_freezePoint.GetValue() <= 1) 
         {
             _isFreezing = true;
@@ -181,7 +181,8 @@ public class SurvivalManager : MonoBehaviour, IDamageable, IFreezeable, IStarvea
     }
     public void Starve(float amount)
     {
-        _hungerPoint.ApplyChange(-amount);
+
+        _hungerPoint.ApplyChange(-amount); 
 
         if (_hungerPoint.GetValue() < 1)
         {
