@@ -63,6 +63,5 @@ public class Highlight : PriorityManager
     protected override void AdditionalTriggerExitImplementation()
     {
         _showInteraction.SetActive(false);
-        GameManager._hideEInteractables = true;
     }
 }

@@ -194,9 +194,9 @@ public class EnvironmentManager : MonoBehaviour
             _blizzardFogEffect.Play(); // Start Fog effect
             _IsBlizzard = true;
 
-            _CurrentOutsideTemperature.SetValue(_blizzardTemp); // Change current temperature
-            _CurrentStaminaUse.SetValue(_blizzardStaminaUse); // change current max stamina
-            _CurrentStaminaRegen.SetValue(_blizzardStaminaRegen); // change current stamina regen 
+            //_CurrentOutsideTemperature.SetValue(_blizzardTemp); // Change current temperature
+            //_CurrentStaminaUse.SetValue(_blizzardStaminaUse); // change current max stamina
+            //_CurrentStaminaRegen.SetValue(_blizzardStaminaRegen); // change current stamina regen 
 
             //SetPlayerSpeed(_blizzardSpeedDebuff) ; // Give movement speed debuff
         }
@@ -252,7 +252,7 @@ public class EnvironmentManager : MonoBehaviour
         _barrierBlizzardEffect.Play();
         _barrierBlizzardFogEffect.Play();
 
-        _CurrentOutsideTemperature.SetValue(_barrierBlizzardTemp); // Change current temperature
+        //_CurrentOutsideTemperature.SetValue(_barrierBlizzardTemp); // Change current temperature
 
     }
 

@@ -40,7 +40,15 @@ public class PlayerController : MovementController
     {
         base.FixedUpdate();
 
-        if (!_inDialogue && !GuidelineManager.instance._isOngoingEvent)
+        if (GuidelineManager.instance.isActiveAndEnabled)
+        {
+            if (!GuidelineManager.instance._isOngoingEvent)
+            {
+                return;
+            }
+        }
+
+        if (!_inDialogue)
         {
             if (Vector3.Distance(transform.position, _movePoint.position) <= .05f) //makes sure you can't move if u have not reached ur new position yet.
             {
