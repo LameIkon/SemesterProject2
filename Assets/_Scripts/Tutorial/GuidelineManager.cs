@@ -17,7 +17,7 @@ public class GuidelineManager : MonoBehaviour
     [SerializeField] private bool _numberKeyPressed; // Used to detect keypress
     public bool _usedItem; // Used as checker on toolbars
     public bool _finishedInsideTutorial; // Used to stop triggers from happening and to stop ship in to reset when leaving and enter ship
-
+    public bool _tutorialHasStarted; // Used for the skipGuide script to check wether it should start or not
 
 
     [Header("Guide Canvases")]
@@ -137,8 +137,10 @@ public class GuidelineManager : MonoBehaviour
     IEnumerator Initilize()
     {
         yield return null; // Need to wait a frame else it cant check for the ship bool
-        if (GameManager._shipInBool &&_canvasRestrictionHolder == null)
+        if (GameManager._shipInBool && _canvasRestrictionHolder == null)
         {
+            _tutorialHasStarted = true;
+
             // Find the camera component
             _virtualCamera = GameObject.FindWithTag("MainCamera");
             _cameraOriginalOrthoSize = _virtualCamera.GetComponent<CinemachineVirtualCamera>().m_Lens.OrthographicSize; // Store the original size
@@ -611,6 +613,7 @@ public class GuidelineManager : MonoBehaviour
         _numberKeyPressed = false;
         _isOngoingEvent = false;
         _finishedInsideTutorial = false;
+        _tutorialHasStarted = false;
 
         // Reset canvas alpha
         _movementCanvas.GetComponent<CanvasGroup>().alpha = 1.0f;

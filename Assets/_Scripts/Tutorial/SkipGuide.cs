@@ -7,8 +7,10 @@ public class SkipGuide : MonoBehaviour
     [SerializeField] private GameObject _guidelineManager;
     public static bool _skipGuide;
     public static bool _ShowGuide = true;
-    public static bool _hideGuide;
+    public static bool _hideGuide = true;
     public static bool _showGuide;
+
+    private float _hideButtonTimer = 60;
 
     private void Start()
     {
@@ -17,13 +19,22 @@ public class SkipGuide : MonoBehaviour
 
     private void OnEnable()
     {
-        StartCoroutine(HideSkipButton()); // Start timer from start
-        _skipGuide = false;
-        gameObject.GetComponent<CanvasGroup>().alpha = 1f;
+        if (GuidelineManager.instance._tutorialHasStarted)
+        {
+            StartCoroutine(HideSkipButton(60)); // Start timer from start
+            _skipGuide = false;
+            gameObject.GetComponent<CanvasGroup>().alpha = 1f; // Show the gameobject
+        }
+        else
+        {
+            gameObject.GetComponent<CanvasGroup>().alpha = 0f; // Dont show the object the script is on. (hide buttons)
+            StartCoroutine(HideSkipButton(0)); // Hide the button right away
+        }
     }
 
     private void OnDisable()
     {
+        Debug.Log("disabled");
         _hideGuide = true;
         _showGuide = true;
     }
@@ -40,16 +51,16 @@ public class SkipGuide : MonoBehaviour
         }
         else if (_ShowGuide && _showGuide) // if set to true
         {
-            StartCoroutine(HideSkipButton()); // Start timer from start
+            StartCoroutine(HideSkipButton(60)); // Start timer from start
             _skipGuide = false;
             gameObject.GetComponent<CanvasGroup>().alpha = 1f;
             _showGuide = false;
         }
     }
 
-    private IEnumerator HideSkipButton()
+    private IEnumerator HideSkipButton(float timer)
     {
-        yield return new WaitForSeconds(60); // After 60 if you havent pressed the button
+        yield return new WaitForSeconds(timer); // After 60 if you havent pressed the button
         this.gameObject.SetActive(false); // Set Gameobject to false indication that player might not want to press it
     }
 

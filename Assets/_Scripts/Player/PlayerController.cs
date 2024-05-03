@@ -43,8 +43,9 @@ public class PlayerController : MovementController
 
         if (GuidelineManager.instance.isActiveAndEnabled)
         {
-            if (!GuidelineManager.instance._isOngoingEvent)
+            if (GuidelineManager.instance._isOngoingEvent)
             {
+                Debug.Log("cant move");
                 return;
             }
         }
@@ -283,8 +284,8 @@ public class PlayerController : MovementController
     {
         // Subscribe from the events
         InputReader.OnMoveEvent += HandleMove;
-        InputReader.OnRunStartEvent -= HandleRunStart;
-        InputReader.OnRunCancelEvent -= HandleRunCancled;
+        InputReader.OnRunStartEvent += HandleRunStart;
+        InputReader.OnRunCancelEvent += HandleRunCancled;
     }
 
     public void DisableEvents()

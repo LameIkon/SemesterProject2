@@ -34,7 +34,6 @@ public class RunManager : MonoBehaviour, ITireable
         InputReader.OnMoveEvent -= MovingChecker;
         InputReader.OnRunStartEvent -= RunningChecker;
         InputReader.OnRunCancelEvent -= HandleRunCancel;
-        Debug.Log("disabled");
     }
 
     Coroutine running;

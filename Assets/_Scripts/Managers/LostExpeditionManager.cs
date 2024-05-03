@@ -36,6 +36,7 @@ public class LostExpeditionManager : MonoBehaviour
     [SerializeField] private GameObject _expedition;
     [SerializeField] private float _defaultSpeed; // default speed
     [SerializeField] private float _runSpeed = 4.5f; // Tell them that they need to run
+    private bool _onlyOnce;
 
     [Header("Camera")]
     [SerializeField] private GameObject _virtualCamera;
@@ -56,10 +57,15 @@ public class LostExpeditionManager : MonoBehaviour
     }
     private void OnEnable()
     {
-        DisableNotNeed();
-        FindNeededStuff();
+        if (GameManager._LostExpeditionBool && !_onlyOnce)
+        {
+            Debug.Log("lost");
+            _onlyOnce = true;
+            DisableNotNeed();
+            FindNeededStuff();
 
-        StartCoroutine(TheLostExpedition());
+            StartCoroutine(TheLostExpedition());
+        }
     }
 
     // Update is called once per frame

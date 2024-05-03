@@ -13870,7 +13870,6 @@ MonoBehaviour:
   _lostExpeditionIntro:
     m_SceneAsset: {fileID: 102900000, guid: e8fe075407f50fd40947551cad694254, type: 3}
     m_SceneName: 09
-  _guidelineManager: {fileID: 432784352885748221}
   _guideline: {fileID: 432784352885748221}
   _skipTutorial: {fileID: 5036929749859180080}
   _SkipTutorialButtonFromControls: {fileID: 5047787119847157747}
@@ -18265,7 +18264,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7712112628013913600, guid: fdf18169f0bd2514b83a4e422caa23b4, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7825841516491482843, guid: fdf18169f0bd2514b83a4e422caa23b4, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -22579,6 +22578,10 @@ PrefabInstance:
     - target: {fileID: 2548136485262017326, guid: e36a38a4dc77a644bbfbe397c4ca9e30, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 2691581505823338532, guid: e36a38a4dc77a644bbfbe397c4ca9e30, type: 3}
+      propertyPath: _moveSpeed
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3157731619633482776, guid: e36a38a4dc77a644bbfbe397c4ca9e30, type: 3}
       propertyPath: m_Enabled

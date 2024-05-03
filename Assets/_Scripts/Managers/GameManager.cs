@@ -35,7 +35,6 @@ public class GameManager : PersistentSingleton<GameManager>
     public static bool _LostExpeditionBool;
 
     [Header("Tutorial")]
-    [SerializeField] private GameObject _guidelineManager;
     [SerializeField] private GameObject _guideline;
     [SerializeField] private GameObject _skipTutorial;
     [SerializeField] private GameObject _SkipTutorialButtonFromControls;
@@ -79,10 +78,9 @@ public class GameManager : PersistentSingleton<GameManager>
         _isInventoryOpen = false;
 
         // Set to false if they are active
-        _guideline.SetActive(false);
-        _skipTutorial.SetActive(false);
-        _SkipTutorialButtonFromControls.SetActive(false);
-        _guidelineManager.SetActive(false);
+        //_guideline.SetActive(false);
+        //_skipTutorial.SetActive(false);
+        //_SkipTutorialButtonFromControls.SetActive(false);
 
     }
     private void OnEnable()
@@ -102,6 +100,7 @@ public class GameManager : PersistentSingleton<GameManager>
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        Debug.Log("called");
         CheckScene();
         if (!_mainSceneBool && _shipInBool)
         {
@@ -111,9 +110,8 @@ public class GameManager : PersistentSingleton<GameManager>
 
             if (SkipGuide._skipGuide && SkipGuide._showGuide)
             {
-                _guideline.SetActive(true);
-                _skipTutorial.SetActive(true);
-                _SkipTutorialButtonFromControls.SetActive(true);
+                Debug.Log("guide");
+                _guideline.SetActive(true);               
             }
         }
         else if (_LostExpeditionBool)
@@ -121,6 +119,7 @@ public class GameManager : PersistentSingleton<GameManager>
              _spawnPosition = new Vector3(-33, 370, 0);
             _player.transform.position = _spawnPosition;
             _playerMovePoint.transform.position = _spawnPosition;
+            _skipTutorial.SetActive(false);
              InputReader.OnInventoryEvent -= HandleInventory; // you cannot open inventory
         }
     }
