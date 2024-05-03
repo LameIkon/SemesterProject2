@@ -27,6 +27,8 @@ public class StoryManager : PersistentSingleton<StoryManager>
     {
         ChatBubble.OnChatEndEvent += HandleStory;
         ChatBubble.OnGameEndEvent += HandleEnd;
+        ChatBubbleV2.OnChatEndEvent += HandleStory;
+        ChatBubbleV2.OnGameEndEvent += HandleEnd;
         DialogueManager.OnGameEndEvent += HandleEndMapReturned;
     }
 
@@ -34,6 +36,8 @@ public class StoryManager : PersistentSingleton<StoryManager>
     {
         ChatBubble.OnChatEndEvent -= HandleStory;
         ChatBubble.OnGameEndEvent -= HandleEnd;
+        ChatBubbleV2.OnChatEndEvent -= HandleStory;
+        ChatBubbleV2.OnGameEndEvent -= HandleEnd;
         DialogueManager.OnGameEndEvent -= HandleEndMapReturned;
     }
 

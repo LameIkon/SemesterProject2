@@ -4,7 +4,7 @@ using UnityEngine;
 
 
 [CreateAssetMenu(fileName = "New Color Variable", menuName = "Variable/Color")]
-public class ColorVariable : ScriptableObject
+public class ColorVariable : VariableBase
 {
 
     [SerializeField] private Color _value;
