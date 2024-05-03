@@ -2,6 +2,7 @@ using System.Collections;
 using System;
 using TMPro;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class ChatBubble : MonoBehaviour
 {
@@ -117,6 +118,11 @@ public class ChatBubble : MonoBehaviour
     {
         _coroutineRunning = false; // coroutine is not running
         gameObject.SetActive(false); // if there isnt any dialogue deactivate.
+            if (_hideEOnEnteract)
+            {
+                PriorityManager._canInteractDialogue = true;  
+            }
+
             if (_shipInLoad)
             {
                 OnChatEndEvent?.Invoke();
@@ -125,10 +131,6 @@ public class ChatBubble : MonoBehaviour
             {
                 OnGameEndEvent?.Invoke();
             }
-            if (_hideEOnEnteract)
-            {
-                PriorityManager._canInteractDialogue = true;  
-            }
-        }
+        
     }
 }
