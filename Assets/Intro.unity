@@ -559,23 +559,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9191981464176452171, guid: 092d1207c2a569b48a373a494eeab3e9, type: 3}
       propertyPath: _lines.Array.data[0]
-      value: 'Ejnar: In 1907 three men never returned from their trip.'
+      value: In 1907 three men never returned from their trip.
       objectReference: {fileID: 0}
     - target: {fileID: 9191981464176452171, guid: 092d1207c2a569b48a373a494eeab3e9, type: 3}
       propertyPath: _lines.Array.data[1]
-      value: 'Ejnar: They set out to map the Northen part of Greenland.'
+      value: They set out to map the Northen part of Greenland.
       objectReference: {fileID: 0}
     - target: {fileID: 9191981464176452171, guid: 092d1207c2a569b48a373a494eeab3e9, type: 3}
       propertyPath: _lines.Array.data[2]
-      value: 'Ejnar: I have assembled a crew to find these lost men.'
+      value: A crew was assembled to find these lost men.
       objectReference: {fileID: 0}
     - target: {fileID: 9191981464176452171, guid: 092d1207c2a569b48a373a494eeab3e9, type: 3}
       propertyPath: _lines.Array.data[3]
-      value: 'Ejnar: Whatever it takes we will bring them back.'
+      value: Whatever it takes we will bring them back.
       objectReference: {fileID: 0}
     - target: {fileID: 9191981464176452171, guid: 092d1207c2a569b48a373a494eeab3e9, type: 3}
       propertyPath: _lines.Array.data[4]
-      value: 'Ejnar: This is the story of how it unfolded.'
+      value: This is the story of how it unfolded.
       objectReference: {fileID: 0}
     - target: {fileID: 9191981464176452171, guid: 092d1207c2a569b48a373a494eeab3e9, type: 3}
       propertyPath: _lines.Array.data[5]

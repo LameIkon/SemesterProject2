@@ -559,23 +559,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9191981464176452171, guid: 092d1207c2a569b48a373a494eeab3e9, type: 3}
       propertyPath: _lines.Array.data[0]
-      value: 'Ejnar: Iver never returned.'
+      value: Iver never returned.
       objectReference: {fileID: 0}
     - target: {fileID: 9191981464176452171, guid: 092d1207c2a569b48a373a494eeab3e9, type: 3}
       propertyPath: _lines.Array.data[1]
-      value: 'Ejnar: We set out to look for him.'
+      value: We set out to look for him.
       objectReference: {fileID: 0}
     - target: {fileID: 9191981464176452171, guid: 092d1207c2a569b48a373a494eeab3e9, type: 3}
       propertyPath: _lines.Array.data[2]
-      value: 'Ejnar: He layed there in the snow, lifeless.'
+      value: He layed there in the snow, lifeless.
       objectReference: {fileID: 0}
     - target: {fileID: 9191981464176452171, guid: 092d1207c2a569b48a373a494eeab3e9, type: 3}
       propertyPath: _lines.Array.data[3]
-      value: 'Ejnar: With no time to spare we set sail home.'
+      value: With no time to spare we set sail home.
       objectReference: {fileID: 0}
     - target: {fileID: 9191981464176452171, guid: 092d1207c2a569b48a373a494eeab3e9, type: 3}
       propertyPath: _lines.Array.data[4]
-      value: 'Ejnar: As we return, we shall tell his story.'
+      value: As we return, we shall tell his story.
       objectReference: {fileID: 0}
     - target: {fileID: 9191981464176452171, guid: 092d1207c2a569b48a373a494eeab3e9, type: 3}
       propertyPath: _lines.Array.data[5]
