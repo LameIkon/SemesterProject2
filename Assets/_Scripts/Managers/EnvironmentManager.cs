@@ -269,11 +269,17 @@ public class EnvironmentManager : MonoBehaviour
         _IsSnow = false;
         _IsFog = false;
 
+        // Deactivate objects
+        _blizzard.SetActive(false);
+        _snow.SetActive(false);
+        _fog.SetActive(false);
+
         // Reset to default conditions
         _CurrentOutsideTemperature.SetValue(_defaultTemp);
         _CurrentStaminaUse.SetValue(_defaultStaminaUse);
         _CurrentStaminaRegen.SetValue(_defaultStaminaRegen);
 
+        Debug.Log("weather stopped");
         // Reset to default movement speed
         //SetPlayerSpeed(1f);
     }

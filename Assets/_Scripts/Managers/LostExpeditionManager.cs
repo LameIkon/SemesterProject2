@@ -35,8 +35,10 @@ public class LostExpeditionManager : MonoBehaviour
     //[SerializeField] private 
     [SerializeField] private GameObject _expedition;
     [SerializeField] private float _defaultSpeed; // default speed
-    [SerializeField] private float _runSpeed = 4.5f; // Tell them that they need to run
+    private float _runSpeed = 4.01f; // Tell them that they need to run
     private bool _onlyOnce;
+    private bool _lostExpeditionfinished;
+    [SerializeField] private SceneField _NextScene;
 
     [Header("Camera")]
     [SerializeField] private GameObject _virtualCamera;
@@ -57,9 +59,9 @@ public class LostExpeditionManager : MonoBehaviour
     }
     private void OnEnable()
     {
-        if (GameManager._LostExpeditionBool && !_onlyOnce)
+        if (GameManager._LostExpeditionBool && !_onlyOnce && !_lostExpeditionfinished)
         {
-            Debug.Log("lost");
+            Debug.Log("lost script activated");
             _onlyOnce = true;
             DisableNotNeed();
             FindNeededStuff();
@@ -76,7 +78,7 @@ public class LostExpeditionManager : MonoBehaviour
 
     void DisableNotNeed()
     {
-        //_runManager.GetComponentInChildren<RunManager>().enabled = false;
+        _runManager.GetComponentInChildren<RunManager>().enabled = false; // Prevent running
         _footPrints = GameObject.Find("09Footprints");
         _footPrints.SetActive(false); // hide footprints
         _deadBody.SetActive(false); // hide dead body
@@ -94,7 +96,6 @@ public class LostExpeditionManager : MonoBehaviour
 
         SceneManager.LoadSceneAsync("06", LoadSceneMode.Additive);
         _expedition = GameObject.Find("TheExpeditionScene"); // all gameobjects we want to use in this scene will be on this
-        Debug.Log(_expedition.name);
 
         // NPC
         _npc = _expedition.transform.Find("LostExpeditionNPC").gameObject; // Find the npc
@@ -108,11 +109,10 @@ public class LostExpeditionManager : MonoBehaviour
         _playerDestinationWalk = _expedition.transform.Find("LostPlayerDestinationWalk").gameObject; // find the destination mover
         _playerDestinationAnimator = _playerDestinationWalk.GetComponent<Animator>(); // The controller to move destination
         _playerMovementController = _player.GetComponentInChildren<PlayerController>();
-        _playerMovementController.DisableEvents(); // unsubscribe from the running
         _playerMovementController._moveSpeed = _runSpeed; // tell them they must run
 
         _playerAnimator = _player.GetComponentInChildren<Animator>();
-        _originalPlayerSprite= _playerAnimator.runtimeAnimatorController; // Store the original sprites
+        _originalPlayerSprite = _playerAnimator.runtimeAnimatorController; // Store the original sprites
         _playerAnimator.runtimeAnimatorController = _LostNPCSprite; // replace the current sprite with the lost npc sprites (default)
 
         _LostLight.SetActive(true);
@@ -137,12 +137,14 @@ public class LostExpeditionManager : MonoBehaviour
     IEnumerator TheLostExpedition()
     {
         // Introduction
+       
         _cameraCurrentOrthoSize.m_Lens.OrthographicSize = _cameraEnabledOrthoSize; // Set the camera size
         StartCoroutine(FadeCameraIn(_cameraMidOrthoSize));
+        yield return null;
         EnvironmentManager.instance.Fog();
         EnvironmentManager.instance.Blizzard();
 
-        yield return null;
+        _playerMovementController.DisableEvents(); // unsubscribe from the running. needs a delay, else it will get in conflict with the PlayerController manager subscribing at the same time
 
         // people running
         _npcDestinationAnimator.Play("point2");
@@ -157,8 +159,15 @@ public class LostExpeditionManager : MonoBehaviour
         _playerDestinationAnimator.Play("point4");
         yield return new WaitForSeconds(2);
 
+        // Fade out
+
+
+        // Set values to before the script got started
+        ResetLostExpeditionScript();
+        // Load next Scene
+        SceneManager.LoadScene(_NextScene); // Load this scene when the lost expedition script is done
         yield return new WaitForSeconds(10000);
-        EnvironmentManager.instance.ResetWeather();
+        
     }
 
 
@@ -176,7 +185,6 @@ public class LostExpeditionManager : MonoBehaviour
 
     IEnumerator CharacterFadeIn(GameObject gameObject, float fadeInDuration)
     {
-        Debug.Log("called");
         SpriteRenderer spriteRenderer = gameObject.GetComponentInChildren<SpriteRenderer>();
 
         float currentTime = 0f;
@@ -197,4 +205,21 @@ public class LostExpeditionManager : MonoBehaviour
         spriteRenderer.color = targetColor;
     }
 
+
+    void ResetLostExpeditionScript()
+    {
+        EnvironmentManager.instance.ResetWeather();
+        _runManager.GetComponentInChildren<RunManager>().enabled = true; // allow running
+        _footPrints.SetActive(true); // Show footprints
+        _deadBody.SetActive(true); // Show dead body
+        _toolBar.SetActive(true); // Show toolbar
+        PriorityManager._canInteractChest = true; // Allowed to open chests
+        PriorityManager._canInteractDialogue = true; // Allowed to start dialogue
+        _playerAnimator.runtimeAnimatorController = _originalPlayerSprite; // Set the sprite back
+        _movementController._moveSpeed = _defaultSpeed; // Set speed to default
+        _playerMovementController._moveSpeed = _defaultSpeed; // Set speed to default
+
+        _LostLight.SetActive(false);
+        _aiControlPlayer.enabled = false;
+    }
 }

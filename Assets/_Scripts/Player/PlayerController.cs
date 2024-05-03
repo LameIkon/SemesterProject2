@@ -45,7 +45,6 @@ public class PlayerController : MovementController
         {
             if (GuidelineManager.instance._isOngoingEvent)
             {
-                Debug.Log("cant move");
                 return;
             }
         }

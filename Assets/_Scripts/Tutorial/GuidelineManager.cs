@@ -73,6 +73,7 @@ public class GuidelineManager : MonoBehaviour
     [SerializeField] private GameObject _lantern;
     [SerializeField] private Furnace _furnace;
     [SerializeField] private GameObject _guideInScene;
+    [SerializeField] private GameObject _skipGuide;
 
 
 
@@ -155,6 +156,7 @@ public class GuidelineManager : MonoBehaviour
             _scientistSprite = GameObject.Find("NPC (1)"); // The scientist. Used to get the chat bubbles
             _guideInScene = GameObject.Find("Guide");
             _doorToOutside = GameObject.Find("Door");
+            _skipGuide.GetComponent<SkipGuide>().ActivateSkipGuide(); // actiave the ability to skip the guide
 
             // Find all the child gameobjects and delegate them to a list. gameobject order is important
             Transform canvasParent = _canvasRestrictionHolder.transform;

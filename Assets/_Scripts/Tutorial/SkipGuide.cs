@@ -10,33 +10,20 @@ public class SkipGuide : MonoBehaviour
     public static bool _hideGuide = true;
     public static bool _showGuide;
 
-    private float _hideButtonTimer = 60;
-
-    private void Start()
-    {
-        
-    }
 
     private void OnEnable()
     {
-        if (GuidelineManager.instance._tutorialHasStarted)
-        {
-            StartCoroutine(HideSkipButton(60)); // Start timer from start
-            _skipGuide = false;
-            gameObject.GetComponent<CanvasGroup>().alpha = 1f; // Show the gameobject
-        }
-        else
-        {
-            gameObject.GetComponent<CanvasGroup>().alpha = 0f; // Dont show the object the script is on. (hide buttons)
-            StartCoroutine(HideSkipButton(0)); // Hide the button right away
-        }
+        //ActivateSkipGuide();
+        // hide it to begin with
+        gameObject.GetComponent<CanvasGroup>().alpha = 0f; // Dont show the object the script is on. (hide buttons)
+        //StartCoroutine(HideSkipButton(0)); // Hide the button right away
     }
 
     private void OnDisable()
     {
-        Debug.Log("disabled");
         _hideGuide = true;
         _showGuide = true;
+        StopAllCoroutines();
     }
 
     private void Update()
@@ -58,6 +45,15 @@ public class SkipGuide : MonoBehaviour
         }
     }
 
+    public void ActivateSkipGuide()
+    {
+
+        StartCoroutine(HideSkipButton(60)); // Start timer from start
+        _skipGuide = false;
+        gameObject.GetComponent<CanvasGroup>().alpha = 1f; // Show the gameobject
+
+    }
+
     private IEnumerator HideSkipButton(float timer)
     {
         yield return new WaitForSeconds(timer); // After 60 if you havent pressed the button
@@ -70,7 +66,7 @@ public class SkipGuide : MonoBehaviour
         {
             GuidelineManager.instance.CompleteTutorial(); // Call the script that will show all survival bars
             //_guidelineManager.SetActive(false); // Deactiave the Guideline gameobject with its scripts
-            StartCoroutine(FadeOut(this.gameObject)); // Start coroutine to fade out this gameobject
+            StartCoroutine(FadeOut(this.gameObject, gameObject.GetComponent<CanvasGroup>())); // Start coroutine to fade out this gameobject
             _skipGuide = true;
         }
     }
@@ -80,10 +76,11 @@ public class SkipGuide : MonoBehaviour
         _ShowGuide = !_ShowGuide; // Change bool state
     }
 
-    IEnumerator FadeOut(GameObject canvas)
+    IEnumerator FadeOut(GameObject canvas, CanvasGroup Group)
     {
         yield return new WaitForSeconds(0.5f); // Small delay before fade starts
-        float currentAlpha = 1.0f; // Initilize by creating a float with alpha on 1
+        //float currentAlpha = 1.0f; // Initilize by creating a float with alpha on 1
+        float currentAlpha = Group.alpha;
 
         while (currentAlpha >= 0) // Start a while statement that will run as long alpha is not 0
         {
