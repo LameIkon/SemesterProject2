@@ -34691,8 +34691,6 @@ MonoBehaviour:
     m_SceneName: 08
   - m_SceneAsset: {fileID: 102900000, guid: e8fe075407f50fd40947551cad694254, type: 3}
     m_SceneName: 09
-  - m_SceneAsset: {fileID: 102900000, guid: 6abd24e52266c624abc368c1aa90bfbf, type: 3}
-    m_SceneName: 10
   _unloadScenes: []
 --- !u!61 &490974270
 BoxCollider2D:
