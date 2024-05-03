@@ -112,7 +112,7 @@ public class InventoryObject : ScriptableObject
 
     public void SwapItems(InventorySlot item1, InventorySlot item2)
     {
-        if (item2.CanPlaceInSlot(item1.ItemObject) && item1.CanPlaceInSlot(item2.ItemObject) && item2.CanPlaceInSlot2(item1.ItemObject) && item1.CanPlaceInSlot2(item2.ItemObject))
+        if (item2.IsAllowedInSlot(item1.ItemObject) && item1.IsAllowedInSlot(item2.ItemObject) && item2.IsNotDisallowedInSlot(item1.ItemObject) && item1.IsNotDisallowedInSlot(item2.ItemObject))
         {
             InventorySlot temp = new InventorySlot(item2._Item, item2._Amount);
             item2.UpdateSlot(item1._Item, item1._Amount);
@@ -269,7 +269,7 @@ public class InventorySlot
         UpdateSlot(_Item, _Amount += value);
     }
 
-    public bool CanPlaceInSlot(ItemObject itemObject)
+    public bool IsAllowedInSlot(ItemObject itemObject)
     {
         if (_AllowedItems.Length <= 0 || itemObject == null || itemObject._Data._ID < 0) 
         {
@@ -288,7 +288,7 @@ public class InventorySlot
         return false;
     }
 
-    public bool CanPlaceInSlot2(ItemObject itemObject)
+    public bool IsNotDisallowedInSlot(ItemObject itemObject)
     {
 
         if(_DisallowedItems.Length <= 0 || itemObject == null || itemObject._Data._ID < 0)
