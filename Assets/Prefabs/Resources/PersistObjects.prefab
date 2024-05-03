@@ -7813,6 +7813,9 @@ MonoBehaviour:
   _chestFiller: {fileID: 11400000, guid: 04974406d7042a34e97f6e2c4e4554a6, type: 2}
   _database: {fileID: 11400000, guid: 6aab6e98529b36a40aa4942653918f7e, type: 2}
   _highlightScript: {fileID: 1707595387310686950}
+  _spriteRenderer: {fileID: 4395414732160303156}
+  _chestClosedSprite: {fileID: 21300000, guid: 832e7aad55001b34cadf2f9867f482cc, type: 3}
+  _chestOpenSprite: {fileID: 21300000, guid: 6f8df548d62cf114480eb5f1fdf2f955, type: 3}
   _canOpenChest: 0
   _chestIsfilled: 0
   stateToChange: 4
@@ -7980,6 +7983,9 @@ MonoBehaviour:
   _chestFiller: {fileID: 11400000, guid: 32690bca204dceb4fa4ae4392d4f5f59, type: 2}
   _database: {fileID: 11400000, guid: 6aab6e98529b36a40aa4942653918f7e, type: 2}
   _highlightScript: {fileID: 689240724334169086}
+  _spriteRenderer: {fileID: 8022379182061284695}
+  _chestClosedSprite: {fileID: 21300000, guid: 832e7aad55001b34cadf2f9867f482cc, type: 3}
+  _chestOpenSprite: {fileID: 21300000, guid: 6f8df548d62cf114480eb5f1fdf2f955, type: 3}
   _canOpenChest: 0
   _chestIsfilled: 0
   stateToChange: 4
@@ -8732,6 +8738,9 @@ MonoBehaviour:
   _chestFiller: {fileID: 11400000, guid: 9defcd95875370a4e95098d2a3cc76e5, type: 2}
   _database: {fileID: 11400000, guid: 6aab6e98529b36a40aa4942653918f7e, type: 2}
   _highlightScript: {fileID: 3838756866331062412}
+  _spriteRenderer: {fileID: 0}
+  _chestClosedSprite: {fileID: 0}
+  _chestOpenSprite: {fileID: 0}
   _canOpenChest: 0
   _chestIsfilled: 0
   stateToChange: 3
@@ -9232,6 +9241,9 @@ MonoBehaviour:
   _chestFiller: {fileID: 11400000, guid: 57dbfa4848642e845b1ea4ce858f2f60, type: 2}
   _database: {fileID: 11400000, guid: 6aab6e98529b36a40aa4942653918f7e, type: 2}
   _highlightScript: {fileID: 7762364231242949262}
+  _spriteRenderer: {fileID: 4227485587601271114}
+  _chestClosedSprite: {fileID: 21300000, guid: 832e7aad55001b34cadf2f9867f482cc, type: 3}
+  _chestOpenSprite: {fileID: 21300000, guid: 6f8df548d62cf114480eb5f1fdf2f955, type: 3}
   _canOpenChest: 0
   _chestIsfilled: 0
   stateToChange: 4
@@ -19959,6 +19971,9 @@ MonoBehaviour:
   _chestFiller: {fileID: 11400000, guid: c2fc3dfbe1078cd4283a48dacc7a433c, type: 2}
   _database: {fileID: 11400000, guid: 6aab6e98529b36a40aa4942653918f7e, type: 2}
   _highlightScript: {fileID: 7777060883811968380}
+  _spriteRenderer: {fileID: 0}
+  _chestClosedSprite: {fileID: 0}
+  _chestOpenSprite: {fileID: 0}
   _canOpenChest: 0
   _chestIsfilled: 0
   stateToChange: 4
@@ -22993,9 +23008,25 @@ PrefabInstance:
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6319085400892662878, guid: 5def9f13b1d6da24fbfe167a3a8da211, type: 3}
+      propertyPath: _chestIsfilled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6319085400892662878, guid: 5def9f13b1d6da24fbfe167a3a8da211, type: 3}
+      propertyPath: _spriteRenderer
+      value: 
+      objectReference: {fileID: 9203704544140168042}
+    - target: {fileID: 6319085400892662878, guid: 5def9f13b1d6da24fbfe167a3a8da211, type: 3}
+      propertyPath: _chestOpenSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 6f8df548d62cf114480eb5f1fdf2f955, type: 3}
+    - target: {fileID: 6319085400892662878, guid: 5def9f13b1d6da24fbfe167a3a8da211, type: 3}
       propertyPath: _highlightScript
       value: 
       objectReference: {fileID: 2223914600585233979}
+    - target: {fileID: 6319085400892662878, guid: 5def9f13b1d6da24fbfe167a3a8da211, type: 3}
+      propertyPath: _chestClosedSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 832e7aad55001b34cadf2f9867f482cc, type: 3}
     - target: {fileID: 6593681579949499002, guid: 5def9f13b1d6da24fbfe167a3a8da211, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
@@ -23028,6 +23059,11 @@ Transform:
 --- !u!1 &8546132965809463307 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1191049923966709822, guid: 5def9f13b1d6da24fbfe167a3a8da211, type: 3}
+  m_PrefabInstance: {fileID: 7358463148944166965}
+  m_PrefabAsset: {fileID: 0}
+--- !u!212 &9203704544140168042 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 1847781767570856799, guid: 5def9f13b1d6da24fbfe167a3a8da211, type: 3}
   m_PrefabInstance: {fileID: 7358463148944166965}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7367442593260126327
