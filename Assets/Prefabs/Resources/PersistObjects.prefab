@@ -15143,7 +15143,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 736148800603328609, guid: c86bc54ac953c5d47965d2ff1e85ff31, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2781318481826526339, guid: c86bc54ac953c5d47965d2ff1e85ff31, type: 3}
       propertyPath: _highlightScript
@@ -15159,7 +15159,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7328163693546525948, guid: c86bc54ac953c5d47965d2ff1e85ff31, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8439986373081254643, guid: c86bc54ac953c5d47965d2ff1e85ff31, type: 3}
       propertyPath: m_LocalPosition.x
