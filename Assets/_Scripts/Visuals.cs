@@ -35,6 +35,7 @@ public class Visuals : MonoBehaviour
     [SerializeField] private FloatReference _currentTemperature;
     [SerializeField] private ColorReference _colorAboveThreshold;
     [SerializeField] private ColorReference _colorBelowThreshold;
+    [SerializeField] private ColorReference _colorDuringHeat;
     [SerializeField] private float _thresholdTemperature;               // 25
     [SerializeField] private float _changeRateTemperature;              // 100
     [SerializeField] private float _volumeAboveThresholdTemperature;    // -40
@@ -117,8 +118,12 @@ public class Visuals : MonoBehaviour
             #endregion
 
             #region Hunger Variables
-            
-                EnableHungerVisual();
+
+                switch (_currentHunger < _hungerThreshold)
+                {
+                    case true: EnableHungerVisual(); break;
+                    case false: DisableHungerVisual(); break;
+                }
             
             #endregion
         }
@@ -128,7 +133,7 @@ public class Visuals : MonoBehaviour
     #region Health Methods
     
         private void AboveThresholdIsTrue() => _aboveThreshold = true;  
-        
+
         private void AboveThresholdIsFalse() => _aboveThreshold = false; 
     
         private void EnableLowHealthVisual()
@@ -141,20 +146,32 @@ public class Visuals : MonoBehaviour
 
             switch (_aboveThreshold)        // Increments or decrements the intensity depending on whether _aboveThreshold is true or false
             {
-                case true: _currentIntensity -= _changeRateHealth * Time.deltaTime;
-                    if (_currentHealth < _lowThresholdHealth) 
+                case true:
+                {
+                    _currentIntensity -= _changeRateHealth * Time.deltaTime;
+                    if (_currentHealth < _lowThresholdHealth)
+                    {
                         _currentIntensity -= _changeRateHealth * _changeRateMultiplier * Time.deltaTime; 
-                    break; 
-                case false: _currentIntensity += _changeRateHealth * Time.deltaTime; 
-                    if (_currentHealth < _lowThresholdHealth) 
+                    }
+                    break;   
+                }
+
+                case false:
+                {
+                    _currentIntensity += _changeRateHealth * Time.deltaTime;
+                    if (_currentHealth < _lowThresholdHealth)
+                    {
                         _currentIntensity += _changeRateHealth * _changeRateMultiplier * Time.deltaTime; 
+                    }
                     break; 
+                }
             }
+            
         }
 
         private void DisableLowHealthVisual()
         {
-            if (_healthDefaulter) { return; }                           // Ensures that the rest of the method won't be called at the start of the game
+            if (_healthDefaulter) { return; }                           // Ensures that the rest of the method won't be called at the start of the game                 
             
             _currentIntensity -= _changeRateHealth * Time.deltaTime;    // Fades the vignette effect away
             switch (_currentIntensity < 0)
@@ -167,10 +184,10 @@ public class Visuals : MonoBehaviour
     
     #region Temperature Methods
     
-        protected virtual void EnableFreezeVisual()
+        private void EnableFreezeVisual()
         {
-            switch (Bonfire._IsHeatingUp) { case true: /* Method call */ ; return; }
-            
+            if (Bonfire._IsHeatingUp) { ApplyHeatAbsorption(); return; }
+
             _temperatureDefaulter = false;                              // Ensures only one use of the if-statement in DisableFreezeVisual()
             _isCold = true;                                             // Is used in HeatAbsorption.cs to help the script to know which method to override
             
@@ -178,17 +195,17 @@ public class Visuals : MonoBehaviour
             _volumeBelowThresholdTemperature = _defaultBelow;           // Resets _volumeBelowThresholdTemperature to default 
             
             _cfpTemperature = new ClampedFloatParameter(_volumeAboveThresholdTemperature, _defaultBelow, _defaultAbove, true);
-            
-            switch (_volumeAboveThresholdTemperature > _defaultBelow)
+
+            if (_volumeAboveThresholdTemperature > _defaultBelow)
             {
-                case true: _volumeAboveThresholdTemperature -= _changeRateTemperature * Time.deltaTime; break;
+                _volumeAboveThresholdTemperature -= _changeRateTemperature * Time.deltaTime;
             }
         }
 
-        protected virtual void DisableFreezeVisual()
+        private void DisableFreezeVisual()
         {
-            switch (Bonfire._IsHeatingUp) { case true: /* Method call*/; break; }
-            
+            if (Bonfire._IsHeatingUp) { ApplyHeatAbsorption(); return; } 
+
             _temperatureIcon.color = _colorAboveThreshold;      // Changes the color of the icon when the method is called
             _isCold = false;                                    // Is used in HeatAbsorption.cs to help the script to know which method to override
             
@@ -200,11 +217,26 @@ public class Visuals : MonoBehaviour
             
             _volumeAboveThresholdTemperature = _defaultAbove;   // Resets _volumeAboveThresholdTemperature to default 
             _cfpTemperature = new ClampedFloatParameter(_volumeBelowThresholdTemperature, _defaultBelow, _defaultAbove, true);
-            
-            switch (_volumeBelowThresholdTemperature < _defaultAbove) 
+
+            if (_volumeBelowThresholdTemperature < _defaultAbove)
             {
-                case true: _volumeBelowThresholdTemperature += _changeRateTemperature * Time.deltaTime; break;
+                _volumeBelowThresholdTemperature += _changeRateTemperature * Time.deltaTime;
             }
+        }
+
+        private void ApplyHeatAbsorption()
+        {
+            // switch (_isCold)
+            // {
+            //    case true: /*Code*/; break; 
+            //    case false: /*Code*/; break;
+            // }
+            print("Apply");
+        }
+
+        private void DeapplyHeatAbsorption()
+        {
+            print("Deapply");
         }
         
     #endregion
@@ -212,15 +244,9 @@ public class Visuals : MonoBehaviour
     
     #region Hunger Methods
     
-        private void EnableHungerVisual()
-        {
-            // CameraShake();
-        }
+        private void EnableHungerVisual() { } // CameraShake();
 
-        private void DisableHungerVisual()
-        {
-        
-        }
+        private void DisableHungerVisual() { }
         
     #endregion
 
@@ -229,66 +255,3 @@ public class Visuals : MonoBehaviour
         CameraShakeManager._Instance.CameraShake(_impulseSource);
     }
 }
-
-public sealed class Heating : Visuals
-{
-    [SerializeField] private Volume _volume;
-    [SerializeField] private FloatReference _currentTemperature;
-    [SerializeField] private Color _colorAboveThreshold;
-    [SerializeField] private Color _colorBelowThreshold;
-    [SerializeField] private float _thresholdTemperature; // 25
-    [SerializeField] private float _changeRateTemperature; // 100
-    [SerializeField] private float _volumeAboveThresholdTemperature; // -40
-    [SerializeField] private float _volumeBelowThresholdTemperature; // -100
-    private Image _temperatureIcon;
-    private ClampedFloatParameter _cfpTemperature;
-    private WhiteBalance _whiteBalance;
-    private bool _aboveThreshold;
-    private float _defaultAbove;
-    private float _defaultBelow;
-    private bool _temperatureDefaulter;
-
-    #region Unity Methods
-
-        private void Awake()
-        {
-            print("Helloooooo");
-            _volume = GetComponent<Volume>();       // Initializes _volume
-        }
-
-        private void Update()
-        {
-            if (Bonfire._IsHeatingUp)
-            {
-                print("Yes this workS!!");
-            }
-
-            switch (_isCold)
-            {
-               case true: this.EnableFreezeVisual(); break; 
-               case false: this.DisableFreezeVisual(); break;
-            }
-    }
-    
-    #endregion
-    
-    #region Heat Absorption Methods
-    
-        private void EnableAbsorptionVisual()
-        {
-            
-        }
-    
-        private void DisableAbsorptionVisual()
-        {
-            
-        }
-    
-    #endregion
-    
-    protected override void EnableFreezeVisual() { return; }
-
-    protected override void DisableFreezeVisual() { return; }
-}
-
-
