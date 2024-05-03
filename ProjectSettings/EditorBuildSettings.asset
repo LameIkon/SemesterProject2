@@ -48,12 +48,12 @@ EditorBuildSettings:
     path: Assets/Scenes/Outside/ShipOut.unity
     guid: 7314f0872e3e19141aa46b3e5a390d46
   - enabled: 1
-    path: Assets/Intro.unity
+    path: Assets/Scenes/Cutscenes/Intro.unity
     guid: 073575a6384ebab4b81e0e6277777220
   - enabled: 1
-    path: Assets/Ending1.unity
+    path: Assets/Scenes/Cutscenes/Ending1.unity
     guid: 90a975f8d7957c44aa012f68f1abf521
   - enabled: 1
-    path: Assets/Ending2.unity
+    path: Assets/Scenes/Cutscenes/Ending2.unity
     guid: 2707794ddb18b7349b4cacbff5a69073
   m_configObjects: {}

@@ -24,6 +24,11 @@ public class Health : MonoBehaviour, IDamageable
     public void TakeDamage(float damageAmount)
     {
         _health.ApplyChange(-damageAmount);
+
+        if (_health <= 0) 
+        {
+            SurvivalManager._Instance.Die();
+        }
     }
 
 }
