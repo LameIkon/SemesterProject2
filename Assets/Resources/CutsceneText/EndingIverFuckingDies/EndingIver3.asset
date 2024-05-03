@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f7182fbdba43aae4db1d1061afa736c0, type: 3}
-  m_Name: Hello
+  m_Name: EndingIver3
   m_EditorClassIdentifier: 
   DevDescription: 
-  _value: Hello
+  _value: With no time to spare we set sail home.

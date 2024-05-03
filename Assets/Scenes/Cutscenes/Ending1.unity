@@ -542,6 +542,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9191981464176452171, guid: 092d1207c2a569b48a373a494eeab3e9, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9191981464176452171, guid: 092d1207c2a569b48a373a494eeab3e9, type: 3}
       propertyPath: _mainMenuLoad
       value: 1
       objectReference: {fileID: 0}
@@ -588,8 +592,76 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7787492243858214795, guid: 092d1207c2a569b48a373a494eeab3e9, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1089848927}
   m_SourcePrefab: {fileID: 100100000, guid: 092d1207c2a569b48a373a494eeab3e9, type: 3}
+--- !u!114 &1089848925 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1127987309600625894, guid: 092d1207c2a569b48a373a494eeab3e9, type: 3}
+  m_PrefabInstance: {fileID: 1089848924}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &1089848926 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7787492243858214795, guid: 092d1207c2a569b48a373a494eeab3e9, type: 3}
+  m_PrefabInstance: {fileID: 1089848924}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1089848927
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1089848926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65ee17d67979495419058a298768f43b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _textComponent: {fileID: 1089848925}
+  _lines:
+  - UseConstant: 0
+    ConstantString: 
+    Variable: {fileID: 11400000, guid: f014545719f780b42bdfb86a47697960, type: 2}
+  - UseConstant: 0
+    ConstantString: 
+    Variable: {fileID: 11400000, guid: daf9b13b28a033d418b8c3816280393c, type: 2}
+  - UseConstant: 0
+    ConstantString: 
+    Variable: {fileID: 11400000, guid: 30c6c9e7e36760a4bbbd635b652df5d2, type: 2}
+  - UseConstant: 0
+    ConstantString: 
+    Variable: {fileID: 11400000, guid: 48ed04c52e2808649b9c957e9144a4c3, type: 2}
+  - UseConstant: 0
+    ConstantString: 
+    Variable: {fileID: 11400000, guid: 9253e9a89712c8047bf0ea20d330da29, type: 2}
+  - UseConstant: 0
+    ConstantString: 
+    Variable: {fileID: 11400000, guid: e0c7ebcb00eb68e4da4c0aa7573bce6e, type: 2}
+  - UseConstant: 0
+    ConstantString: 
+    Variable: {fileID: 11400000, guid: c0272132b1ca20348a4fd82e766d5f76, type: 2}
+  _textSpeed:
+    UseConstant: 0
+    ConstantValue: 0
+    Variable: {fileID: 11400000, guid: 05a22037a05470142a438c33c2eafecc, type: 2}
+  _nextLineShowUp:
+    UseConstant: 0
+    ConstantValue: 1
+    Variable: {fileID: 11400000, guid: 4dad0429c13a1b44e85f741db7f9f373, type: 2}
+  _automaticStart: 0
+  _hideEOnEnteract: 0
+  _randomLine: 0
+  _triggerOnce: 0
+  _shipInLoad: 0
+  _mainMenuLoad: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

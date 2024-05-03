@@ -418,12 +418,52 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1127987309600625894, guid: 092d1207c2a569b48a373a494eeab3e9, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 87f25fc2de03e9946b267b8df3e85fe6, type: 2}
+    - target: {fileID: 1127987309600625894, guid: 092d1207c2a569b48a373a494eeab3e9, type: 3}
+      propertyPath: m_fontStyle
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1127987309600625894, guid: 092d1207c2a569b48a373a494eeab3e9, type: 3}
+      propertyPath: m_fontColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1127987309600625894, guid: 092d1207c2a569b48a373a494eeab3e9, type: 3}
+      propertyPath: m_fontColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1127987309600625894, guid: 092d1207c2a569b48a373a494eeab3e9, type: 3}
+      propertyPath: m_fontColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1127987309600625894, guid: 092d1207c2a569b48a373a494eeab3e9, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 9054108129265998816, guid: 87f25fc2de03e9946b267b8df3e85fe6, type: 2}
+    - target: {fileID: 1127987309600625894, guid: 092d1207c2a569b48a373a494eeab3e9, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 1127987309600625894, guid: 092d1207c2a569b48a373a494eeab3e9, type: 3}
+      propertyPath: m_horizontalMapping
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1127987309600625894, guid: 092d1207c2a569b48a373a494eeab3e9, type: 3}
       propertyPath: m_enableWordWrapping
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1127987309600625894, guid: 092d1207c2a569b48a373a494eeab3e9, type: 3}
       propertyPath: m_HorizontalAlignment
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1127987309600625894, guid: 092d1207c2a569b48a373a494eeab3e9, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1127987309600625894, guid: 092d1207c2a569b48a373a494eeab3e9, type: 3}
+      propertyPath: m_enableVertexGradient
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2281682900595814014, guid: 092d1207c2a569b48a373a494eeab3e9, type: 3}
       propertyPath: m_IsActive
@@ -542,6 +582,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9191981464176452171, guid: 092d1207c2a569b48a373a494eeab3e9, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9191981464176452171, guid: 092d1207c2a569b48a373a494eeab3e9, type: 3}
       propertyPath: _mainMenuLoad
       value: 1
       objectReference: {fileID: 0}
@@ -610,22 +654,54 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65ee17d67979495419058a298768f43b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _textComponent: {fileID: 0}
-  _lines: []
+  _textComponent: {fileID: 1089848927}
+  _lines:
+  - UseConstant: 0
+    ConstantString: 
+    Variable: {fileID: 11400000, guid: 743928ba0ee6d184e8deca28886873b8, type: 2}
+  - UseConstant: 0
+    ConstantString: 
+    Variable: {fileID: 11400000, guid: 26b0070dff42bd548af1bed52f3f4bf4, type: 2}
+  - UseConstant: 0
+    ConstantString: 
+    Variable: {fileID: 11400000, guid: 458ae2b371a4ad94dad971e5a6beed41, type: 2}
+  - UseConstant: 0
+    ConstantString: 
+    Variable: {fileID: 11400000, guid: fce70ac7dbfe10b4aa0cc1ce8fbf582a, type: 2}
+  - UseConstant: 0
+    ConstantString: 
+    Variable: {fileID: 11400000, guid: 7991a4194a2422b44bf0865b07ef7112, type: 2}
+  - UseConstant: 0
+    ConstantString: 
+    Variable: {fileID: 11400000, guid: e0c7ebcb00eb68e4da4c0aa7573bce6e, type: 2}
+  - UseConstant: 0
+    ConstantString: 
+    Variable: {fileID: 11400000, guid: c0272132b1ca20348a4fd82e766d5f76, type: 2}
   _textSpeed:
     UseConstant: 0
     ConstantValue: 0
-    Variable: {fileID: 0}
+    Variable: {fileID: 11400000, guid: 05a22037a05470142a438c33c2eafecc, type: 2}
   _nextLineShowUp:
-    UseConstant: 1
+    UseConstant: 0
     ConstantValue: 1
-    Variable: {fileID: 0}
-  _automaticStart: 0
+    Variable: {fileID: 11400000, guid: 4dad0429c13a1b44e85f741db7f9f373, type: 2}
+  _automaticStart: 1
   _hideEOnEnteract: 0
   _randomLine: 0
   _triggerOnce: 0
   _shipInLoad: 0
-  _mainMenuLoad: 0
+  _mainMenuLoad: 1
+--- !u!114 &1089848927 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1127987309600625894, guid: 092d1207c2a569b48a373a494eeab3e9, type: 3}
+  m_PrefabInstance: {fileID: 1089848924}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

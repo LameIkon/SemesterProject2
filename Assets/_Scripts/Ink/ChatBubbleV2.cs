@@ -75,11 +75,8 @@ public class ChatBubbleV2 : MonoBehaviour
         }
         if (!_randomLine)
         {
-            foreach (char c in _lines[_index].ToCharArray()) // checks of many letters there is in the given line
-            {
-                _textComponent.text += c; // Input the letter in the dialogue
-                yield return new WaitForSeconds(_textSpeed); // wait before looking for next letter
-            }
+            
+            yield return StartCoroutine(TypewriterEffect(_index));
 
             yield return new WaitForSeconds(_nextLineShowUp); // When dialogue is finished start this
 
@@ -88,15 +85,21 @@ public class ChatBubbleV2 : MonoBehaviour
         else if (_randomLine)
         {
             int number = Random.Range(0, _lines.Length);
-            foreach (char c in _lines[number].ToCharArray()) // checks of many letters there is in the given line
-            {
-                _textComponent.text += c; // Input the letter in the dialogue
-                yield return new WaitForSeconds(_textSpeed); // wait before looking for next letter
-            }
+            
+            yield return StartCoroutine(TypewriterEffect(number));
 
             yield return new WaitForSeconds(_nextLineShowUp); // When dialogue is finished start this
 
             EndChat(); // End
+        }
+    }
+
+    IEnumerator TypewriterEffect(int index) 
+    {
+        foreach (char c in _lines[index].ToCharArray()) 
+        {
+            _textComponent.text += c;
+            yield return new WaitForSeconds(_textSpeed);
         }
     }
 

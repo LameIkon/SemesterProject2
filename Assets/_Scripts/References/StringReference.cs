@@ -6,7 +6,7 @@ public class StringReference
 {
 
     public bool UseConstant = true;
-    [TextArea(2,4)]public string ConstantString;
+    public string ConstantString;
     public StringVariable Variable;
 
     #region Constructers
