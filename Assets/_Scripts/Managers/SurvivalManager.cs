@@ -97,7 +97,7 @@ public class SurvivalManager : Singleton<SurvivalManager>, IDamageable, IFreezea
 
     void FixedUpdate()
     {
-        if (_inDialogue)
+        if (!_inDialogue)
         {
             Tiker();
         }
