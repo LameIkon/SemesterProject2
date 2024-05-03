@@ -112,13 +112,12 @@ public class InventoryObject : ScriptableObject
 
     public void SwapItems(InventorySlot item1, InventorySlot item2)
     {
-        if (item2.CanPlaceInSlot(item1.ItemObject) && item1.CanPlaceInSlot(item2.ItemObject))
+        if (item2.IsAllowedInSlot(item1.ItemObject) && item1.IsAllowedInSlot(item2.ItemObject) && item2.IsNotDisallowedInSlot(item1.ItemObject) && item1.IsNotDisallowedInSlot(item2.ItemObject))
         {
             InventorySlot temp = new InventorySlot(item2._Item, item2._Amount);
             item2.UpdateSlot(item1._Item, item1._Amount);
             item1.UpdateSlot(temp._Item, temp._Amount);
-        }
-
+        }    
     }
 
 
@@ -195,8 +194,7 @@ public class Inventory
             if (_Slots[i] != null)
             {
                 _Slots[i].RemoveItem();
-            }
-            
+            } 
         }
 
     }
@@ -217,7 +215,8 @@ public class InventorySlot
     public SlotUpdated _OnBeforeUpdate;
 
 
-    public ItemType[] _AllowedItems = new ItemType[0];    
+    public ItemType[] _AllowedItems = new ItemType[0];
+    public ItemType[] _DisallowedItems = new ItemType[0];
     public Item _Item = new Item ();
     public int _Amount;
    
@@ -270,18 +269,43 @@ public class InventorySlot
         UpdateSlot(_Item, _Amount += value);
     }
 
-    public bool CanPlaceInSlot(ItemObject itemObject)
+    public bool IsAllowedInSlot(ItemObject itemObject)
     {
         if (_AllowedItems.Length <= 0 || itemObject == null || itemObject._Data._ID < 0) 
         {
             return true;
         }
-
+   
         for (int i = 0; i < _AllowedItems.Length; i++)
         {
             if (itemObject._ItemType == _AllowedItems[i])
+            {
+                Debug.Log("Can place item");
                 return true;
+            }    
         }
+
         return false;
+    }
+
+    public bool IsNotDisallowedInSlot(ItemObject itemObject)
+    {
+
+        if(_DisallowedItems.Length <= 0 || itemObject == null || itemObject._Data._ID < 0)
+        {
+           return true;
+        }
+
+        for (int i = 0; i < _DisallowedItems.Length; i++)
+        {
+            if (itemObject._ItemType == _DisallowedItems[i])
+            {
+               Debug.Log("Can't place item");
+               return false;
+            }
+        }
+
+        return true;
+
     }
 }

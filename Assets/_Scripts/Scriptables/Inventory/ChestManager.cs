@@ -15,8 +15,12 @@ public class ChestManager : MonoBehaviour
     [SerializeField] private ItemDatabaseObject _database;
     private StaticInterface _chestInterface;
     [SerializeField] private Highlight _highlightScript;
-    
-    
+
+    [SerializeField] private SpriteRenderer _spriteRenderer;
+    [SerializeField] private Sprite _chestClosedSprite;
+    [SerializeField] private Sprite _chestOpenSprite;
+
+
     private bool _turn = false;
     private InventorySlot[] _slots = new InventorySlot[6];
 
@@ -41,6 +45,19 @@ public class ChestManager : MonoBehaviour
 
             FillUpChest();
 
+        }
+    }
+
+    private void Update()
+    {
+        if(_turn && _spriteRenderer != null)
+        {
+            _spriteRenderer.sprite = _chestOpenSprite;
+        }
+
+        else if(!_turn && _spriteRenderer != null)
+        {
+            _spriteRenderer.sprite = _chestClosedSprite;
         }
     }
 
@@ -114,7 +131,7 @@ public class ChestManager : MonoBehaviour
     {
         _turn = !_turn;
         _highlightScript.TriggerUse(_turn);
-        _chestCanvas.SetActive(_turn);
+        _chestCanvas.SetActive(_turn);        
         DialogueManager.instance._DialogueVariables.ChangeMainStoryState(stateToChange);
 
         GameManager._inventoryMenuSTATIC.SetActive(_turn);
@@ -125,7 +142,7 @@ public class ChestManager : MonoBehaviour
         if (GameManager._inventoryMenuSTATIC.activeInHierarchy)
         {
             GameManager._inventoryMenuSTATIC.SetActive(false);
-        }
+        }      
         _chestCanvas.SetActive(false);
         _turn = false;
     }
