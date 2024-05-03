@@ -413,7 +413,7 @@ public class GuidelineManager : MonoBehaviour
         yield return new WaitForSeconds(4f);
         yield return new WaitUntil(() => _lantern.activeInHierarchy); // wait until lantern is active
         _captainSprite.transform.GetChild(3).gameObject.SetActive(true); // Get the 9th chatbubble and activate it
-        yield return new WaitForSeconds(22f);
+        yield return new WaitForSeconds(32f);
         _captainAnimator.Play("point16");
         yield return new WaitForSeconds(3f);
         StartCoroutine(CharacterFadeOut(_captainSprite, 1.5f));
