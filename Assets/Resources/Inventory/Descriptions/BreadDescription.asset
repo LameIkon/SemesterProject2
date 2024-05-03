@@ -14,7 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _itemDescription: '<size=20><b> Bread</b> </size>
 
-    This piece of bread gives
-    +40 food
+    +40 hunger
 
 '

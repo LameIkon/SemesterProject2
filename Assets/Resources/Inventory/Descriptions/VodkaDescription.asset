@@ -12,7 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 985cf02980db40d479858dba3c78dc6a, type: 3}
   m_Name: VodkaDescription
   m_EditorClassIdentifier: 
-  _itemDescription: '<size=20><b> Vodka</b> </size>
-
-    This brings memories to
-    a better time +15 heat +5 food '
+  _itemDescription: "<size=20><b> Vodka</b> </size>\nBrings memories of a better
+    time. \n+5 hunger,  +15 temperature"
