@@ -588,8 +588,44 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7787492243858214795, guid: 092d1207c2a569b48a373a494eeab3e9, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1089848926}
   m_SourcePrefab: {fileID: 100100000, guid: 092d1207c2a569b48a373a494eeab3e9, type: 3}
+--- !u!1 &1089848925 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7787492243858214795, guid: 092d1207c2a569b48a373a494eeab3e9, type: 3}
+  m_PrefabInstance: {fileID: 1089848924}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1089848926
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1089848925}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65ee17d67979495419058a298768f43b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _textComponent: {fileID: 0}
+  _lines: []
+  _textSpeed:
+    UseConstant: 0
+    ConstantValue: 0
+    Variable: {fileID: 0}
+  _nextLineShowUp:
+    UseConstant: 1
+    ConstantValue: 1
+    Variable: {fileID: 0}
+  _automaticStart: 0
+  _hideEOnEnteract: 0
+  _randomLine: 0
+  _triggerOnce: 0
+  _shipInLoad: 0
+  _mainMenuLoad: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
