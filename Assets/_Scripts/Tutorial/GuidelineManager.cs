@@ -28,7 +28,7 @@ public class GuidelineManager : MonoBehaviour
     [SerializeField] private GameObject _toolbarCanvas;
     [SerializeField] private GameObject _useItemCanvas;
     [SerializeField] private GameObject _staminaCanvas;
-    [SerializeField] private GameObject _lanternCanvas;
+    //[SerializeField] private GameObject _lanternCanvas;
 
     [Header("Surivival Bars")]
     [SerializeField] private Animator _healthAnimator;
@@ -59,6 +59,7 @@ public class GuidelineManager : MonoBehaviour
     [SerializeField] private List<Transform> _doors = new List<Transform>();
     [SerializeField] private List<Transform> _canvasBlocker = new List<Transform>();
     [SerializeField] private List<Transform> _roomTriggers = new List<Transform>();
+    [SerializeField] private GameObject _doorToOutside;
 
     [Header("Captain")]
     [SerializeField] private GameObject _captainDestinationWalk;
@@ -151,7 +152,7 @@ public class GuidelineManager : MonoBehaviour
             _captainSprite = GameObject.Find("NPC"); // The captain. Used to get the chat bubbles
             _scientistSprite = GameObject.Find("NPC (1)"); // The scientist. Used to get the chat bubbles
             _guideInScene = GameObject.Find("Guide");
-            
+            _doorToOutside = GameObject.Find("Door");
 
             // Find all the child gameobjects and delegate them to a list. gameobject order is important
             Transform canvasParent = _canvasRestrictionHolder.transform;
@@ -171,17 +172,21 @@ public class GuidelineManager : MonoBehaviour
             _doors.Add(doorParent.GetChild(2));
 
             // Get stair
-            _doors.Add(doorParent.GetChild(3));           
+            _doors.Add(doorParent.GetChild(3));
+
 
             // Get triggers
             _roomTriggers.Add(triggerParent.GetChild(0));
             _roomTriggers.Add(triggerParent.GetChild(1));
             _roomTriggers.Add(triggerParent.GetChild(2));
             _roomTriggers.Add(triggerParent.GetChild(3));
+            _roomTriggers.Add(triggerParent.GetChild(4));
 
             // Deactivate trigger for later use
             _roomTriggers[2].gameObject.SetActive(false);
             _roomTriggers[3].gameObject.SetActive(false);
+            _roomTriggers[4].gameObject.SetActive(false);
+            _doorToOutside.gameObject.SetActive(false);
 
             // Start first part of tutorial
             Invoke("ShowHealth", 2f);
@@ -235,7 +240,7 @@ public class GuidelineManager : MonoBehaviour
         StartCoroutine(ShowRoom(_canvasBlocker[0], _doors[0])); // Its expected that midle room is the first index
         StartCoroutine(FadeCameraIn(_cameraMidOrthoSize));
         yield return new WaitWhile(() => !_isOngoingEvent); // wait until the ongoing event trigger becomes true
-        StartCoroutine(CaptainFadeIn(_captainSprite, 1.5f));
+        StartCoroutine(CharacterFadeIn(_captainSprite, 1.5f));
         yield return new WaitForSeconds(1f);
         _captainAnimator.Play("point1");
         yield return new WaitForSeconds(0.75f);
@@ -251,27 +256,7 @@ public class GuidelineManager : MonoBehaviour
 
 
 
-    IEnumerator CaptainFadeIn(GameObject gameObject, float fadeInDuration)
-    {
-        SpriteRenderer spriteRenderer = gameObject.GetComponentInChildren<SpriteRenderer>();
-
-        float currentTime = 0f;
-        //float fadeInDuration = 1.5f; // Duration of the fadein effect
-        Color targetColor = spriteRenderer.color; // Get the initial color of the sprite
-
-        while (currentTime < fadeInDuration)
-        {
-            currentTime += Time.deltaTime;
-            float alpha = Mathf.Lerp(0f, 1f, currentTime / fadeInDuration);
-            targetColor.a = alpha; // Set the alpha 
-            spriteRenderer.color = targetColor; // Apply the new color
-            yield return null;
-        }
-
-        // Ensure alpha is fully set to 1
-        targetColor.a = 1f;
-        spriteRenderer.color = targetColor;
-    }
+  
 
 
     #endregion
@@ -385,10 +370,13 @@ public class GuidelineManager : MonoBehaviour
         _isOngoingEvent = false;
         _captainSprite.transform.GetChild(6).gameObject.SetActive(true); // Get the 5th chatbubble and activate it
         yield return new WaitUntil(() => GameManager._inventoryMenuSTATIC.activeSelf); // wait until the ongoing event trigger becomes true
-        _lanternCanvas.SetActive(true);
-        yield return new WaitUntil(() => _lantern.activeInHierarchy); // wait until lantern is active
-        StartCoroutine(FadeOut(_lanternCanvas));
+        yield return new WaitUntil(() => !GameManager._inventoryMenuSTATIC.activeSelf); // wait until the ongoing event trigger becomes false
+        _captainSprite.transform.GetChild(7).gameObject.SetActive(true); // Get the 6th chatbubble and activate it
+        yield return new WaitForSeconds(6f);
+        _captainSprite.transform.GetChild(8).gameObject.SetActive(true); // Get the 7th chatbubble and activate it
         _finishedInsideTutorial = true; // Tutorial inside ship finished
+        yield return new WaitForSeconds(2f);
+        
 
         // start outside tutorial
         StartCoroutine(Outside());
@@ -401,9 +389,39 @@ public class GuidelineManager : MonoBehaviour
     IEnumerator Outside()
     {
 
-        StartCoroutine(ShowRoom(null, _doors[3]));
+        StartCoroutine(ShowRoom(null, _doors[3])); // remove the door
+        _doorToOutside.SetActive(true); // Stairs can now be used
+        _roomTriggers[4].gameObject.SetActive(true);
         yield return new WaitUntil(() => EnvironmentManager.instance._outside); // wait until going outside
-        yield return new WaitForSeconds(10f); // wait before showing stamina
+
+
+        PriorityManager._canInteractDialogue = false; // You are not allowed to talk to the captain
+        _captainSprite = GameObject.Find("NPC"); // The captain. Used to get the chat bubbles
+        GameObject doorToInside = GameObject.Find("Door");
+        doorToInside.SetActive(false);
+
+
+        yield return new WaitUntil(() => _isOngoingEvent); // wait until the ongoing event trigger becomes true
+        _isOngoingEvent = false; // Enable movement
+        yield return new WaitForSeconds(1f);
+        StartCoroutine(CharacterFadeIn(_captainSprite, 1.5f));
+        yield return new WaitForSeconds(1f);
+        _captainAnimator.Play("point14");
+        _captainSprite.transform.GetChild(2).gameObject.SetActive(true); // Get the 8th chatbubble and activate it
+        yield return new WaitForSeconds(4f);
+        _captainAnimator.Play("point15");
+        yield return new WaitForSeconds(4f);
+        yield return new WaitUntil(() => _lantern.activeInHierarchy); // wait until lantern is active
+        _captainSprite.transform.GetChild(3).gameObject.SetActive(true); // Get the 9th chatbubble and activate it
+        yield return new WaitForSeconds(32f);
+        _captainAnimator.Play("point16");
+        yield return new WaitForSeconds(3f);
+        StartCoroutine(CharacterFadeOut(_captainSprite, 1.5f));
+        yield return new WaitForSeconds(1.5f);
+        _captainSprite.SetActive(false);
+        doorToInside.SetActive(true);
+
+        yield return new WaitForSeconds(30f); // wait before showing stamina
         _staminaAnimator.Play("SlideInLeft");
         _runningCanvas.SetActive(true);
         yield return new WaitUntil(() => PlayerController._isMoving && _isRunning); // wait until you are running
@@ -443,11 +461,13 @@ public class GuidelineManager : MonoBehaviour
         StartCoroutine(FadeCameraIn(_cameraOriginalOrthoSize));
 
         // captain position
-        StartCoroutine(CaptainFadeIn(_captainSprite, 0.1f));
+        StartCoroutine(CharacterFadeIn(_captainSprite, 0.1f));
         _captainAnimator.Play("point3");
 
         _finishedInsideTutorial = true; // Tutorial inside ship finished
         _isOngoingEvent = false; // you will be able to walk
+        _doorToOutside.SetActive(true); // you can now exit
+        _roomTriggers[4].gameObject.SetActive(false);
 
         // Reset inventory screens
         _inventoryScreen.SetActive(false);
@@ -457,6 +477,51 @@ public class GuidelineManager : MonoBehaviour
         _dragCanvas.SetActive(false);
         _toolbarCanvas.SetActive(false);
         _useItemCanvas.SetActive(false);
+    }
+
+
+    IEnumerator CharacterFadeIn(GameObject gameObject, float fadeInDuration)
+    {
+        SpriteRenderer spriteRenderer = gameObject.GetComponentInChildren<SpriteRenderer>();
+
+        float currentTime = 0f;
+        //float fadeInDuration = 1.5f; // Duration of the fadein effect
+        Color targetColor = spriteRenderer.color; // Get the initial color of the sprite
+
+        while (currentTime < fadeInDuration)
+        {
+            currentTime += Time.deltaTime;
+            float alpha = Mathf.Lerp(0f, 1f, currentTime / fadeInDuration);
+            targetColor.a = alpha; // Set the alpha 
+            spriteRenderer.color = targetColor; // Apply the new color
+            yield return null;
+        }
+
+        // Ensure alpha is fully set to 1
+        targetColor.a = 1f;
+        spriteRenderer.color = targetColor;
+    }
+
+    IEnumerator CharacterFadeOut(GameObject gameObject, float fadeInDuration)
+    {
+        SpriteRenderer spriteRenderer = gameObject.GetComponentInChildren<SpriteRenderer>();
+
+        float currentTime = 0f;
+        //float fadeInDuration = 1.5f; // Duration of the fadein effect
+        Color targetColor = spriteRenderer.color; // Get the initial color of the sprite
+
+        while (currentTime < fadeInDuration)
+        {
+            currentTime += Time.deltaTime;
+            float alpha = Mathf.Lerp(1f, 0f, currentTime / fadeInDuration);
+            targetColor.a = alpha; // Set the alpha 
+            spriteRenderer.color = targetColor; // Apply the new color
+            yield return null;
+        }
+
+        // Ensure alpha is fully set to 0
+        targetColor.a = 0f;
+        spriteRenderer.color = targetColor;
     }
 
     IEnumerator FadeOut(GameObject canvas)
@@ -522,7 +587,7 @@ public class GuidelineManager : MonoBehaviour
     void TutorialFinished()
     {
         _captainSprite = GameObject.Find("NPC"); // The captain. Used to get the chat bubbles
-        StartCoroutine(CaptainFadeIn(_captainSprite, 0.1f));
+        StartCoroutine(CharacterFadeIn(_captainSprite, 0.1f));
         _captainAnimator.Play("point3");
 
     }

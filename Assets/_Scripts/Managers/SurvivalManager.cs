@@ -66,6 +66,12 @@ public class SurvivalManager : MonoBehaviour, IDamageable, IFreezeable, IStarvea
     [SerializeField] private Animator _playerAnimator;
     [SerializeField] private MovementController _movementController;
     [SerializeField] private GameObject _lantern;
+    [SerializeField] private GameObject _playerChatBubble;
+
+    // chat calls
+    private bool _lowHunger;
+    private bool _lowTemperature;
+    private bool _isTimingOut;
 
 
     #region Unity Methods
@@ -76,7 +82,7 @@ public class SurvivalManager : MonoBehaviour, IDamageable, IFreezeable, IStarvea
 
     private void OnEnable()
     {
-        Invoke(nameof(SetSurvivalbars), 0.1f); // need a small delay
+        Invoke(nameof(SetSurvivalbars), 0.01f); // need a small delay
         StartDialogue.OnDialogueStartedEvent += HandleDialogueStart;
         DialogueManager.OnDialogueEndedEvent += HandleDialogueEnd;
     }
@@ -94,6 +100,7 @@ public class SurvivalManager : MonoBehaviour, IDamageable, IFreezeable, IStarvea
         {
             Tiker();
         }
+
     }
 
 
@@ -157,6 +164,13 @@ public class SurvivalManager : MonoBehaviour, IDamageable, IFreezeable, IStarvea
         {
             _isFreezing = true;
             TakeDamage(_healthLossOnFreeze);
+            if (!_lowTemperature && !_isTimingOut)
+            {
+                _lowTemperature = true;
+                _isTimingOut = true;
+                _playerChatBubble.transform.GetChild(2).gameObject.SetActive(true);
+                Invoke(nameof(TimeOutChat),30f); // Set bool to true after 30 secs
+            }
         }
         else
         {
@@ -190,6 +204,13 @@ public class SurvivalManager : MonoBehaviour, IDamageable, IFreezeable, IStarvea
             _isStarving = true;
             _isFull = false;
             TakeDamage(_healthLossOnHunger);
+            if (!_lowHunger && !_isTimingOut)
+            {
+                _lowTemperature = true;
+                _isTimingOut = true;
+                _playerChatBubble.transform.GetChild(1).gameObject.SetActive(true);
+                Invoke(nameof(TimeOutChat), 30f); // Set bool to true after 30 secs
+            }
         }
         else
         {
@@ -248,5 +269,16 @@ public class SurvivalManager : MonoBehaviour, IDamageable, IFreezeable, IStarvea
             return false;
         }
     
+    }
+
+    private void TimeOutChat()
+    {
+        _lowTemperature = false;
+        _lowHunger = false;
+    }
+
+    private void OnApplicationQuit()
+    {
+        SetSurvivalbars();
     }
 }
