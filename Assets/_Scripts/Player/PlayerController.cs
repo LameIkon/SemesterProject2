@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class PlayerController : MovementController
 {
@@ -276,6 +277,24 @@ public class PlayerController : MovementController
     {
         _inDialogue = false;
     }
+
+    // These are used primarily for the LostExpeditionManager to disable running
+    public void EnableEvents()
+    {
+        // Subscribe from the events
+        InputReader.OnMoveEvent += HandleMove;
+        InputReader.OnRunStartEvent -= HandleRunStart;
+        InputReader.OnRunCancelEvent -= HandleRunCancled;
+    }
+
+    public void DisableEvents()
+    {
+        // Unsubscribe from the events
+        InputReader.OnMoveEvent -= HandleMove;
+        InputReader.OnRunStartEvent -= HandleRunStart;
+        InputReader.OnRunCancelEvent -= HandleRunCancled;
+    }
+
     #endregion
 
     // <NOT NECESSARY>

@@ -46,7 +46,7 @@ public class GoToPointAI : BrainAI
         if (!target)
         {
 
-            target = UnityEngine.GameObject.FindGameObjectWithTag(_destination);
+            target = GameObject.Find(_destination);
 
             brain.Remember(_target, target);
         }

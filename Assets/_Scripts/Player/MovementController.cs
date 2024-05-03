@@ -4,7 +4,7 @@ using UnityEngine;
 public class MovementController : MonoBehaviour
 {
 
-    protected float _moveSpeed;
+    public float _moveSpeed;
     [SerializeField] protected FloatReferencer _speedReference;
     [SerializeField, Tooltip("Remember to drag the child collider MovePoint of the player into this field")]
     protected Transform _movePoint;
