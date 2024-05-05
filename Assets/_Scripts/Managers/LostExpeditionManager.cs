@@ -30,19 +30,21 @@ public class LostExpeditionManager : MonoBehaviour
     private MovementController _movementController;
     [SerializeField] private GameObject _npcDestinationWalk;
     private Animator _npcDestinationAnimator;
+    private Animator _npcAnimator;
 
     [Header("The Expedition Objects")]
     //[SerializeField] private 
     [SerializeField] private GameObject _expedition;
     [SerializeField] private float _defaultSpeed; // default speed
-    private float _runSpeed = 4.01f; // Tell them that they need to run
+    private float _setMovementSpeed = 3.5f; // Tell them that they need to run
     private bool _onlyOnce;
-    private bool _lostExpeditionfinished;
+    public static bool _lostExpeditionfinished;
     [SerializeField] private SceneField _NextScene;
+    [SerializeField] private GameObject _polarBear;
 
     [Header("Camera")]
     [SerializeField] private GameObject _virtualCamera;
-    [SerializeField] private CinemachineVirtualCamera _cameraCurrentOrthoSize; // used to acces the component after we find the virtual camera
+    [SerializeField] private CinemachineVirtualCamera _camera; // used to acces the component after we find the virtual camera
     [SerializeField] private float _cameraOriginalOrthoSize; // Store the default camera size
 
     [SerializeField, Space(8f)] private float _cameraEnabledOrthoSize = 1; // the start value
@@ -92,10 +94,13 @@ public class LostExpeditionManager : MonoBehaviour
         // Camera
         _virtualCamera = GameObject.FindWithTag("MainCamera");
         _cameraOriginalOrthoSize = _virtualCamera.GetComponent<CinemachineVirtualCamera>().m_Lens.OrthographicSize; // Store the original size
-        _cameraCurrentOrthoSize = _virtualCamera.GetComponent<CinemachineVirtualCamera>(); // Set the current size
+        _camera = _virtualCamera.GetComponent<CinemachineVirtualCamera>(); // Set the current size
 
         SceneManager.LoadSceneAsync("06", LoadSceneMode.Additive);
         _expedition = GameObject.Find("TheExpeditionScene"); // all gameobjects we want to use in this scene will be on this
+
+        // Bear
+        _polarBear = _expedition.transform.Find("LostExpeditonPolarBear").gameObject; // find the bear
 
         // NPC
         _npc = _expedition.transform.Find("LostExpeditionNPC").gameObject; // Find the npc
@@ -103,13 +108,15 @@ public class LostExpeditionManager : MonoBehaviour
         _npcDestinationAnimator = _npcDestinationWalk.GetComponent<Animator>(); // The controller to move destination
         _movementController = _npc.GetComponentInChildren<MovementController>(); // get the component
         _defaultSpeed = _movementController._moveSpeed; // save the default speed. Fine only this gets it
-        _movementController._moveSpeed = _runSpeed; // tell them they must run
+        _movementController._moveSpeed = _setMovementSpeed; // tell them they must run
+        _npcAnimator = _npc.GetComponentInChildren<Animator>();
 
         // Player
         _playerDestinationWalk = _expedition.transform.Find("LostPlayerDestinationWalk").gameObject; // find the destination mover
         _playerDestinationAnimator = _playerDestinationWalk.GetComponent<Animator>(); // The controller to move destination
         _playerMovementController = _player.GetComponentInChildren<PlayerController>();
-        _playerMovementController._moveSpeed = _runSpeed; // tell them they must run
+        _playerMovementController._moveSpeed = _setMovementSpeed; // We want them to run a bit slower for this scene
+        _playerMovementController._forceRunningAnimation = true; // forced to run
 
         _playerAnimator = _player.GetComponentInChildren<Animator>();
         _originalPlayerSprite = _playerAnimator.runtimeAnimatorController; // Store the original sprites
@@ -137,9 +144,10 @@ public class LostExpeditionManager : MonoBehaviour
     IEnumerator TheLostExpedition()
     {
         // Introduction
-       
-        _cameraCurrentOrthoSize.m_Lens.OrthographicSize = _cameraEnabledOrthoSize; // Set the camera size
-        StartCoroutine(FadeCameraIn(_cameraMidOrthoSize));
+        _camera.m_Follow = null;
+        _camera.transform.position = new Vector3(-50, 350, -10);
+        _camera.m_Lens.OrthographicSize = _cameraEnabledOrthoSize; // Set the camera size
+        StartCoroutine(FadeCameraIn(_cameraOriginalOrthoSize, 1));
         yield return null;
         EnvironmentManager.instance.Fog();
         EnvironmentManager.instance.Blizzard();
@@ -147,18 +155,24 @@ public class LostExpeditionManager : MonoBehaviour
         _playerMovementController.DisableEvents(); // unsubscribe from the running. needs a delay, else it will get in conflict with the PlayerController manager subscribing at the same time
 
         // people running
-        _npcDestinationAnimator.Play("point2");
-        _playerDestinationAnimator.Play("point2");
+        //_npcDestinationAnimator.Play("point2");
+        //_playerDestinationAnimator.Play("point2");
         StartCoroutine(CharacterFadeIn(_player, 1.5f));
         StartCoroutine(CharacterFadeIn(_npc, 1.5f));
+        yield return new WaitForSeconds(6);
+        _npcDestinationAnimator.Play("point2");
+        _playerDestinationAnimator.Play("point2");
         yield return new WaitForSeconds(1);
-        _npcDestinationAnimator.Play("point3");
-        _playerDestinationAnimator.Play("point3");
+        _npc.transform.GetChild(3).gameObject.SetActive(true); // Get the 1st chatbubble and activate it
         yield return new WaitForSeconds(2);
-        _npcDestinationAnimator.Play("point4");
-        _playerDestinationAnimator.Play("point4");
+        _polarBear.SetActive(true);
+        yield return new WaitForSeconds(5);
+        _npcAnimator.Play("Shooting_SideRight");
+        _npc.transform.GetChild(4).gameObject.SetActive(true); // Get the 1st chatbubble and activate it
         yield return new WaitForSeconds(2);
 
+
+        yield return new WaitForSeconds(10000);
         // Fade out
 
 
@@ -166,21 +180,21 @@ public class LostExpeditionManager : MonoBehaviour
         ResetLostExpeditionScript();
         // Load next Scene
         SceneManager.LoadScene(_NextScene); // Load this scene when the lost expedition script is done
-        yield return new WaitForSeconds(10000);
+       
         
     }
 
 
-    IEnumerator FadeCameraIn(float wantedOrthoSize) // Fade camera slowly on
+    IEnumerator FadeCameraIn(float wantedOrthoSize, float SpeedUpTime) // Fade camera slowly on
     {
-        float currentSize = _cameraCurrentOrthoSize.m_Lens.OrthographicSize;
+        float currentSize = _camera.m_Lens.OrthographicSize;
         while (currentSize <= wantedOrthoSize)
         {
-            currentSize += Time.deltaTime * 2; // for more faster and smooth transition
-            _cameraCurrentOrthoSize.m_Lens.OrthographicSize = currentSize;
+            currentSize += Time.deltaTime * SpeedUpTime; // for more faster and smooth transition
+            _camera.m_Lens.OrthographicSize = currentSize;
             yield return null;
         }
-        _cameraCurrentOrthoSize.m_Lens.OrthographicSize = wantedOrthoSize; // Ensure it gets set to the correct size
+        _camera.m_Lens.OrthographicSize = wantedOrthoSize; // Ensure it gets set to the correct size
     }
 
     IEnumerator CharacterFadeIn(GameObject gameObject, float fadeInDuration)
@@ -221,5 +235,7 @@ public class LostExpeditionManager : MonoBehaviour
 
         _LostLight.SetActive(false);
         _aiControlPlayer.enabled = false;
+
+        _camera.m_Follow = _player.transform;
     }
 }

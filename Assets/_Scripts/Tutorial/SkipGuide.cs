@@ -28,21 +28,25 @@ public class SkipGuide : MonoBehaviour
 
     private void Update()
     {
-        if (!_ShowGuide && _hideGuide) // if set to false skip it
+        if (LostExpeditionManager._lostExpeditionfinished)
         {
-            GuidelineManager.instance.CompleteTutorial(); // Call the script that will show all survival bars
-            //_guidelineManager.SetActive(false); // Deactiave the Guideline gameobject with its scripts
-           gameObject.GetComponent<CanvasGroup>().alpha = 0f; // Start coroutine to fade out this gameobject
-            _skipGuide = true;
-            _hideGuide = false;
+            if (!_ShowGuide && _hideGuide) // if set to false skip it
+            {
+                GuidelineManager.instance.CompleteTutorial(); // Call the script that will show all survival bars
+                                                              //_guidelineManager.SetActive(false); // Deactiave the Guideline gameobject with its scripts
+                gameObject.GetComponent<CanvasGroup>().alpha = 0f; // Start coroutine to fade out this gameobject
+                _skipGuide = true;
+                _hideGuide = false;
+            }
+            else if (_ShowGuide && _showGuide) // if set to true
+            {
+                StartCoroutine(HideSkipButton(60)); // Start timer from start
+                _skipGuide = false;
+                gameObject.GetComponent<CanvasGroup>().alpha = 1f;
+                _showGuide = false;
+            }
         }
-        else if (_ShowGuide && _showGuide) // if set to true
-        {
-            StartCoroutine(HideSkipButton(60)); // Start timer from start
-            _skipGuide = false;
-            gameObject.GetComponent<CanvasGroup>().alpha = 1f;
-            _showGuide = false;
-        }
+       
     }
 
     public void ActivateSkipGuide()

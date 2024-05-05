@@ -12612,7 +12612,7 @@ MonoBehaviour:
     m_SceneAsset: {fileID: 102900000, guid: 073575a6384ebab4b81e0e6277777220, type: 3}
     m_SceneName: Intro
   _virtualCamera: {fileID: 0}
-  _cameraCurrentOrthoSize: {fileID: 0}
+  _camera: {fileID: 0}
   _cameraOriginalOrthoSize: 0
   _cameraEnabledOrthoSize: 1
   _cameraBeginningOrthoSize: 3
@@ -22513,6 +22513,10 @@ PrefabInstance:
       propertyPath: _moveSpeed
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2691581505823338532, guid: e36a38a4dc77a644bbfbe397c4ca9e30, type: 3}
+      propertyPath: _forceRunningAnimation
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3157731619633482776, guid: e36a38a4dc77a644bbfbe397c4ca9e30, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -22544,6 +22548,10 @@ PrefabInstance:
     - target: {fileID: 7021621769431304607, guid: e36a38a4dc77a644bbfbe397c4ca9e30, type: 3}
       propertyPath: m_PropertySheet.m_Float.m_Array.Array.data[4].m_Value
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7021621769431304607, guid: e36a38a4dc77a644bbfbe397c4ca9e30, type: 3}
+      propertyPath: m_PropertySheet.m_Bool.m_Array.Array.data[0].m_Overridden
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7021621769431304607, guid: e36a38a4dc77a644bbfbe397c4ca9e30, type: 3}
       propertyPath: m_PropertySheet.m_Float.m_Array.Array.data[4].m_Overridden
@@ -22644,6 +22652,10 @@ PrefabInstance:
     - target: {fileID: 7615089792575113519, guid: e36a38a4dc77a644bbfbe397c4ca9e30, type: 3}
       propertyPath: m_PropertySheet.m_Vector3f.m_Array.Array.data[1].m_Name
       value: WindSpeedMin
+      objectReference: {fileID: 0}
+    - target: {fileID: 7615089792575113519, guid: e36a38a4dc77a644bbfbe397c4ca9e30, type: 3}
+      propertyPath: m_PropertySheet.m_Bool.m_Array.Array.data[0].m_Overridden
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7615089792575113519, guid: e36a38a4dc77a644bbfbe397c4ca9e30, type: 3}
       propertyPath: m_PropertySheet.m_Float.m_Array.Array.data[1].m_Overridden

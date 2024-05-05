@@ -21,6 +21,15 @@ public class PolarBearController : MovementController
         }
     }
 
+    protected override void FixedUpdate()
+    {
+
+        if (!_isAttacking)
+        {
+            base.FixedUpdate();
+        }
+    }
+
     public void RunSpeed()
     {
         _moveSpeed = _speedReference.GetMaxValue();
@@ -35,30 +44,34 @@ public class PolarBearController : MovementController
     {
         if (!_isAttacking)
         {
+            _isAttacking = true;
             StartCoroutine(AttackConsecutive(ownPosition, attackRange, damage));
         }
     }
 
+    // Ensure that the runtime of this coroutine is the same lenght as the attack animation - will cause visual animations bugs otherwise
     IEnumerator AttackConsecutive(Vector3 ownPosition, float attackRange, float damage)
     {
-        _isAttacking = true;
-        _movePoint.position = transform.position;
+        _movePoint.position = transform.position; // Force stop the bear. Will however offset them from the grid
+        yield return null;
         AttackAnimation();
-        yield return new WaitForSeconds (0.70f);
-        Collider2D[] hits = Physics2D.OverlapCircleAll(ownPosition, 1.8f * attackRange);
+        yield return new WaitForSeconds (0.2f);
+        Collider2D[] hits = Physics2D.OverlapCircleAll(ownPosition, 2.2f * attackRange);
         foreach (var hit in hits)
         {
             if (hit.gameObject.name == "Player")
             {
-                Debug.Log("Hit!");
                 hit.GetComponent<IDamageable>()?.TakeDamage(damage);
 
             }
             else
             {
                 //Debug.Log("missed");
+                Debug.Log(hit.name);
             }
-            yield return new WaitForSeconds(0.30f);
+            yield return new WaitForSeconds(0.8f);
+            // looks bad to set it to the grid this way. should be set to round number when looking at the enemy instead
+            //_movePoint.position = new Vector3(Mathf.Round(transform.position.x), Mathf.Round(transform.position.y), Mathf.Round(transform.position.z)); // Set the position to the grid again
             _isAttacking = false;
         }
     }
@@ -81,9 +94,11 @@ public class PolarBearController : MovementController
                 direction.x = -1;
                 _lookingDirection = "Left";
             }
-            StartAnimation();
+                StartAnimation();
         }
     }
+
+
     #region Animations
     protected override void IdleAnimation()
     {

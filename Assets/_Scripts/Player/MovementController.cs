@@ -20,12 +20,14 @@ public class MovementController : MonoBehaviour
     protected float _walkingSpeed; // Used to check if the player is running
     protected bool _isIdling;
     protected bool _isDead;
+    public bool _forceRunningAnimation;
 
     void Awake()
     {
         _movePoint.parent = null; //detachs the MovePoint as a child of player. Not acutally needed. 
-        _moveSpeed = _speedReference.GetMinValue(); // Sets the walking speed 
+        _moveSpeed = _speedReference.GetMinValue(); // Sets the walking speed        
         _walkingSpeed = _speedReference.GetMinValue(); // Used to check if _moveSpeed gets changed.
+
         StopAllCoroutines();
         _lookingDirection = null;
     }
@@ -124,7 +126,7 @@ public class MovementController : MonoBehaviour
             if (Vector3.Distance(transform.position, _movePoint.position) >= 1f) // Only change when you move 1 tile
             {
                 _isIdling = false;
-                if (_walkingSpeed < _moveSpeed) // If your moveSpeed is faster than your walkingpeed it means you are running
+                if (_walkingSpeed < _moveSpeed || _forceRunningAnimation) // If your moveSpeed is faster than your walkingpeed it means you are running
                 {
                     RunningAnimation();
                 }

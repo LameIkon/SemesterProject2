@@ -15,6 +15,7 @@ public class PolarBearAI : BrainAI
     [SerializeField] private int _aggroRange;
     [SerializeField] private float _damage;
     [SerializeField] private float _attackRange;
+    [SerializeField] private bool _forceAggro; // Set this to true if you want to always be aggroed on player
 
     private PolarBearController _polarBearController;
 
@@ -59,13 +60,11 @@ public class PolarBearAI : BrainAI
 
             if (AggroRange(vectorBetween, _aggroRange * unitVectorBetween, _aggroRange)) // if getting into its zone, cancel its idle time
             {
-                Debug.Log("aggro");
                 stateTimeout = 0f;
             }
 
         }
 
-        brain.Remember("idle", false);
         brain.Remember(_stateTimeout, stateTimeout);
 
         if (_move == null)
@@ -88,21 +87,31 @@ public class PolarBearAI : BrainAI
             Vector3 vectorBetween = targetPosition - ownPosition; // The distance between
             Vector3 unitVectorBetween = (vectorBetween).normalized; // Normalized
 
-            if (hasAggro) // Even if you escape its zone it will still have aggro on you for a moment
-            {
-                _polarBearController.RunSpeed();
-                Walk(GiveDirectionTowardsPlayer(unitVectorBetween));
-                SetTimeoutAggro(brain);
-            }
-
-
             // if inside its attack range stop up and attack
-            else if (AttackRange(vectorBetween, _attackRange * unitVectorBetween, _attackRange)) 
-            {         
+            if (AttackRange(vectorBetween, _attackRange * unitVectorBetween, _attackRange))
+            {
                 // Calls the controller for the attack animations
                 _polarBearController.Attack(ownPosition, _attackRange, _damage);
                 SetTimeoutAttack(brain);
             }
+
+            else if (hasAggro || _forceAggro) // Even if you escape its zone it will still have aggro on you for a moment
+            {
+                _polarBearController.RunSpeed();
+                Walk(GiveDirectionTowardsPlayer(unitVectorBetween));
+
+                if (Random.value < 0.025f) // 2.5% chance for losing aggro every frame
+                {
+                    SetTimeoutAggro(brain);
+                }
+                else
+                {
+                     SetTimeOutRefreshAggro(brain);
+                }
+            }
+
+
+            
 
             // Start running
             else if (AggroRange(vectorBetween, _aggroRange * unitVectorBetween, _aggroRange))
@@ -116,7 +125,7 @@ public class PolarBearAI : BrainAI
                 _polarBearController.WalkSpeed();
                 if (Random.value < 0.05f) // 5% chance of idle
                 {
-                    Debug.Log("idle");
+
                     SetTimeIdle(brain);
                 }
                 else
@@ -223,12 +232,17 @@ public class PolarBearAI : BrainAI
 
     }
 
+    private void SetTimeOutRefreshAggro(AIThinker brain)
+    {
+        brain.Remember(_stateTimeout, Random.Range(_waitBetweenRunning.MinValue, _waitBetweenRunning.MaxValue));
+        brain.Remember(_hasAggro, true);
+    }
+
     private void SetTimeIdle(AIThinker brain)
     {
         brain.Remember(_stateTimeout, Random.Range(_idleTime.MinValue, _idleTime.MaxValue));
         brain.Remember(_hasAggro, false);
         brain.Remember(_idle, true);
-        brain.Remember("idle", true);
     }
     #endregion
 

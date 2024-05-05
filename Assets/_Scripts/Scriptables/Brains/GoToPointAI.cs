@@ -9,7 +9,9 @@ public class GoToPointAI : BrainAI
     // [SerializeField] private RangedFloat _moveTime;  
     // [SerializeField] private RangedFloat _fireTime;
     [SerializeField] private RangedFloat _waitBetweenWalk;
+    [SerializeField] private RangedFloat _waitBetweenReachingDestination;
     [SerializeField] private float _rangeToPlayerStop;
+    [SerializeField] private bool _forceStopPlayerOnPointReached; // Currently just been set in inspector
 
 
     [SerializeField] private string _destination = "Destination";
@@ -24,13 +26,14 @@ public class GoToPointAI : BrainAI
     {
         brain.Remember(_walkState, Directions.W);
         brain.Remember(_stateTimeout, Random.Range(_waitBetweenWalk.MinValue, _waitBetweenWalk.MaxValue));
+        brain.Remember(_stateTimeout, Random.Range(_waitBetweenReachingDestination.MinValue, _waitBetweenReachingDestination.MaxValue));
     }
 
     private MovementController _move;
 
     public override void Think(AIThinker brain)
     {
-        UnityEngine.GameObject target = brain.Remember<UnityEngine.GameObject>(_target);
+        GameObject target = brain.Remember<GameObject>(_target);
         float stateTimeout = brain.Remember<float>(_stateTimeout);
         stateTimeout -= Time.deltaTime;
         brain.Remember(_stateTimeout, stateTimeout);
@@ -62,7 +65,10 @@ public class GoToPointAI : BrainAI
 
             if (RangeHolder(vectorBetween, _rangeToPlayerStop * unitVectorBetween, _rangeToPlayerStop))
             {
+
+                Debug.Log("walk");
                 SetTimeoutWalk(brain);
+
                 if (_ReachedDestination == false)
                 {
                     _ReachedDestination = true;
@@ -71,13 +77,28 @@ public class GoToPointAI : BrainAI
             }
             else
             {
-                SetTimeoutWalk(brain);
-                if (_ReachedDestination == true)
+                if (!_forceStopPlayerOnPointReached)
                 {
-                    _ReachedDestination = false;
+                    SetTimeoutWalk(brain);
+                    if (_ReachedDestination == true)
+                    {
+                        Debug.Log("destination");
+                        _ReachedDestination = false;
+                    }
+                    Walk(GiveDirectionTowardsPlayer(unitVectorBetween), brain);
                 }
+                else
+                {
 
-                Walk(GiveDirectionTowardsPlayer(unitVectorBetween), brain);
+                    if (_ReachedDestination == true)
+                    {
+                        Debug.Log("destination");
+                        SetTimeoutReachedDestination(brain);
+                        _ReachedDestination = false;
+                        Walk(GiveDirectionTowardsPlayer(unitVectorBetween), brain);
+                    }
+                    
+                }
             }
             
         }
@@ -242,6 +263,11 @@ public class GoToPointAI : BrainAI
     private void SetTimeoutWalk(AIThinker brain)
     {
         brain.Remember(_stateTimeout, Random.Range(_waitBetweenWalk.MinValue, _waitBetweenWalk.MaxValue));
+    }
+
+    private void SetTimeoutReachedDestination(AIThinker brain)
+    {
+        brain.Remember(_stateTimeout, Random.Range(_waitBetweenReachingDestination.MinValue, _waitBetweenReachingDestination.MaxValue));
     }
 
 

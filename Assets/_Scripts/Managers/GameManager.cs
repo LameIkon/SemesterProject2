@@ -110,12 +110,13 @@ public class GameManager : PersistentSingleton<GameManager>
             if (SkipGuide._skipGuide && SkipGuide._showGuide)
             {
                 Debug.Log("guide");
+                LostExpeditionManager._lostExpeditionfinished = true; // used for the skiptutorial to get activated
                 _guideline.SetActive(true);               
             }
         }
         else if (_LostExpeditionBool)
         {
-             _spawnPosition = new Vector3(-33, 370, 0);
+            _spawnPosition = new Vector3(-36, 351, 0);
             _player.transform.position = _spawnPosition;
             _playerMovePoint.transform.position = _spawnPosition;
              InputReader.OnInventoryEvent -= HandleInventory; // you cannot open inventory

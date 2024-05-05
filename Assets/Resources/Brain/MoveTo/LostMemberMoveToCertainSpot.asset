@@ -15,5 +15,9 @@ MonoBehaviour:
   _waitBetweenWalk:
     MinValue: 0.1
     MaxValue: 0.1
-  _rangeToPlayerStop: 0.5
+  _waitBetweenReachingDestination:
+    MinValue: 2
+    MaxValue: 2
+  _rangeToPlayerStop: 2
+  _forceStopPlayerOnPointReached: 1
   _destination: LostMemberDestinationWalk
