@@ -9,9 +9,10 @@ public class GoToPointAI : BrainAI
     // [SerializeField] private RangedFloat _moveTime;  
     // [SerializeField] private RangedFloat _fireTime;
     [SerializeField] private RangedFloat _waitBetweenWalk;
+    [SerializeField] private bool _shouldWaitBetweenOnPointReached; // Currently just been set in inspector
     [SerializeField] private RangedFloat _waitBetweenReachingDestination;
     [SerializeField] private float _rangeToPlayerStop;
-    [SerializeField] private bool _forceStopPlayerOnPointReached; // Currently just been set in inspector
+    
 
 
     [SerializeField] private string _destination = "Destination";
@@ -66,18 +67,18 @@ public class GoToPointAI : BrainAI
             if (RangeHolder(vectorBetween, _rangeToPlayerStop * unitVectorBetween, _rangeToPlayerStop))
             {
 
-                Debug.Log("walk");
+                Debug.Log("destination");
                 SetTimeoutWalk(brain);
 
                 if (_ReachedDestination == false)
                 {
                     _ReachedDestination = true;
                 }
-                
+
             }
             else
             {
-                if (!_forceStopPlayerOnPointReached)
+                if (!_shouldWaitBetweenOnPointReached)
                 {
                     SetTimeoutWalk(brain);
                     if (_ReachedDestination == true)
@@ -92,12 +93,11 @@ public class GoToPointAI : BrainAI
 
                     if (_ReachedDestination == true)
                     {
-                        Debug.Log("destination");
+                        Debug.Log("walking");
                         SetTimeoutReachedDestination(brain);
-                        _ReachedDestination = false;
-                        Walk(GiveDirectionTowardsPlayer(unitVectorBetween), brain);
+                        _ReachedDestination = false;                     
                     }
-                    
+                    Walk(GiveDirectionTowardsPlayer(unitVectorBetween), brain);
                 }
             }
             
@@ -186,78 +186,27 @@ public class GoToPointAI : BrainAI
     private Directions GiveDirectionTowardsPlayer(Vector3 dir)
     {
 
-        int i = Random.Range(0, 2);
+        // Go the direction the target is as accurate as possible
+        if (dir == Vector3.up) return Directions.N;
+        if (dir == Vector3.right) return Directions.E;
+        if (dir == Vector3.down) return Directions.S;
+        if (dir == Vector3.left) return Directions.W;
 
-        if (dir == Vector3.up)
+
+        bool isMovingUp = dir.y > 0;
+        bool isMovingRight = dir.x > 0;
+        if (isMovingUp) // Introduce a little randomness/smoothness to its pathfinding
         {
-            return Directions.N;
-        }
-        else if (dir == Vector3.right)
-        {
-            return Directions.E;
-        }
-        else if (dir == Vector3.down)
-        {
-            return Directions.S;
-        }
-        else if (dir == Vector3.left)
-        {
-            return Directions.W;
-        }
-        else if (dir == new Vector3())
-        {
-            return Directions.NW;
-        }
-        else if (dir.y > 0 && dir.x > 0)
-        {
-            if (i == 0)
-            {
-                return Directions.N;
-            }
-            else
-            {
-                return Directions.NE;
-            }
-        }
-        else if (dir.y > 0 && dir.x < 0)
-        {
-            if (i == 0)
-            {
-                return Directions.N;
-            }
-            else
-            {
-                return Directions.NW;
-            }
-        }
-        else if (dir.y < 0 && dir.x > 0)
-        {
-            if (i == 0)
-            {
-                return Directions.S;
-            }
-            else
-            {
-                return Directions.SE;
-            }
-        }
-        else if (dir.y < 0 && dir.x < 0)
-        {
-            if (i == 0)
-            {
-                return Directions.S;
-            }
-            else
-            {
-                return Directions.SW;
-            }
+            // 80% chance to running straight instead of diagonal
+            if (isMovingRight) return (Random.value > 0.8f) ? Directions.N : Directions.NE; // go up 
+            else return (Random.value > 0.8f) ? Directions.N : Directions.NW;
         }
         else
         {
-            return Directions.None;
+            // 80% chance to running straight instead of diagonal
+            if (isMovingRight) return (Random.value > 0.8f) ? Directions.S : Directions.SE; // go down
+            else return (Random.value > 0.8f) ? Directions.S : Directions.SW;
         }
-
-
     }
 
     private void SetTimeoutWalk(AIThinker brain)

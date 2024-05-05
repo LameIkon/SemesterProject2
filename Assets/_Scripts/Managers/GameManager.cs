@@ -33,6 +33,7 @@ public class GameManager : PersistentSingleton<GameManager>
     [Header("Lost Expedition Intro")]
     [SerializeField] private SceneField _lostExpeditionIntro;
     public static bool _LostExpeditionBool;
+    public GameObject _blackSceen;
 
     [Header("Tutorial")]
     [SerializeField] private GameObject _guideline;
@@ -128,6 +129,7 @@ public class GameManager : PersistentSingleton<GameManager>
 
         if (currentScene.name == _mainMenu)
         {
+            Cursor.visible = true; // By chance when you load into the scene and cursor wasnt active
             _mainSceneBool = true;
         }
         else
@@ -137,6 +139,7 @@ public class GameManager : PersistentSingleton<GameManager>
 
         if (currentScene.name == _shipIn)
         {
+            Cursor.visible = true; // By chance when you load into the scene and cursor wasnt active
             _shipInBool = true;
         }
         else
@@ -150,6 +153,7 @@ public class GameManager : PersistentSingleton<GameManager>
         }
         else
         {
+            _blackSceen.SetActive(false); // need for when changing away from this scene, because it gives a frame where you see everything
             _LostExpeditionBool= false;
         }
     }

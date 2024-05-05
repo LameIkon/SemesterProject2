@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: LostPlayerMoveToCertainSpot
   m_EditorClassIdentifier: 
   _waitBetweenWalk:
-    MinValue: 0.1
-    MaxValue: 0.1
+    MinValue: 0.26
+    MaxValue: 0.26
+  _shouldWaitBetweenOnPointReached: 0
   _waitBetweenReachingDestination:
-    MinValue: 2
-    MaxValue: 2
-  _rangeToPlayerStop: 2
-  _forceStopPlayerOnPointReached: 1
+    MinValue: 0.3
+    MaxValue: 0.3
+  _rangeToPlayerStop: 1
   _destination: LostPlayerDestinationWalk

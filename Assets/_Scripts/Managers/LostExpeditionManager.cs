@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
 using UnityEditor.Animations;
 using Cinemachine;
+using UnityEngine.UI;
 
 public class LostExpeditionManager : MonoBehaviour
 {
@@ -41,6 +42,8 @@ public class LostExpeditionManager : MonoBehaviour
     public static bool _lostExpeditionfinished;
     [SerializeField] private SceneField _NextScene;
     [SerializeField] private GameObject _polarBear;
+    [SerializeField] private GameObject _lostExpeditionTextCanvas;
+    [SerializeField] private CanvasGroup _lostExpeditionCanvasGroup;
 
     [Header("Camera")]
     [SerializeField] private GameObject _virtualCamera;
@@ -80,6 +83,7 @@ public class LostExpeditionManager : MonoBehaviour
 
     void DisableNotNeed()
     {
+        Cursor.visible = false;
         _runManager.GetComponentInChildren<RunManager>().enabled = false; // Prevent running
         _footPrints = GameObject.Find("09Footprints");
         _footPrints.SetActive(false); // hide footprints
@@ -91,13 +95,19 @@ public class LostExpeditionManager : MonoBehaviour
 
     void FindNeededStuff()
     {
+
         // Camera
         _virtualCamera = GameObject.FindWithTag("MainCamera");
         _cameraOriginalOrthoSize = _virtualCamera.GetComponent<CinemachineVirtualCamera>().m_Lens.OrthographicSize; // Store the original size
         _camera = _virtualCamera.GetComponent<CinemachineVirtualCamera>(); // Set the current size
 
+        // The parent gameobject with all the needed stuff
         SceneManager.LoadSceneAsync("06", LoadSceneMode.Additive);
         _expedition = GameObject.Find("TheExpeditionScene"); // all gameobjects we want to use in this scene will be on this
+
+        // Canvas Text
+        _lostExpeditionTextCanvas = _expedition.transform.Find("IntroTextLostExpeditionCanvas").gameObject;
+        _lostExpeditionCanvasGroup = _lostExpeditionTextCanvas.GetComponentInChildren<CanvasGroup>();
 
         // Bear
         _polarBear = _expedition.transform.Find("LostExpeditonPolarBear").gameObject; // find the bear
@@ -134,54 +144,55 @@ public class LostExpeditionManager : MonoBehaviour
         Color currentColor = playerSpriteRenderer.color;
         currentColor.a = 0;
         playerSpriteRenderer.color = currentColor;
-        npcSpriteRenderer.color = currentColor;
-
-       
-
-
+        npcSpriteRenderer.color = currentColor;    
     }
 
     IEnumerator TheLostExpedition()
     {
+
         // Introduction
         _camera.m_Follow = null;
         _camera.transform.position = new Vector3(-50, 350, -10);
         _camera.m_Lens.OrthographicSize = _cameraEnabledOrthoSize; // Set the camera size
-        StartCoroutine(FadeCameraIn(_cameraOriginalOrthoSize, 1));
+
+        _lostExpeditionTextCanvas.SetActive(true);
+        StartCoroutine(CanvasGroupFade(true, 3, _lostExpeditionCanvasGroup));
         yield return null;
+        _playerMovementController.DisableEvents(); // unsubscribe from the running. needs a delay, else it will get in conflict with the PlayerController manager subscribing at the same time
+        
+        yield return new WaitForSeconds(4);
+
+           
+        StartCoroutine(ImageFadeIn(false, 5, _lostExpeditionTextCanvas));
+
         EnvironmentManager.instance.Fog();
         EnvironmentManager.instance.Blizzard();
 
-        _playerMovementController.DisableEvents(); // unsubscribe from the running. needs a delay, else it will get in conflict with the PlayerController manager subscribing at the same time
+        yield return new WaitForSeconds(4);
+        StartCoroutine(CanvasGroupFade(false, 3, _lostExpeditionCanvasGroup));
+        StartCoroutine(FadeCameraIn(_cameraOriginalOrthoSize, 1));
 
-        // people running
-        //_npcDestinationAnimator.Play("point2");
-        //_playerDestinationAnimator.Play("point2");
-        StartCoroutine(CharacterFadeIn(_player, 1.5f));
-        StartCoroutine(CharacterFadeIn(_npc, 1.5f));
+        StartCoroutine(SpriterendererFadeIn(true, 1.5f, _player));
+        StartCoroutine(SpriterendererFadeIn(true, 1.5f, _npc));
         yield return new WaitForSeconds(6);
         _npcDestinationAnimator.Play("point2");
         _playerDestinationAnimator.Play("point2");
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.5f);
         _npc.transform.GetChild(3).gameObject.SetActive(true); // Get the 1st chatbubble and activate it
         yield return new WaitForSeconds(2);
         _polarBear.SetActive(true);
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(2.25f);
+        _playerAnimator.Play("Falling_SideLeft");
+        yield return new WaitForSeconds(0.2f);
+        _player.transform.GetChild(1).GetChild(8).gameObject.SetActive(true); // Get players chat bubble
+        yield return new WaitForSeconds(1.5f);
         _npcAnimator.Play("Shooting_SideRight");
-        _npc.transform.GetChild(4).gameObject.SetActive(true); // Get the 1st chatbubble and activate it
-        yield return new WaitForSeconds(2);
-
-
-        yield return new WaitForSeconds(10000);
-        // Fade out
-
-
-        // Set values to before the script got started
+        _npc.transform.GetChild(4).gameObject.SetActive(true); // Get the 2nd chatbubble and activate it
+        yield return new WaitForSeconds(1);
+        GameManager._Instance._blackSceen.SetActive(true);
         ResetLostExpeditionScript();
-        // Load next Scene
-        SceneManager.LoadScene(_NextScene); // Load this scene when the lost expedition script is done
-       
-        
+        yield return new WaitForSeconds(5f);
+        SceneManager.LoadScene(_NextScene); // Load this scene when the lost expedition script is don      
     }
 
 
@@ -197,26 +208,71 @@ public class LostExpeditionManager : MonoBehaviour
         _camera.m_Lens.OrthographicSize = wantedOrthoSize; // Ensure it gets set to the correct size
     }
 
-    IEnumerator CharacterFadeIn(GameObject gameObject, float fadeInDuration)
+    IEnumerator SpriterendererFadeIn(bool fadeIn, float fadeDuration, GameObject gameObject)
     {
         SpriteRenderer spriteRenderer = gameObject.GetComponentInChildren<SpriteRenderer>();
 
         float currentTime = 0f;
-        //float fadeInDuration = 1.5f; // Duration of the fadein effect
         Color targetColor = spriteRenderer.color; // Get the initial color of the sprite
 
-        while (currentTime < fadeInDuration)
+        float startAlpha = fadeIn ? 0f : 1f;  // If for example we want to fade in then, we know the start value should be 0
+        float targetAlpha = fadeIn ? 1f : 0f; // If we know that we want to fade in then, we know the goal is to reach 1
+
+
+        while (currentTime < fadeDuration)
         {
             currentTime += Time.deltaTime;
-            float alpha = Mathf.Lerp(0f, 1f, currentTime / fadeInDuration);
-            targetColor.a = alpha; // Set the alpha 
-            spriteRenderer.color = targetColor; // Apply the new color
+            float alpha = Mathf.Lerp(startAlpha, targetAlpha, currentTime / fadeDuration);
+            targetColor.a = alpha;
+            spriteRenderer.color = targetColor;
             yield return null;
         }
 
-        // Ensure alpha is fully set to 1
-        targetColor.a = 1f;
+        // Ensure alpha is set to the target value
+        targetColor.a = targetAlpha;
         spriteRenderer.color = targetColor;
+    }
+
+    private IEnumerator ImageFadeIn(bool fadeIn, float fadeDuration, GameObject gameObject)
+    {
+        Image image = gameObject.GetComponentInChildren<Image>();
+
+        if (image != null)
+        {
+            float currentTime = 0f;
+            Color targetColor = image.color;
+            float startAlpha = fadeIn ? 0f : 1f;
+            float targetAlpha = fadeIn ? 1f : 0f;
+
+            while (currentTime < fadeDuration)
+            {
+                currentTime += Time.deltaTime;
+                float alpha = Mathf.Lerp(startAlpha, targetAlpha, currentTime / fadeDuration);
+                targetColor.a = alpha;
+                image.color = targetColor;
+                yield return null;
+            }
+            targetColor.a = targetAlpha;
+            image.color = targetColor;
+        }
+    }
+
+    private IEnumerator CanvasGroupFade(bool fadeIn, float fadeDuration, CanvasGroup canvasGroup)
+    {
+        float targetAlpha = fadeIn ? 1f : 0f; // true to fade in and false to fade out
+        float startAlpha = canvasGroup.alpha;
+        float currentTime = 0f;
+
+        while (currentTime < fadeDuration)
+        {
+            currentTime += Time.deltaTime;
+            float newAlpha = Mathf.Lerp(startAlpha, targetAlpha, currentTime / fadeDuration);
+            canvasGroup.alpha = newAlpha;
+            yield return null;
+        }
+
+        // Ensure the alpha value is exactly equal to the target value
+        canvasGroup.alpha = targetAlpha;
     }
 
 
@@ -237,5 +293,7 @@ public class LostExpeditionManager : MonoBehaviour
         _aiControlPlayer.enabled = false;
 
         _camera.m_Follow = _player.transform;
+
+        _expedition.SetActive(false);
     }
 }

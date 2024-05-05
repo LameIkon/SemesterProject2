@@ -95,12 +95,12 @@ public class PolarBearAI : BrainAI
                 SetTimeoutAttack(brain);
             }
 
-            else if (hasAggro || _forceAggro) // Even if you escape its zone it will still have aggro on you for a moment
-            {
+            else if (hasAggro) // Even if you escape its zone it will still have aggro on you for a moment
+            {              
                 _polarBearController.RunSpeed();
                 Walk(GiveDirectionTowardsPlayer(unitVectorBetween));
 
-                if (Random.value < 0.025f) // 2.5% chance for losing aggro every frame
+                if (Random.value < 0.025f || !_forceAggro) // 2.5% chance for losing aggro every frame
                 {
                     SetTimeoutAggro(brain);
                 }
@@ -114,8 +114,9 @@ public class PolarBearAI : BrainAI
             
 
             // Start running
-            else if (AggroRange(vectorBetween, _aggroRange * unitVectorBetween, _aggroRange))
+            else if (AggroRange(vectorBetween, _aggroRange * unitVectorBetween, _aggroRange) || _forceAggro)
             {
+                Debug.Log("aggro player");
                 _polarBearController.RunSpeed();
                 Walk(GiveDirectionTowardsPlayer(unitVectorBetween));
                 SetTimeoutAggro(brain);
