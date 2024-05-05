@@ -35,7 +35,7 @@ public class LostExpeditionManager : MonoBehaviour
 
     [Header("The Expedition Objects")]
     //[SerializeField] private 
-    [SerializeField] private GameObject _expedition;
+    public static GameObject _expedition;
     [SerializeField] private float _defaultSpeed; // default speed
     private float _setMovementSpeed = 3.5f; // Tell them that they need to run
     private bool _onlyOnce;
@@ -144,7 +144,10 @@ public class LostExpeditionManager : MonoBehaviour
         Color currentColor = playerSpriteRenderer.color;
         currentColor.a = 0;
         playerSpriteRenderer.color = currentColor;
-        npcSpriteRenderer.color = currentColor;    
+        npcSpriteRenderer.color = currentColor;
+
+        // We dont want to reset everytime we leave the ship and enter again
+        DontDestroyOnLoad(_expedition);
     }
 
     IEnumerator TheLostExpedition()
@@ -288,12 +291,20 @@ public class LostExpeditionManager : MonoBehaviour
         _playerAnimator.runtimeAnimatorController = _originalPlayerSprite; // Set the sprite back
         _movementController._moveSpeed = _defaultSpeed; // Set speed to default
         _playerMovementController._moveSpeed = _defaultSpeed; // Set speed to default
+        _playerMovementController._forceRunningAnimation = false; // not forced to run anymore
 
         _LostLight.SetActive(false);
         _aiControlPlayer.enabled = false;
 
+        _playerMovementController.EnableEvents();
+
         _camera.m_Follow = _player.transform;
 
         _expedition.SetActive(false);
+    }
+
+    void OnMainMenu()
+    {
+
     }
 }
