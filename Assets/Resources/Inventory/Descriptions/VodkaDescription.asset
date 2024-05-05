@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 985cf02980db40d479858dba3c78dc6a, type: 3}
   m_Name: VodkaDescription
   m_EditorClassIdentifier: 
-  _itemDescription: '<size=20><b> Vodka</b> </size>
+  _itemDescription: '<size=20><b> Schnapps</b> </size>
 
     <size=14>Evokes memories
     of a better time. Replenishes hunger by <color=#ffdd1a>5</color>, raises temperature
