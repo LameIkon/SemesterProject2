@@ -14,4 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _itemDescription: '<size=20><b> Lantern</b> </size>
 
-    Used as source of light'
+    <size=14>Used as source
+    of light</size>'

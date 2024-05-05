@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _itemDescription: '<size=20><b> Vodka</b> </size>
 
-    Brings memories of a better
-    time... +5 hunger,  +15 temperature'
+    <size=14>Evokes memories
+    of a better time. Replenishes hunger by <color=#ffdd1a>5</color>, raises temperature
+    by <color=#ffdd1a>15</color></size>'
