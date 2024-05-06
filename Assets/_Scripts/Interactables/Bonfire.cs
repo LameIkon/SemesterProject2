@@ -42,6 +42,9 @@ public class Bonfire : MonoBehaviour
 
     private void Update()
     {
+        if (_bonfireLit && _playerIsClose) { _IsHeatingUp = true; }
+        if (_bonfireLit && !_playerIsClose) { _IsHeatingUp = false; }
+        
         //This needs to be in update otherwise when u put wood on fire it wont apply right away.
         if (_bonfireLit && !_isTriggeredOnce && _playerIsClose)
         {
@@ -79,7 +82,7 @@ public class Bonfire : MonoBehaviour
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
-        {      
+        {
             _canOpenBonfire = false;
             _playerIsClose = false;
             _highlightScript.TriggerExit(gameObject);
@@ -120,7 +123,6 @@ public class Bonfire : MonoBehaviour
             _lights.SetActive(true);
             _spriteRenderer.sprite = _campfireLitSprite;
             StartCoroutine(_burnCoroutine);
-            _IsHeatingUp = true;                        // Used in Visuals.cs
         }    
     }
 
@@ -138,8 +140,7 @@ public class Bonfire : MonoBehaviour
         _isTriggeredOnce = false;
         _coroutineBurnActive = false;
         _burnCoroutine = BurningTime(_burningTime);
-        _IsHeatingUp = false;                   // Used in Visuals.cs
-      
+        
 
 
         if (_systemFloat >= _restoreValue)
