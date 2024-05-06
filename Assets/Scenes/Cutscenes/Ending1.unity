@@ -418,12 +418,24 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1127987309600625894, guid: 092d1207c2a569b48a373a494eeab3e9, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 87f25fc2de03e9946b267b8df3e85fe6, type: 2}
+    - target: {fileID: 1127987309600625894, guid: 092d1207c2a569b48a373a494eeab3e9, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 9054108129265998816, guid: 87f25fc2de03e9946b267b8df3e85fe6, type: 2}
+    - target: {fileID: 1127987309600625894, guid: 092d1207c2a569b48a373a494eeab3e9, type: 3}
       propertyPath: m_enableWordWrapping
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1127987309600625894, guid: 092d1207c2a569b48a373a494eeab3e9, type: 3}
       propertyPath: m_HorizontalAlignment
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1127987309600625894, guid: 092d1207c2a569b48a373a494eeab3e9, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2281682900595814014, guid: 092d1207c2a569b48a373a494eeab3e9, type: 3}
       propertyPath: m_IsActive
@@ -656,12 +668,12 @@ MonoBehaviour:
     UseConstant: 0
     ConstantValue: 1
     Variable: {fileID: 11400000, guid: 4dad0429c13a1b44e85f741db7f9f373, type: 2}
-  _automaticStart: 0
+  _automaticStart: 1
   _hideEOnEnteract: 0
   _randomLine: 0
   _triggerOnce: 0
   _shipInLoad: 0
-  _mainMenuLoad: 0
+  _mainMenuLoad: 1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
