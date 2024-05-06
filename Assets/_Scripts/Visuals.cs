@@ -40,11 +40,11 @@ public class Visuals : MonoBehaviour
     [SerializeField] private float _changeRateTemperature;              // 100
     [SerializeField] private float _volumeAboveThresholdTemperature;    // -40
     [SerializeField] private float _volumeBelowThresholdTemperature;    // -100
-    [SerializeField] protected bool _isCold;
+    [SerializeField] private float _volumeForHeat;                      // 60
     private Image _temperatureIcon;
     private ClampedFloatParameter _cfpTemperature;
     private WhiteBalance _whiteBalance;
-    protected float _currentVolumeTemperature;
+    private float _currentVolumeTemperature;
     private float _defaultAbove;
     private float _defaultBelow;
     private bool _temperatureDefaulter;
@@ -187,11 +187,14 @@ public class Visuals : MonoBehaviour
         private void EnableFreezeVisual()
         {
             if (Bonfire._IsHeatingUp) { ApplyHeatAbsorption(); return; }
+            if (!Bonfire._IsHeatingUp) { DeapplyHeatAbsorption(); }
 
             _temperatureDefaulter = false;                              // Ensures only one use of the if-statement in DisableFreezeVisual()
-            _isCold = true;                                             // Is used in HeatAbsorption.cs to help the script to know which method to override
+
+            ///////////////////////////////////_temperatureIcon.;///////////
             
             _temperatureIcon.color = _colorBelowThreshold;              // Changes the color of the icon when the method is called
+            _currentVolumeTemperature = _defaultBelow;                  // Resets _currentVolumeTemperature to -100
             _volumeBelowThresholdTemperature = _defaultBelow;           // Resets _volumeBelowThresholdTemperature to default 
             
             _cfpTemperature = new ClampedFloatParameter(_volumeAboveThresholdTemperature, _defaultBelow, _defaultAbove, true);
@@ -205,9 +208,10 @@ public class Visuals : MonoBehaviour
         private void DisableFreezeVisual()
         {
             if (Bonfire._IsHeatingUp) { ApplyHeatAbsorption(); return; } 
+            if (!Bonfire._IsHeatingUp) { DeapplyHeatAbsorption(); }
 
             _temperatureIcon.color = _colorAboveThreshold;      // Changes the color of the icon when the method is called
-            _isCold = false;                                    // Is used in HeatAbsorption.cs to help the script to know which method to override
+            _currentVolumeTemperature = _defaultAbove;          // Defaults _currentVolumeTemperature to -40
             
             if (_temperatureDefaulter)                          // Will only be accessed at the start of the game
             {
@@ -226,27 +230,52 @@ public class Visuals : MonoBehaviour
 
         private void ApplyHeatAbsorption()
         {
-            // switch (_isCold)
-            // {
-            //    case true: /*Code*/; break; 
-            //    case false: /*Code*/; break;
-            // }
-            print("Apply");
+            _temperatureIcon.color = _colorDuringHeat;
+            switch (_currentTemperature < _thresholdTemperature)     
+            {
+                case true:         // For EnableFreezeVisual() 
+                {
+                    _cfpTemperature = new ClampedFloatParameter(_currentVolumeTemperature, _defaultBelow, _volumeForHeat, true);
+
+                    if (_currentVolumeTemperature < _volumeForHeat)
+                    {
+                        _currentVolumeTemperature += _changeRateTemperature * Time.deltaTime;
+                    }
+                    break;
+                }
+                
+                case false:         // For DisableFreezeVisual() 
+                {
+                   _cfpTemperature = new ClampedFloatParameter(_currentVolumeTemperature, _defaultAbove, _volumeForHeat, true);
+
+                    if (_currentVolumeTemperature < _volumeForHeat)
+                    {
+                        _currentVolumeTemperature += _changeRateTemperature * Time.deltaTime;
+                    }
+                    break;
+                }
+            }
         }
 
         private void DeapplyHeatAbsorption()
         {
-            print("Deapply");
+            
         }
         
     #endregion
     
     
     #region Hunger Methods
-    
-        private void EnableHungerVisual() { } // CameraShake();
 
-        private void DisableHungerVisual() { }
+        private void EnableHungerVisual() // CameraShake(); on Icon
+        {
+        
+        } 
+
+        private void DisableHungerVisual()
+        {
+            
+        }
         
     #endregion
 

@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _itemDescription: '<size=20><b> Map</b> </size>
 
-    A drawn map of the North Greenlandic
-    coast'
+    <size=14>A drawn map of the
+    North Greenlandic coast</size>'

@@ -15143,7 +15143,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 736148800603328609, guid: c86bc54ac953c5d47965d2ff1e85ff31, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2781318481826526339, guid: c86bc54ac953c5d47965d2ff1e85ff31, type: 3}
       propertyPath: _highlightScript
@@ -15159,7 +15159,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7328163693546525948, guid: c86bc54ac953c5d47965d2ff1e85ff31, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8439986373081254643, guid: c86bc54ac953c5d47965d2ff1e85ff31, type: 3}
       propertyPath: m_LocalPosition.x
@@ -17507,6 +17507,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4087976290286355162, guid: 48cc3c46621aa674db0e2ce4ce8a527f, type: 3}
+      propertyPath: m_TagString
+      value: HungerIcon
+      objectReference: {fileID: 0}
     - target: {fileID: 4303502836921626794, guid: 48cc3c46621aa674db0e2ce4ce8a527f, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 2
@@ -17617,6 +17621,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5896722629414400429, guid: 48cc3c46621aa674db0e2ce4ce8a527f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6345457671889070018, guid: 48cc3c46621aa674db0e2ce4ce8a527f, type: 3}
+      propertyPath: m_AnchoredPosition.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6436207616488323837, guid: 48cc3c46621aa674db0e2ce4ce8a527f, type: 3}
@@ -20205,7 +20213,7 @@ MonoBehaviour:
   _breadSprite: {fileID: 21300000, guid: 6281e69e11bff07478833b1790bc1b4a, type: 3}
   _drumstickSprite: {fileID: 21300000, guid: 04aaa4bfbc081414b92ae065bbf3ee0b, type: 3}
   _fishSprite: {fileID: 21300000, guid: 93bb9411b6898674ea4e1b5d190ae29b, type: 3}
-  _vodkaSprite: {fileID: 21300000, guid: 6e8a0ed158e89aa4295a207e3e275331, type: 3}
+  _vodkaSprite: {fileID: 21300000, guid: 5d69f497d24c6694a87229408eb6581f, type: 3}
   _firewoodSprite: {fileID: 21300000, guid: 925120c3f23d8184e88bff2764e9309f, type: 3}
   _mapSprite: {fileID: 21300000, guid: c0f9a45a7baba0743acd3d4ae1a9efdf, type: 3}
   _lanternSprite: {fileID: 21300000, guid: 6ce03429a37a72a41a74529c7e5b4055, type: 3}

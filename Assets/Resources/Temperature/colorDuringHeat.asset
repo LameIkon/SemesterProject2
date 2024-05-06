@@ -9,10 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 985cf02980db40d479858dba3c78dc6a, type: 3}
-  m_Name: LanternDescription
+  m_Script: {fileID: 11500000, guid: a756a3da25314de4a8f894e6f0c385eb, type: 3}
+  m_Name: colorDuringHeat
   m_EditorClassIdentifier: 
-  _itemDescription: '<size=20><b> Lantern</b> </size>
-
-    <size=14>Used as source
-    of light</size>'
+  _value: {r: 1, g: 0.46574655, b: 0, a: 1}

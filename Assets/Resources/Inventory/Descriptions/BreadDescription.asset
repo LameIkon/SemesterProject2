@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _itemDescription: '<size=20><b> Bread</b> </size>
 
-    This piece of bread gives
-    +40 food
+    <size=14>Just plain wheat
+    bread. Replenishes hunger by <color=#ffdd1a>40</color></size>
 
 '
