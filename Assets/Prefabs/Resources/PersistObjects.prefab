@@ -17507,6 +17507,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4087976290286355162, guid: 48cc3c46621aa674db0e2ce4ce8a527f, type: 3}
+      propertyPath: m_TagString
+      value: HungerIcon
+      objectReference: {fileID: 0}
     - target: {fileID: 4303502836921626794, guid: 48cc3c46621aa674db0e2ce4ce8a527f, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 2
@@ -17617,6 +17621,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5896722629414400429, guid: 48cc3c46621aa674db0e2ce4ce8a527f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6345457671889070018, guid: 48cc3c46621aa674db0e2ce4ce8a527f, type: 3}
+      propertyPath: m_AnchoredPosition.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6436207616488323837, guid: 48cc3c46621aa674db0e2ce4ce8a527f, type: 3}
