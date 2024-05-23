@@ -186,7 +186,7 @@ public class LostExpeditionManager : MonoBehaviour
         _npc.transform.GetChild(3).gameObject.SetActive(true); // Get the 1st chatbubble and activate it
         yield return new WaitForSeconds(2);
         _polarBear.SetActive(true);
-        yield return new WaitForSeconds(2.25f);
+        yield return new WaitForSeconds(2.3f);
         _playerAnimator.Play("Falling_SideLeft");
         yield return new WaitForSeconds(0.2f);
         _player.transform.GetChild(1).GetChild(8).gameObject.SetActive(true); // Get players chat bubble

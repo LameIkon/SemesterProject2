@@ -86,6 +86,8 @@ public class EnvironmentManager : MonoBehaviour
     private void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
+        _inside = true;
+        _outside = false;   
     }
 
     private void OnDisable()

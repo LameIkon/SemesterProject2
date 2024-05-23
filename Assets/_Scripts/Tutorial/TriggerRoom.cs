@@ -8,7 +8,7 @@ public class TriggerRoom : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if ( GuidelineManager.instance._finishedInsideTutorial && GameManager._shipInBool) // Wont get triggered if tutorial finished and only inside ship
+        if (GuidelineManager.instance._finishedTutorial && GameManager._shipInBool && collision.gameObject.name == "Player") // Wont get triggered if tutorial finished
         {
             this.gameObject.SetActive(false);
             return;
