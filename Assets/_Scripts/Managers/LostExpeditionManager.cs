@@ -56,7 +56,6 @@ public class LostExpeditionManager : MonoBehaviour
     [SerializeField, Space(8f)] private float _cameraMidEnabledOrthoSize = 3; // the start value
     [SerializeField] private float _cameraMidOrthoSize = 5; // the start value
 
-
     // Start is called before the first frame update
     void Start()
     {
@@ -78,7 +77,10 @@ public class LostExpeditionManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Cursor.visible == true && !_lostExpeditionfinished)
+        {
+            Cursor.visible = false;
+        }
     }
 
     void DisableNotNeed()
@@ -195,6 +197,7 @@ public class LostExpeditionManager : MonoBehaviour
         GameManager._Instance._blackSceen.SetActive(true);
         ResetLostExpeditionScript();
         yield return new WaitForSeconds(5f);
+        _lostExpeditionfinished = true;
         SceneManager.LoadScene(_NextScene); // Load this scene when the lost expedition script is don      
     }
 

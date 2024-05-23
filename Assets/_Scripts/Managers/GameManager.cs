@@ -34,6 +34,7 @@ public class GameManager : PersistentSingleton<GameManager>
     [SerializeField] private SceneField _lostExpeditionIntro;
     public static bool _LostExpeditionBool;
     public GameObject _blackSceen;
+    private bool _lostExpeditionOnceBool;
 
     [Header("Tutorial")]
     [SerializeField] private GameObject _guideline;
@@ -108,19 +109,16 @@ public class GameManager : PersistentSingleton<GameManager>
             _player.transform.position = _spawnPosition;
             _playerMovePoint.transform.position = _spawnPosition;
 
-            if (SkipGuide._skipGuide && SkipGuide._showGuide)
-            {
-                Debug.Log("guide");
-                LostExpeditionManager._lostExpeditionfinished = true; // used for the skiptutorial to get activated
-                _guideline.SetActive(true);               
-            }
+            _lostExpeditionOnceBool = true;
+            InputReader.OnInventoryEvent += HandleInventory; // you can open inventory
         }
-        else if (_LostExpeditionBool)
+        else if (_LostExpeditionBool && !_mainSceneBool && !_lostExpeditionOnceBool)
         {
             _spawnPosition = new Vector3(-36, 351, 0);
             _player.transform.position = _spawnPosition;
             _playerMovePoint.transform.position = _spawnPosition;
              InputReader.OnInventoryEvent -= HandleInventory; // you cannot open inventory
+            Debug.Log("expedition cutscene");
         }
     }
     void CheckScene()

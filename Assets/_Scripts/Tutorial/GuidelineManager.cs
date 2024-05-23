@@ -190,7 +190,7 @@ public class GuidelineManager : MonoBehaviour
             _roomTriggers[2].gameObject.SetActive(false);
             _roomTriggers[3].gameObject.SetActive(false);
             _roomTriggers[4].gameObject.SetActive(false);
-            _doorToOutside.gameObject.SetActive(false);
+            _doorToOutside.SetActive(false);
 
             // Start first part of tutorial
             Invoke("ShowHealth", 2f);
@@ -394,10 +394,9 @@ public class GuidelineManager : MonoBehaviour
     {
 
         StartCoroutine(ShowRoom(null, _doors[3])); // remove the door
-        _doorToOutside.SetActive(true); // Stairs can now be used
-        _roomTriggers[4].gameObject.SetActive(true);
+        _doorToOutside.SetActive(true); // you can now exit
         yield return new WaitUntil(() => EnvironmentManager.instance._outside); // wait until going outside
-
+        _roomTriggers[4].gameObject.SetActive(true);
 
         PriorityManager._canInteractDialogue = false; // You are not allowed to talk to the captain
         _captainSprite = GameObject.Find("NPC"); // The captain. Used to get the chat bubbles
