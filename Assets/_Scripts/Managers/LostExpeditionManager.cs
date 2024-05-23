@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 using UnityEditor.Animations;
 using Cinemachine;
 using UnityEngine.UI;
+using UnityEngine.Rendering.Universal;
 
 public class LostExpeditionManager : MonoBehaviour
 {
@@ -18,6 +19,8 @@ public class LostExpeditionManager : MonoBehaviour
     [Header("Player")]
     [SerializeField] private GameObject _player;
     [SerializeField] private GameObject _LostLight;
+    [SerializeField] private Light2D _lostLantern;
+
     private PlayerController _playerMovementController;
     private Animator _playerAnimator;
     private RuntimeAnimatorController _originalPlayerSprite;
@@ -55,6 +58,11 @@ public class LostExpeditionManager : MonoBehaviour
 
     [SerializeField, Space(8f)] private float _cameraMidEnabledOrthoSize = 3; // the start value
     [SerializeField] private float _cameraMidOrthoSize = 5; // the start value
+
+
+    [Header("Audio")]
+    [SerializeField] private AudioSource _audioSource;
+    [SerializeField] private AudioClip _loadgun, _gunshot;
 
     // Start is called before the first frame update
     void Start()
@@ -150,6 +158,7 @@ public class LostExpeditionManager : MonoBehaviour
 
         // We dont want to reset everytime we leave the ship and enter again
         DontDestroyOnLoad(_expedition);
+
     }
 
     IEnumerator TheLostExpedition()
@@ -180,9 +189,10 @@ public class LostExpeditionManager : MonoBehaviour
         StartCoroutine(SpriterendererFadeIn(true, 1.5f, _player));
         StartCoroutine(SpriterendererFadeIn(true, 1.5f, _npc));
         yield return new WaitForSeconds(6);
+        StartCoroutine(LightFade(true, 2f, _lostLantern));
         _npcDestinationAnimator.Play("point2");
         _playerDestinationAnimator.Play("point2");
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.5f);               
         _npc.transform.GetChild(3).gameObject.SetActive(true); // Get the 1st chatbubble and activate it
         yield return new WaitForSeconds(2);
         _polarBear.SetActive(true);
@@ -193,7 +203,11 @@ public class LostExpeditionManager : MonoBehaviour
         yield return new WaitForSeconds(1.5f);
         _npcAnimator.Play("Shooting_SideRight");
         _npc.transform.GetChild(4).gameObject.SetActive(true); // Get the 2nd chatbubble and activate it
+        _audioSource.clip = _loadgun;
+        _audioSource.Play();
         yield return new WaitForSeconds(1);
+        _audioSource.clip = _gunshot;
+        _audioSource.Play();
         GameManager._Instance._blackSceen.SetActive(true);
         ResetLostExpeditionScript();
         yield return new WaitForSeconds(5f);
@@ -281,6 +295,26 @@ public class LostExpeditionManager : MonoBehaviour
         canvasGroup.alpha = targetAlpha;
     }
 
+    IEnumerator LightFade(bool fadeIn, float fadeDuration, Light2D light)
+    {
+        float currentTime = 0f;
+        Color startColor = light.color;
+        float startAlpha = fadeIn ? 0f : startColor.a;
+        float targetAlpha = 125f / 255f; // Target alpha value in 0-1 range
+
+        while (currentTime < fadeDuration)
+        {
+            currentTime += Time.deltaTime;
+            float alpha = Mathf.Lerp(startAlpha, targetAlpha, currentTime / fadeDuration);
+            startColor.a = alpha;
+            light.color = startColor;
+            yield return null;
+        }
+        startColor.a = targetAlpha;
+        light.color = startColor;
+
+    }
+
 
     void ResetLostExpeditionScript()
     {
@@ -297,6 +331,7 @@ public class LostExpeditionManager : MonoBehaviour
         _playerMovementController._forceRunningAnimation = false; // not forced to run anymore
 
         _LostLight.SetActive(false);
+        _lostLantern.gameObject.SetActive(false);
         _aiControlPlayer.enabled = false;
 
         _playerMovementController.EnableEvents();
