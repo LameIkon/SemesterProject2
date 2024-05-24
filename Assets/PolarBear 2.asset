@@ -19,8 +19,8 @@ MonoBehaviour:
     MinValue: 0.4
     MaxValue: 0.4
   _waitBetweenRunning:
-    MinValue: 0.15
-    MaxValue: 0.15
+    MinValue: 0.1
+    MaxValue: 0.1
   _waitBetweenAttack:
     MinValue: 2
     MaxValue: 2
