@@ -23473,6 +23473,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 1577063444}
     m_Modifications:
     - target: {fileID: 1601263763485570700, guid: 629e3b9b21b39ae47b55cf3e5acb6cbf, type: 3}
+      propertyPath: _forceRoar
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1601263763485570700, guid: 629e3b9b21b39ae47b55cf3e5acb6cbf, type: 3}
+      propertyPath: _forceRoarOnAggro
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1601263763485570700, guid: 629e3b9b21b39ae47b55cf3e5acb6cbf, type: 3}
       propertyPath: _polarBearAIScript
       value: 
       objectReference: {fileID: 11400000, guid: 88d0ea1febddcf74d8737f7cfb75c501, type: 2}

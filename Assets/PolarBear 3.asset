@@ -19,11 +19,12 @@ MonoBehaviour:
     MinValue: 0.4
     MaxValue: 0.4
   _waitBetweenRunning:
-    MinValue: 0.1
-    MaxValue: 0.1
+    MinValue: 0.15
+    MaxValue: 0.15
   _waitBetweenAttack:
     MinValue: 2
     MaxValue: 2
   _aggroRange: 4
   _damage: 10
   _attackRange: 1
+  _forceAggro: 0

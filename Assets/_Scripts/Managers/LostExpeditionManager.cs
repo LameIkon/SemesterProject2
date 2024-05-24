@@ -89,7 +89,7 @@ public class LostExpeditionManager : MonoBehaviour
     {
         if (Cursor.visible == true && !_lostExpeditionfinished)
         {
-            Cursor.visible = false;
+            //Cursor.visible = false;
         }
     }
 

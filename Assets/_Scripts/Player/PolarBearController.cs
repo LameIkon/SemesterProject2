@@ -7,6 +7,7 @@ public class PolarBearController : MovementController
     [SerializeField] private PolarBearAI _polarBearAIScript;
     [SerializeField] private AudioSource _runningAudioSource;
     [SerializeField] private AudioSource _roarAudioSource;
+    [SerializeField] private bool _forceRoarOnAggro;
 
     private bool _isAttacking;
 
@@ -64,6 +65,7 @@ public class PolarBearController : MovementController
     {
         _movePoint.position = transform.position; // Force stop the bear. Will however offset them from the grid
         yield return null;
+        yield return null;
         AttackAnimation();
         yield return new WaitForSeconds (0.2f);
         Collider2D[] hits = Physics2D.OverlapCircleAll(ownPosition, 2.2f * attackRange);
@@ -120,7 +122,10 @@ public class PolarBearController : MovementController
                     RunningAnimation();
                     if (!_runningAudioSource.isPlaying) // Checks if the audio is not playing
                     {
-                        _roarAudioSource.Play();
+                        if (Random.value < 0.25f || _forceRoarOnAggro) // 25% chance to roar or if boolean set to true. 
+                        {
+                            _roarAudioSource.Play(); 
+                        }
                         _runningAudioSource.Play();
                     }
                 }
