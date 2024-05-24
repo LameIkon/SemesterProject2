@@ -333,7 +333,10 @@ public class DialogueManager : MonoBehaviour
         { 
         animator.Play("Speak");
         }
-        catch (MissingReferenceException e) { }
+        catch (MissingReferenceException e) 
+        { 
+            Debug.Log(e.ToString());
+        }
 
         string currentText = "";
         foreach (char c in storedText)
@@ -346,7 +349,10 @@ public class DialogueManager : MonoBehaviour
         {
             animator.Play("Idle");
         }
-        catch (MissingReferenceException e) { }
+        catch (MissingReferenceException e) 
+        {
+            Debug.Log(e.ToString());
+        }
     }
 
 }

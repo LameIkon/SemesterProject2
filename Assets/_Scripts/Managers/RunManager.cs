@@ -38,7 +38,7 @@ public class RunManager : MonoBehaviour, ITireable
 
     Coroutine running;
     Coroutine regen;
-    private void Update()
+    private void FixedUpdate()
     {
         if (_isMoving && _isRunning && _checkOnce) // Only start running if you are moving and pressing run
         {
