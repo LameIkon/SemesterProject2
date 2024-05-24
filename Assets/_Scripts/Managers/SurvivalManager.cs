@@ -92,6 +92,7 @@ public class SurvivalManager : Singleton<SurvivalManager>, IDamageable, IFreezea
     {
         StartDialogue.OnDialogueStartedEvent -= HandleDialogueStart;
         DialogueManager.OnDialogueEndedEvent -= HandleDialogueEnd;
+        SetSurvivalbars();
     }
 
 

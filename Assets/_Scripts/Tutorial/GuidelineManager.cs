@@ -16,8 +16,8 @@ public class GuidelineManager : MonoBehaviour
     public bool _isLanterInToolBar; // Used to check if lantern is in toolbar
     [SerializeField] private bool _numberKeyPressed; // Used to detect keypress
     public bool _usedItem; // Used as checker on toolbars
-    public bool _finishedInsideTutorial; // Used to stop triggers from happening and to stop ship in to reset when leaving and enter ship
-
+    public bool _finishedTutorial; // Used to stop triggers from happening and to stop ship in to reset when leaving and enter ship
+    public bool _tutorialHasStarted; // Used for the skipGuide script to check wether it should start or not
 
 
     [Header("Guide Canvases")]
@@ -73,6 +73,7 @@ public class GuidelineManager : MonoBehaviour
     [SerializeField] private GameObject _lantern;
     [SerializeField] private Furnace _furnace;
     [SerializeField] private GameObject _guideInScene;
+    [SerializeField] private GameObject _skipGuide;
 
 
 
@@ -128,7 +129,7 @@ public class GuidelineManager : MonoBehaviour
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         // When loading scene
-        if (_finishedInsideTutorial && GameManager._shipInBool)
+        if (_finishedTutorial && GameManager._shipInBool)
         {
             TutorialFinished();
         }
@@ -137,8 +138,10 @@ public class GuidelineManager : MonoBehaviour
     IEnumerator Initilize()
     {
         yield return null; // Need to wait a frame else it cant check for the ship bool
-        if (GameManager._shipInBool &&_canvasRestrictionHolder == null)
+        if (GameManager._shipInBool && _canvasRestrictionHolder == null)
         {
+            _tutorialHasStarted = true;
+
             // Find the camera component
             _virtualCamera = GameObject.FindWithTag("MainCamera");
             _cameraOriginalOrthoSize = _virtualCamera.GetComponent<CinemachineVirtualCamera>().m_Lens.OrthographicSize; // Store the original size
@@ -153,6 +156,7 @@ public class GuidelineManager : MonoBehaviour
             _scientistSprite = GameObject.Find("NPC (1)"); // The scientist. Used to get the chat bubbles
             _guideInScene = GameObject.Find("Guide");
             _doorToOutside = GameObject.Find("Door");
+            _skipGuide.GetComponent<SkipGuide>().ActivateSkipGuide(); // actiave the ability to skip the guide
 
             // Find all the child gameobjects and delegate them to a list. gameobject order is important
             Transform canvasParent = _canvasRestrictionHolder.transform;
@@ -186,7 +190,7 @@ public class GuidelineManager : MonoBehaviour
             _roomTriggers[2].gameObject.SetActive(false);
             _roomTriggers[3].gameObject.SetActive(false);
             _roomTriggers[4].gameObject.SetActive(false);
-            _doorToOutside.gameObject.SetActive(false);
+            _doorToOutside.SetActive(false);
 
             // Start first part of tutorial
             Invoke("ShowHealth", 2f);
@@ -371,16 +375,18 @@ public class GuidelineManager : MonoBehaviour
         _captainSprite.transform.GetChild(6).gameObject.SetActive(true); // Get the 5th chatbubble and activate it
         yield return new WaitUntil(() => GameManager._inventoryMenuSTATIC.activeSelf); // wait until the ongoing event trigger becomes true
         yield return new WaitUntil(() => !GameManager._inventoryMenuSTATIC.activeSelf); // wait until the ongoing event trigger becomes false
-        _captainSprite.transform.GetChild(7).gameObject.SetActive(true); // Get the 6th chatbubble and activate it
-        yield return new WaitForSeconds(6f);
-        _captainSprite.transform.GetChild(8).gameObject.SetActive(true); // Get the 7th chatbubble and activate it
-        _finishedInsideTutorial = true; // Tutorial inside ship finished
-        yield return new WaitForSeconds(2f);
-        
 
         // start outside tutorial
         StartCoroutine(Outside());
-        
+        _finishedTutorial = true; // Tutorial inside ship finished
+        StartCoroutine(ShowRoom(null, _doors[3])); // remove the door
+        _doorToOutside.SetActive(true); // you can now exit
+
+        _captainSprite.transform.GetChild(7).gameObject.SetActive(true); // Get the 6th chatbubble and activate it
+        yield return new WaitForSeconds(6f);
+        _captainSprite.transform.GetChild(8).gameObject.SetActive(true); // Get the 7th chatbubble and activate it
+        yield return new WaitForSeconds(2f);
+       
     }
     #endregion
 
@@ -388,12 +394,10 @@ public class GuidelineManager : MonoBehaviour
 
     IEnumerator Outside()
     {
-
-        StartCoroutine(ShowRoom(null, _doors[3])); // remove the door
-        _doorToOutside.SetActive(true); // Stairs can now be used
-        _roomTriggers[4].gameObject.SetActive(true);
         yield return new WaitUntil(() => EnvironmentManager.instance._outside); // wait until going outside
-
+        StopCoroutine(Show4thRoom()); // if you decide to go out before captain finishes talking stop the coroutine
+        Debug.Log("outside" + EnvironmentManager.instance._outside);
+        _roomTriggers[4].gameObject.SetActive(true);
 
         PriorityManager._canInteractDialogue = false; // You are not allowed to talk to the captain
         _captainSprite = GameObject.Find("NPC"); // The captain. Used to get the chat bubbles
@@ -464,7 +468,7 @@ public class GuidelineManager : MonoBehaviour
         StartCoroutine(CharacterFadeIn(_captainSprite, 0.1f));
         _captainAnimator.Play("point3");
 
-        _finishedInsideTutorial = true; // Tutorial inside ship finished
+        _finishedTutorial = true; // Tutorial inside ship finished
         _isOngoingEvent = false; // you will be able to walk
         _doorToOutside.SetActive(true); // you can now exit
         _roomTriggers[4].gameObject.SetActive(false);
@@ -610,7 +614,8 @@ public class GuidelineManager : MonoBehaviour
         _isfoodInToolBar = false;
         _numberKeyPressed = false;
         _isOngoingEvent = false;
-        _finishedInsideTutorial = false;
+        _finishedTutorial = false;
+        _tutorialHasStarted = false;
 
         // Reset canvas alpha
         _movementCanvas.GetComponent<CanvasGroup>().alpha = 1.0f;

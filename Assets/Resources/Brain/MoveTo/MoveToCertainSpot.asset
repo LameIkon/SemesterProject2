@@ -16,4 +16,4 @@ MonoBehaviour:
     MinValue: 0.2
     MaxValue: 0.2
   _rangeToPlayerStop: 1
-  _destination: Destination
+  _destination: CaptainDestinationWalk

@@ -63,6 +63,5 @@ public class HighlightDialogue : PriorityManager
     protected override void AdditionalTriggerExitImplementation()
     {
         _showInteraction.SetActive(false);
-        GameManager._hideEInteractables = true;
     }
 }

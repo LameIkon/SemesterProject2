@@ -9,11 +9,13 @@ public class WeatherTrigger : MonoBehaviour
     [SerializeField] private bool _blizzard;
     [SerializeField] private bool _snow;
     [SerializeField] private bool _fog;
+    [SerializeField] private float _exitTimeRemoveEffect;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.name == "Player")
         {
+            StopAllCoroutines();
             ChooseWeather();
         }
     }
@@ -21,7 +23,7 @@ public class WeatherTrigger : MonoBehaviour
     {
         if (collision.gameObject.name == "Player")
         {
-            EnvironmentManager.instance.ResetWeather(); // stop the weather when you exit
+            StartCoroutine(Timer());
         }
     }
 
@@ -48,5 +50,13 @@ public class WeatherTrigger : MonoBehaviour
         {
             Debug.LogError("No weather condition choosen!");
         }
+    }
+
+    IEnumerator Timer()
+    {      
+        yield return new WaitForSeconds(_exitTimeRemoveEffect);
+        EnvironmentManager.instance.StopWeather();
+        yield return new WaitForSeconds(5f);
+        EnvironmentManager.instance.ResetWeather(); // stop the weather when you exit
     }
 }

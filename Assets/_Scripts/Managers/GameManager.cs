@@ -14,7 +14,8 @@ public class GameManager : PersistentSingleton<GameManager>
     [SerializeField] private GameObject _inventoryMenu;
     [SerializeField] private SceneField _mainMenu;
     [SerializeField] private SceneField _shipIn;
-    [SerializeField] private GameObject _guideline;
+    
+    
     [SerializeField] private GameObject _player;
     [SerializeField] private GameObject _playerMovePoint;
     public static GameObject _inventoryMenuSTATIC;
@@ -27,25 +28,38 @@ public class GameManager : PersistentSingleton<GameManager>
     [SerializeField] private List<GameObject> _fireCanvases;
     [SerializeField] private List<GameObject> _firePlaces;
 
+    
+
+    [Header("Lost Expedition Intro")]
+    [SerializeField] private SceneField _lostExpeditionIntro;
+    public static bool _LostExpeditionBool;
+    public GameObject _blackSceen;
+    private bool _lostExpeditionOnceBool;
+
+    [Header("Tutorial")]
+    [SerializeField] private GameObject _guideline;
+    [SerializeField] private GameObject _skipTutorial;
+    [SerializeField] private GameObject _SkipTutorialButtonFromControls;
 
 
+    [Header("Other stuff")]
     public bool _mainSceneBool;
-    public static bool _shipInBool;
+    public static bool _shipInBool;  
     public bool _isInventoryOpen = false;
     public bool _isChestOpen;
-    private bool _isPaused = false;
-
-    public static bool _hideEInteractables; // used for scripts disable interactables such as chest and campfire
+    private bool _isPaused = false;     
+    private Vector3 _spawnPosition;
+    
 
     protected override void Awake()
     {
-       
-
         base.Awake();
         if (_inputs == null) 
         {
             _inputs = ScriptableObject.CreateInstance<InputReader>();
         }
+
+        
     }
 
     private void Start() 
@@ -62,9 +76,13 @@ public class GameManager : PersistentSingleton<GameManager>
             _inventoryMenu.SetActive(false);
         }
         CheckScene();
-        _hideEInteractables = false;
         _isPaused = false;
         _isInventoryOpen = false;
+
+        // Set to false if they are active
+        //_guideline.SetActive(false);
+        //_skipTutorial.SetActive(false);
+        //_SkipTutorialButtonFromControls.SetActive(false);
 
     }
     private void OnEnable()
@@ -80,22 +98,33 @@ public class GameManager : PersistentSingleton<GameManager>
         InputReader.OnPauseEvent -= HandlePause;
         InputReader.OnInventoryEvent -= HandleInventory;
         SceneManager.sceneLoaded -= OnSceneLoaded;
+        Debug.Log("disabled inventory");
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        Vector3 spawnPoint = new Vector3(107, -1, 0);
-
         CheckScene();
         if (!_mainSceneBool && _shipInBool)
         {
-            _player.transform.position = spawnPoint;
-            _playerMovePoint.transform.position = spawnPoint;
+            _spawnPosition = new Vector3(107, -1, 0);
+            _player.transform.position = _spawnPosition;
+            _playerMovePoint.transform.position = _spawnPosition;
 
-            if (SkipGuide._skipGuide && SkipGuide._showGuide)
+            
+            if (!_lostExpeditionOnceBool)
             {
-                _guideline.SetActive(true);
+                _lostExpeditionOnceBool = true;
+                InputReader.OnInventoryEvent += HandleInventory; // you can open inventory
             }
+            Debug.Log("inside ship");
+        }
+        else if (_LostExpeditionBool && !_mainSceneBool && !_lostExpeditionOnceBool)
+        {
+            _spawnPosition = new Vector3(-36, 351, 0);
+            _player.transform.position = _spawnPosition;
+            _playerMovePoint.transform.position = _spawnPosition;
+             InputReader.OnInventoryEvent -= HandleInventory; // you cannot open inventory
+            Debug.Log("expedition cutscene");
         }
     }
     void CheckScene()
@@ -104,6 +133,7 @@ public class GameManager : PersistentSingleton<GameManager>
 
         if (currentScene.name == _mainMenu)
         {
+            Cursor.visible = true; // By chance when you load into the scene and cursor wasnt active
             _mainSceneBool = true;
         }
         else
@@ -113,11 +143,22 @@ public class GameManager : PersistentSingleton<GameManager>
 
         if (currentScene.name == _shipIn)
         {
+            Cursor.visible = true; // By chance when you load into the scene and cursor wasnt active
             _shipInBool = true;
         }
         else
         {
             _shipInBool = false;
+        }
+
+        if (currentScene.name == _lostExpeditionIntro)
+        {
+            _LostExpeditionBool = true;
+        }
+        else
+        {
+            _blackSceen.SetActive(false); // need for when changing away from this scene, because it gives a frame where you see everything
+            _LostExpeditionBool= false;
         }
     }
 
@@ -151,11 +192,11 @@ public class GameManager : PersistentSingleton<GameManager>
 
     private void HandleInventory() 
     {
+        Debug.Log("handle inventory");
         // Inventory
         if (_inventoryMenu.activeInHierarchy)
         {
             _inventoryMenu.SetActive(false);
-            _hideEInteractables = false; // interactables can be seen again
             _isInventoryOpen = false;
 
             // Check if any chests are active
@@ -194,7 +235,6 @@ public class GameManager : PersistentSingleton<GameManager>
         else if (!_inventoryMenu.activeInHierarchy)
         {
             _inventoryMenu.SetActive(true);
-            _hideEInteractables = true; // Hide E interactables
             _isInventoryOpen=true;
         }
 

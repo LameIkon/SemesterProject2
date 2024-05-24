@@ -86,6 +86,8 @@ public class EnvironmentManager : MonoBehaviour
     private void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
+        _inside = true;
+        _outside = false;   
     }
 
     private void OnDisable()
@@ -188,15 +190,15 @@ public class EnvironmentManager : MonoBehaviour
             _blizzard.SetActive(true); // Make it active
         }
 
-        if (!_IsSnow && !_IsFog)
+        if (!_IsSnow)
         {
             _blizzardEffect.Play(); // Start Blizzard effect
             _blizzardFogEffect.Play(); // Start Fog effect
             _IsBlizzard = true;
 
-            _CurrentOutsideTemperature.SetValue(_blizzardTemp); // Change current temperature
-            _CurrentStaminaUse.SetValue(_blizzardStaminaUse); // change current max stamina
-            _CurrentStaminaRegen.SetValue(_blizzardStaminaRegen); // change current stamina regen 
+            //_CurrentOutsideTemperature.SetValue(_blizzardTemp); // Change current temperature
+            //_CurrentStaminaUse.SetValue(_blizzardStaminaUse); // change current max stamina
+            //_CurrentStaminaRegen.SetValue(_blizzardStaminaRegen); // change current stamina regen 
 
             //SetPlayerSpeed(_blizzardSpeedDebuff) ; // Give movement speed debuff
         }
@@ -209,14 +211,14 @@ public class EnvironmentManager : MonoBehaviour
             _fog.SetActive(true); // Make it active
         }
 
-        if (!_IsBlizzard && !_IsSnow)
+        if (!_IsSnow)
         {
             _fogEffect.Play();
             _IsFog = true;
 
-            _CurrentOutsideTemperature.SetValue(_fogTemp); // Change current temperature
-            _CurrentStaminaUse.SetValue(_fogStaminaUse); // change current max stamina
-            _CurrentStaminaRegen.SetValue(_fogStaminaRegen); // change current stamina regen 
+            //_CurrentOutsideTemperature.SetValue(_fogTemp); // Change current temperature
+            //_CurrentStaminaUse.SetValue(_fogStaminaUse); // change current max stamina
+            //_CurrentStaminaRegen.SetValue(_fogStaminaRegen); // change current stamina regen 
 
             //SetPlayerSpeed(_fogSpeedDebuff); // Give movement speed debuff
         }
@@ -235,8 +237,8 @@ public class EnvironmentManager : MonoBehaviour
             _IsSnow = true;
 
             _CurrentOutsideTemperature.SetValue(_snowTemp); // Change current temperature
-            _CurrentStaminaUse.SetValue(_snowStaminaUse); // change current max stamina
-            _CurrentStaminaRegen.SetValue(_snowStaminaRegen); // change current stamina regen 
+            //_CurrentStaminaUse.SetValue(_snowStaminaUse); // change current max stamina
+            //_CurrentStaminaRegen.SetValue(_snowStaminaRegen); // change current stamina regen 
 
             //SetPlayerSpeed(_snowSpeedDebuff); // Give movement speed debuff
         }
@@ -256,6 +258,15 @@ public class EnvironmentManager : MonoBehaviour
 
     }
 
+    public void StopWeather()
+    {
+        // Stop all visual weather conditions
+        _blizzardEffect.Stop();
+        _blizzardFogEffect.Stop();
+        _fogEffect.Stop();
+        _snowEffect.Stop();
+    }
+
     public void ResetWeather() // Reset everything back to default
     {
         // Stop all visual weather conditions
@@ -269,11 +280,17 @@ public class EnvironmentManager : MonoBehaviour
         _IsSnow = false;
         _IsFog = false;
 
+        // Deactivate objects
+        _blizzard.SetActive(false);
+        _snow.SetActive(false);
+        _fog.SetActive(false);
+
         // Reset to default conditions
         _CurrentOutsideTemperature.SetValue(_defaultTemp);
         _CurrentStaminaUse.SetValue(_defaultStaminaUse);
         _CurrentStaminaRegen.SetValue(_defaultStaminaRegen);
 
+        Debug.Log("weather stopped");
         // Reset to default movement speed
         //SetPlayerSpeed(1f);
     }

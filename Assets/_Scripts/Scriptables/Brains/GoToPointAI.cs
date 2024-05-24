@@ -9,7 +9,10 @@ public class GoToPointAI : BrainAI
     // [SerializeField] private RangedFloat _moveTime;  
     // [SerializeField] private RangedFloat _fireTime;
     [SerializeField] private RangedFloat _waitBetweenWalk;
+    [SerializeField] private bool _shouldWaitBetweenOnPointReached; // Currently just been set in inspector
+    [SerializeField] private RangedFloat _waitBetweenReachingDestination;
     [SerializeField] private float _rangeToPlayerStop;
+    
 
 
     [SerializeField] private string _destination = "Destination";
@@ -24,13 +27,14 @@ public class GoToPointAI : BrainAI
     {
         brain.Remember(_walkState, Directions.W);
         brain.Remember(_stateTimeout, Random.Range(_waitBetweenWalk.MinValue, _waitBetweenWalk.MaxValue));
+        brain.Remember(_stateTimeout, Random.Range(_waitBetweenReachingDestination.MinValue, _waitBetweenReachingDestination.MaxValue));
     }
 
     private MovementController _move;
 
     public override void Think(AIThinker brain)
     {
-        UnityEngine.GameObject target = brain.Remember<UnityEngine.GameObject>(_target);
+        GameObject target = brain.Remember<GameObject>(_target);
         float stateTimeout = brain.Remember<float>(_stateTimeout);
         stateTimeout -= Time.deltaTime;
         brain.Remember(_stateTimeout, stateTimeout);
@@ -46,7 +50,7 @@ public class GoToPointAI : BrainAI
         if (!target)
         {
 
-            target = UnityEngine.GameObject.FindGameObjectWithTag(_destination);
+            target = GameObject.Find(_destination);
 
             brain.Remember(_target, target);
         }
@@ -62,22 +66,39 @@ public class GoToPointAI : BrainAI
 
             if (RangeHolder(vectorBetween, _rangeToPlayerStop * unitVectorBetween, _rangeToPlayerStop))
             {
+
+                Debug.Log("destination");
                 SetTimeoutWalk(brain);
+
                 if (_ReachedDestination == false)
                 {
                     _ReachedDestination = true;
                 }
-                
+
             }
             else
             {
-                SetTimeoutWalk(brain);
-                if (_ReachedDestination == true)
+                if (!_shouldWaitBetweenOnPointReached)
                 {
-                    _ReachedDestination = false;
+                    SetTimeoutWalk(brain);
+                    if (_ReachedDestination == true)
+                    {
+                        Debug.Log("destination");
+                        _ReachedDestination = false;
+                    }
+                    Walk(GiveDirectionTowardsPlayer(unitVectorBetween), brain);
                 }
+                else
+                {
 
-                Walk(GiveDirectionTowardsPlayer(unitVectorBetween), brain);
+                    if (_ReachedDestination == true)
+                    {
+                        Debug.Log("walking");
+                        SetTimeoutReachedDestination(brain);
+                        _ReachedDestination = false;                     
+                    }
+                    Walk(GiveDirectionTowardsPlayer(unitVectorBetween), brain);
+                }
             }
             
         }
@@ -165,83 +186,37 @@ public class GoToPointAI : BrainAI
     private Directions GiveDirectionTowardsPlayer(Vector3 dir)
     {
 
-        int i = Random.Range(0, 2);
+        // Go the direction the target is as accurate as possible
+        if (dir == Vector3.up) return Directions.N;
+        if (dir == Vector3.right) return Directions.E;
+        if (dir == Vector3.down) return Directions.S;
+        if (dir == Vector3.left) return Directions.W;
 
-        if (dir == Vector3.up)
+
+        bool isMovingUp = dir.y > 0;
+        bool isMovingRight = dir.x > 0;
+        if (isMovingUp) // Introduce a little randomness/smoothness to its pathfinding
         {
-            return Directions.N;
-        }
-        else if (dir == Vector3.right)
-        {
-            return Directions.E;
-        }
-        else if (dir == Vector3.down)
-        {
-            return Directions.S;
-        }
-        else if (dir == Vector3.left)
-        {
-            return Directions.W;
-        }
-        else if (dir == new Vector3())
-        {
-            return Directions.NW;
-        }
-        else if (dir.y > 0 && dir.x > 0)
-        {
-            if (i == 0)
-            {
-                return Directions.N;
-            }
-            else
-            {
-                return Directions.NE;
-            }
-        }
-        else if (dir.y > 0 && dir.x < 0)
-        {
-            if (i == 0)
-            {
-                return Directions.N;
-            }
-            else
-            {
-                return Directions.NW;
-            }
-        }
-        else if (dir.y < 0 && dir.x > 0)
-        {
-            if (i == 0)
-            {
-                return Directions.S;
-            }
-            else
-            {
-                return Directions.SE;
-            }
-        }
-        else if (dir.y < 0 && dir.x < 0)
-        {
-            if (i == 0)
-            {
-                return Directions.S;
-            }
-            else
-            {
-                return Directions.SW;
-            }
+            // 80% chance to running straight instead of diagonal
+            if (isMovingRight) return (Random.value > 0.8f) ? Directions.N : Directions.NE; // go up 
+            else return (Random.value > 0.8f) ? Directions.N : Directions.NW;
         }
         else
         {
-            return Directions.None;
+            // 80% chance to running straight instead of diagonal
+            if (isMovingRight) return (Random.value > 0.8f) ? Directions.S : Directions.SE; // go down
+            else return (Random.value > 0.8f) ? Directions.S : Directions.SW;
         }
-
-
     }
 
     private void SetTimeoutWalk(AIThinker brain)
     {
         brain.Remember(_stateTimeout, Random.Range(_waitBetweenWalk.MinValue, _waitBetweenWalk.MaxValue));
+    }
+
+    private void SetTimeoutReachedDestination(AIThinker brain)
+    {
+        brain.Remember(_stateTimeout, Random.Range(_waitBetweenReachingDestination.MinValue, _waitBetweenReachingDestination.MaxValue));
     }
 
 
