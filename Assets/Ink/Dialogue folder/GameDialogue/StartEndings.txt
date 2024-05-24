@@ -1,7 +1,7 @@
 Starting cutscene:
 Ejnar:
-In 1907 three men never returned from their trip.
-They set out to map the Northen part of Greenland.
+In 1907, three men failed to return from their trip.
+They set out to map the Northern part of Greenland.
 I have assembled a crew to find these lost men.
 Whatever it takes we will bring them back.
 This is the story of how that unfolded.
@@ -13,7 +13,7 @@ Ending 1 Iver dies:
 Ejnar: 
 Iver never returned. 
 We sent out to look for him.
-He layed there in the snow, lifeless.
+He laid there in the snow, lifelessly.
 With no time to spare we set sail home.
 As we return, we shall tell his story.
 
