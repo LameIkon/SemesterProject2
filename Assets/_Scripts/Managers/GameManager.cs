@@ -98,6 +98,7 @@ public class GameManager : PersistentSingleton<GameManager>
         InputReader.OnPauseEvent -= HandlePause;
         InputReader.OnInventoryEvent -= HandleInventory;
         SceneManager.sceneLoaded -= OnSceneLoaded;
+        Debug.Log("disabled inventory");
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -109,8 +110,13 @@ public class GameManager : PersistentSingleton<GameManager>
             _player.transform.position = _spawnPosition;
             _playerMovePoint.transform.position = _spawnPosition;
 
-            _lostExpeditionOnceBool = true;
-            InputReader.OnInventoryEvent += HandleInventory; // you can open inventory
+            
+            if (!_lostExpeditionOnceBool)
+            {
+                _lostExpeditionOnceBool = true;
+                InputReader.OnInventoryEvent += HandleInventory; // you can open inventory
+            }
+            Debug.Log("inside ship");
         }
         else if (_LostExpeditionBool && !_mainSceneBool && !_lostExpeditionOnceBool)
         {
@@ -186,6 +192,7 @@ public class GameManager : PersistentSingleton<GameManager>
 
     private void HandleInventory() 
     {
+        Debug.Log("handle inventory");
         // Inventory
         if (_inventoryMenu.activeInHierarchy)
         {

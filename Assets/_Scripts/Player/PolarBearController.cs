@@ -5,12 +5,21 @@ using UnityEngine;
 public class PolarBearController : MovementController
 {
     [SerializeField] private PolarBearAI _polarBearAIScript;
+    [SerializeField] private AudioSource _runningAudioSource;
+    [SerializeField] private AudioSource _roarAudioSource;
 
     private bool _isAttacking;
 
     private void Start()
     {
         _polarBearAIScript.SetPolarBearController(this);
+
+        AudioSource[] audioSources = GetComponents<AudioSource>(); // Get all audio components into an array
+        if (audioSources.Length == 2) // we should have only 2 audio sources
+        {
+            _runningAudioSource = audioSources[0];
+            _roarAudioSource = audioSources[1];
+        }
     }
 
     protected override void Update()
@@ -45,6 +54,7 @@ public class PolarBearController : MovementController
         if (!_isAttacking)
         {
             _isAttacking = true;
+            _runningAudioSource.Stop(); // stop running sound
             StartCoroutine(AttackConsecutive(ownPosition, attackRange, damage));
         }
     }
@@ -95,6 +105,35 @@ public class PolarBearController : MovementController
                 _lookingDirection = "Left";
             }
                 StartAnimation();
+        }
+    }
+
+    protected override void StartAnimation()
+    {
+        if (_animator != null)
+        {
+            if (Vector3.Distance(transform.position, _movePoint.position) >= 1f) // Only change when you move 1 tile
+            {
+                _isIdling = false;
+                if (_walkingSpeed < _moveSpeed || _forceRunningAnimation) // If your moveSpeed is faster than your walkingpeed it means you are running
+                {
+                    RunningAnimation();
+                    if (!_runningAudioSource.isPlaying) // Checks if the audio is not playing
+                    {
+                        _roarAudioSource.Play();
+                        _runningAudioSource.Play();
+                    }
+                }
+                else
+                {
+                    MoveAnimation();
+                    if (_runningAudioSource.isPlaying) // Check if the audio is playing
+                    {
+                        _roarAudioSource.Stop();
+                        _runningAudioSource.Stop();
+                    }
+                }
+            }
         }
     }
 

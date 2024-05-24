@@ -12823,6 +12823,7 @@ GameObject:
   - component: {fileID: 3193884579015899434}
   - component: {fileID: 4201160948168280278}
   - component: {fileID: 2618642363178252662}
+  - component: {fileID: 8826381028740556247}
   m_Layer: 0
   m_Name: LostExpeditionManager
   m_TagString: Untagged
@@ -12882,9 +12883,13 @@ MonoBehaviour:
   _cameraBeginningOrthoSize: 3
   _cameraMidEnabledOrthoSize: 3
   _cameraMidOrthoSize: 5
-  _audioSource: {fileID: 2618642363178252662}
+  _gunAudioSource: {fileID: 2618642363178252662}
+  _blizzardAudioSource: {fileID: 8826381028740556247}
+  _backgroundAudioSource: {fileID: 227193225165580191}
+  _playerRunningAudioSource: {fileID: 0}
   _loadgun: {fileID: 8300000, guid: 463c367130648ff4db2350ef98769069, type: 3}
   _gunshot: {fileID: 8300000, guid: bbf689863199b944fa3639fa2401d25a, type: 3}
+  _running: {fileID: 8300000, guid: cb36b915afbe16d4f9e1c58bcbf26a60, type: 3}
 --- !u!82 &2618642363178252662
 AudioSource:
   m_ObjectHideFlags: 0
@@ -12896,9 +12901,105 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 0.1
   m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!82 &8826381028740556247
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7209865374331109271}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: b1399b57a7518a24f9d8f58f4d2ae356, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 0.1
+  m_Pitch: 0.9
   Loop: 0
   Mute: 0
   Spatialize: 0
@@ -17916,9 +18017,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 7700974244885912009}
     - target: {fileID: 7071212026655611817, guid: 5f68667c624044144aaece0f732353f6, type: 3}
+      propertyPath: _fogTemp
+      value: -17
+      objectReference: {fileID: 0}
+    - target: {fileID: 7071212026655611817, guid: 5f68667c624044144aaece0f732353f6, type: 3}
       propertyPath: _blizzard
       value: 
       objectReference: {fileID: 4641309284227531815}
+    - target: {fileID: 7071212026655611817, guid: 5f68667c624044144aaece0f732353f6, type: 3}
+      propertyPath: _snowTemp
+      value: -15
+      objectReference: {fileID: 0}
     - target: {fileID: 7071212026655611817, guid: 5f68667c624044144aaece0f732353f6, type: 3}
       propertyPath: _fogEffect
       value: 
@@ -17927,6 +18036,10 @@ PrefabInstance:
       propertyPath: _snowEffect
       value: 
       objectReference: {fileID: 2696401445911192389}
+    - target: {fileID: 7071212026655611817, guid: 5f68667c624044144aaece0f732353f6, type: 3}
+      propertyPath: _blizzardTemp
+      value: -25
+      objectReference: {fileID: 0}
     - target: {fileID: 7071212026655611817, guid: 5f68667c624044144aaece0f732353f6, type: 3}
       propertyPath: _blizzardEffect
       value: 

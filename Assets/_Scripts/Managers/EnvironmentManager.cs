@@ -237,8 +237,8 @@ public class EnvironmentManager : MonoBehaviour
             _IsSnow = true;
 
             _CurrentOutsideTemperature.SetValue(_snowTemp); // Change current temperature
-            _CurrentStaminaUse.SetValue(_snowStaminaUse); // change current max stamina
-            _CurrentStaminaRegen.SetValue(_snowStaminaRegen); // change current stamina regen 
+            //_CurrentStaminaUse.SetValue(_snowStaminaUse); // change current max stamina
+            //_CurrentStaminaRegen.SetValue(_snowStaminaRegen); // change current stamina regen 
 
             //SetPlayerSpeed(_snowSpeedDebuff); // Give movement speed debuff
         }
@@ -254,8 +254,17 @@ public class EnvironmentManager : MonoBehaviour
         _barrierBlizzardEffect.Play();
         _barrierBlizzardFogEffect.Play();
 
-        //_CurrentOutsideTemperature.SetValue(_barrierBlizzardTemp); // Change current temperature
+        _CurrentOutsideTemperature.SetValue(_barrierBlizzardTemp); // Change current temperature
 
+    }
+
+    public void StopWeather()
+    {
+        // Stop all visual weather conditions
+        _blizzardEffect.Stop();
+        _blizzardFogEffect.Stop();
+        _fogEffect.Stop();
+        _snowEffect.Stop();
     }
 
     public void ResetWeather() // Reset everything back to default

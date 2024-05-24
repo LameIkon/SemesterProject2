@@ -61,7 +61,9 @@ public class LostExpeditionManager : MonoBehaviour
 
 
     [Header("Audio")]
-    [SerializeField] private AudioSource _audioSource;
+    [SerializeField] private AudioSource _gunAudioSource;
+    [SerializeField] private AudioSource _blizzardAudioSource;
+    [SerializeField] private AudioSource _backgroundAudioSource;
     [SerializeField] private AudioClip _loadgun, _gunshot;
 
     // Start is called before the first frame update
@@ -94,6 +96,7 @@ public class LostExpeditionManager : MonoBehaviour
     void DisableNotNeed()
     {
         Cursor.visible = false;
+        _backgroundAudioSource.Stop();
         _runManager.GetComponentInChildren<RunManager>().enabled = false; // Prevent running
         _footPrints = GameObject.Find("09Footprints");
         _footPrints.SetActive(false); // hide footprints
@@ -171,6 +174,7 @@ public class LostExpeditionManager : MonoBehaviour
 
         _lostExpeditionTextCanvas.SetActive(true);
         StartCoroutine(CanvasGroupFade(true, 3, _lostExpeditionCanvasGroup));
+        _blizzardAudioSource.Play();
         yield return null;
         _playerMovementController.DisableEvents(); // unsubscribe from the running. needs a delay, else it will get in conflict with the PlayerController manager subscribing at the same time
         
@@ -196,18 +200,21 @@ public class LostExpeditionManager : MonoBehaviour
         _npc.transform.GetChild(3).gameObject.SetActive(true); // Get the 1st chatbubble and activate it
         yield return new WaitForSeconds(2);
         _polarBear.SetActive(true);
-        yield return new WaitForSeconds(2.3f);
+        yield return new WaitForSeconds(1f);
+        //_bearAudioSource.clip = _bearRunning;
+        //_bearAudioSource.Play();
+        yield return new WaitForSeconds(1.3f);
         _playerAnimator.Play("Falling_SideLeft");
         yield return new WaitForSeconds(0.2f);
         _player.transform.GetChild(1).GetChild(8).gameObject.SetActive(true); // Get players chat bubble
         yield return new WaitForSeconds(1.5f);
         _npcAnimator.Play("Shooting_SideRight");
         _npc.transform.GetChild(4).gameObject.SetActive(true); // Get the 2nd chatbubble and activate it
-        _audioSource.clip = _loadgun;
-        _audioSource.Play();
+        _gunAudioSource.clip = _loadgun;
+        _gunAudioSource.Play();
         yield return new WaitForSeconds(1);
-        _audioSource.clip = _gunshot;
-        _audioSource.Play();
+        _gunAudioSource.clip = _gunshot;
+        _gunAudioSource.Play();
         GameManager._Instance._blackSceen.SetActive(true);
         ResetLostExpeditionScript();
         yield return new WaitForSeconds(5f);
@@ -339,6 +346,9 @@ public class LostExpeditionManager : MonoBehaviour
         _camera.m_Follow = _player.transform;
 
         _expedition.SetActive(false);
+
+        _backgroundAudioSource.Play(); // allow the default background noise back
+        _blizzardAudioSource.Stop();
     }
 
     void OnMainMenu()
