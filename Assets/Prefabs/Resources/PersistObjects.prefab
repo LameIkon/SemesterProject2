@@ -23713,6 +23713,30 @@ PrefabInstance:
       propertyPath: _forceRunningAnimation
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2762194720312333093, guid: e36a38a4dc77a644bbfbe397c4ca9e30, type: 3}
+      propertyPath: _lines.Array.data[0]
+      value: I'm not ready to leave yet.
+      objectReference: {fileID: 0}
+    - target: {fileID: 2762194720312333093, guid: e36a38a4dc77a644bbfbe397c4ca9e30, type: 3}
+      propertyPath: _lines.Array.data[1]
+      value: I need a lantern first.
+      objectReference: {fileID: 0}
+    - target: {fileID: 2762194720312333093, guid: e36a38a4dc77a644bbfbe397c4ca9e30, type: 3}
+      propertyPath: _lines.Array.data[2]
+      value: I think I need to do something else.
+      objectReference: {fileID: 0}
+    - target: {fileID: 2795535040380351681, guid: e36a38a4dc77a644bbfbe397c4ca9e30, type: 3}
+      propertyPath: _lines.Array.data[0]
+      value: I'm starving.
+      objectReference: {fileID: 0}
+    - target: {fileID: 2795535040380351681, guid: e36a38a4dc77a644bbfbe397c4ca9e30, type: 3}
+      propertyPath: _lines.Array.data[1]
+      value: I could use some food.
+      objectReference: {fileID: 0}
+    - target: {fileID: 2795535040380351681, guid: e36a38a4dc77a644bbfbe397c4ca9e30, type: 3}
+      propertyPath: _lines.Array.data[2]
+      value: I'm getting a little hungry.
+      objectReference: {fileID: 0}
     - target: {fileID: 3157731619633482776, guid: e36a38a4dc77a644bbfbe397c4ca9e30, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -23732,6 +23756,22 @@ PrefabInstance:
     - target: {fileID: 3570611794764209667, guid: e36a38a4dc77a644bbfbe397c4ca9e30, type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4535669244795282369, guid: e36a38a4dc77a644bbfbe397c4ca9e30, type: 3}
+      propertyPath: _lines.Array.data[0]
+      value: It seems the blizzard storm is gone.
+      objectReference: {fileID: 0}
+    - target: {fileID: 6638708593222674105, guid: e36a38a4dc77a644bbfbe397c4ca9e30, type: 3}
+      propertyPath: _lines.Array.data[0]
+      value: I shouldn't be walking into this blizzard.
+      objectReference: {fileID: 0}
+    - target: {fileID: 6638708593222674105, guid: e36a38a4dc77a644bbfbe397c4ca9e30, type: 3}
+      propertyPath: _lines.Array.data[1]
+      value: This is a bad idea.
+      objectReference: {fileID: 0}
+    - target: {fileID: 6638708593222674105, guid: e36a38a4dc77a644bbfbe397c4ca9e30, type: 3}
+      propertyPath: _lines.Array.data[2]
+      value: I shouldn't move any further.
       objectReference: {fileID: 0}
     - target: {fileID: 7021621769431304607, guid: e36a38a4dc77a644bbfbe397c4ca9e30, type: 3}
       propertyPath: m_PropertySheet.m_Float.m_Array.Array.size
@@ -23952,6 +23992,22 @@ PrefabInstance:
     - target: {fileID: 7615089792575113519, guid: e36a38a4dc77a644bbfbe397c4ca9e30, type: 3}
       propertyPath: m_PropertySheet.m_Gradient.m_Array.Array.data[0].m_Value.m_NumColorKeys
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8508680650265460361, guid: e36a38a4dc77a644bbfbe397c4ca9e30, type: 3}
+      propertyPath: _lines.Array.data[0]
+      value: I should go back to the ship to report about my findings.
+      objectReference: {fileID: 0}
+    - target: {fileID: 9058399315920698875, guid: e36a38a4dc77a644bbfbe397c4ca9e30, type: 3}
+      propertyPath: _lines.Array.data[0]
+      value: I'm freezing.
+      objectReference: {fileID: 0}
+    - target: {fileID: 9058399315920698875, guid: e36a38a4dc77a644bbfbe397c4ca9e30, type: 3}
+      propertyPath: _lines.Array.data[1]
+      value: I need to find a place to get warmth.
+      objectReference: {fileID: 0}
+    - target: {fileID: 9058399315920698875, guid: e36a38a4dc77a644bbfbe397c4ca9e30, type: 3}
+      propertyPath: _lines.Array.data[2]
+      value: I'm cold.
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -24705,7 +24761,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5976783435165415486, guid: ce95528e08361d34ab00bde1adbac263, type: 3}
       propertyPath: _lines.Array.data[0]
-      value: dammit i fell!
+      value: Dammit I fell!
       objectReference: {fileID: 0}
     - target: {fileID: 5976783435165415486, guid: ce95528e08361d34ab00bde1adbac263, type: 3}
       propertyPath: _lines.Array.data[1]
