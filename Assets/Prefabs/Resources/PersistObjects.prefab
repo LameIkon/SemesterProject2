@@ -432,7 +432,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: To use an item
+  m_text: to use an item
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: bfea17042bc31c841b7eb63fb6362109, type: 2}
   m_sharedMaterial: {fileID: 5437978294661855311, guid: bfea17042bc31c841b7eb63fb6362109, type: 2}
@@ -700,7 +700,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Hold the lantern in your toolbar
+  m_text: 'Select the lantern in your toolbar
 
     Right click to use
 
@@ -27064,6 +27064,16 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -244.7725
       objectReference: {fileID: 0}
+    - target: {fileID: 2375554630047723696, guid: 3bd13d619094d8544a258a73d50c1dee, type: 3}
+      propertyPath: m_text
+      value: 'to open the inventory
+
+'
+      objectReference: {fileID: 0}
+    - target: {fileID: 2946758057988103669, guid: 3bd13d619094d8544a258a73d50c1dee, type: 3}
+      propertyPath: m_text
+      value: Place firewood in the campfire to get heat
+      objectReference: {fileID: 0}
     - target: {fileID: 2965975014664911485, guid: 3bd13d619094d8544a258a73d50c1dee, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -27428,6 +27438,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8682435269875404615, guid: 3bd13d619094d8544a258a73d50c1dee, type: 3}
+      propertyPath: m_text
+      value: to navigate the toolbar
+      objectReference: {fileID: 0}
     - target: {fileID: 8757619685341135753, guid: 3bd13d619094d8544a258a73d50c1dee, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -27439,6 +27453,14 @@ PrefabInstance:
     - target: {fileID: 8810217720073104430, guid: 3bd13d619094d8544a258a73d50c1dee, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8825562912352990147, guid: 3bd13d619094d8544a258a73d50c1dee, type: 3}
+      propertyPath: m_text
+      value: Place firewood in the campfire to get heat
+      objectReference: {fileID: 0}
+    - target: {fileID: 8825562912352990147, guid: 3bd13d619094d8544a258a73d50c1dee, type: 3}
+      propertyPath: m_HorizontalAlignment
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 9032855945727728637, guid: 3bd13d619094d8544a258a73d50c1dee, type: 3}
       propertyPath: m_text
