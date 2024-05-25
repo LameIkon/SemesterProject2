@@ -28,11 +28,11 @@ INCLUDE Globals.ink
         -> mission
         
     * [Where are we?]
-        Where do you think? Greenland of course, we have spend the last 6 months getting here.
+        Where do you think? Greenland of course. We have spent the last 6 months getting here.
         -> main
         
     * [See you]
-        Yes, I'll see you
+        Yes, I'll see you.
             ~LaubMainReturn = true
         -> END
 
@@ -43,11 +43,11 @@ INCLUDE Globals.ink
             -> asking_laub_for_his_name
     
     *{LaubMainFirstTimeNameAsk == false} [What is your full name?]
-        No it is not.
+        ...
             -> asking_laub_for_his_name
             
     * [What do you do on the ship?]
-        I am here to ensure the safety of this mission, nothing must go wrong. 
+        I am here to ensure the safety of this mission. Nothing must go wrong. 
         ~ LaubMainFirstTimeNameAsk = false
         -> who_are_you
         
@@ -61,20 +61,20 @@ INCLUDE Globals.ink
         {LaubMainFirstTimeNameAsk: Not really!| My name is not of importance to you.}
         
         * * [Are you sure?]
-            Yes, now stop asking
+            Yes, now stop asking.
             -> pestering_laub_for_his_name
             
         * * [Okay]
-            Thank you!
+            Thank you.
             -> who_are_you
         
     * [Okay]
-        Thank you
+        Thank you.
         -> who_are_you
 
 
 === pestering_laub_for_his_name === 
-    + [Please, I need your full name.]
+    + [Please, I need your full name]
         {LaubMainPersteringLaub > 4:
             -> pissed_off_laub
          - else:
@@ -83,17 +83,17 @@ INCLUDE Globals.ink
             -> pestering_laub_for_his_name
         }
         
-    + [Ejnar told me he needed it.]
+    + [Ejnar told me he needed it]
         {LaubMainPersteringLaub > 4:
             -> pissed_off_laub
         - else:
-            He knows it aleady, there is no need for me to tell him.
+            He knows it already, there is no need for me to tell you.
             ~ LaubMainPersteringLaub++
             -> pestering_laub_for_his_name
         }
         
     * [Okay]
-        Thank you, now go away from me.
+        Thank you. Now, go away.
         -> END
 
 
@@ -107,23 +107,23 @@ INCLUDE Globals.ink
         -> mission
 
     * [I agree]
-        Finally someone with an ounce of sense, maybe you can talk some into Ejnar.
+        Finally, someone with an ounce of sense. Maybe you could talk some into Ejnar.
         ~ LaubMainAgreeWithLaub = true
         ~ LaubMainFirstTimeMissionAsk = false
         -> mission
      
     * [{LaubMainFirstTimeMissionAsk: What makes you think that? | Why is it impossible? }]
         
-        We are here during the Winter, it gets brutally cold!
+        We are here during the winter, it gets brutally cold!
         ~ LaubMainFirstTimeMissionAsk  = false
         -> mission
         
-    * [ Could you explain why? ]
-        Because almost all our provisions are used up, we had to slaughter the last dog to get food!
+    * [Could you explain why?]
+        Because almost all our provisions are used up. We had to slaughter the last dog to get food!
         ~ LaubMainFirstTimeMissionAsk  = false
         -> mission
         
-    * [Back to questions]
+    * [Back to the other questions]
         What do you want to know?
         -> main 
 
@@ -135,7 +135,7 @@ INCLUDE Globals.ink
 What do you want?
 
     * [I found Joergen]
-        Do I look like the captian of the expedition? Go talk to Ejnar about it, not me!
+        Do I look like the captain of the expedition? Go talk to Ejnar about it, not me!
             -> END
 
     * [Nothing]
@@ -151,7 +151,7 @@ What do you want?
 Can I help you with anything?
 0
     * [I found Niels]
-        Do I look like the captian of the expedition? Go talk to Ejnar about it, not me!
+        Do I look like the captain of the expedition? Go talk to Ejnar about it, not me!
             -> END
             
     * [Yes]
@@ -159,18 +159,18 @@ Can I help you with anything?
             -> END
 
     * [No]
-        Great, then I have no more to say to you.
+        Great, then I have nothing more to say to you.
             -> END
 
     * [See you]
-        Goodbye
+        Goodbye.
             -> END
 
 === ludvig_main ===
 What now?
 
     * [I found Ludvig]
-        Dead persumably? Such is the rules of the land.
+        Dead persumably? Such is the rules of this land.
             -> END
 
     * [Nothing]
@@ -178,14 +178,14 @@ What now?
             -> END
 
     * [See you]
-        Goodbye
+        Goodbye.
             -> END
 
 
 === card_main === 
 What do you want now?
     * [I found the map]
-        Finally, then we can get away from this horrible and cold place. You made my day Iver. Talk with Ejnar about it.
+        Finally. At last we can get away from this horribly cold place. You made my day Iver. Talk with Ejnar about it.
             -> END
 
     * [Nothing]
@@ -193,5 +193,5 @@ What do you want now?
             -> END
 
     * [See you]
-        Goodbye
+        Goodbye.
             -> END

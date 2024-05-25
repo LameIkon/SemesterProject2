@@ -42,7 +42,7 @@ INCLUDE Globals.ink
             -> END  
     
 === supplies_to_grab ===
-Some food will be necessary. You should also bring a lantern. The sun no longer rises this time of the year.
+Take some food, it will be necessary. You should also bring a lantern. The sun no longer rises this time of the year.
     *[Continue]
         Though, you shouldn't take too much. We are running low on supplies, and getting more here is not an easy task. Perhaps we should hunt for meat while you are out.
             * * [Continue]
@@ -51,7 +51,7 @@ Some food will be necessary. You should also bring a lantern. The sun no longer 
             
             
 === where_to_look ===
-Denmark's Harbour, just north of here. Hopefully they have reached there. They have build a small hut there, could be they are residing in that.
+Denmark's Harbour, just north of here. There is a small hut built over there. Hopefully, they have reached it. Could they be residing in it?
 
     *[Who are we looking for?]
         -> the_men_you_look_for

@@ -18,7 +18,7 @@ INCLUDE Globals.ink
     
     - HansMainReturn && HansWeatherTheory: Last time you reported you felt {HansTemperaturFeeling}, has this changed?
     
-    - HansMainReturn && HansNewTheory: You want something? 
+    - HansMainReturn && HansNewTheory: Do you want something? 
 }
         ~ HansMainReturn = false
  
@@ -29,11 +29,11 @@ INCLUDE Globals.ink
         -> working_on
         
     * {HansNewTheory} [Any new theories?]
-        Negative, It will take sometime before new ones come to me.
+        Negative, it will take some time before new ones come to me.
             -> main
         
     
-    * [What do on the ship?]
+    * [What are you doing on the ship?]
         -> what_do_you_do
     
     * [See you]
@@ -43,9 +43,9 @@ INCLUDE Globals.ink
         
         
 === working_on ===
-Right now I am on the brink of brilliance. I came with the intent to learn about how some people don't feel the cold, as much as others.
+I am now on the brink of brilliance. I came with the intent to learn why some people don't feel the cold as much as others.
     
-    *[What have you found out?]
+    *[What did you learn?]
         -> first_theory
     
     *[Okay]
@@ -55,7 +55,7 @@ Right now I am on the brink of brilliance. I came with the intent to learn about
                 -> first_theory
             
             * * [No]
-                How come I promise it is really exciting
+                How come? I promise it is very exciting.
                 
                     * * * [Okay, go ahead]
                         -> first_theory
@@ -66,12 +66,12 @@ Right now I am on the brink of brilliance. I came with the intent to learn about
 
 === first_theory ===
     ~HansWeatherTheory = true
-    For now, I have deduced that I feel cold, while Ejnar is not. But he has also been here before. Maybe if I go outside and stay in the snow I'll feel less cold when I come back in the ship.
+    I have deduced that I feel the cold, and Ejnar does not. Though he has been here before. If I go out in the snow, I'll maybe feel less cold when I return to the ship.
     
     *[Anything else]
-        No, but maybe you could report back to me how you feel?
+        No, but maybe you could report to me how you feel?
             
-            * * [Yes, I could do that]
+            * * [Yes, I can do that]
                 -> weather_feelings
         
             * * [No thank you]
@@ -86,9 +86,9 @@ Right now I am on the brink of brilliance. I came with the intent to learn about
 === weather_feelings ===
 ~HansTemperaturAmountOfChanges++
 {
-    - HansTemperaturAmountOfChanges < 5 :Oohh, how exciting, please tell me.
-    - HansTemperaturAmountOfChanges < 10 : You have now reported back {HansTemperaturAmountOfChanges} times, the data is getting better the more you report back. 
-    - HansTemperaturAmountOfChanges < 25 : With {HansTemperaturAmountOfChanges} changes in how you feel, I think you do not have to report more, you are of course welcome to.
+    - HansTemperaturAmountOfChanges < 5 :Oohh, how exciting. Please tell me.
+    - HansTemperaturAmountOfChanges < 10 : You have now reported back {HansTemperaturAmountOfChanges} times, the data is getting better the more you report. 
+    - HansTemperaturAmountOfChanges < 25 : With {HansTemperaturAmountOfChanges} changes in how you feel, I think you do not have to report more. You are of course welcome to.
     - HansTemperaturAmountOfChanges < 50 : {HansTemperaturAmountOfChanges} times! I think you are just toying with me at this point.
     - HansTemperaturAmountOfChanges < 100 : {HansTemperaturAmountOfChanges} times! Stop! Please Stop!
     - HansTemperaturAmountOfChanges < 10000 : I am just going to ignore the rest reports.
@@ -104,7 +104,7 @@ Right now I am on the brink of brilliance. I came with the intent to learn about
         -> noted("fine")
       
 === noted(var) === 
-Noted, please report back if this ever changes.
+Noted. Please report back if this ever changes.
 ~HansTemperaturFeeling = var
 {
     - ludvigDiaryFound: -> ludvig_main
@@ -117,21 +117,21 @@ Noted, please report back if this ever changes.
 
 VAR HansMainAskWhatHeDoes = false
 === what_do_you_do ===
-{HansMainAskWhatHeDoes: | I'm Hans, scientist from the University of Copenhagen, I'm here to conduct experiments and it will be me who has the responsiblity to consturct the final card from the sketches. }
+{HansMainAskWhatHeDoes: | I'm Hans, a scientist from the University of Copenhagen. I'm here to conduct experiments. I am responsible for constructing the final map from the sketches. }
 
-    * [What have you studied]
+    * [What did you study?]
         ~ HansMainAskWhatHeDoes = true
-        I have studied quiet a lot, but my main intrest is humans and weather. How does one live in such a place like Greenland volentary? My themometer cannot mesure temperatures so low.
+        I've studied quite a lot. My main interests are humans and weather. How does one live in a place like Greenland voluntarily? My thermometer cannot measure temperatures this low.
         -> what_do_you_do
     
-    * [Back to other questions]
+    * [Back to the other questions]
         Sure, anything else I can help with?
         -> main
 
 
 
 === new_theory ===
-Hmpf, you just gave me a new theory I'll have to think out. It will be even better than the last.
+Hmpf, you just gave me a new theory I'll have to ponder. It will be even better than the last.
     ~ HansNewTheory = true
 -> main
 
@@ -147,13 +147,13 @@ Hmpf, you just gave me a new theory I'll have to think out. It will be even bett
 
 === joergen_main ===
 {
-    - HansJoergenFirstTimeMain: Oh, you are back already. {HansWeatherTheory: Do you have anything to report? Maybe you have something new about the cold.} {HansNewTheory: I have a new theory}
+    - HansJoergenFirstTimeMain: Oh, you are back already. {HansWeatherTheory: Do you have anything to report? Maybe you've got something new about the cold.} {HansNewTheory: I have a new theory}
         ~HansJoergenFirstTimeMain = false
-    - HansJoergenReturn: Anything else you would like? 
+    - HansJoergenReturn: Would you like anything else? 
         ~HansJoergenReturn = false
 }
 
-    + {HansWeatherTheory && HansJoergenTheoryHeard}[I would like to report]
+    + {HansWeatherTheory && HansJoergenTheoryHeard}[I'd like to report]
         -> weather_feelings
     
     * {HansWeatherTheory && HansJoergenTheoryHeard == false}[Yes]
@@ -168,16 +168,16 @@ Hmpf, you just gave me a new theory I'll have to think out. It will be even bett
         ~HansJoergenTheoryHeard = true
         -> new_theory_joergen
         
-    * [Who where you again?]
-        Me? I Hans scientist {HansBecomeInsane: not that it means anything to someone like you.} {HansWeatherTheory: currently occupide by your reports from the outside.} {HansNameTheory: Hans, name: Hans occupation: scientist. You remember that now.} {HansNewTheory: currently I have a new theory for you to hear. } {HansEatingTheory: have you tried to eat something today?}
+    * [Who were you again?]
+        Me? I'm Hans the scientist {HansBecomeInsane: not that it means anything to someone like you.} {HansWeatherTheory: currently occupied by your reports from outside.} {HansNameTheory: Hans, name: Hans occupation: scientist. You remember that now.} {HansNewTheory: currently, I have a new theory for you to hear. } {HansEatingTheory: have you eaten something today?}
                 -> joergen_main
     
     * [See you]
     ~ HansJoergenReturn = true
     {
-        - HansWeatherTheory && HansJoergenTheoryHeard: See you, and please report back   
-        - HansNewTheory && HansJoergenTheoryHeard: See you 
-        - else: See you
+        - HansWeatherTheory && HansJoergenTheoryHeard: See you, and please report back.   
+        - HansNewTheory && HansJoergenTheoryHeard: See you.
+        - else: See you.
     }
             -> END
 
@@ -185,21 +185,21 @@ Hmpf, you just gave me a new theory I'll have to think out. It will be even bett
 
 
 === nothing_to_report ===
-That cannot be, no no no no no. You must have something, anything, things you must have. 
-    * [Yes I have something]
-        You are a funny man Iver, yes of course you have something to report.
+No no no no... that can't be. You must have something, anything, just anything you can report. 
+    * [I have something]
+        You are a funny man Iver. Of course you got something to report.
             -> weather_feelings
 
     * [No, nothing to report]
         ~HansWeatherTheory = false
-        Yes it makes sense, you are forgetting your struggle from the outside. Yes that must be it, it is so cold that you cannot remember. Do you remember the name of the captain?
+        That makes sense. You are forgetting your struggle from being outside. Wait, that must be it! It's so cold you can't remember. Do you know the name of the captain?
         
         * * [Laub]
             -> does_not_remember_captain("Laub")
         * * [Hans]
             -> does_not_remember_captain("Hans")
         * * [Ejnar]
-            No, my hypotesis must be wrong. Can it be wrong, no he must have guessed and gotten it right. Yes that's it, it can't be wrong, I can't be wrong.
+            No, my hypothesis must be wrong... or is it? No, he must have guessed and gotten it right. Yes, that's it. The hypothesis cannot be wrong. I can never be wrong.
                 -> joergen_main
         * * [Who?]
             -> does_not_remember_captain("Who")
@@ -208,42 +208,42 @@ That cannot be, no no no no no. You must have something, anything, things you mu
 
 === does_not_remember_captain(name) ===
 ~ HansNameTheory = true
-{name}, interesting, very interesting. {name == "Who": Subject does not remember that we have a captain. | Subject remembers a name but not the correct one.} Yes my theory must be true. 
+{name}, interesting, very interesting. {name == "Who": Subject does not remember our captain. | Subject recalls a name but not the correct one.} Yes, my theory must be true. 
     -> joergen_main
     
 
 
 === new_theory_joergen ===
 ~HansNewTheory = false
-Ooohh yes I do. Would you like to hear it?
+Oohh, yes I do. Would you like to hear it?
     * [Yes]
-        I cannot wait to tell you
+        I cannot wait to tell you.
             -> eating_theory
     
     * [No, not really]
-        Ooh, why not not!?
+        Oohh, why not not!?
         
             * * [I am just joking]
-                So funny Iver, yes funny, that you are.
+                Very funny Iver. You sure are humorous.
                     -> eating_theory
             
-            * * [I just don't]
+            * * [I just don't want to]
             ~HansBecomeInsane = true
-                No, of course not, who would even want to listen to someone like me. No one that is who.
+                No, of course not. Who would even want to listen to someone like me? No one.
                 -> joergen_main
 
 
 === eating_theory ===
 ~HansEatingTheory = true
 
-Something strange happens here on Greenland. It seems that one can eat and eat and not become full. Have you tried this?
+Something strange happens here in Greenland. It seems that one can eat and eat and not become full. Have you tried this?
     
     * [Yes]
-        Yes, stange is it not. I still have no good explantion for this phenomena.
+        Yes, strange isn't it? I still have no good explanation for this phenomenon.
         -> joergen_main
     
     * [No]
-        Stange, how long does one have to be here to get to this level? 
+        Strange. How long does one have to be here to get to that level? 
         -> joergen_main
 
 
@@ -262,9 +262,9 @@ Something strange happens here on Greenland. It seems that one can eat and eat a
 
 === eating_theory_end ===
 {
-    - HansNielsFirstEatingTheory: Iver welcome back, have you tried out my new theory?
+    - HansNielsFirstEatingTheory: Welcome back Iver! Have you tried out my new theory?
         ~ HansNielsFirstEatingTheory = false
-    - HansNielsEatingTheoryReturn: Iver you return, have you tried the theory?
+    - HansNielsEatingTheoryReturn: Iver, you have returned. Have you tried my theory?
         ~ HansNielsEatingTheoryReturn = false
 }
     * {HansNielsEatingTheoryPicked == false}[Yes]
@@ -288,7 +288,7 @@ Something strange happens here on Greenland. It seems that one can eat and eat a
 
 
 === eating_theory_tried(response) ===
-{response: Ohh yes, can you explain your findings?| What a shame it would have proved invaluable data?}
+{response: Oohh yes, can you explain your findings?| What a shame, it could have provided invaluable data.}
 
 
     * {response} [My stomach hurts]
@@ -297,7 +297,7 @@ Something strange happens here on Greenland. It seems that one can eat and eat a
     * {response} [Nothing to say]
         -> eating_theory_yes
     
-    * {response == false} [So what!]
+    * {response == false} [So what?!]
         -> eating_theory_no
     
     * {response == false} [Does it matter?]
@@ -305,19 +305,19 @@ Something strange happens here on Greenland. It seems that one can eat and eat a
         
 
 === eating_theory_yes ===
-Yes, a most logical explantion. You do not feel full, but yet you are. Interesting, most interesting. I will note this down.
+Yes, a most logical explanation. You don't feel full, but you are. Interesting, very interesting indeed. I will note it down.
     -> eating_theory_end
     
     
 === eating_theory_no ===
-Iver, you are no man of science. You do not seem to comprehend the complexity of the world around you. A shame, but no matter.
+Iver, you are no man of science. You don't seem to comprehend the complexity of the world around you. What a shame. But it doesn't matter.
     -> eating_theory_end
 
 === weather_theory_end ===
 {
-    - HansNielsFirstWeatherTheory: Ahoy Iver, have you come to report how you are feeling?
+    - HansNielsFirstWeatherTheory: Ahoy Iver! Have you come to report how you are feeling?
         ~ HansNielsFirstWeatherTheory = false
-    - HansNielsWeatherTheoryReturn: You come back
+    - HansNielsWeatherTheoryReturn: You came back.
         ~ HansNielsWeatherTheoryReturn = false
 
 }
@@ -335,20 +335,20 @@ Iver, you are no man of science. You do not seem to comprehend the complexity of
     
     * [See you]
         ~ HansNielsWeatherTheoryReturn = true
-        Yes, yes see you Iver
+        Yes, yes see you Iver.
             -> END
 
 
 === weather_theory(response) ===
 { 
-    - response == false: Oohh, that is alright. I have gathed enough on Ejnar alone to answer my questions.
+    - response == false: Oohh, that's alright. I have gathered enough about Ejnar alone to answer my questions.
         -> END
     - HansTemperaturAmountOfChanges < 5: -> weather_feelings
-    - HansTemperaturAmountOfChanges < 10 : With the amount of times you have reported I do not think you are needed more for my report. Thank you Iver.
+    - HansTemperaturAmountOfChanges < 10 : With the amount of times you have reported, I do not think you are needed for my report anymore. Thank you Iver.
         -> END
-    - HansTemperaturAmountOfChanges < 100 : I do not need any more reports please.
+    - HansTemperaturAmountOfChanges < 100 : I do not need any more reports, please.
         -> END
-    - HansTemperaturAmountOfChanges < 10000 : By my accounts you are way to interested in the weather to be unbiased. Please leave me alone Iver.
+    - HansTemperaturAmountOfChanges < 10000 : By my accounts, you are way too interested in the weather to be unbiased. Please leave me alone Iver.
         -> END
     
    
@@ -359,10 +359,10 @@ Iver, you are no man of science. You do not seem to comprehend the complexity of
 {
     - HansNielsFirstNameTheory: Ahoy Christian, how are you doing?
         ~ HansNielsFirstNameTheory = false
-    - HansNielsNameTheoryReturn && HansNielsNameTheoryPicked == false: Ahoy Marcus, what do you want.
-    - HansNielsNameTheoryReturn: He returns, but I have nothing to say to him I will just smile and wait until he leaves.
+    - HansNielsNameTheoryReturn && HansNielsNameTheoryPicked == false: Ahoy Marcus, what do you want?
+    - HansNielsNameTheoryReturn: He returns, but I have nothing to say to him. I will just smile and wait until he leaves.
 }
-    * {HansNielsNameTheoryPicked == false} [I am Iver]
+    * {HansNielsNameTheoryPicked == false} [I'm Iver]
         -> name_theory("Iver")
     
     * {HansNielsNameTheoryPicked == false}[Just fine]
@@ -373,7 +373,7 @@ Iver, you are no man of science. You do not seem to comprehend the complexity of
     
     * [See you]
         ~ HansNielsNameTheoryReturn = true
-        See you 
+        See you.
         -> END
 
 
@@ -381,21 +381,21 @@ Iver, you are no man of science. You do not seem to comprehend the complexity of
 ~ HansNielsNameTheoryPicked = true
 ~ HansNielsEatingTheoryReturn = true
 {
-    - response == "Iver": Subject says his own name, must be somthing in the subconscious, telling him something. The cold is getting to him.
+    - response == "Iver": Subject recalls his name. There must be something in the subconscious that tells him something. The cold is getting to him.
         
-    - else: {response}, how curious. Subject does not react to me giving the wrong name. He must be affected more that I thought. Interesting, most interesting.
+    - else: {response}, how curious. Subject does not react to me giving the wrong name. He must be more affected than I thought. Interesting, very interesting.
 }
         -> END   
 
 === hans_becomes_insane ===
-Ahoy Iver, what could a humble servant like Hans do for you?
+Ahoy Iver. What could a humble servant like Hans do for you?
 
     * [Got any new theories?]
-        Theories, yes. But they are of no intrest for you, now are they? You did not want them before, so you shall not have them now!
+        Theories, yes. But are they of any interest to you now, are they? You didn't want to hear about them before, so you will not hear them now!
             -> END
     
     * [Nothing]
-        No, of course not. What would I Hans have to theorise that the great Iver would ever like to hear, nothing. Of course nothing.
+        No, of course not. What would I, Hans, have to theorise that the great Iver would ever like to hear? Nothing. Of course, nothing.
             -> END
 
 
@@ -403,14 +403,14 @@ Ahoy Iver, what could a humble servant like Hans do for you?
 === card_main === 
 {
     - HansBecomeInsane: -> hans_becomes_insane
-    - HansGotTheMap: I have everything I need, go talk to Ejnar. -> END
-    - HansDidNotGetTheMap: Please leave, I do not need that map anyways -> END
-    - else: You have the map? Please give it here, then I can compare it to the old ones.
+    - HansGotTheMap: I have everything I need. Go talk to Ejnar. -> END
+    - HansDidNotGetTheMap: Please just leave. I do not need the map anyways -> END
+    - else: Do you have the map? Please give it, then I can compare it to the old ones.
 }
 
     * [Here is the map]
         ~ HansGotTheMap = true
-        Thank you Iver I will get to work immediately.
+        Thank you Iver. I will get to work immediately.
         -> END
         
     * [No]
@@ -421,9 +421,9 @@ Ahoy Iver, what could a humble servant like Hans do for you?
             I did not find that funny. Why did I not? Hhhmmm, I can feel a new theory brewing.
                 -> END
                 
-        * * [Not giving it]
+        * * [I'm not giving it]
             ~ HansDidNotGetTheMap = true
-            Oohh, then leave me be. And do not come back!
+            Then leave me be. And do not come back!
                 -> END
 
 
