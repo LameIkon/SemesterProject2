@@ -65,9 +65,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: this is an empty dialogue, test test test test test test test asdasd asd
+  m_text: 'this is an empty dialogue, test test test test test test test asdasd asd
     asd asd asd asd as das d assd assd ad a sda sd asd as da da sd asd ad a sdas
-    da sd ad a sda
+    da sd ad a sda fwefwe fwef wefwe f wef '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: bfea17042bc31c841b7eb63fb6362109, type: 2}
   m_sharedMaterial: {fileID: 5437978294661855311, guid: bfea17042bc31c841b7eb63fb6362109, type: 2}
@@ -94,8 +94,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 25
-  m_fontSizeBase: 25
+  m_fontSize: 24
+  m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -106,7 +106,7 @@ MonoBehaviour:
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
-  m_lineSpacing: 17
+  m_lineSpacing: 10
   m_lineSpacingMax: 0
   m_paragraphSpacing: 1
   m_charWidthMaxAdj: 0
