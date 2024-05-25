@@ -43,7 +43,7 @@ INCLUDE Globals.ink
         
         
 === working_on ===
-Right now I am on the brink of brilliance. I came with the intent to learn about how some people don’t feel the cold, as much as others.
+Right now I am on the brink of brilliance. I came with the intent to learn about how some people don't feel the cold, as much as others.
     
     *[What have you found out?]
         -> first_theory
@@ -66,7 +66,7 @@ Right now I am on the brink of brilliance. I came with the intent to learn about
 
 === first_theory ===
     ~HansWeatherTheory = true
-    For now, I have deduced that I feel cold, while Ejnar is not. But he has also been here before. Maybe if I go outside and stay in the snow I’ll feel less cold when I come back in the ship.
+    For now, I have deduced that I feel cold, while Ejnar is not. But he has also been here before. Maybe if I go outside and stay in the snow I'll feel less cold when I come back in the ship.
     
     *[Anything else]
         No, but maybe you could report back to me how you feel?

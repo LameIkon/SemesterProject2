@@ -22,7 +22,7 @@ INCLUDE Globals.ink
         
 } 
 
-    *[Should I grab anything specific?]
+    *[Should I get anything specific?]
         -> supplies_to_grab
 
     *{EjnarMainHasAsked == false}[Where should I look?]
@@ -42,16 +42,16 @@ INCLUDE Globals.ink
             -> END  
     
 === supplies_to_grab ===
-Yes, some food. You could also take a lantern. This time of the year the sun no longer rises.
+Some food will be necessary. You should also bring a lantern. The sun no longer rises this time of the year.
     *[Continue]
-        Just don't take to much, the provisions are low and geting more food here is not an easy task. Maby we can go hunting for meat while you are searching.
+        Though, you shouldn't take too much. We are running low on supplies, and getting more here is not an easy task. Perhaps we should hunt for meat while you are out.
             * * [Continue]
-                You can grab some wood to put in the furnace
+                You should also place some firewood in the furnace, it's getting cold.
                 -> main
             
             
 === where_to_look ===
-Denmark's Harbour is north of here hopefully they reached there. They have build a small hut there, could be they are residing in that.
+Denmark's Harbour, just north of here. Hopefully they have reached there. They have build a small hut there, could be they are residing in that.
 
     *[Who are we looking for?]
         -> the_men_you_look_for
@@ -63,52 +63,52 @@ Denmark's Harbour is north of here hopefully they reached there. They have build
 
 === the_men_you_look_for ===
 {
-    - EjnarMainReturnToAsking && EjnarMainAskAboutJoergen && EjnarMainAskAboutNiels && EjnarMainAskAboutLudvig: You have heard about all of them, I have no more to tell you.  
+    - EjnarMainReturnToAsking && EjnarMainAskAboutJoergen && EjnarMainAskAboutNiels && EjnarMainAskAboutLudvig: You have heard about each one, I have nothing more to add. 
     
-    - EjnarMainReturnToAsking: Would you like to hear about the others.
+    - EjnarMainReturnToAsking: Would you like to hear about the others?
         ~EjnarMainReturnToAsking = false
     
-    - EjnarMainReturnToAsking == false && EjnarMainAskAboutJoergen == false && EjnarMainAskAboutNiels == false && EjnarMainAskAboutLudvig == false:  We are looking for Joergen the Greenlander, Niels the Cartographer and your brother Ludvig.
+    - EjnarMainReturnToAsking == false && EjnarMainAskAboutJoergen == false && EjnarMainAskAboutNiels == false && EjnarMainAskAboutLudvig == false:  We are looking for Joergen the Greenlander, Niels the cartographer and your brother Ludvig.
         ~EjnarMainReturnToAsking = false
 
 }
 
     * {EjnarMainAskAboutJoergen == false}[Joergen]
-        Joergen, born and raised in Greenland if anyone of them shall have survived. He would be my first pick, I travelled together with him on an earlier trip to Greenland.
+        Joergen, born and raised in Greenland. If any of them will survive, he would be my first pick. I have travelled with him on a trip to Greenland in the past.
             ~EjnarMainAskAboutJoergen = true
         -> the_men_you_look_for
     
     * {EjnarMainAskAboutNiels == false}[Niels]
-        Niels, the cartographer, responsible for all the drawings and measuring. Those sketches he must have made are all the reason we came here.
+        Niels, the cartographer. He's responsible for all the drawings and measurements. The sketches he drew are all the reason we came here.
             ~EjnarMainAskAboutNiels = true
         -> the_men_you_look_for
     
     * {EjnarMainAskAboutLudvig == false}[Ludvig]
-        Ludvig, him I do not know so much about. But you must, seeing as he is your brother.
+        Ludvig. He, I do not know much about, but you, as his brother, must know more.
             ~EjnarMainAskAboutLudvig = true
         -> the_men_you_look_for
         
     + {EjnarMainAskAboutJoergen == false || EjnarMainAskAboutNiels == false || EjnarMainAskAboutLudvig == false} [No thank you]
-        A shame, they are good people all worthy an mention.
+        What a shame, they are good people all worthy of mention.
         ~EjnarMainReturnToAsking = true
         -> main
     
     + {EjnarMainAskAboutJoergen && EjnarMainAskAboutNiels && EjnarMainAskAboutLudvig}[Okay]
-        Great I have nothing more to tell you about them.
+        Great, I have nothing more to tell you about them.
         ~EjnarMainReturnToAsking = true
         -> main
 
 
 === still_alive === 
-    If they have made it to the hut in Denmark’s Harbour and gotten the provisions from the stash. There is no doubt in my mind they all very well are alive.
+    If they have reached the hut in Denmark's Harbour and got the supplies from the stash, there is no doubt in my mind that they all very well are alive.
         *[Continue]
-            But here in Greenland nothing is safe, the weather is brutal. And if their sled dogs haven’t died, they cannot go very far. Pushing a sled is no easy work.
+            But nothing is safe in Greenland, the weather is brutal. If their sled dogs have died, they can't go very far. Pushing a sled is no easy task.
                     -> main
 
 
 
 === where_are_we ===
-    We are close to the Shannon Island, the ice is not good for the boat’s hull. We cannot go any further north from here.
+    We are near Shannon Island. The ice is no good for the boat's hull. We cannot go any further north from here.
             -> main 
 
 
@@ -136,21 +136,21 @@ Denmark's Harbour is north of here hopefully they reached there. They have build
     + [Where should I go next?]
     {
     
-        - EjnarJoergenMainWhereToGoNext == 1: Since you have found the hut, try go, north or west. 
+        - EjnarJoergenMainWhereToGoNext == 1: Since you have found the hut, try to go north or west. 
             -> joergen_main
-        - EjnarJoergenMainWhereToGoNext == 2: Since you have not found the hut, try to find that. 
+        - EjnarJoergenMainWhereToGoNext == 2: Try to find the hut. 
             -> joergen_main 
-        - else: The only place they could be is north. Have you found the hut at Denmark's Harbour?
+        - else: The only place they could be is north. Have you found the hut at Denmark's Harbour yet?
     }
     
         * * [Yes]
             ~ EjnarJoergenMainWhereToGoNext = 1
-            But they where not there. Else they would have gone with you I am sure. Try to go, north or west from the hut. #hutFound
+            But they weren't there? Otherwise, they would have come with you, I'm sure of that. Try to go north or west from the hut. #hutFound
                 -> joergen_main
         
         * * [No]
             ~ EjnarJoergenMainWhereToGoNext = 2
-            Then try to go there next. That is what I would do. #hutNotFound
+            Then try to go there next. That's what I would do. #hutNotFound
                 -> joergen_main
     
     * [See you]
@@ -160,7 +160,7 @@ Denmark's Harbour is north of here hopefully they reached there. They have build
 
 === found_diary === 
 ~EjnarJoergenMainDiaryFound = true
-Let me see it! Joergen always wrote in Greenlandic, so the fact he used time to make it readable for us tells me, he knew his time was comming. Where did you find this?
+Let me see that! Joergen always writes in Greenlandic. The fact he wrote this in Danish for us tells me he knew his time was coming. Where did you find this?
     
     * [In a cave, together with him]
         -> joergens_fate(true)
@@ -178,7 +178,7 @@ VAR joergenFound = false
     
     {joergenFound: -> joergen_main}
 
-    * [I found him to in cave]
+    * [I found him in a cave]
         If we have the time we shall build a grave for him. A grave that shall stand the test of time.
             -> joergen_main
     
@@ -194,13 +194,13 @@ VAR joergenFound = false
 
     
 === ending_joergen ===
-Yes goodbye
+Goodbye.
 ~EjnarJoergenMainReturn = true
     --> END
 
 === niels_main ===
 {
-    - EjnarNielsMainFirstTime: You return, have you found anything new?
+    - EjnarNielsMainFirstTime: You have returned, did you find anything new?
         ~ EjnarNielsMainFirstTime = false
     - EjnarNielsMainReturn: Was there anything else?
         ~ EjnarNielsMainReturn = false
@@ -225,24 +225,24 @@ Yes goodbye
 === niels_diary ===
     ~EjnarNielsMainToldAboutDiary = true
     {
-        - EjnarNielsDiaryFirstAsk: Let me see it. Yes they did it. The Peary Channel does not exist! But they left the map in a stone cairn it seems.
-        - EjnarNielsDiaryReturn: You have other questions?
+        - EjnarNielsDiaryFirstAsk: Let me see it. Yes they did it, the Peary Channel does not exist! But they left the map in a stone cairn it seems.
+        - EjnarNielsDiaryReturn: Do you have another question?
     
     }
     ~ EjnarNielsDiaryFirstAsk = false
     ~ EjnarNielsDiaryReturn = false
         * [Peary Channel?]
-            The American Robert Peary, drew a map where Greenland is connected to the North America. This map Niels drew can disprove this. Rightfully Greenland is a Danish colony.
+            American Robert Peary drew a map of Greenland being connected to North America. The map Niels drew disproves it. Greenland is rightfully a Danish colony.
                 -> niels_diary
             
         
         * [Stone cairn?]
-            There are almost no landmarks on Greenland so we use stacked stones to navigate sometimes. Sometimes they also contain provisions.
+            Greenland has few landmarks, so we stack stones to find our way back. Sometimes, they also contain supplies.
                 -> niels_diary
         
         + [What now?]
         ~ EjnarNielsDiaryReturn = true
-            Go to the Cairn, it must be North of where you found this diary. And get that map back.
+            Find the cairn and get the map. It must be north of where you found this diary.
                 -> niels_main
                 
     
@@ -254,7 +254,7 @@ Yes goodbye
     
     * [The sled was broken]
         ~ EjnarNielsSledFirstAsk = false
-        That cannot be good. Nothing good comes from a broken sled, was there anything else?
+        That's bad. Nothing good comes from a broken sled. Is there anything else?
             -> niels_sled
 
 === ludvig_main ===
@@ -263,41 +263,41 @@ Yes goodbye
     - EjnarLudvigMainFirstTime: Welcome back, do you have anything to report?
         ~ EjnarLudvigMainFirstTime = false
 
-    - EjnarLudvigMainReturn: The last thing we need now is the map
+    - EjnarLudvigMainReturn: The last thing we now is the map.
         ~ EjnarLudvigMainReturn = false
 }
 
     * [I found Ludvig]
-        And by account of him not being here. Must mean he is with God now. The risk is big when you come to Greenland.
+        The fact that he is not here must mean he is with God now. The risk is huge when you come to Greenland.
             -> ludvig_main
         
     + [See you]
-        See you, now go find that map!
+        See you. Now go find that map!
             -> END
         
         
 
 === card_main ===
-You return what have you found?
+You have returned, did you find something?
 
     * {HansBecomeInsane && HansGotTheMap == false}[I have the map]
-        Normally I would have Hans look at it, but he seems to have lost his mind, the cold does stange things to men. Are you ready to return?
+        Usually, I would have Hans look at it, but he seems to have lost his mind. The cold does strange things to men. Are you ready to return?
             -> to_return
             
     * {HansDidNotGetTheMap} [I have the map]
-        And you did not want to give it to Hans? I cannot fathom why but, the most important is we have it. Are you ready to return?
+        And you didn't want to give it to Hans? I cannot fathom why, but more importantly, we have it. Are you ready to return?
             -> to_return
 
     * {HansGotTheMap == false && HansBecomeInsane == false} [I have the map]
-        How splendid, give it to Hans.
+        Splendid! Give it to Hans.
             -> END
         
     * {HansGotTheMap} [Hans has the map]
-        Then we shall start our return trip home to Copenhagen. Are you ready to return?
+        Then we shall begin our return trip home to Copenhagen. Are you ready to return?
             -> to_return
     
     * [Nothing to report]
-        That is fine, let me hear when you have found something
+        That's fine, let me hear when you have found something.
             -> END
 
     * {EjnarCardHasFoundIt} [Let us return]
@@ -306,11 +306,11 @@ You return what have you found?
         
 === to_return ===
     ~EjnarCardHasFoundIt = true
-    * [Yes, let us return]
+    * [Yes, let's return]
         -> end_the_game
         
     * [No, not yet]
-        Be quick, we do not have long before the ice will lock us in here
+        Be quick, we do not have long before the ice will lock us in here.
             -> END
 
 === end_the_game ===

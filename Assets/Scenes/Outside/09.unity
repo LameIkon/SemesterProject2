@@ -23472,6 +23472,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1577063444}
     m_Modifications:
+    - target: {fileID: -4392439922953783933, guid: 629e3b9b21b39ae47b55cf3e5acb6cbf, type: 3}
+      propertyPath: m_Volume
+      value: 0.102
+      objectReference: {fileID: 0}
     - target: {fileID: 1601263763485570700, guid: 629e3b9b21b39ae47b55cf3e5acb6cbf, type: 3}
       propertyPath: _forceRoar
       value: 1
@@ -23729,7 +23733,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5976783435165415486, guid: ce95528e08361d34ab00bde1adbac263, type: 3}
       propertyPath: _lines.Array.data[0]
-      value: I can't See anything in this blizzard!
+      value: I can't see anything in this blizzard!
       objectReference: {fileID: 0}
     - target: {fileID: 5976783435165415486, guid: ce95528e08361d34ab00bde1adbac263, type: 3}
       propertyPath: _lines.Array.data[1]
@@ -115832,7 +115836,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5976783435165415486, guid: ce95528e08361d34ab00bde1adbac263, type: 3}
       propertyPath: _lines.Array.data[0]
-      value: Oh god here it comes!
+      value: Oh God, here it comes!
       objectReference: {fileID: 0}
     - target: {fileID: 5976783435165415486, guid: ce95528e08361d34ab00bde1adbac263, type: 3}
       propertyPath: _lines.Array.data[1]
