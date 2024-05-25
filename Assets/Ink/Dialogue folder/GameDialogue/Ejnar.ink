@@ -14,7 +14,7 @@ INCLUDE Globals.ink
 === main ===
 
 {
-    - EjnarMainFirstTime: Remember to grab some supplies from the chest before you head out.
+    - EjnarMainFirstTime: Remember to grab some provisions from the chest before you head out.
         ~ EjnarMainFirstTime = false
         
     - EjnarMainReturn: Is there anything else?
@@ -44,7 +44,7 @@ INCLUDE Globals.ink
 === supplies_to_grab ===
 Take some food, it will be necessary. You should also bring a lantern. The sun no longer rises this time of the year.
     *[Continue]
-        Though, you shouldn't take too much. We are running low on supplies, and getting more here is not an easy task. Perhaps we should hunt for meat while you are out.
+        Though, you shouldn't take too much. We are running low on provisions, and getting more here is not an easy task. Perhaps we should hunt for meat while you are out.
             * * [Continue]
                 You should also place some firewood in the furnace, it's getting cold.
                 -> main
@@ -100,7 +100,7 @@ Denmark's Harbour, just north of here. There is a small hut built over there. Ho
 
 
 === still_alive === 
-    If they have reached the hut in Denmark's Harbour and got the supplies from the stash, there is no doubt in my mind that they all very well are alive.
+    If they have reached the hut in Denmark's Harbour and got the provisions from the stash, there is no doubt in my mind that they all very well are alive.
         *[Continue]
             But nothing is safe in Greenland, the weather is brutal. If their sled dogs have died, they can't go very far. Pushing a sled is no easy task.
                     -> main
@@ -237,7 +237,7 @@ Goodbye.
             
         
         * [Stone cairn?]
-            Greenland has few landmarks, so we stack stones to find our way back. Sometimes, they also contain supplies.
+            Greenland has few landmarks, so we stack stones to find our way back. Sometimes, they also contain provisions.
                 -> niels_diary
         
         + [What now?]
