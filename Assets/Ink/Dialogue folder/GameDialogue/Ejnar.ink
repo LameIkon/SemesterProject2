@@ -14,7 +14,7 @@ INCLUDE Globals.ink
 === main ===
 
 {
-    - EjnarMainFirstTime: Remember to grab some supplies from the chest, before you head out.
+    - EjnarMainFirstTime: Remember to grab some supplies from the chest before you head out.
         ~ EjnarMainFirstTime = false
         
     - EjnarMainReturn: Is there anything else?
@@ -22,7 +22,7 @@ INCLUDE Globals.ink
         
 } 
 
-    *[Anything specific I should grab?]
+    *[Should I grab anything specific?]
         -> supplies_to_grab
 
     *{EjnarMainHasAsked == false}[Where should I look?]
@@ -37,7 +37,7 @@ INCLUDE Globals.ink
         
     
     * {EjnarMainFirstTime == false}[See you]
-        Goodbye and good search
+        Goodbye and good search.
             ~EjnarMainReturn = true
             -> END  
     
