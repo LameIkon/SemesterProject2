@@ -425,7 +425,7 @@ public class GuidelineManager : MonoBehaviour
         _captainSprite.SetActive(false);
         doorToInside.SetActive(true);
 
-        yield return new WaitForSeconds(30f); // wait before showing stamina
+        yield return new WaitForSeconds(5f); // wait before showing stamina
         _staminaAnimator.Play("SlideInLeft");
         _runningCanvas.SetActive(true);
         yield return new WaitUntil(() => PlayerController._isMoving && _isRunning); // wait until you are running

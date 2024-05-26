@@ -15,6 +15,7 @@ public class TriggerBarrierExit : MonoBehaviour
             EnvironmentManager.instance.ExitBlizzardBarrier(); // Notify that you exited the weather condition
             _insideBarrier.transform.SetParent(_originalParent); // Set the "InsideBarrier" as child of the barrier gameobject
             _insideBarrier.transform.position = _originalParent.position; // Set the "InsideBarrier" back to its original position
+            BlizzardBarrerTrigger._IsInsidebarrier = false;
         }
     }
 }

@@ -5,6 +5,7 @@ public class BlizzardBarrerTrigger : MonoBehaviour
 {
     private Transform _container; // Used to move choosen gameobject.
     private Transform _originalParent; // Used to take the container back
+    public static bool _IsInsidebarrier;
 
 
     private void Awake()
@@ -34,6 +35,7 @@ public class BlizzardBarrerTrigger : MonoBehaviour
                 _originalParent = _container.transform.parent; // Store the original parent that the "InsideBarrier" is originally on
                 _container.transform.SetParent(collision.gameObject.transform); // Set the "InsideBarrier" as child of player (to follow him where he goes)
                 _container.transform.position = collision.gameObject.transform.localPosition; // Set the "InsideBarrier" to be centered around the player
+                _IsInsidebarrier = true;
             }
         }
     }

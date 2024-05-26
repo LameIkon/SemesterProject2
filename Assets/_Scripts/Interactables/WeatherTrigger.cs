@@ -15,15 +15,21 @@ public class WeatherTrigger : MonoBehaviour
     {
         if (collision.gameObject.name == "Player")
         {
-            StopAllCoroutines();
-            ChooseWeather();
+            if (!BlizzardBarrerTrigger._IsInsidebarrier)
+            {               
+                StopAllCoroutines();
+                ChooseWeather();
+            }
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.name == "Player")
         {
-            StartCoroutine(Timer());
+            if (!BlizzardBarrerTrigger._IsInsidebarrier)
+            {
+                StartCoroutine(Timer());
+            }
         }
     }
 
