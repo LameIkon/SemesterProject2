@@ -361,6 +361,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 673382678994217161, guid: 092d1207c2a569b48a373a494eeab3e9, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 1120
+      objectReference: {fileID: 0}
+    - target: {fileID: 673382678994217161, guid: 092d1207c2a569b48a373a494eeab3e9, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 132
+      objectReference: {fileID: 0}
     - target: {fileID: 846390978686111360, guid: 092d1207c2a569b48a373a494eeab3e9, type: 3}
       propertyPath: m_AnchorMax.x
       value: 1
@@ -425,6 +433,10 @@ PrefabInstance:
       propertyPath: m_sharedMaterial
       value: 
       objectReference: {fileID: 5437978294661855311, guid: bfea17042bc31c841b7eb63fb6362109, type: 2}
+    - target: {fileID: 1127987309600625894, guid: 092d1207c2a569b48a373a494eeab3e9, type: 3}
+      propertyPath: m_VerticalAlignment
+      value: 256
+      objectReference: {fileID: 0}
     - target: {fileID: 1127987309600625894, guid: 092d1207c2a569b48a373a494eeab3e9, type: 3}
       propertyPath: m_enableWordWrapping
       value: 1

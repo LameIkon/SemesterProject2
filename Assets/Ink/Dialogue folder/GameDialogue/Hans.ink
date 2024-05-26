@@ -147,9 +147,9 @@ Hmpf, you just gave me a new theory I'll have to ponder. It will be even better 
 
 === joergen_main ===
 {
-    - HansJoergenFirstTimeMain: Oh, you are back already. {HansWeatherTheory: Do you have anything to report? Maybe you've got something new about the cold.} {HansNewTheory: I have a new theory}
+    - HansJoergenFirstTimeMain: Oh, you are back already. {HansWeatherTheory: Do you have anything to report? Maybe you've got something new about the cold.} {HansNewTheory: I have a new theory.}
         ~HansJoergenFirstTimeMain = false
-    - HansJoergenReturn: Would you like anything else? 
+    - HansJoergenReturn: Would you like anything else? {HansNewTheory && HansJoergenTheoryHeard == false: I have a new theory.}
         ~HansJoergenReturn = false
 }
 
