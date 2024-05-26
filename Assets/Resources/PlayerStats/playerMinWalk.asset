@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: playerMinWalk
   m_EditorClassIdentifier: 
   DevDescription: 
-  _value: 40
+  _value: 4
   _onValueChanged: {fileID: 0}
