@@ -1,7 +1,7 @@
 -> start
 
 === start ===
-You stand at the door. What should you do?
+You stand at the door. No light or sound is coming from inside. Maybe they didn't make it?
 *[Knock on the door] -> knock
 *[leave]-> end_dialogue_without_knowing
     
@@ -28,7 +28,7 @@ you decide to knock on the door again
     **[continue]
         ...
         ***[continue]
-            There seems to be nobody inside.
+            Still nothing
             ****[leave]
                     -> conclusion
 
