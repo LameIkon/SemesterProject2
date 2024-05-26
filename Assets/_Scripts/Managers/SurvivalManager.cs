@@ -170,7 +170,7 @@ public class SurvivalManager : Singleton<SurvivalManager>, IDamageable, IFreezea
                 _lowTemperature = true;
                 _isTimingOut = true;
                 _playerChatBubble.transform.GetChild(2).gameObject.SetActive(true);
-                Invoke(nameof(TimeOutChat),30f); // Set bool to true after 30 secs
+                Invoke(nameof(TimeOutChat), 15f); // Set bool to true after 30 secs
             }
         }
         else
@@ -208,10 +208,11 @@ public class SurvivalManager : Singleton<SurvivalManager>, IDamageable, IFreezea
             TakeDamage(_healthLossOnHunger);
             if (!_lowHunger && !_isTimingOut)
             {
+                Debug.Log("true");
                 _lowTemperature = true;
                 _isTimingOut = true;
                 _playerChatBubble.transform.GetChild(1).gameObject.SetActive(true);
-                Invoke(nameof(TimeOutChat), 30f); // Set bool to true after 30 secs
+                Invoke(nameof(TimeOutChat), 15f); // Set bool to true after 30 secs
             }
         }
         else
@@ -275,8 +276,10 @@ public class SurvivalManager : Singleton<SurvivalManager>, IDamageable, IFreezea
 
     private void TimeOutChat()
     {
+        Debug.Log("triggered");
         _lowTemperature = false;
         _lowHunger = false;
+        _isTimingOut = false;
     }
 
     private void OnApplicationQuit()

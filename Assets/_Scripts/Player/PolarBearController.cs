@@ -5,8 +5,8 @@ using UnityEngine;
 public class PolarBearController : MovementController
 {
     [SerializeField] private PolarBearAI _polarBearAIScript;
-    [SerializeField] private AudioSource _runningAudioSource;
-    [SerializeField] private AudioSource _roarAudioSource;
+    private AudioSource _runningAudioSource;
+    private AudioSource _roarAudioSource;
     [SerializeField] private bool _forceRoarOnAggro;
 
     private bool _isAttacking;
