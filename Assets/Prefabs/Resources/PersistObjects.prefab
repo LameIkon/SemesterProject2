@@ -22564,7 +22564,7 @@ PrefabInstance:
     - target: {fileID: 6560139934568328296, guid: a2cb9d025f836b140aabfa0ffee3619f, type: 3}
       propertyPath: _defaultProfile
       value: 
-      objectReference: {fileID: 7375557849770731191, guid: cfe4f7e651e695d4583eca60813d2719, type: 3}
+      objectReference: {fileID: 7375557849770731191, guid: a6c16d0db5663704b932ca39f76f5aeb, type: 3}
     - target: {fileID: 6560139934568328296, guid: a2cb9d025f836b140aabfa0ffee3619f, type: 3}
       propertyPath: _globalVariables
       value: 

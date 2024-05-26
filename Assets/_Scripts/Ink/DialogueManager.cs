@@ -296,8 +296,7 @@ public class DialogueManager : MonoBehaviour
             _currentProile.transform.SetParent(nameholder.transform, false); // Set Image to the parent but keep its own transform
         }
         else
-        {
-            
+        {         
             _currentProile = Instantiate(_defaultProfile); // Takes a gameobject prefab
             _currentProile.transform.SetParent(nameholder.transform, false); // Set Image to the parent but keep its own transform
         }
