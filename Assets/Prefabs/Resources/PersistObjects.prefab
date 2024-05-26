@@ -7954,10 +7954,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _toolbarInventory: {fileID: 11400000, guid: 19ca4fa43b33e1e49bcdffdde2125a03, type: 2}
   _inventorySlotPrefabs:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 9093438168178960729}
+  - {fileID: 8248229067678754453}
+  - {fileID: 1046334515632854116}
+  - {fileID: 5265543784797332291}
   _selectedColor: {r: 0.16212173, g: 0.2384908, b: 0.41509432, a: 0.68235296}
   _notSelectedColor: {r: 1, g: 1, b: 1, a: 0.4392157}
 --- !u!1 &2387614818641749877
