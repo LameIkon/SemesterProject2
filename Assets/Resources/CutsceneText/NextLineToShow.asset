@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: NextLineToShow
   m_EditorClassIdentifier: 
   DevDescription: 'Should be between 2 and 4 '
-  _value: 3
+  _value: 3.5
   _onValueChanged: {fileID: 0}
