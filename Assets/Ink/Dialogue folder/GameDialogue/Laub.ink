@@ -19,7 +19,7 @@ INCLUDE Globals.ink
 }
 
 
-    * [Who are you?] 
+    * [Who are you?]
         I am first lieutenant Laub.
         -> who_are_you
         
