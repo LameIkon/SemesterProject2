@@ -92,9 +92,9 @@ public class RunManager : MonoBehaviour, ITireable
             LoseStamina(_staminaUseOnRun);
             LoseHunger(_HungerUseOnRun);
             GainTemperature(_TempGainOnRun);
-            yield return null;
+            yield return new WaitForFixedUpdate();
         }
-        yield return null;
+        yield return new WaitForFixedUpdate();
     }
 
     private IEnumerator RegenStamina()
@@ -103,9 +103,9 @@ public class RunManager : MonoBehaviour, ITireable
         while (_staminaValue.GetValue() <= _maxStamina) // While value is below max possible stamina
         {
             GainStamina(_staminaRegen);
-            yield return null;
+            yield return new WaitForFixedUpdate();
         }
-        yield return null; // Stop when reached max
+        yield return new WaitForFixedUpdate(); // Stop when reached max
     }
 
     // When running you will lose stamina
