@@ -138,7 +138,7 @@ Denmark's Harbour, just north of here. There is a small hut built over there. Ho
     
         - EjnarJoergenMainWhereToGoNext == 1: Since you have found the hut, try to go north or west. 
             -> joergen_main
-        - EjnarJoergenMainWhereToGoNext == 2: Try to find the hut. 
+        - EjnarJoergenMainWhereToGoNext == 2: Try to find the hut in Denmark's Harbour. 
             -> joergen_main 
         - else: The only place they could be is north. Have you found the hut at Denmark's Harbour yet?
     }
@@ -288,7 +288,7 @@ You have returned, did you find something?
         And you didn't want to give it to Hans? I cannot fathom why, but more importantly, we have it. Are you ready to return?
             -> to_return
 
-    * {HansGotTheMap == false && HansBecomeInsane == false} [I have the map]
+    * {HansDidNotGetTheMap == false && HansGotTheMap == false && HansBecomeInsane == false} [I have the map]
         Splendid! Give it to Hans.
             -> END
         
