@@ -7954,11 +7954,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _toolbarInventory: {fileID: 11400000, guid: 19ca4fa43b33e1e49bcdffdde2125a03, type: 2}
   _inventorySlotPrefabs:
-  - {fileID: 9093438168178960729}
-  - {fileID: 8248229067678754453}
-  - {fileID: 1046334515632854116}
-  - {fileID: 5265543784797332291}
-  _selectedColor: {r: 0.011764727, g: 0.09596022, b: 0.7921569, a: 0.7372549}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  _selectedColor: {r: 0.16212173, g: 0.2384908, b: 0.41509432, a: 0.68235296}
   _notSelectedColor: {r: 1, g: 1, b: 1, a: 0.4392157}
 --- !u!1 &2387614818641749877
 GameObject:
@@ -13394,7 +13394,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.1
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -13487,12 +13487,12 @@ AudioSource:
   m_GameObject: {fileID: 7209865374331109271}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -309124049782638395, guid: 839546bad97b46546a81e67b31d77cc1, type: 2}
   m_audioClip: {fileID: 8300000, guid: b1399b57a7518a24f9d8f58f4d2ae356, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.1
+  m_Volume: 1
   m_Pitch: 0.9
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0

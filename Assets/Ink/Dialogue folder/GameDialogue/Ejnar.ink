@@ -102,7 +102,7 @@ Denmark's Harbour, just north of here. There is a small hut built over there. Ho
 === still_alive === 
     If they have reached the hut in Denmark's Harbour and got the provisions from the stash, there is no doubt in my mind that they all very well are alive.
         *[Continue]
-            But nothing is safe in Greenland, the weather is brutal. If their sled dogs have died, they can't go very far. Pushing a sled is no easy task.
+            But nothing is safe here in Greenland, the weather is brutal. If their sled dogs have died, they can't go very far. Pushing a sled is no easy task.
                     -> main
 
 
