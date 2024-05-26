@@ -16,6 +16,7 @@ public class EnvironmentManager : MonoBehaviour
     [SerializeField] private GameObject _blizzard;
     [SerializeField] private GameObject _snow;
     [SerializeField] private GameObject _fog;
+    [SerializeField] private GameObject _lostExpeditionBlizzard;
     public GameObject _barrierBlizzard;
 
     [Header("Weather Effects")]
@@ -182,6 +183,14 @@ public class EnvironmentManager : MonoBehaviour
         //Timer();
     }
 
+    public void LostExpeditionBLizzard()
+    {
+        if (!_lostExpeditionBlizzard.activeInHierarchy) // Checks if the GameObject is active in the scene
+        {
+            _lostExpeditionBlizzard.SetActive(true); // Make it active
+        }
+    }
+
 
     public void Blizzard()
     {
@@ -284,6 +293,7 @@ public class EnvironmentManager : MonoBehaviour
         _blizzard.SetActive(false);
         _snow.SetActive(false);
         _fog.SetActive(false);
+        _lostExpeditionBlizzard.SetActive(false);
 
         // Reset to default conditions
         _CurrentOutsideTemperature.SetValue(_defaultTemp);

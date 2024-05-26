@@ -40,9 +40,7 @@ public class QuestManager : PersistentSingleton<QuestManager>
             GameObject hazzard = GameObject.Find("HazzardBarrier");
             hazzard.GetComponentInChildren<ChildToParent>().SetToOwnParent();
             hazzard.SetActive(false);
-
-
-
+            DontDestroyOnLoad(hazzard);
         }
         if (2 == journal && !_journal2)
         {

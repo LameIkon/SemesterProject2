@@ -5022,7 +5022,7 @@ VisualEffect:
   m_PropertySheet:
     m_Float:
       m_Array:
-      - m_Value: 1000
+      - m_Value: 5000
         m_Name: FogAmount
         m_Overridden: 1
       - m_Value: 4
@@ -5071,8 +5071,8 @@ VisualEffect:
       - m_Value:
           serializedVersion: 2
           key0: {r: 1, g: 1, b: 1, a: 0}
-          key1: {r: 0.5, g: 0.5, b: 0.5, a: 0.39215687}
-          key2: {r: 0, g: 0, b: 0, a: 0.3137255}
+          key1: {r: 0.5, g: 0.5, b: 0.5, a: 0.37254903}
+          key2: {r: 0, g: 0, b: 0, a: 0.37254903}
           key3: {r: 0, g: 0, b: 0, a: 0}
           key4: {r: 0, g: 0, b: 0, a: 0}
           key5: {r: 0, g: 0, b: 0, a: 0}

@@ -3,6 +3,7 @@ using UnityEngine.VFX;
 
 public class BlizzardBarrerTrigger : MonoBehaviour
 {
+
     private Transform _container; // Used to move choosen gameobject.
     private Transform _originalParent; // Used to take the container back
     public static bool _IsInsidebarrier;
@@ -15,6 +16,7 @@ public class BlizzardBarrerTrigger : MonoBehaviour
             // This should store the GameObject named "InsideBarrier" since it should be the only child
             _container = gameObject.transform.GetChild(0);
         }
+        
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

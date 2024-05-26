@@ -181,12 +181,13 @@ public class LostExpeditionManager : MonoBehaviour
            
         StartCoroutine(ImageFadeIn(false, 5, _lostExpeditionTextCanvas));
 
-        EnvironmentManager.instance.Fog();
-        EnvironmentManager.instance.Blizzard();
+        //EnvironmentManager.instance.Fog();
+        //EnvironmentManager.instance.Blizzard();
+        EnvironmentManager.instance.LostExpeditionBLizzard();
 
         yield return new WaitForSeconds(4);
         StartCoroutine(CanvasGroupFade(false, 3, _lostExpeditionCanvasGroup));
-        StartCoroutine(FadeCameraIn(_cameraOriginalOrthoSize, 1));
+        StartCoroutine(FadeCameraIn(5, 1));
 
         StartCoroutine(SpriterendererFadeIn(true, 1.5f, _player));
         StartCoroutine(SpriterendererFadeIn(true, 1.5f, _npc));
